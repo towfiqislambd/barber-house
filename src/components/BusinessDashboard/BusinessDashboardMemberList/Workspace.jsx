@@ -1,4 +1,4 @@
-import workspace from "../../../assets/images/Workspace.png";
+import workspace from "../../../assets/images/workspace.png";
 const Workspace = () => {
   return (
     <div>
