@@ -1,4 +1,4 @@
-import logo from "../assets/images/businessLogo.png"
+import logo from "../assets/images/logo.jpg";
 import {
   FooterCopyrightSvg,
   FooterLangSvg,
@@ -16,7 +16,9 @@ const Footer = () => {
       <div className="bg-[#EFF0F4] py-7 sm:py-14 px-5 xl:px-3 2xl:px-5">
         <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 sm:gap-8 md:gap-[35px] lg:gap-6 xl:gap-2 2xl:gap-5">
           <div className="col-span-1 xl:col-span-2">
-            <img src={logo} alt="" className="mb-5 block" />
+            <h3 className="text-[48px] font-normal font-Marcellus text-[#1E1E1E] ">
+              cleanse
+            </h3>
             <p className="max-w-[262px] text-[#2C2C2C]">
               Your Beauty, Our Priority – Exceptional Service, Every Time
             </p>
@@ -55,16 +57,16 @@ const Footer = () => {
               Contact Us
             </h3>
             <div className="flex gap-1 2xl:gap-3 items-center">
-              <button className="w-10 h-10 rounded-full grid place-items-center bg-gradient-to-r from-[#008A90] from-[0.38%] to-[#00C2CB] to-[99.24%]">
+              <button className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient ">
                 <FooterSocialOne />
               </button>
-              <button className="w-10 h-10 rounded-full grid place-items-center bg-gradient-to-r from-[#008A90] from-[0.38%] to-[#00C2CB] to-[99.24%]">
+              <button className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient ">
                 <FooterSocialTwo />
               </button>
-              <button className="w-10 h-10 rounded-full grid place-items-center bg-gradient-to-r from-[#008A90] from-[0.38%] to-[#00C2CB] to-[99.24%]">
+              <button className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient ">
                 <FooterSocialThree />
               </button>
-              <button className="w-10 h-10 rounded-full grid place-items-center bg-gradient-to-r from-[#008A90] from-[0.38%] to-[#00C2CB] to-[99.24%]">
+              <button className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient">
                 <FooterSocialFour />
               </button>
             </div>
@@ -75,7 +77,7 @@ const Footer = () => {
       <div className="bg-white py-5 flex items-center justify-between container px-5 4xl:px-0">
         <p className="flex gap-1 items-center">
           <FooterLangSvg />
-          <span className="text-[#00848A] font-medium">English</span>
+          <span className=" text-primary font-medium">English</span>
         </p>
         <p className="flex gap-1 items-center">
           <FooterCopyrightSvg />

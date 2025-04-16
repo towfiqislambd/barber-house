@@ -6,7 +6,7 @@ export default {
     extend: {
       backgroundImage: {
         "primary-gradient":
-          "linear-gradient(90deg, #008A90 0.38%, #00C2CB 99.24%)",
+          "linear-gradient(90deg, #621C36 0.38%, #EE6C9C 99.24%)",
       },
       borderRadius: {
         md: "calc(var(--radius) - 2px)",
@@ -35,6 +35,8 @@ export default {
         Marcellus: ["Marcellus", "serif"],
       },
       colors: {
+        "primary-gradient":
+          "linear-gradient(90deg, #621C36 0.38%, #EE6C9C 99.24%)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -46,7 +48,7 @@ export default {
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {
-          DEFAULT: "#00C2CB",
+          DEFAULT: "#EE6C9C",
         },
         textColor: "#2C2C2C",
         textLight: "#545454",

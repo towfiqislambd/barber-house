@@ -44,14 +44,14 @@ const WhatOurUserSay = () => {
               {/* prev-button */}
               <div
                 onClick={() => swiperRef.slidePrev()}
-                className="absolute xl:top-1/2 top-[-40px]  right-[30px] xl:right-1 z-10 cursor-pointer bg-white border border-[#00C2CB] py-2 px-[7px] rounded-[100px]"
+                className="absolute xl:top-1/2 top-[-40px]  right-[30px] xl:right-1 z-10 cursor-pointer bg-white border border-primary py-2 px-[7px] rounded-[100px]"
               >
                 <UsePrevSliderSvg />
               </div>
               {/* Next-button */}
               <div
                 onClick={() => swiperRef.slideNext()}
-                className="absolute xl:top-1/2 top-[-40px] bg-white -right-[10px] xl:-right-8 z-10 cursor-pointer border border-[#00C2CB] py-2 px-[7px] rounded-[100px]"
+                className="absolute xl:top-1/2 top-[-40px] bg-white -right-[10px] xl:-right-8 z-10 cursor-pointer border border-primary py-2 px-[7px] rounded-[100px]"
               >
                 <UserNextSliderSvg />
               </div>

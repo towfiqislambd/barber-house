@@ -21,7 +21,7 @@ const CallToAction = ({ title, subtitle, btnText }) => {
           <p className="text-[#F4F5F7] font-manrope  text-[16px] xl:text-2xl xl:leading-9 mt-[6px]">
             {subtitle}
           </p>
-          <button className="flex gap-[10px] items-center text-[#FFF] font-manrope text-lg font-medium leading-[27px] bg-[#00C2CB] py-3 px-6 mt-8 rounded-lg shadow-getStart_Shadow group">
+          <button className="flex gap-[10px] items-center text-[#FFF] font-manrope text-lg font-medium leading-[27px] bg-primary py-3 px-6 mt-8 rounded-lg shadow-getStart_Shadow group">
             {btnText}
             <GetStartSvg />
           </button>

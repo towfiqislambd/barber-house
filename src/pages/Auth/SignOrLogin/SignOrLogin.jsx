@@ -59,7 +59,7 @@ const SignOrLogin = () => {
         {/*  */}
         <div className="pt-[30px] mb-[30px] xl:pt-[300px] flex justify-center gap-1 items-center">
           <SupportSvg />
-          <h1 className="text-[#008A90] font-outfit text-lg font-medium">
+          <h1 className="text-primary font-outfit text-lg font-medium">
             Support
           </h1>
         </div>

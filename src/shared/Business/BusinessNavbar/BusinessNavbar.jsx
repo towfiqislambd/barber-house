@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../../../public/finalLogo.png";
+import logo from "../../../assets/images/logo.jpg";
 import { ForCustomerSvg } from "@/components/svgContainer/SvgContainer";
 import { useEffect, useState } from "react";
 import { HiMiniBars3 } from "react-icons/hi2";
@@ -56,14 +56,14 @@ const BusinessNavbar = () => {
           <div className={`flex-shrink-0  transition-all fixed xl:static bg-white xl:bg-white left-0 top-0 bottom-0 p-[20px] w-[230px] xl:w-[100%] ${salesetting ? "translate-x-[0%]" : "translate-x-[-100%] xl:translate-x-[0%]"}`}>
 
             <div className="block xl:hidden">
-              <div className="border-b broder-[1px] border-teal-600 pb-[15px] mb-[20px] flex justify-between items-center">
+              <div className="border-b broder-[1px] border-primary pb-[15px] mb-[20px] flex justify-between items-center">
                 <div>
                   <Link to="/business">
                     <img className="w-[30px] object-cover rounded-[5px]" src={logo} alt="" />
                   </Link>
                 </div>
                 <div>
-                  <button onClick={() => saleMobileMenuActive(false)} className="text-[25px] text-teal-600"><LiaTimesCircle /></button>
+                  <button onClick={() => saleMobileMenuActive(false)} className="text-[25px] text-primary"><LiaTimesCircle /></button>
                 </div>
               </div>
             </div>
@@ -74,7 +74,7 @@ const BusinessNavbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "businessNavClass text-primary hover:text-primary"
-                    : "businessNavClass hover:text-[#00bac2]"
+                    : "businessNavClass hover:text-primary"
                 }
                 to={"/business/pricingPage"}
               >
@@ -85,7 +85,7 @@ const BusinessNavbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "businessNavClass text-primary hover:text-primary"
-                    : "businessNavClass hover:text-[#00bac2]"
+                    : "businessNavClass hover:text-primary"
                 }
                 to={"/business/businesshelpcenter"}
               >
@@ -96,7 +96,7 @@ const BusinessNavbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "businessNavClass text-primary hover:text-primary"
-                    : "businessNavClass hover:text-[#00bac2] "
+                    : "businessNavClass hover:text-primary "
                 }
                 to={"/business/signorlogin"}
               >
@@ -107,7 +107,7 @@ const BusinessNavbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "businessNavClass text-primary hover:text-primary"
-                    : "businessNavClass hover:text-[#00bac2]"
+                    : "businessNavClass hover:text-primary"
                 }
                 to={"/business/selectaccount"}
               >
@@ -118,19 +118,19 @@ const BusinessNavbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "businessNavClass text-primary hover:text-primary"
-                    : "businessNavClass hover:text-[#00bac2]"
+                    : "businessNavClass hover:text-primary"
                 }
                 to={"/business/contactus"}
               >
                 Contact Us
               </NavLink>
-              <div className="group flex gap-1 cursor-pointer items-center hover:text-[#00bac2]">
+              <div className="group flex gap-1 cursor-pointer items-center hover:text-primary">
                 <NavLink
                   onClick={() => saleMobileMenuActive(false)}
                   className={({ isActive }) =>
                     isActive
                       ? "businessNavClass"
-                      : "businessNavClass hover:text-[#00bac2]"
+                      : "businessNavClass hover:text-primary"
                   }
                   to="/"
                 >
@@ -141,8 +141,6 @@ const BusinessNavbar = () => {
             </nav>
           </div>
         </div>
-
-
       </div>
     </section>
   );

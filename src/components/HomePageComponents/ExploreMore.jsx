@@ -17,7 +17,7 @@ const ExploreMore = () => {
               management. Ranked No. 1 by industry professionals for its top
               features.
             </p>
-            <button className="px-6 py-3 rounded-full bg-gradient-to-r from-[#008A90] from-[0.38%] to-[#00C2CB] to-[99.24%] text-white">
+            <button className="px-6 py-3 rounded-full bg-primary-gradient text-white">
               Explore more
             </button>
             <div className="flex gap-3 items-center text-xl font-semibold">

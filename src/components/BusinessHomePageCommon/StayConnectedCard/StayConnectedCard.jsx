@@ -8,7 +8,7 @@ const StayConnectedCard = ({ image, title, subTitle, reverse }) => {
     >
       {/* This is left side */}
       <div>
-        <h1 className="text-[#008A90] font-manrope text-xl font-medium leading-[30px]">
+        <h1 className="text-primary font-manrope text-xl font-medium leading-[30px]">
           {title}
         </h1>
         <h2 className="text-[#1E1E1E] font-outfit text-[28px] xl:text-[40px] font-semibold mt-3">

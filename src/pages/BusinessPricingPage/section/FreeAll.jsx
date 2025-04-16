@@ -46,7 +46,7 @@ const FreeAll = () => {
         <div className="text-center py-[68px]">
           <h1 className="text-textSecondary font-outfit text-[26px] xl:text-[40px] font-semibold leading-normal">
             Free for all,{" "}
-            <span className="bg-gradient-to-r from-[#008A90] to-[#00C2CB] bg-clip-text text-transparent">
+            <span className="bg-primary-gradient  bg-clip-text text-transparent">
               no monthly fee
             </span>
           </h1>

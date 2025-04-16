@@ -122,7 +122,7 @@ const BusinessFooter = () => {
       <div className="flex flex-col xl:flex-row gap-[15px] justify-between container py-6">
         <div className="flex items-center">
           <WorldSvg />
-          <h1 className="font-manrope font-semibold text-base text-[#00848A]">
+          <h1 className="font-manrope font-semibold text-base text-primary">
             English
           </h1>
         </div>

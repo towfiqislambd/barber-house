@@ -16,7 +16,7 @@ const HomepageStat = () => {
         <div className="mt-6 md:mt-12 grid lg:grid-cols-12 gap-5 px-5 2xl:px-0">
           {/* big */}
           <div className="col-span-4 lg:col-span-4 xl:col-span-6 bg-[#F4F4F4] xl:py-[72px] py-7 xl:px-12 w-full flex flex-col gap-2 items-center justify-center rounded-lg px-3">
-            <h3 className="text-4xl xl:text-8xl font-semibold font-outfit bg-gradient-to-r from-[#008A90] to-[#00C2CB] bg-clip-text text-transparent">
+            <h3 className="text-4xl xl:text-8xl font-semibold font-outfit bg-primary-gradient bg-clip-text text-transparent">
               1 billion+
             </h3>
             <p className="text-base xl:text-lg font-semibold">

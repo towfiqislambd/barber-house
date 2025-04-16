@@ -1,4 +1,4 @@
-import logo from "@/assets/images/logo.png";
+import logo from "../assets/images/logo.jpg" ;
 import { RxCross2 } from "react-icons/rx";
 import {
   DownArrowSvg,
@@ -50,7 +50,6 @@ const Navbar = () => {
 
         {/* NavLinks */}
         <div className="hidden xl:flex items-center gap-8">
-          
           {/* cta */}
           <div className="flex items-center gap-5">
             <Link
@@ -82,7 +81,7 @@ const Navbar = () => {
                     ].map(({ icon, label }) => (
                       <li
                         key={label}
-                        className="cursor-pointer flex gap-2 items-center hover:bg-[#008a90] hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
+                        className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
                         onClick={() => setIsPopoverOpen(false)}
                       >
                         {icon}
@@ -92,7 +91,7 @@ const Navbar = () => {
                       </li>
                     ))}
                     <li
-                      className="cursor-pointer flex gap-2 items-center hover:bg-[#008a90] hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
+                      className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
                       onClick={() => setIsPopoverOpen(false)}
                     >
                       <p className="font-manrope text-lg font-medium">
@@ -100,18 +99,18 @@ const Navbar = () => {
                       </p>
                     </li>
                   </ul>
-                  <div className="border-t border-[#008A90] my-5"></div>
+                  <div className="border-t border-primary-gradient my-5"></div>
                   <h4 className="font-semibold text-xl text-[#222] mb-5">
                     Others
                   </h4>
                   <p
-                    className="cursor-pointer flex gap-2 items-center hover:bg-[#008a90] hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
+                    className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
                     onClick={() => setIsPopoverOpen(false)}
                   >
                     For businesses
                   </p>
                   <p
-                    className="cursor-pointer flex gap-2 items-center hover:bg-[#008a90] hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
+                    className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
                     onClick={() => setIsPopoverOpen(false)}
                   >
                     Customer support
@@ -155,7 +154,7 @@ const Navbar = () => {
         <div className="flex flex-col mt-5 items-center gap-6">
           {/* tabs */}
           <div className="flex flex-col items-center gap-3">
-            {["Male", "Female"].map((option) => (
+            {["Male", "Female"].map(option => (
               <button
                 key={option}
                 onClick={() => setGender(option)}
@@ -213,7 +212,7 @@ const Navbar = () => {
                       </li>
                     ))}
                     <li
-                      className="cursor-pointer flex gap-2 items-center hover:bg-[#008a90] hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded py-1"
+                      className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded py-1"
                       onClick={() => setIsPopoverOpen(false)}
                     >
                       <p className="font-manrope text-[17px] font-medium">
@@ -221,18 +220,18 @@ const Navbar = () => {
                       </p>
                     </li>
                   </ul>
-                  <div className="border-t border-[#008A90] my-3"></div>
+                  <div className="border-t border-primary-gradient my-3"></div>
                   <h4 className="font-semibold text-lg text-[#222] mb-2">
                     Others
                   </h4>
                   <p
-                    className="cursor-pointer flex gap-2 items-center hover:bg-[#008a90] hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded"
+                    className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded"
                     onClick={() => setIsPopoverOpen(false)}
                   >
                     For businesses
                   </p>
                   <p
-                    className="cursor-pointer flex gap-2 items-center hover:bg-[#008a90] hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded pt-1 mb-5"
+                    className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded pt-1 mb-5"
                     onClick={() => setIsPopoverOpen(false)}
                   >
                     Customer support
