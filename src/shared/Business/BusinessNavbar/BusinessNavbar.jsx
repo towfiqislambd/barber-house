@@ -44,15 +44,6 @@ const BusinessNavbar = () => {
           <div>
             <button onClick={saleMobileMenuActive} className="text-[24px] block xl:hidden"><HiMiniBars3 /></button>
           </div>
-
-          {salesetting && (
-            <div
-              className="fixed inset-0 bg-black bg-opacity-50 z-5"
-              onClick={() => setSalesetting(false)}
-            ></div>
-          )}
-
-
           <div className={`flex-shrink-0  transition-all fixed xl:static bg-white xl:bg-white left-0 top-0 bottom-0 p-[20px] w-[230px] xl:w-[100%] ${salesetting ? "translate-x-[0%]" : "translate-x-[-100%] xl:translate-x-[0%]"}`}>
 
             <div className="block xl:hidden">
