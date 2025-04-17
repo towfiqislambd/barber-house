@@ -37,7 +37,7 @@ const TryMore = () => {
         {servicesData.map((service, index) => (
           <div
             key={index}
-            className="border border-[#B0ECEF] bg-[#FFF] max-w-[750px] py-6 px-7 rounded-2xl flex items-center justify-between"
+            className="border border-borderColorLight bg-primaryLight max-w-[750px] py-6 px-7 rounded-2xl flex items-center justify-between"
           >
             {/* Card Content */}
             <div>
@@ -47,7 +47,7 @@ const TryMore = () => {
               <p className="text-textLight font-manrope text-base font-semibold mt-2">
                 {service.duration}
               </p>
-              <Link className="text-[#008A90] font-manrope text-lg font-medium leading-[30px] mt-3 underline cursor-pointer flex">
+              <Link className=" text-primary font-manrope text-lg font-medium leading-[30px] mt-3 underline cursor-pointer flex">
                 {service.price}
               </Link>
             </div>

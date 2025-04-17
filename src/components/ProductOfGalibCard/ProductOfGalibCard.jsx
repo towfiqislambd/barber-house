@@ -6,7 +6,7 @@ const ProductOfGalibCard = ({
   inStock,
 }) => {
   return (
-    <div className="bg-[#F8FFFF] max-w-[365px] py-5 lg:py-8 px-5 lg:px-8 border-[0.4px] border-[#01BAC2] rounded-2xl">
+    <div className="bg-primaryLight max-w-[365px] py-5 lg:py-8 px-5 lg:px-8 border-[0.4px] border-primary rounded-2xl">
       {/* Image Section */}
       <div className="bg-[#E6F7F9] flex justify-center relative">
         <img src={imgSrc} alt={title} />
@@ -15,7 +15,7 @@ const ProductOfGalibCard = ({
       {/* Stock Status */}
       {inStock && (
         <div className="max-w-[88px] absolute top-[42px] right-[52px]">
-          <h1 className="text-[#00894E] font-manrope text-base font-semibold leading-6 bg-[rgba(0,206,110,0.20)] py-[6px] px-3 flex justify-center rounded-tl-[8px] rounded-tr-[8px] rounded-br-[8px] rounded-bl-[2px]">
+          <h1 className="text-secondary font-manrope text-base font-semibold leading-6 bg-primary py-[6px] px-3 flex justify-center rounded-tl-[8px] rounded-tr-[8px] rounded-br-[8px] rounded-bl-[2px]">
             In Stock
           </h1>
         </div>
@@ -41,7 +41,7 @@ const ProductOfGalibCard = ({
       </div>
 
       {/* Add to Cart Button */}
-      <div className="border border-[#00C2CB] py-2 lg:py-3 px-2 text-center lg:px-6 max-w-[150px] rounded-[40px] mt-6">
+      <div className="border border-primary py-2 lg:py-3 px-2 text-center lg:px-6 max-w-[150px] rounded-[40px] mt-6">
         <button className="text-textLight font-manrope text-lg font-medium">
           Add to cart
         </button>

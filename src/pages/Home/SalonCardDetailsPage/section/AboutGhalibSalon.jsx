@@ -42,7 +42,7 @@ const AboutGhalibSalon = () => {
           <div className="flex items-center gap-2">
             <h1 className="text-textLight font-manrope lg:text-lg  leading-[30px]">
               Khalidiyah, Sultanah Qiblatain Road, Medina, Saudi Arabia.{" "}
-              <span className="text-[#008A90] font-manrope lg:text-xl font-semibold leading-[30px]">
+              <span className="text-primary font-manrope lg:text-xl font-semibold leading-[30px]">
                 Get direction
               </span>
             </h1>

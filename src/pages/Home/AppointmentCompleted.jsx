@@ -10,7 +10,7 @@ const AppointmentCompleted = () => {
                 <CheckSvg />
                 <h3 className="font-outfit mb-5 text-2xl lg:text-3xl font-semibold text-[#2C2C2C]">Appointment Successfully Completed</h3>
                 <Link to='/'>
-                    <button className="font-semibold text-lg text-[#00848A] px-3 lg:px-5 py-2 lg:py-3 rounded-lg border border-[#00848A]">Back to home</button>
+                    <button className="font-semibold text-lg text-primary px-3 lg:px-5 py-2 lg:py-3 rounded-lg border border-borderColor ">Back to home</button>
                 </Link>
             </div>
 

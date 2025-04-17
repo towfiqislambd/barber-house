@@ -12,7 +12,9 @@ const ServiceCard = ({ service, activeCard, setActiveCard }) => {
     <div
       onClick={() => setActiveCard(isActive ? null : service.id)}
       className={`${
-        isActive ? "border-[#01BAC2] bg-[#F8FFFF]" : "border-[#B0ECEF] bg-white"
+        isActive
+          ? " border-borderColorLight bg-primaryLight"
+          : " border-borderColorLight bg-white"
       } border-[0.4px] ease-in-out duration-500 max-w-[750px] h-auto max-h-[146px] p-5 lg:py-6 lg:px-7 rounded-2xl flex cursor-pointer items-center justify-between`}
     >
       {/* Card Content */}
@@ -29,7 +31,7 @@ const ServiceCard = ({ service, activeCard, setActiveCard }) => {
             src={currencyImg}
             alt="Currency"
           />
-          <h1 className="text-[#008A90] font-manrope text-xl font-medium leading-[30px]">
+          <h1 className="text-primary font-manrope text-xl font-medium leading-[30px]">
             {service.price}
           </h1>
         </div>

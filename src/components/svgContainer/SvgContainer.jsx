@@ -2602,13 +2602,13 @@ export function ServicesGhalibSalonSvg() {
     >
       <path
         d="M24 44C35.046 44 44 35.046 44 24C44 12.954 35.046 4 24 4C12.954 4 4 12.954 4 24C4 35.046 12.954 44 24 44Z"
-        stroke="#00C2CB"
+        stroke="#EE6C9C"
         strokeWidth="2"
         strokeLinejoin="round"
       />
       <path
         d="M24 16V32M16 24H32"
-        stroke="#00C2CB"
+        stroke="#EE6C9C"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

@@ -107,7 +107,7 @@ const SelectServicesPage = () => {
                   key={index}
                   onClick={() => setActiveCountry(item)}
                   className={`px-4 lg:px-7 py-2 lg:py-3 rounded-full ${activeCountry === item
-                    ? "bg-[#008A90] text-white font-semibold leading-6"
+                    ? "bg-primary text-white font-semibold leading-6"
                     : "text-textLight font-manrope font-medium leading-6"
                     }`}
                 >

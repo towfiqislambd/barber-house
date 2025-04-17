@@ -26,7 +26,7 @@ const LeftSideCard = ({
       />
 
       {/* Card Content */}
-      <div className="border 2xl:p-4 xl:p-6 p-2 rounded-b-xl border-b-[0.5px] border-l-[0.5px] border-r-[0.5px] border-[#B0ECEF] bg-white">
+      <div className="border 2xl:p-4 xl:p-6 p-2 rounded-b-xl border-b-[0.5px] border-l-[0.5px] border-r-[0.5px] border-borderColorLight bg-white">
         <h1 className="text-textLight font-outfit text-xl lg:text-2xl 3xl:text-[32px] font-medium">
           {title}
         </h1>
@@ -83,7 +83,7 @@ const LeftSideCard = ({
             </div>
           ))}
           {/* See More Services */}
-          <Link className="text-[#008A90] font-manrope lg:text-lg font-semibold underline cursor-pointer flex">
+          <Link className="text-primary font-manrope lg:text-lg font-semibold underline cursor-pointer flex">
             See More Services
           </Link>
         </div>

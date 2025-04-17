@@ -36,7 +36,7 @@ const SearchResultPage = () => {
       <div className="flex flex-col md:flex-row items-center justify-between max-w-[1185px]">
         <div
           onClick={toggleDropdown}
-          className="flex gap-2 border border-[#008A90] rounded-[36px] py-[10px] px-5 cursor-pointer"
+          className="flex gap-2 border border-borderColor rounded-[36px] py-[10px] px-5 cursor-pointer"
         >
           <FilterSvg />
           <button className="">filter</button>
@@ -101,13 +101,13 @@ const SearchResultPage = () => {
             {/* Dropdown Footer */}
             <div className="flex justify-end gap-2 mt-4">
               <button
-                className="border border-[#008A90] px-4 lg:px-6 py-2 lg:py-3 rounded-lg text-[#2C2C2C] font-manrope text-lg font-medium leading-[27px]"
+                className="border border-borderColor px-4 lg:px-6 py-2 lg:py-3 rounded-lg text-[#2C2C2C] font-manrope text-lg font-medium leading-[27px]"
                 onClick={() => setIsOpen(false)}
               >
                 Clear all
               </button>
               <button
-                className="bg-[#008A90] text-white px-4 lg:px-8 py-2 lg:py-3 rounded-lg font-manrope text-lg font-semibold leading-[27px]"
+                className="bg-primary-gradient text-white px-4 lg:px-8 py-2 lg:py-3 rounded-lg font-manrope text-lg font-semibold leading-[27px]"
                 onClick={() => setIsOpen(false)}
               >
                 Apply

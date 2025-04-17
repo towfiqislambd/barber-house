@@ -5,7 +5,7 @@ import currencyImg from "../../../../assets/images/searchResultPage/currentcy.pn
 
 const Featured = () => {
   return (
-    <div className="lg:max-w-[493px] max-h-[871px] border-[0.4px] border-solid p-5 border-[#B0ECEF] 2xl:px-7 2xl:py-7 3xl:py-8 3xl:px-7 rounded-2xl">
+    <div className="lg:max-w-[493px] max-h-[871px] border-[0.4px] border-solid p-5 border-borderColorLight 2xl:px-7 2xl:py-7 3xl:py-8 3xl:px-7 rounded-2xl">
       <img
         className="w-full h-[180px] 2xl:h-[237px] object-cover"
         src={chooseImg}
@@ -21,7 +21,7 @@ const Featured = () => {
         </p>
       </div>
       {/*  */}
-      <div className="border-t border-[#54D6DC] border-b py-6 2xl:py-12">
+      <div className="border-t border-primary border-b py-6 2xl:py-12">
         {/* This is the Wax Services 01 */}
         <div className="flex justify-between">
           <div>
@@ -79,7 +79,7 @@ const Featured = () => {
         </div>
       </div>
       {/* This is the button section */}
-      <div className="flex justify-center mt-5 2xl:mt-10 3xl:mt-20 bg-gradient-to-r from-[#008A90] to-[#00C2CB] py-2 2xl:py-[14px] px-6 rounded-[40px]">
+      <div className="flex justify-center mt-5 2xl:mt-10 3xl:mt-20 bg-primary-gradient py-2 2xl:py-[14px] px-6 rounded-[40px]">
         <Link
           to={"/chooseprofessionalpage"}
           className="text-[#FFF] font-manrope text-lg font-semibold "

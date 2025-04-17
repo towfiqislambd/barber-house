@@ -24,7 +24,7 @@ const ConfirmationWithPay = () => {
           Confirm your Booking
         </h3>
         <div className="grid xl:grid-cols-12 2xl:gap-10 gap-5">
-          <div className="col-span-8 bg-white border border-[#b0ecef8a] 3xl:px-32 2xl:px-16 px-4 3xl:py-20 py-4 rounded">
+          <div className="col-span-8 bg-white border border-borderColorLight 3xl:px-32 2xl:px-16 px-4 3xl:py-20 py-4 rounded">
             <h3 className="text-[#2C2C2C] text-xl xl:text-2xl font-semibold mb-3">
               Payment Method
             </h3>
@@ -135,7 +135,7 @@ const ConfirmationWithPay = () => {
               rows={5}
             ></textarea>
           </div>
-          <div className="xl:col-span-4 col-span-8 bg-white border self-start border-[#b0ecef8a] 2xl:p-12 p-6 rounded">
+          <div className="xl:col-span-4 col-span-8 bg-white border self-start border-borderColorLight 2xl:p-12 p-6 rounded">
             <img src={s2} className="w-full xl:h-full lg:h-[350px]" />
             <h3 className="font-outfit text-xl xl:text-2xl font-medium text-[#545454] my-2">
               Ghalibs Barber Salon
@@ -143,7 +143,7 @@ const ConfirmationWithPay = () => {
             <p className="text-base xl:text-lg text-[#545454] font-medium mb-3">
               Khalidiyah, Sultanah Qiblatain Road, Medina, Saudi Arabia.
             </p>
-            <div className="border-t pb-5 border-[#54D6DC]"></div>
+            <div className="border-t pb-5 border-primary"></div>
             <div className="flex gap-2 items-center font-medium text-[#545454] mb-2">
               <CalendarSvg />
               <p>4th February, Tuesday</p>
@@ -164,7 +164,7 @@ const ConfirmationWithPay = () => {
                 <span>20.00</span>
               </p>
             </div>
-            <div className="border-t border-[#54D6DC]"></div>
+            <div className="border-t border-primary"></div>
             <div className="flex justify-between pt-5 pb-5 items-center text-[#2C2C2C] text-lg font-medium">
               <p className="text-[#2C2C2C] font-semibold text-base xl:text-lg mb-1">
                 Total (Pay now)
@@ -175,7 +175,7 @@ const ConfirmationWithPay = () => {
               </p>
             </div>
             <Link to="/appointment-completed">
-              <button className="text-[#FFF] font-manrope text-xl font-semibold bg-gradient-to-r from-[#008A90] to-[#00C2CB] justify-center py-3 xl:mt-8 mt-0 rounded-[40px] w-full block">
+              <button className="text-[#FFF] font-manrope text-xl font-semibold bg-primary-gradient justify-center py-3 xl:mt-8 mt-0 rounded-[40px] w-full block">
                 Confirm
               </button>
             </Link>

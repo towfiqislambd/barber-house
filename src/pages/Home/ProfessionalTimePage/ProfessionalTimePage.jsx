@@ -132,7 +132,7 @@ const ProfessionalTimePage = () => {
                   selected={date}
                   onSelect={(selected) => {
                     setDate(selected);
-                    setSelectedDate(selected); // Update selectedDate state
+                    setSelectedDate(selected); 
                   }}
                 />
               </PopoverContent>
@@ -181,7 +181,7 @@ const ProfessionalTimePage = () => {
                         onClick={() => setSelectedDate(itemDate)}
                         className={`w-12 h-[44px] 2xl:w-[60px] 2xl:h-[52px] font-bold text-lg md:text-xl rounded-xl border transition-all ${
                           isSelected
-                            ? "bg-[#008A90] text-white"
+                            ? "bg-primary text-white"
                             : "bg-white text-black"
                         }`}
                       >
@@ -200,7 +200,7 @@ const ProfessionalTimePage = () => {
                   key={idx}
                   className={`md:text-lg py-2 md:py-3 rounded-lg border transition-all ${
                     selectedAppointment === item
-                      ? "bg-[#12e3e312] text-[#008A90] font-bold border border-[#008A90]"
+                      ? " bg-primaryLight text-primary font-bold border border-borderColor"
                       : "bg-white text-[#545454] font-semibold"
                   }`}
                   onClick={() => setSelectedAppointment(item)}

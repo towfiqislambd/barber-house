@@ -14,7 +14,7 @@ const BookNow = () => {
           </p>
           {/* This is the first div */}
           <Link to={"/select-service"}>
-            <div className="bg-[#F8FFFF] rounded-2xl border-[#01BAC2] border py-5 md:py-7 xl:py-[40px] px-5 md:px-10 xl:px-[80px] mt-7">
+            <div className="bg-primaryLight rounded-2xl border-primary border py-5 md:py-7 xl:py-[40px] px-5 md:px-10 xl:px-[80px] mt-7">
               <h1 className="text-[#000] font-manrope text-lg md:text-xl font-semibold">
                 Book a single appointment
               </h1>
@@ -25,7 +25,7 @@ const BookNow = () => {
           </Link>
           {/* This is the second div */}
           <Link to={"/select-service"}>
-            <div className="bg-[#FFF] rounded-2xl border-[#01BAC2] border py-5 md:py-7 xl:py-[40px] px-5 md:px-10 xl:px-[80px] mt-5">
+            <div className="bg-primaryLight rounded-2xl border-primary border py-5 md:py-7 xl:py-[40px] px-5 md:px-10 xl:px-[80px] mt-5">
               <h1 className="text-[#000] font-manrope text-lg md:text-xl font-semibold">
                 Book group appointment
               </h1>

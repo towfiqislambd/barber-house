@@ -52,11 +52,12 @@ export default {
         },
         textColor: "#2C2C2C",
         textLight: "#545454",
-        borderColor: "#B3BAC5",
+        borderColor: "#F47392",
         textSecondary: "#1E1E1E",
+        borderColorLight: "rgba(238, 108, 156, 0.60)",
+        primaryLight: "#FFF8FA",
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "#621C36",
         },
         muted: {
           DEFAULT: "hsl(var(--muted))",

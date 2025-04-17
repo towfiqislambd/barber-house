@@ -43,7 +43,7 @@ const TeamofGhalib = () => {
         {people.map((person, index) => (
           <div
             key={index}
-            className="bg-[#F8FFFF] border-[0.4px] border-[#B0ECEF] max-w-[249px] rounded-tl-[52px] rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] p-6 mt-8"
+            className="bg-primaryLight  border-[0.4px] border-primary max-w-[249px] rounded-tl-[52px] rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] p-6 mt-8"
           >
             <img src={person.pic} alt={person.name} />
             <div className="text-center mt-2">

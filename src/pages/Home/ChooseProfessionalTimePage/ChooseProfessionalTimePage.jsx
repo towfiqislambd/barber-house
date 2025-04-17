@@ -88,8 +88,8 @@ const ChooseProfessionalTimePage = () => {
                     <div className="relative">
                       <div
                         className={`${activeProfessional?.id === therapist.id
-                          ? " border-[#01BAC2] bg-[#F8FFFF] "
-                          : "bg-[#FFF] border-[#B0ECEF] "
+                          ? " border-borderColor bg-primaryLight "
+                          : "bg-[#FFF] border-borderColorLight "
                           } cursor-pointer min-h-[139px] py-3 xl:py-5 px-5 xl:px-8 border-[0.4px] ease-in-out duration-300 rounded-[12px] space-y-2`}
                       >
                         <img src={therapist.image} alt={therapist.name} />
@@ -111,7 +111,7 @@ const ChooseProfessionalTimePage = () => {
               </div>
             </div>
             {/* This is the right side div */}
-            <div className="self-start w-full border-[#B0ECEF] border-[0.4px] border-solid h-auto rounded-2xl xl:w-[400px] px-[19px] py-6">
+            <div className="self-start w-full border-borderColor border-[0.4px] border-solid h-auto rounded-2xl xl:w-[400px] px-[19px] py-6">
               <div className="flex gap-2">
                 <figure className="h-[91px] w-[91px]">
                   <img

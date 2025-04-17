@@ -130,7 +130,7 @@ const SalonCardDetailsBanner = ({ setActiveCart }) => {
                     onClick={() => {
                       navigate(item?.redirectLink);
                     }}
-                    className=" bg-[#B3BAC5] cursor-pointer hover:bg-[#008A90] ease-in-out duration-300 border-[1px] border-solid border-[#B3BAC5] bg-transparent w-9 h-9 lg:w-12 lg:h-12 rounded-full flex items-center justify-center"
+                    className=" bg-[#B3BAC5] cursor-pointer hover:bg-primary ease-in-out duration-300 border-[1px] border-solid border-[#B3BAC5] bg-transparent w-9 h-9 lg:w-12 lg:h-12 rounded-full flex items-center justify-center"
                   >
                     <item.icon />
                   </div>
@@ -220,7 +220,7 @@ const SalonCardDetailsBanner = ({ setActiveCart }) => {
             <div className="flex items-center gap-2">
               <h1 className="max-w-[410px] text-textLight font-manrope text-lg lg:text-xl font-semibold leading-[30px]">
                 Khalidiyah, Sultanah Qiblatain Road, Medina, Saudi Arabia.{" "}
-                <span className="text-[#008A90] font-manrope lg:text-xl font-semibold leading-[30px]">
+                <span className="text-primary font-manrope lg:text-xl font-semibold leading-[30px]">
                   Get direction
                 </span>
               </h1>
@@ -228,7 +228,7 @@ const SalonCardDetailsBanner = ({ setActiveCart }) => {
           </div>
           {/* This is the button section */}
           <Link to="/booknow">
-            <button className="text-[#FFF] font-manrope text-lg 2xl:text-xl font-semibold bg-gradient-to-r from-[#008A90] to-[#00C2CB] justify-center py-2 lg:py-3 2xl:py-4 mt-8 3xl:mt-[72px] rounded-[40px] w-full block">
+            <button className="text-[#FFF] font-manrope text-lg 2xl:text-xl font-semibold bg-primary-gradient justify-center py-2 lg:py-3 2xl:py-4 mt-8 3xl:mt-[72px] rounded-[40px] w-full block">
               Book Now
             </button>
           </Link>
