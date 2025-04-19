@@ -9,11 +9,11 @@ import { Modal } from "antd";
 export default function PaymentMethod() {
   const [activeIndex, setActiveIndex] = useState(null);
 
-  const actionFunc = (index) => {
-    setActiveIndex((prevIndex) => (prevIndex === index ? null : index));
+  const actionFunc = index => {
+    setActiveIndex(prevIndex => (prevIndex === index ? null : index));
   };
 
-  const handleClickOutside = (event) => {
+  const handleClickOutside = event => {
     if (!event.target.closest(".action-container")) {
       setActiveIndex(null);
     }
@@ -67,7 +67,7 @@ export default function PaymentMethod() {
         </div>
       </div>
       <div className="flex flex-col gap-[20px]">
-        <div className="px-[20px] xl:px-[50px] py-[10px] xl:py-[35px] border rounded-[8px] border-[#DFE1E6] bg-white flex items-center justify-between cursor-pointer hover:border-[#00C2CB] flex-shrink-0">
+        <div className="px-[20px] xl:px-[50px] py-[10px] xl:py-[35px] border rounded-[8px] border-[#DFE1E6] bg-white flex items-center justify-between cursor-pointer hover:border-borderColorLight flex-shrink-0">
           <div>
             <div className="mb-[4px]">
               <img src={Cash} alt="" />
@@ -84,7 +84,7 @@ export default function PaymentMethod() {
         {PaymentInfo.map((card, index) => (
           <div
             key={card.id}
-            className="px-[20px] xl:px-[50px] py-[10px] xl:py-[35px] border rounded-[8px] border-[#DFE1E6] bg-white flex items-center justify-between cursor-pointer hover:border-[#00C2CB] flex-shrink-0"
+            className="px-[20px] xl:px-[50px] py-[10px] xl:py-[35px] border rounded-[8px] border-[#DFE1E6] bg-white flex items-center justify-between cursor-pointer hover:border-primary flex-shrink-0"
           >
             <div>
               <div className="mb-[4px]">
@@ -97,7 +97,7 @@ export default function PaymentMethod() {
             <div className="relative action-container">
               <button
                 onClick={() => actionFunc(index)}
-                className="flex items-center justify-center gap-[10px] border border-[#008A90] rounded-[24px] text-[#008A90] w-[127px] py-[8px] xl:py-[12px] px-[16px] font-medium mb-[5px]"
+                className="flex items-center justify-center gap-[10px] border border-primary rounded-[24px] text-primary w-[127px] py-[8px] xl:py-[12px] px-[16px] font-medium mb-[5px]"
               >
                 Actions
                 <span className="text-[22px]">

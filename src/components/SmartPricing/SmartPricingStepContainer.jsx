@@ -24,19 +24,19 @@ const SmartPricingStepContainer = () => {
       <div className="flex gap-5 items-center justify-center container">
         <div
           className={`w-[435px] h-2 rounded ${
-            step === 1 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 1 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
 
         <div
           className={`w-[435px] h-2 rounded ${
-            step === 2 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 2 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
 
         <div
           className={`w-[435px] h-2 rounded ${
-            step === 3 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 3 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
       </div>

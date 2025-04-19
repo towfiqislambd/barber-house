@@ -31,7 +31,7 @@ const UpcomingAppointments = () => {
                     </Select>
                     <div className="flex mt-5 gap-3 items-center">
                         <button className="px-5 border py-2 rounded-lg font-medium">Close</button>
-                        <button className="px-5 py-2 bg-[#008A90] text-white rounded-lg font-medium">Apply Changes</button>
+                        <button className="px-5 py-2 bg-primary text-white rounded-lg font-medium">Apply Changes</button>
                     </div>
                 </div>
             </div>

@@ -126,7 +126,7 @@ const AppointmentList = () => {
         <div className="flex gap-10 items-center">
           <Popover>
             <PopoverTrigger>
-              <button className="md:px-4 px-2 md:py-[10px] py-2 flex gap-2 items-center outline-none rounded-lg border border-[#00C2CB]">
+              <button className="md:px-4 px-2 md:py-[10px] py-2 flex gap-2 items-center outline-none rounded-lg border border-borderColorLight">
                 <ExportSvg />
                 <p>Option</p>
                 <DropdownSvg />
@@ -183,10 +183,10 @@ const AppointmentList = () => {
                 <td className="px-3 lg:px-4 text-[#545454] font-medium py-4 lg:py-5">
                   {data.saleDate}
                 </td>
-                <td className="px-3 lg:px-4 text-[#008A90] font-medium py-4 lg:py-5">
+                <td className="px-3 lg:px-4 text-primary font-medium py-4 lg:py-5">
                   {data.saleNo}
                 </td>
-                <td className="px-3 lg:px-4 text-[#008A90] font-medium py-4 lg:py-5">
+                <td className="px-3 lg:px-4 text-primary font-medium py-4 lg:py-5">
                   {data.ppptRef}
                 </td>
                 <td className="px-3 lg:px-4 text-[#545454] font-medium py-4 lg:py-5">
@@ -195,7 +195,7 @@ const AppointmentList = () => {
                 <td className="px-3 lg:px-4 text-[#545454] font-medium py-4 lg:py-5">
                   {data.location}
                 </td>
-                <td className="px-3 lg:px-4 text-[#008A90] font-medium py-4 lg:py-5">
+                <td className="px-3 lg:px-4 text-primary font-medium py-4 lg:py-5">
                   {data.teamMember}
                 </td>
                 <td className="px-3 lg:px-4 text-[#545454] font-medium py-4 lg:py-5">

@@ -29,7 +29,7 @@ const BusinessDashboardMarketing = () => {
       <div className="relative">
         {/* Toggle Button */}
         <button
-          className="xl:hidden px-4 py-2 bg-[#008A90] text-white rounded-md xl:mb-4"
+          className="xl:hidden px-4 py-2 bg-primary text-white rounded-md xl:mb-4"
           onClick={() => setIsVisible(!isVisible)}
         >
           {isVisible ? "Close Menu" : "Open Menu"}
@@ -58,9 +58,9 @@ const BusinessDashboardMarketing = () => {
                 <button
                   key={tab.label}
                   onClick={() => setIsVisible(false) || setActiveTab(tab.label)}
-                  className={`px-5 py-2 w-full block text-left duration-300 transition-all hover:bg-[#008A90] hover:text-white rounded-lg ${
+                  className={`px-5 py-2 w-full block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
                     activeTab === tab.label
-                      ? "text-white bg-[#008A90]"
+                      ? "text-white bg-primary"
                       : "text-[#2C2C2C]"
                   }`}
                 >

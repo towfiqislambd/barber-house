@@ -417,27 +417,27 @@ const BusinessDashboardCalendar = () => {
             <PopoverContent className="w-[220px] p-4">
               <div className="space-y-4">
                 <button className="flex gap-2 items-center">
-                  <p className="text-textColor text-base font-manrope font-medium leading-6 hover:bg-[#00C2CB] transition-all ease-in-out duration-300 py-2 px-3 rounded-xl">
+                  <p className="text-textColor text-base font-manrope font-medium leading-6 hover:bg-primary transition-all ease-in-out duration-300 py-2 px-3 rounded-xl">
                     Appointment
                   </p>
                 </button>
                 <button className="flex gap-2 items-center">
-                  <p className="text-textColor text-base font-manrope font-medium leading-6 py-2 px-3 rounded-xl hover:bg-[#00C2CB] transition-all ease-in-out duration-300">
+                  <p className="text-textColor text-base font-manrope font-medium leading-6 py-2 px-3 rounded-xl hover:bg-primary transition-all ease-in-out duration-300">
                     Group Appointment
                   </p>
                 </button>
                 <button className="flex gap-2 items-center">
-                  <p className="text-textColor text-base font-manrope font-medium leading-6 py-2 px-3 rounded-xl hover:bg-[#00C2CB] transition-all ease-in-out duration-300">
+                  <p className="text-textColor text-base font-manrope font-medium leading-6 py-2 px-3 rounded-xl hover:bg-primary transition-all ease-in-out duration-300">
                     <BlockedTimeModal />
                   </p>
                 </button>
                 <button className="flex gap-2 items-center">
-                  <p className="text-textColor text-base font-manrope font-medium leading-6 py-2 px-3 rounded-xl hover:bg-[#00C2CB] transition-all ease-in-out duration-300">
+                  <p className="text-textColor text-base font-manrope font-medium leading-6 py-2 px-3 rounded-xl hover:bg-primary transition-all ease-in-out duration-300">
                     Sale
                   </p>
                 </button>
                 <button className="flex gap-2 items-center">
-                  <p className="text-textColor text-base font-manrope font-medium leading-6 py-2 px-3 rounded-xl hover:bg-[#00C2CB] transition-all ease-in-out duration-300">
+                  <p className="text-textColor text-base font-manrope font-medium leading-6 py-2 px-3 rounded-xl hover:bg-primary transition-all ease-in-out duration-300">
                     Quick Payment
                   </p>
                 </button>
@@ -739,7 +739,7 @@ const BusinessDashboardCalendar = () => {
           <div className="flex flex-col gap-y-5 ">
             <div className="flex flex-row w-full justify-between ">
               <span>Team members</span>
-              <span className="text-[#008A90] cursor-pointer">Clear all</span>
+              <span className="text-primary cursor-pointer">Clear all</span>
             </div>
             <div className="flex flex-col gap-y-5">
               {employees.map((employee, idx) => {
@@ -822,7 +822,7 @@ const BusinessDashboardCalendar = () => {
                     toast.error("Nothing to clear");
                   }
                 }}
-                className="py-[14.5px] px-4 lg:px-[69px] border-[1px] border-solid rounded-[8px] border-[#DFE1E6] text-[#2C2C2C] text-[14px] font-manrope font-medium leading-[150%] hover:border-transparent hover:text-white hover:bg-[#008A90] ease-in-out duration-300 "
+                className="py-[14.5px] px-4 lg:px-[69px] border-[1px] border-solid rounded-[8px] border-[#DFE1E6] text-[#2C2C2C] text-[14px] font-manrope font-medium leading-[150%] hover:border-transparent hover:text-white hover:bg-primary ease-in-out duration-300 "
               >
                 Clear filters
               </button>
@@ -839,7 +839,7 @@ const BusinessDashboardCalendar = () => {
                     toast.error("Please select a filter to apply");
                   }
                 }}
-                className="py-[14.5px] px-8 lg:px-[69px]  text-[14px] font-manrope font-medium leading-[150%] bg-[#008A90]  text-white cursor-pointer border-[1px] border-transparent hover:border-solid rounded-[8px] border-[#DFE1E6] hover:bg-transparent hover:border-[#DFE1E6] hover:text-[#2c2c2c] ease-in-out duration-300  "
+                className="py-[14.5px] px-8 lg:px-[69px]  text-[14px] font-manrope font-medium leading-[150%] bg-primary  text-white cursor-pointer border-[1px] border-transparent hover:border-solid rounded-[8px] border-[#DFE1E6] hover:bg-transparent hover:border-[#DFE1E6] hover:text-[#2c2c2c] ease-in-out duration-300  "
               >
                 {" "}
                 Apply

@@ -129,14 +129,14 @@ const SalesSummaryModal = () => {
               </div>
             </div>
             <div className="flex justify-between items-center">
-              <p className="text-[#008A90] text-lg font-medium">
+              <p className="text-primary text-lg font-medium">
                 Clear all filters
               </p>
               <div className="flex gap-3 justify-end mt-7">
-                <button className="px-4 py-[5px] rounded-lg border border-[#00C2CB] font-medium text-[#2C2C2C]">
+                <button className="px-4 py-[5px] rounded-lg border border-borderColor font-medium text-[#2C2C2C]">
                   Cancel
                 </button>
-                <button className="px-4 py-2 bg-[#008A90] text-white rounded-lg border border-[#008A90] font-medium">
+                <button className="px-4 py-2 bg-primary text-white rounded-lg border border-borderColorLight font-medium">
                   Apply
                 </button>
               </div>

@@ -61,7 +61,7 @@ const OnlineProfileStepFour = ({ step, setStep }) => {
               key={day}
               onClick={() => setDate(day)}
               className={`${
-                date === day ? "bg-gray-200 text-black border" : "bg-[#6950F3]"
+                date === day ? "bg-gray-200 text-black border" : "bg-primary"
               } lg:px-[16px] md:px-2 px-[6px] py-[18px] rounded-[100px] text-[#FFF] font-manrope text-base font-medium leading-6 w-[66px]`}
             >
               {day.slice(0, 3)}

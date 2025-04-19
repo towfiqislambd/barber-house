@@ -6,11 +6,11 @@ export default function NewTax() {
     <div className="pt-[40px] px-6 md:px-0">
       <div className="flex gap-[20px] justify-end container mb-[30px]">
         <Link to="/businessDashboard/settingsales">
-          <button className="border border-[#DFE1E6] rounded-[8px] text-[#2C2C2C] font-manrope text-[18px] xl:text-[20px] font-semibold p-[10px] xl:p-[14px] min-w-[100px] xl:min-w-[218px] hover:bg-[#008A90] hover:text-[#FFF] transition-all duration-300 hover:scale-95">
+          <button className="border border-[#DFE1E6] rounded-[8px] text-[#2C2C2C] font-manrope text-[18px] xl:text-[20px] font-semibold p-[10px] xl:p-[14px] min-w-[100px] xl:min-w-[218px] hover:bg-primary hover:text-[#FFF] transition-all duration-300 hover:scale-95">
             Close
           </button>
         </Link>
-        <button className="border border-[#DFE1E6] rounded-[8px] bg-[#008A90] text-[#FFF] font-manrope text-[18px] xl:text-[20px] font-semibold p-[10px] xl:p-[14px] min-w-[100px] xl:min-w-[218px] hover:scale-95 transition-all duration-300">
+        <button className="border border-[#DFE1E6] rounded-[8px] bg-primary text-[#FFF] font-manrope text-[18px] xl:text-[20px] font-semibold p-[10px] xl:p-[14px] min-w-[100px] xl:min-w-[218px] hover:scale-95 transition-all duration-300">
           Save
         </button>
       </div>
@@ -38,7 +38,7 @@ export default function NewTax() {
               <input
                 type="text"
                 placeholder="enter tax name"
-                className="py-[16px] px-[20px] border rounded-[8px] w-full focus:border-[#00B1B9] focus:outline-none"
+                className="py-[16px] px-[20px] border rounded-[8px] w-full focus:border-primary focus:outline-none"
               />
             </div>
             <div className="">
@@ -52,7 +52,7 @@ export default function NewTax() {
                 <input
                   type="text"
                   placeholder="enter tax name"
-                  className="py-[16px] px-[20px] border rounded-[8px] w-full focus:border-[#00B1B9] focus:outline-none pl-[40px]"
+                  className="py-[16px] px-[20px] border rounded-[8px] w-full focus:border-primary focus:outline-none pl-[40px]"
                 />
 
                 <span className="absolute left-[15px]  top-[50%] translate-y-[-50%] bg-[#fff]">

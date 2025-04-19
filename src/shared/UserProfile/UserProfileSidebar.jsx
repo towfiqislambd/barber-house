@@ -7,7 +7,7 @@ export default function UserProfileSidebar() {
   const [activeItem, setActiveItem] = useState(localStorage.getItem('activeTab') || 'profile');
 
   const linkStyle = "py-[16px] px-[32px] rounded-[8px] text-[#2C2C2C] font-manrope font-medium leading-[27px] text-[18px] block";
-  const activeStyle = "bg-[#00B1B9] text-white";
+  const activeStyle = "bg-primary text-white";
 
   // Save the active tab to localStorage whenever it changes
   useEffect(() => {

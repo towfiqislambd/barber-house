@@ -6,7 +6,7 @@ import Icon2 from "../../assets/images/icon/location.svg";
 import Icon3 from "../../assets/images/icon/calendar.svg";
 import Icon4 from "../../assets/images/icon/clock.svg";
 import ToggleDemo from "../../assets/images/usertoggle.png";
-import userDashboardLogo from "../../assets/images/userdashboardlogo.jpg";
+import userDashboardLogo from "../../assets/images/logo.jpg";
 
 export default function UserProfileNavbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -22,7 +22,7 @@ export default function UserProfileNavbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/">
-            <img src={userDashboardLogo} alt="User Logo" />
+            <img className="h-[60px] w-[60px] object-cover rounded-4 "  src={userDashboardLogo} alt="User Logo" />
           </Link>
 
           {/* Full Form (2xl and up) */}

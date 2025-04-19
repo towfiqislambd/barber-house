@@ -57,59 +57,59 @@ const OnlineProfileContainer = () => {
       <div className="flex gap-5 items-center justify-center container">
         <div
           className={`w-40 h-2 rounded ${
-            step === 1 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 1 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
 
         <div
           className={`w-40 h-2 rounded ${
-            step === 2 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 2 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
 
         <div
           className={`w-40 h-2 rounded ${
-            step === 3 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 3 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
         <div
           className={`w-40 h-2 rounded ${
-            step === 4 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 4 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
         <div
           className={`w-40 h-2 rounded ${
-            step === 5 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 5 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
         <div
           className={`w-40 h-2 rounded ${
-            step === 6 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 6 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
         <div
           className={`w-40 h-2 rounded ${
-            step === 7 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 7 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
         <div
           className={`w-40 h-2 rounded ${
-            step === 8 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 8 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
         <div
           className={`w-40 h-2 rounded ${
-            step === 9 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 9 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
         <div
           className={`w-40 h-2 rounded ${
-            step === 10 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 10 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
         <div
           className={`w-40 h-2 rounded ${
-            step === 11 ? "bg-[#6950F3]" : "bg-[#DFE1E6]"
+            step === 11 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
       </div>

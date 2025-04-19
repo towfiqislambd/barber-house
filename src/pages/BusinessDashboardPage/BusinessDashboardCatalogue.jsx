@@ -13,9 +13,9 @@ const BusinessDashboardCatalogue = () => {
         <ul className="xl:space-y-5 xl:text-lg font-medium text-nowrap flex xl:block gap-3 flex-wrap md:gap-5">
           <button
             onClick={() => setActiveTab("service_menu")}
-            className={`xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-[#008A90] hover:text-white rounded-lg ${
+            className={`xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
               activeTab === "service_menu"
-                ? "text-white bg-[#008A90]"
+                ? "text-white bg-primary"
                 : "text-[#2C2C2C]"
             }`}
           >
@@ -23,9 +23,9 @@ const BusinessDashboardCatalogue = () => {
           </button>
           <button
             onClick={() => setActiveTab("memberships")}
-            className={`xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-[#008A90] hover:text-white rounded-lg ${
+            className={`xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
               activeTab === "memberships"
-                ? "text-white bg-[#008A90]"
+                ? "text-white bg-primary"
                 : "text-[#2C2C2C]"
             }`}
           >
@@ -33,9 +33,9 @@ const BusinessDashboardCatalogue = () => {
           </button>
           <button
             onClick={() => setActiveTab("products")}
-            className={`xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-[#008A90] hover:text-white rounded-lg ${
+            className={`xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
               activeTab === "products"
-                ? "text-white bg-[#008A90]"
+                ? "text-white bg-primary"
                 : "text-[#2C2C2C]"
             }`}
           >

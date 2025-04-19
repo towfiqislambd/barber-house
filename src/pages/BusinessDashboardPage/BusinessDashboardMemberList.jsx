@@ -12,9 +12,9 @@ const BusinessDashboardMemberList = () => {
         <ul className="flex gap-5 xl:block xl:space-y-7 text-lg font-medium">
           <button
             onClick={() => setActiveTab("team-members")}
-            className={`sm:px-5 px-2 py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-[#008A90] hover:text-white rounded-lg ${
+            className={`sm:px-5 px-2 py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
               activeTab === "team-members"
-                ? "text-white bg-[#008A90] sm:text-lg text-sm"
+                ? "text-white bg-primary sm:text-lg text-sm"
                 : "text-[#2C2C2C] sm:text-lg text-sm"
             }`}
           >
@@ -22,9 +22,9 @@ const BusinessDashboardMemberList = () => {
           </button>
           <button
             onClick={() => setActiveTab("scheduled_shifts")}
-            className={`sm:px-5 px-2 py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-[#008A90] hover:text-white rounded-lg ${
+            className={`sm:px-5 px-2 py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
               activeTab === "scheduled_shifts"
-                ? "text-white bg-[#008A90] sm:text-lg text-sm"
+                ? "text-white bg-primary sm:text-lg text-sm"
                 : "text-[#2C2C2C] sm:text-lg text-sm"
             }`}
           >

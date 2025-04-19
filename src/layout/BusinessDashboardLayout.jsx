@@ -1,6 +1,6 @@
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
-import logo from "../assets/images/businessLogo.png";
+import logo from "../assets/images/logo.jpg";
 import profile from "../assets/images/profile.png";
 import {
   BusinessDashboardOne,
@@ -109,8 +109,8 @@ const BusinessDashboardLayout = () => {
       {/* Dashboard Header */}
       {!isExcluded && (
         <header className="flex justify-between sticky top-0 z-[999] md:h-[90px] bg-white items-center border-b border-[#c5cad3] py-2 px-5 md:px-10">
-          <Link to='/'>
-            <img src={logo} alt="Logo" />
+          <Link to="/">
+            <img className="w-[50px] h-[50px] " src={logo} alt="Logo" />
           </Link>
           <div className="flex gap-3 md:gap-5 items-center">
             <button>
@@ -125,7 +125,10 @@ const BusinessDashboardLayout = () => {
               alt="Profile"
             />
             {/* Hamburger btn */}
-            <button onClick={() => setOpen(!isOpen)} className="bg-[#00C2CB] xl:hidden text-white w-10 h-9 rounded grid place-items-center">
+            <button
+              onClick={() => setOpen(!isOpen)}
+              className="bg-primary xl:hidden text-white w-10 h-9 rounded grid place-items-center"
+            >
               <FaBars className="text-2xl" />
             </button>
           </div>
@@ -149,7 +152,7 @@ const BusinessDashboardLayout = () => {
                       className="flex justify-center"
                       onClick={() => setActive(id)}
                     >
-                      <Icon color={active === id ? "#008A90" : "#2C2C2C"} />
+                      <Icon color={active === id ? "#EE6C9C" : "#2C2C2C"} />
                     </NavLink>
                   </Tooltip>
                 </li>
@@ -160,8 +163,9 @@ const BusinessDashboardLayout = () => {
 
         {/* Scrollable Content */}
         <main
-          className={`flex-1 bg-[#F9F9F9] ${location.pathname !== "/businessDashboard/calendar" && "md:p-5"
-            }  overflow-y-auto ${isExcluded ? "h-screen" : "h-full"}`}
+          className={`flex-1 bg-[#F9F9F9] ${
+            location.pathname !== "/businessDashboard/calendar" && "md:p-5"
+          }  overflow-y-auto ${isExcluded ? "h-screen" : "h-full"}`}
         >
           <Outlet />
         </main>
@@ -170,11 +174,19 @@ const BusinessDashboardLayout = () => {
       {/* Responsive code here */}
 
       {/* Blur Overlay */}
-      <div onClick={() => setOpen(false)} className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 xl:hidden z-[999] ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-      </div>
+      <div
+        onClick={() => setOpen(false)}
+        className={`fixed inset-0 bg-black/30 backdrop-blur-sm transition-opacity duration-300 xl:hidden z-[999] ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      ></div>
 
       {/* Sidebar */}
-      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white px-5 py-8 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[100px] xl:hidden`}>
+      <div
+        className={`${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } duration-500 transition-transform fixed top-0 z-[999] left-0 bg-white px-5 py-8 shadow-lg overflow-y-auto  border-r max-h-screen min-h-screen w-[100px] xl:hidden`}
+      >
         {!isExcluded && (
           <aside id="sidebar" className=" bg-white">
             <ul className="space-y-9">
@@ -185,7 +197,7 @@ const BusinessDashboardLayout = () => {
                     className="flex justify-center"
                     onClick={() => handleActive(id)}
                   >
-                    <Icon color={active === id ? "#008A90" : "#2C2C2C"} />
+                    <Icon color={active === id ? "#EE6C9C" : "#2C2C2C"} />
                   </NavLink>
                 </li>
               ))}

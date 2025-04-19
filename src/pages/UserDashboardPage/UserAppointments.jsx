@@ -113,7 +113,7 @@ export default function UserAppointments() {
       <div className='flex gap-[30px]'>
         <div className='flex-shrink-0 w-[814px]'>
           <div className="">
-            <div className="flex bg-[#008A90] w-max rounded-[36px] p-[4px] mb-[28px]">
+            <div className="flex bg-primary w-max rounded-[36px] p-[4px] mb-[28px]">
               <button
                 className={`py-2 px-4 rounded-[32px] font-manrope font-semibold text-[18px] ${activeTab === "tab1" ? "bg-[#FFF] text-[#2C2C2C]" : "text-[#FFF]"
                   }`}
@@ -134,7 +134,7 @@ export default function UserAppointments() {
 
               {activeTab === "tab1" && <div>
                 <div className='mb-[28px]'>
-                  <h3 className='text-[#2C2C2C] font-outfit text-[28px] font-medium leading-[33px] flex gap-[15px]'>Upcomming <span className='w-[30px] h-[30px] bg-[#008A90] rounded-[100%] text-center flex items-center justify-center text-[#FFF] text-[20px]'>4</span></h3>
+                  <h3 className='text-[#2C2C2C] font-outfit text-[28px] font-medium leading-[33px] flex gap-[15px]'>Upcomming <span className='w-[30px] h-[30px] bg-primary rounded-[100%] text-center flex items-center justify-center text-[#FFF] text-[20px]'>4</span></h3>
                 </div>
                 {
                   upcomingAppointments.map((upcomingData) => (
@@ -146,15 +146,13 @@ export default function UserAppointments() {
               </div>}
               {activeTab === "tab2" && <div>
                 <div className='mb-[28px]'>
-                  <h3 className='text-[#2C2C2C] font-outfit text-[28px] font-medium leading-[33px] flex gap-[15px]'>Previous <span className='w-[30px] h-[30px] bg-[#008A90] rounded-[100%] text-center flex items-center justify-center text-[#FFF] text-[20px]'>4</span></h3>
+                  <h3 className='text-[#2C2C2C] font-outfit text-[28px] font-medium leading-[33px] flex gap-[15px]'>Previous <span className='w-[30px] h-[30px] bg-primary rounded-[100%] text-center flex items-center justify-center text-[#FFF] text-[20px]'>4</span></h3>
                 </div>
                 {
                   previousAppointments.map((previousData) => (
                     <PreviousCard previousData={previousData} key={previousData.id} />
                   ))
                 }
-
-
               </div>}
             </div>
           </div>
@@ -163,12 +161,12 @@ export default function UserAppointments() {
 
 
         {/*Start:: Right card  */}
-        <div className='flex-shrink-0 w-[400px] border border-[#B0ECEF] rounded-[16px] p-[30px]'>
+        <div className='flex-shrink-0 w-[400px] border border-borderColorLight rounded-[16px] p-[30px]'>
           <div className='overflow-hidden rounded-tl-[8px] rounded-tr-[8px] h-[200px]'>
             <img src={BookingImg} className='w-full h-full object-cover' alt="" />
           </div>
           <div className='mt-[16px] mb-[32px]'>
-            <button className='bg-[#00C2CB] rounded-[24px] text-white px-[12px] py-[6px] flex items-center gap-[5px]'> <span><IoMdCheckmarkCircleOutline /></span> Booking Confirmed</button>
+            <button className='bg-primary rounded-[24px] text-white px-[12px] py-[6px] flex items-center gap-[5px]'> <span><IoMdCheckmarkCircleOutline /></span> Booking Confirmed</button>
           </div>
           <div className='flex flex-col gap-[64px]'>
             <div>
@@ -205,7 +203,7 @@ export default function UserAppointments() {
                   <p className='text-[#545454] font-manrope text-[18px] font-medium'>Gift card</p>
                   <div>
                     <Link to="/userdashboard/giftcard">
-                      <button className='text-[#545454] font-manrope font-semibold rounded-[8px] border border-[#008A90] px-[16px] py-[8px] flex items-center gap-[5px]'>Buy <span><FaAngleRight /></span></button>
+                      <button className='text-[#545454] font-manrope font-semibold rounded-[8px] border border-primary px-[16px] py-[8px] flex items-center gap-[5px]'>Buy <span><FaAngleRight /></span></button>
                     </Link>
                   </div>
                 </div>
@@ -213,7 +211,7 @@ export default function UserAppointments() {
                   <p className='text-[#545454] font-manrope text-[18px] font-medium'>Membership</p>
                   <div>
                     <Link to="/userdashboard/usermembership">
-                      <button className='text-[#545454] font-manrope font-semibold rounded-[8px] border border-[#008A90] px-[16px] py-[8px] flex items-center gap-[5px]'>
+                      <button className='text-[#545454] font-manrope font-semibold rounded-[8px] border border-primary px-[16px] py-[8px] flex items-center gap-[5px]'>
                         Buy
                         <span> <FaAngleRight /></span>
                       </button>

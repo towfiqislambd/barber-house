@@ -92,8 +92,8 @@ const CatalogFilterModal = () => {
 
                         </div>
                         <div className="flex gap-3 justify-end mt-7">
-                            <button className="px-4 py-[5px] rounded-lg border border-[#00C2CB] font-medium text-[#2C2C2C]">Cancel</button>
-                            <button className="px-4 py-2 bg-[#008A90] text-white rounded-lg border border-[#008A90] font-medium">Apply</button>
+                            <button className="px-4 py-[5px] rounded-lg border border-primary font-medium text-[#2C2C2C]">Cancel</button>
+                            <button className="px-4 py-2 bg-primary text-white rounded-lg border border-primary font-medium">Apply</button>
                         </div>
                     </DialogDescription>
                 </DialogHeader>

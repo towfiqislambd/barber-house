@@ -114,7 +114,7 @@ const ReportingClientList = () => {
         <div className="flex gap-10 items-center">
           <Popover>
             <PopoverTrigger>
-              <button className="2xl:px-4 px-2 2xl:py-[10px] py-2 flex gap-2 items-center outline-none rounded-lg border border-[#00C2CB]">
+              <button className="2xl:px-4 px-2 2xl:py-[10px] py-2 flex gap-2 items-center outline-none rounded-lg border border-borderColorLight">
                 <ExportSvg />
                 <p>Option</p>
                 <DropdownSvg />

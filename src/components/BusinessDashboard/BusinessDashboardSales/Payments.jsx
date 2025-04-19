@@ -112,7 +112,7 @@ const Payments = () => {
         {/* Export */}
         <Popover>
           <PopoverTrigger>
-            <button className="px-2 lg:px-4 py-2 lg:py-[10px] flex gap-2 items-center outline-none rounded-lg border border-[#00C2CB]">
+            <button className="px-2 lg:px-4 py-2 lg:py-[10px] flex gap-2 items-center outline-none rounded-lg border border-primary ">
               <ExportSvg />
               <p>Option</p>
               <DropdownSvg />
@@ -136,7 +136,7 @@ const Payments = () => {
           </PopoverContent>
         </Popover>
       </div>
-      <div className="border-t border-[#008A90] mt-10 pb-5"></div>
+      <div className="border-t border-primary mt-10 pb-5"></div>
       <div className="overflow-x-auto">
         {/* Table */}
         <table className="w-full border-collapse lg:min-w-[800px]">

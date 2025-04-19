@@ -59,9 +59,9 @@ export default function SalesDrawer() {
               <button
                 key={index}
                 onClick={() => setActiveList(item)}
-                className={`px-5 py-2 text-[#008A90] font-medium rounded-full border ${
+                className={`px-5 py-2 text-primary font-medium rounded-full border ${
                   activeList === item
-                    ? "border-[#00C2CB] bg-[#00C2CB] text-white"
+                    ? "border-primary bg-primary text-white"
                     : "border-gray-300"
                 }`}
               >
@@ -150,7 +150,7 @@ export default function SalesDrawer() {
                 </div>
               </div>
               <div className="mb-[15px]">
-                <button className="flex items-center gap-2 px-[16px] py-[8px] border-[#008A90] border rounded-full text-[#008A90] font-manrope font-semibold text-[16px]">
+                <button className="flex items-center gap-2 px-[16px] py-[8px] border-primary border rounded-full text-primary font-manrope font-semibold text-[16px]">
                   <span>
                     <FiPlusCircle />
                   </span>{" "}
@@ -203,7 +203,7 @@ export default function SalesDrawer() {
                       <BsThreeDotsVertical />
                     </div>
                     <div className="flex-shrink-0">
-                      <button className="rounded-[8px] bg-[#008A90] p-3 text-[20px] text-[#fff] sm:w-[362px] w-full">
+                      <button className="rounded-[8px] bg-primary-gradient p-3 text-[20px] text-[#fff] sm:w-[362px] w-full">
                         Pay now
                       </button>
                     </div>

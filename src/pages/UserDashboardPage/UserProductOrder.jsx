@@ -37,7 +37,7 @@ export default function UserProductOrder() {
             <form action="">
               <div className='relative'>
                 <input
-                  className="border py-[13px] px-[14px] rounded-[5px] focus:border-[#00B1B9] focus:outline-none w-full ps-[50px]"
+                  className="border py-[13px] px-[14px] rounded-[5px] focus:border-primary focus:outline-none w-full ps-[50px]"
                   type="search"
                   placeholder="Search"
                 />

@@ -194,7 +194,7 @@ const Inventory = () => {
         <div className="flex lg:gap-10 gap-5 items-center">
           <Popover>
             <PopoverTrigger>
-              <button className="px-4 3xl:py-[10px] py-1 flex gap-2 items-center outline-none rounded-lg border border-[#00C2CB]">
+              <button className="px-4 3xl:py-[10px] py-1 flex gap-2 items-center outline-none rounded-lg border border-borderColorLight">
                 <ExportSvg />
                 <p>Option</p>
                 <DropdownSvg />

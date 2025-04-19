@@ -16,7 +16,7 @@ const EditCategoryModal = () => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger>
-                <button className="text-[#545454] font-medium hover:text-blue-500">Edit category</button>
+                <button className="text-[#545454] font-medium hover:text-primary">Edit category</button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>

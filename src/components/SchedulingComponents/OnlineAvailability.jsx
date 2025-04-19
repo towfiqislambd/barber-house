@@ -16,11 +16,11 @@ export default function OnlineAvailability() {
     <div className="pb-[100px] px-6 lg:px-0 py-6 md:py-0">
       <div className="flex gap-[20px] lg:justify-end justify-start container">
         <Link to="/businessDashboard/scheduling">
-          <button className="border border-[#DFE1E6] rounded-[8px] text-[#2C2C2C] font-manrope text-base sm:text-[20px] font-semibold 2xl:p-[14px] py-2 xl:min-w-[218px] min-w-[120px] hover:bg-[#008A90] hover:text-[#FFF] transition-all duration-300 hover:scale-95">
+          <button className="border border-[#DFE1E6] rounded-[8px] text-[#2C2C2C] font-manrope text-base sm:text-[20px] font-semibold 2xl:p-[14px] py-2 xl:min-w-[218px] min-w-[120px] hover:bg-primary hover:text-[#FFF] transition-all duration-300 hover:scale-95">
             Close
           </button>
         </Link>
-        <button className="border border-[#DFE1E6] rounded-[8px] bg-[#008A90] text-[#FFF] font-manrope text-base sm:text-[20px] font-semibold 2xl:p-[14px] py-2 xl:min-w-[218px] min-w-[120px] hover:scale-95 transition-all duration-300">
+        <button className="border border-[#DFE1E6] rounded-[8px] bg-primary text-[#FFF] font-manrope text-base sm:text-[20px] font-semibold 2xl:p-[14px] py-2 xl:min-w-[218px] min-w-[120px] hover:scale-95 transition-all duration-300">
           Save
         </button>
       </div>

@@ -17,7 +17,7 @@ const AddCategoryModal = () => {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger>
-                <button className="xl:font-semibold text-base xl:text-lg text-[#008A90] xl:px-3">Add Category</button>
+                <button className="xl:font-semibold text-base xl:text-lg text-primary xl:px-3">Add Category</button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
@@ -37,8 +37,8 @@ const AddCategoryModal = () => {
                             </div>
                         </div>
                         <div className="flex gap-3 justify-end mt-7">
-                            <button onClick={() => setOpen(false)} className="px-4 py-[5px] rounded-lg border border-[#00C2CB] font-medium text-[#2C2C2C]">Cancel</button>
-                            <button className="px-4 py-2 bg-[#008A90] text-white rounded-lg border border-[#008A90] font-medium">Add</button>
+                            <button onClick={() => setOpen(false)} className="px-4 py-[5px] rounded-lg border border-borderColor font-medium text-[#2C2C2C]">Cancel</button>
+                            <button className="px-4 py-2 bg-primary text-white rounded-lg border border-borderColorLight font-medium">Add</button>
                         </div>
                     </DialogDescription>
                 </DialogHeader>

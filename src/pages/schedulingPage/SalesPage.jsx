@@ -21,7 +21,7 @@ export default function SalesPage() {
       <div className="">
         <button
           onClick={saleMobileMenuActive}
-          className="visible 3xl:invisible absolute right-[0px] bg-[#008A90] text-white p-[10px] border rounded-tl-[8px] rounded-bl-[8px]"
+          className="visible 3xl:invisible absolute right-[0px] bg-primary text-white p-[10px] border rounded-tl-[8px] rounded-bl-[8px]"
         >
           <FaBarsStaggered />
         </button>

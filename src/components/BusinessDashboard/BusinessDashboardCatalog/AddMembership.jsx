@@ -18,12 +18,12 @@ const AddMembership = () => {
         <Link to="/businessDashboard/catalogue">
           <MembershipCrossSvg />
         </Link>
-        <button className="bg-[#008A90] text-white px-5 lg:py-[10px] py-2 font-medium rounded-lg">
+        <button className="bg-primary text-white px-5 lg:py-[10px] py-2 font-medium rounded-lg">
           Add membership
         </button>
       </div>
       <div className="rounded-xl">
-        <div className="border rounded-t-xl border-[#00C2CB] px-6 py-3">
+        <div className="border rounded-t-xl border-borderColor px-6 py-3">
           <h3 className="font-outfit text-2xl font-medium text-[#1E1E1E]">
             Add a membership
           </h3>
@@ -58,7 +58,7 @@ const AddMembership = () => {
                 className="px-4"
               />
             </div>
-            <div className="border-t border-[#00899072] mb-7"></div>
+            <div className="border-t border-borderColorLight mb-7"></div>
 
             <h3 className="font-outfit text-xl lg:text-[22px] font-medium mb-1">
               Services & sessions
@@ -99,7 +99,7 @@ const AddMembership = () => {
                 </div>
               </div>
             </div>
-            <div className="border-t border-[#00899072] mb-7"></div>
+            <div className="border-t border-borderColorLight mb-7"></div>
 
             <h3 className="font-outfit text-xl lg:text-[22px] font-medium mb-1">
               Pricing & payment
@@ -140,7 +140,7 @@ const AddMembership = () => {
                 </div>
               </div>
             </div>
-            <div className="border-t border-[#00899072] mb-7"></div>
+            <div className="border-t border-borderColorLight mb-7"></div>
 
             <h3 className="font-outfit text-xl lg:text-[22px] font-medium mb-1">
               Tax rate
@@ -158,7 +158,7 @@ const AddMembership = () => {
                 </SelectContent>
               </Select>
             </div>
-            <div className="border-t border-[#00899072] mb-7"></div>
+            <div className="border-t border-borderColorLight mb-7"></div>
 
             <h3 className="font-outfit text-xl lg:text-[22px] font-medium mb-1">
               Terms & conditions

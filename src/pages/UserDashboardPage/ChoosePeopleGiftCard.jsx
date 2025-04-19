@@ -31,7 +31,7 @@ export default function ChoosePeopleGiftCard() {
                 </div>
 
                 {/*Start:: Right card  */}
-                <div className='flex-shrink-0 w-[400px] border border-[#B0ECEF] rounded-[16px] p-[30px] h-max'>
+                <div className='flex-shrink-0 w-[400px] border border-borderColorLight rounded-[16px] p-[30px] h-max'>
                     <div className='overflow-hidden rounded-tl-[8px] rounded-tr-[8px] h-[200px] mb-[20px]'>
                         <img src={BookingImg} className='w-full h-full object-cover' alt="" />
                     </div>

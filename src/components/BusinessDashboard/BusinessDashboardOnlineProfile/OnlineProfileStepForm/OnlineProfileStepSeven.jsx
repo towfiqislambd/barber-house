@@ -48,7 +48,7 @@ const OnlineProfileStepSeven = ({ step, setStep }) => {
           Quality images that highlight the beauty, comfort and professionalism
           of your space are the best way to immediately capture the attention of
           potential clients.{" "}
-          <span className="text-[#5E22DD] font-bold leading-6">Learn more</span>
+          <span className="text-primary font-bold leading-6">Learn more</span>
         </p>
         {/*  */}
         <div className="flex flex-col lg:flex-row md:gap-8 gap-4 items-center lg:mt-10 mt-5">

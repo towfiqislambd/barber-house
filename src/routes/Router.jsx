@@ -108,7 +108,6 @@ import PaymentsSummery from "@/pages/BusinessDashboardPage/PaymentsSummery";
 import PaymentTransactions from "@/pages/BusinessDashboardPage/PaymentTransactions";
 import AppointmentList from "@/pages/BusinessDashboardPage/AppointmentList";
 import ReportingClientList from "@/pages/BusinessDashboardPage/ReportingClientList";
-import Inventory from "@/pages/BusinessDashboardPage/Inventory";
 import WorkingHoursSummery from "@/pages/BusinessDashboardPage/WorkingHoursSummery";
 import Permission from "@/pages/schedulingPage/PermissionPage";
 import PermissionPage from "@/pages/schedulingPage/PermissionPage";
@@ -128,6 +127,7 @@ import CreatePass from "@/pages/Auth/CreatePass/CreatePass";
 import Allsalons from "@/pages/Allsalons/Allsalons";
 import ProfessionalAndTimePage from "@/pages/ProfessionalAndTimePage/ProfessionalAndTimePage";
 import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
+import Inventory from "@/pages/BusinessDashboardPage/Inventory";
 
 export const router = createBrowserRouter([
   {

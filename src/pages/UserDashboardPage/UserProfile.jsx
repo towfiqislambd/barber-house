@@ -86,9 +86,9 @@ export default function UserProfile() {
       <div className='px-[15px]'>
         <h3 className='text-[#2C2C2C] font-outfit text-[24px] xl:text-[36px] font-medium mb-[40px] pl-[50px] xl:pl-[0px]'>Profile</h3>
         <div className='flex flex-col xl:flex-row gap-[20px]'>
-          <div className='py-[15px] xl:py-[48px] px-[15px] xl:px-[56px] bg-[#FFF] h-max xl:h-[900px] border border-[#B0ECEF] rounded-[16px]'>
+          <div className='py-[15px] xl:py-[48px] px-[15px] xl:px-[56px] bg-[#FFF] h-max xl:h-[900px] border border-borderColorLight rounded-[16px]'>
             <div className='xl:w-[300px] flex-shrink-0'>
-              <div className='text-end'><button className='text-end text-[#008A90] font-manrope text-[16px] xl:text-[20px] font-semibold leading-[30px] xl:mb-[12px]' onClick={editProfileFunc} >Edit</button></div>
+              <div className='text-end'><button className='text-end text-primary font-manrope text-[16px] xl:text-[20px] font-semibold leading-[30px] xl:mb-[12px]' onClick={editProfileFunc} >Edit</button></div>
               <div className='xl:w-[112px] w-[60px] xl:h-[112px] h-[60px] mx-auto mb-[10px] xl:mb-[16px] rounded-[100%] bg-[#4B58AA]'>
                 <h4 className='text-[#FFF] font-manrope text-[24px] xl:text-[64px] font-bold text-center leading-[64px] xl:leading-[112px]'>T</h4>
               </div>
@@ -119,14 +119,14 @@ export default function UserProfile() {
               </div>
             </div>
           </div>
-          <div className='py-[15px] xl:py-[48px] px-[15px] xl:px-[56px] bg-[#FFF]  border border-[#B0ECEF] rounded-[16px] mb-[100px] xl:w-[612px] h-max'>
+          <div className='py-[15px] xl:py-[48px] px-[15px] xl:px-[56px] bg-[#FFF]  border border-borderColorLight rounded-[16px] mb-[100px] xl:w-[612px] h-max'>
             <h3 className='xl:mb-[32px] mb-[15px] text-[#1E1E1E] font-outfit text-[20px] xl:text-[24px] font-medium leading-[28px]'>My Addresses</h3>
 
             {addresses.map((address, index) => (
               <div className='flex flex-col gap-[20px] mb-[30px]' key={address.id}>
                 <div className="bg-[#F4F9FA] py-[10px] xl:py-[20px] px-[10px] xl:px-[24px] flex gap-[12px] rounded-[8px]">
                   <div className="w-[40px] h-[40px] rounded-[100%] p-[10px] bg-[#FFF] flex-shrink-0 shadow-md">
-                    <span className="text-[#008A90] text-[20px]">
+                    <span className="text-primary text-[20px]">
                       <IoMdHome />
                     </span>
                   </div>
@@ -160,7 +160,7 @@ export default function UserProfile() {
 
 
             <div>
-              <button onClick={showModal} className='py-[10px] px-[16px] text-[#545454] font-manrope text-[18px] leading-[27px] font-medium border rounded-[32px] border-[#00C2CB] flex gap-[10px] items-center'><span><CiCirclePlus /></span> Add address</button>
+              <button onClick={showModal} className='py-[10px] px-[16px] text-[#545454] font-manrope text-[18px] leading-[27px] font-medium border rounded-[32px] border-borderColor flex gap-[10px] items-center'><span><CiCirclePlus /></span> Add address</button>
             </div>
           </div>
         </div>
@@ -183,12 +183,12 @@ export default function UserProfile() {
                 <div className='w-full xl:w-[50%]'>
                   <label className='text-[#2C2C2C] block text-[16px] font-semibold font-manrope leading-[27px] mb-[5px]' htmlFor="">First name
                   </label>
-                  <input type="text" className='py-[11px] px-[15px] font-manrope text-[16px] font-medium w-full border border-[#d4d4d4] focus:border-[#00B1B9] focus:outline-none rounded-[8px]' placeholder='First name' />
+                  <input type="text" className='py-[11px] px-[15px] font-manrope text-[16px] font-medium w-full border border-[#d4d4d4] focus:border-primary focus:outline-none rounded-[8px]' placeholder='First name' />
                 </div>
                 <div className='w-full xl:w-[50%]'>
                   <label className='text-[#2C2C2C] block text-[16px] font-semibold font-manrope leading-[27px] mb-[5px]' htmlFor="">Last name
                   </label>
-                  <input type="text" className='py-[11px] px-[15px] font-manrope text-[16px] font-medium w-full border border-[#d4d4d4] focus:border-[#00B1B9] focus:outline-none rounded-[8px]' placeholder='Last name' />
+                  <input type="text" className='py-[11px] px-[15px] font-manrope text-[16px] font-medium w-full border border-[#d4d4d4] focus:border-primary focus:outline-none rounded-[8px]' placeholder='Last name' />
                 </div>
               </div>
 
@@ -289,12 +289,12 @@ export default function UserProfile() {
               </div>
               <div>
                 <label className='text-[#2C2C2C] block text-[18px] font-semibold font-manrope leading-[27px] mb-[8px]' htmlFor="">Address 02</label>
-                <input type="text" className='py-[14px] px-[20px] font-manrope text-[18px] font-medium w-full border border-[#d4d4d4] focus:border-[#00B1B9] focus:outline-none rounded-[8px]' placeholder='Write your local address' />
+                <input type="text" className='py-[14px] px-[20px] font-manrope text-[18px] font-medium w-full border border-[#d4d4d4] focus:border-primary focus:outline-none rounded-[8px]' placeholder='Write your local address' />
               </div>
             </div>
 
           </form>
-          <button className='mt-[48px] py-[14px] px-[20px] text-[#FFF] bg-gradient-to-r from-teal-600 to-cyan-500 rounded-[48px]  w-[100%] block font-manrope font-medium text-[18px]' onClick={() => setOpen(false)}>Save Address</button>
+          <button className='mt-[48px] py-[14px] px-[20px] text-[#FFF] bg-primary-gradient rounded-[48px]  w-[100%] block font-manrope font-medium text-[18px]' onClick={() => setOpen(false)}>Save Address</button>
         </div>
       </Modal>
 

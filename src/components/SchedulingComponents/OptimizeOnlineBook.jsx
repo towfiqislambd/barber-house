@@ -13,18 +13,18 @@ export default function OptimizeOnlineBook() {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleToggle = () => {
-    setIsVisible((prev) => !prev);
+    setIsVisible(prev => !prev);
   };
 
   return (
     <div className="pb-[100px] px-5 lg:px-0 py-5 md:py-0">
       <div className="flex gap-[20px] justify-end container">
         <Link to="/businessDashboard/scheduling">
-          <button className="border border-[#DFE1E6] rounded-[8px] text-[#2C2C2C] font-manrope text-base sm:text-[20px] font-semibold 2xl:p-[14px] py-2 xl:min-w-[218px] min-w-[120px] hover:bg-[#008A90] hover:text-[#FFF] transition-all duration-300 hover:scale-95">
+          <button className="border border-[#DFE1E6] rounded-[8px] text-[#2C2C2C] font-manrope text-base sm:text-[20px] font-semibold 2xl:p-[14px] py-2 xl:min-w-[218px] min-w-[120px] hover:bg-priamry hover:text-primary transition-all duration-300 hover:scale-95">
             Close
           </button>
         </Link>
-        <button className="border border-[#DFE1E6] rounded-[8px] bg-[#008A90] text-[#FFF] font-manrope text-base sm:text-[20px] font-semibold 2xl:p-[14px] py-2 xl:min-w-[218px] min-w-[120px] hover:scale-95 transition-all duration-300">
+        <button className="border border-[#DFE1E6] rounded-[8px] bg-primary text-[#FFF] font-manrope text-base sm:text-[20px] font-semibold 2xl:p-[14px] py-2 xl:min-w-[218px] min-w-[120px] hover:scale-95 transition-all duration-300">
           Save
         </button>
       </div>

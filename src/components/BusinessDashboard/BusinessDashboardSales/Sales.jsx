@@ -188,7 +188,7 @@ const Sales = () => {
                         setLocation(city);
                         setOpenLocation(false);
                       }}
-                      className="cursor-pointer duration-300 transition-all hover:text-[#008a90]"
+                      className="cursor-pointer duration-300 transition-all hover:text-primary"
                     >
                       {city}
                     </li>
@@ -201,7 +201,7 @@ const Sales = () => {
             {/* Export */}
             <Popover>
               <PopoverTrigger>
-                <button className="px-3 lg:px-4 py-2 lg:py-[10px] flex gap-2 items-center outline-none rounded-lg border border-[#00C2CB]">
+                <button className="px-3 lg:px-4 py-2 lg:py-[10px] flex gap-2 items-center outline-none rounded-lg border border-primary">
                   <ExportSvg />
                   <p>Options</p>
                   <DropdownSvg />
@@ -226,14 +226,14 @@ const Sales = () => {
             </Popover>
             <button
               onClick={showLargeDrawer}
-              className="px-3 lg:px-4 py-2 bg-[#008A90] flex gap-2 items-center outline-none rounded-lg text-white"
+              className="px-3 lg:px-4 py-2 bg-primary flex gap-2 items-center outline-none rounded-lg text-white"
             >
               <AddNowSvg />
               <p>Add new</p>
             </button>
           </div>
         </div>
-        <div className="border-t border-[#008A90] mt-10 pb-5"></div>
+        <div className="border-t border-primary mt-10 pb-5"></div>
         <div className="overflow-x-auto">
           {/* Table */}
           <table className="w-full border-collapse lg:min-w-[800px]">

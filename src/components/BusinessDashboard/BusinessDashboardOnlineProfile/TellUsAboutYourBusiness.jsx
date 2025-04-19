@@ -50,7 +50,7 @@ const TellUsAboutYourBusiness = () => {
         <div className="xl:max-w-[486px] lg:max-w-[300px] max-w-[500px]">
           <h1 className="text-[#000] font-outfit text-2xl md:text-3xl lg:text-5xl xl:text-5xl font-semibold xl:leading-[57.6px] lg:leading-[50px]">
             Let’s get you published on the world’s{" "}
-            <span className="bg-gradient-to-b from-[#6E4BF6] via-[#6E4BF6] to-[#924BF5] bg-clip-text text-transparent">
+            <span className="bg-primary-gradient bg-clip-text text-transparent">
               most popular marketplace
             </span>{" "}
             to grow your business

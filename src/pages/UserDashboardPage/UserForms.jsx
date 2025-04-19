@@ -16,7 +16,7 @@ export default function UserForms() {
               </div>
               <div className='p-[15px] xl:p-[30px] border xl:rounded-tr-[16px] xl:rounded-br-[16px]  w-full'>
                 <h4 className='mb-[4px] text-[#1E1E1E] font-outfit text-[24px] font-semibold'>Trendy Trim</h4>
-                <h5 className='mb-[16px] text-[#008A90] text-[18px] font-semibold'>Membership</h5>
+                <h5 className='mb-[16px] text-primary text-[18px] font-semibold'>Membership</h5>
                 <p className='text-[#545454] font-manrope text-[18px] font-medium' >Joined in Feb 03, 2025</p>
               </div>
             </div>
@@ -29,7 +29,7 @@ export default function UserForms() {
               </div>
               <div className='p-[30px] border xl:rounded-tr-[16px] xl:rounded-br-[16px]  w-full'>
                 <h4 className='mb-[4px] text-[#1E1E1E] font-outfit text-[24px] font-semibold'>Trendy Trim</h4>
-                <h5 className='mb-[16px] text-[#008A90] text-[18px] font-semibold'>Gift card</h5>
+                <h5 className='mb-[16px] text-primary text-[18px] font-semibold'>Gift card</h5>
                 <p className='text-[#545454] font-manrope text-[18px] font-medium' >Sent in Feb 03, 2025</p>
               </div>
             </div>

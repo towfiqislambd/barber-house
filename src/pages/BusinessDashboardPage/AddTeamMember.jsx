@@ -11,11 +11,11 @@ const AddTeamMember = () => {
         <h3 className="font-outfit text-3xl font-semibold">Add team member</h3>
         <div className="flex flex-col md:flex-row gap-3 sm:items-center">
           <Link to="/businessDashboard/members-list">
-            <button className="text-[#545454] border font-medium border-[#00C2CB] rounded-lg px-8 py-2 w-full">
+            <button className="text-[#545454] border font-medium border-borderColorLight rounded-lg px-8 py-2 w-full">
               Close
             </button>
           </Link>
-          <button className="text-[#fff] bg-[#008A90] font-medium rounded-lg px-8 py-2">
+          <button className="text-[#fff] bg-primary font-medium rounded-lg px-8 py-2">
             Save
           </button>
         </div>
@@ -31,7 +31,7 @@ const AddTeamMember = () => {
                 onClick={() => setActiveTab("profile")}
                 className={`px-3 py-2 w-full rounded-lg ${
                   activeTab === "profile"
-                    ? "text-[#008A90] shadow border"
+                    ? "text-primary shadow border"
                     : "text-[#2C2C2C] border-transparent"
                 } flex justify-between items-center`}
               >
@@ -41,19 +41,19 @@ const AddTeamMember = () => {
                 onClick={() => setActiveTab("address")}
                 className={` px-3 py-2 w-full rounded-lg ${
                   activeTab === "address"
-                    ? "text-[#008A90] shadow border"
+                    ? "text-primary shadow border"
                     : "text-[#2C2C2C] border-transparent"
                 } flex justify-between items-center`}
               >
                 Addresses
               </button>
-              <div className="border-t border-[#00C2CB]"></div>
+              <div className="border-t border-borderColorLight"></div>
               <h3 className="text-lg font-semibold">Workspace</h3>
               <button
                 onClick={() => setActiveTab("services")}
                 className={`px-3 py-2 w-full rounded-lg ${
                   activeTab === "services"
-                    ? "text-[#008A90] shadow border"
+                    ? "text-primary shadow border"
                     : "text-[#2C2C2C] border-transparent"
                 } flex justify-between items-center`}
               >
@@ -63,7 +63,7 @@ const AddTeamMember = () => {
                 onClick={() => setActiveTab("settings")}
                 className={`px-3 py-2 w-full rounded-lg ${
                   activeTab === "settings"
-                    ? "text-[#008A90] shadow border"
+                    ? "text-primary shadow border"
                     : "text-[#2C2C2C] border-transparent"
                 } flex justify-between items-center`}
               >
@@ -74,7 +74,7 @@ const AddTeamMember = () => {
                 onClick={() => setActiveTab("commission")}
                 className={`px-3 py-2 w-full rounded-lg ${
                   activeTab === "commission"
-                    ? "text-[#008A90] shadow border"
+                    ? "text-primary shadow border"
                     : "text-[#2C2C2C] border-transparent"
                 } flex justify-between items-center`}
               >

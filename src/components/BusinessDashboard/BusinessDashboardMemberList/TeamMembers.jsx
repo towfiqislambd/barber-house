@@ -100,7 +100,7 @@ const TeamMembers = () => {
           {/* Export */}
           <Popover>
             <PopoverTrigger>
-              <button className="px-3 lg:px-4 py-2 lg:py-[10px] flex gap-1 lg:gap-2 items-center outline-none rounded-lg border border-[#00C2CB]">
+              <button className="px-3 lg:px-4 py-2 lg:py-[10px] flex gap-1 lg:gap-2 items-center outline-none rounded-lg border border-borderColorLight">
                 <p>Options</p>
                 <DropdownSvg />
               </button>
@@ -123,7 +123,7 @@ const TeamMembers = () => {
           </Link>
         </div>
       </div>
-      <div className="border-t border-[#008A90] mt-10 pb-10"></div>
+      <div className="border-t border-borderColor mt-10 pb-10"></div>
       {/* Table */}
       <div className="overflow-x-auto">
         <table className="w-full border-collapse min-w-[800px]">
@@ -134,7 +134,7 @@ const TeamMembers = () => {
             <th className="px-4 py-2 text-left">All actions</th>
           </tr>
           <tbody>
-            {tableData.map((data) => (
+            {tableData.map(data => (
               <tr
                 key={data.id}
                 className="hover:bg-gray-200 border-t first:border-none border-dashed text-[#545454] text-nowrap"
@@ -158,7 +158,7 @@ const TeamMembers = () => {
                 <td className="px-4 text-[#545454] font-medium py-3">
                   <Popover>
                     <PopoverTrigger>
-                      <button className="px-3 lg:px-4 py-2 lg:py-[10px] flex gap-1 lg:gap-2 items-center outline-none rounded-full border border-[#00C2CB]">
+                      <button className="px-3 lg:px-4 py-2 lg:py-[10px] flex gap-1 lg:gap-2 items-center outline-none rounded-full border border-borderColorLight">
                         <p>Actions</p>
                         <DropdownSvg />
                       </button>
@@ -209,7 +209,7 @@ const TeamMembers = () => {
             <p className="text-center text-[#757575] text-base">
               +444 09258964321
             </p>
-            <button className="px-4 mb-5 2xl:w-full justify-center mt-5 lg:py-[10px] py-[6px] flex gap-2 items-center outline-none rounded-lg border text-lg font-semibold border-[#00C2CB]">
+            <button className="px-4 mb-5 2xl:w-full justify-center mt-5 lg:py-[10px] py-[6px] flex gap-2 items-center outline-none rounded-lg border text-lg font-semibold border-borderColorLight">
               <p>Actions</p>
               <DropdownSvg />
             </button>

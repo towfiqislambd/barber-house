@@ -35,7 +35,7 @@ const Standard = () => {
           onClick={() => setActiveList("reports")}
           className={`px-5 py-2 text-[#545454] font-medium rounded-full border ${
             activeList === "reports"
-              ? "border-[#008A90] bg-[#008A90] text-white"
+              ? "border-borderColor bg-primary text-white"
               : "border-gray-300"
           }`}
         >
@@ -46,7 +46,7 @@ const Standard = () => {
           onClick={() => setActiveList("sales")}
           className={`px-5 py-2 text-[#545454] font-medium rounded-full border ${
             activeList === "sales"
-              ? "border-[#008A90] bg-[#008A90] text-white"
+              ? "border-borderColor bg-primary text-white"
               : "border-gray-300"
           }`}
         >
@@ -57,7 +57,7 @@ const Standard = () => {
           onClick={() => setActiveList("finance")}
           className={`px-5 py-2 text-[#545454] font-medium rounded-full border ${
             activeList === "finance"
-              ? "border-[#008A90] bg-[#008A90] text-white"
+              ? "border-borderColor bg-primary text-white"
               : "border-gray-300"
           }`}
         >
@@ -69,7 +69,7 @@ const Standard = () => {
             onClick={() => setActiveList("appointments")}
             className={`px-5 py-2 text-[#545454] font-medium rounded-full border ${
               activeList === "appointments"
-                ? "border-[#008A90] bg-[#008A90] text-white"
+                ? "border-borderColor bg-primary text-white"
                 : "border-gray-300"
             }`}
           >
@@ -82,7 +82,7 @@ const Standard = () => {
             onClick={() => setActiveList("clients")}
             className={`px-5 py-2 text-[#545454] font-medium rounded-full border ${
               activeList === "clients"
-                ? "border-[#008A90] bg-[#008A90] text-white"
+                ? "border-borderColor bg-primary text-white"
                 : "border-gray-300"
             }`}
           >
@@ -95,7 +95,7 @@ const Standard = () => {
             onClick={() => setActiveList("inventory")}
             className={`px-5 py-2 text-[#545454] font-medium rounded-full border ${
               activeList === "inventory"
-                ? "border-[#008A90] bg-[#008A90] text-white"
+                ? "border-borderColor bg-primary text-white"
                 : "border-gray-300"
             }`}
           >
@@ -108,7 +108,7 @@ const Standard = () => {
         <div>
           <Link
             to="/businessDashboard/performance"
-            className="border cursor-pointer mb-5 bg-white p-5 rounded-lg border-[#8AE3E7] flex gap-5 items-center"
+            className="border cursor-pointer mb-5 bg-white p-5 rounded-lg border-borderColorLight flex gap-5 items-center"
           >
             <PerformanceLogoSvg />
             <div className="">
@@ -122,7 +122,7 @@ const Standard = () => {
           </Link>
           <Link
             to="/businessDashboard/presence"
-            className="border cursor-pointer bg-white p-5 rounded-lg border-[#8AE3E7] flex gap-5 items-center"
+            className="border cursor-pointer bg-white p-5 rounded-lg border-borderColorLight flex gap-5 items-center"
           >
             <PerformanceLogoSvg />
             <div className="">
@@ -141,7 +141,7 @@ const Standard = () => {
         <div>
           <Link
             to="/businessDashboard/sales-summary"
-            className="border cursor-pointer mb-5 bg-white p-5 rounded-lg border-[#8AE3E7] flex gap-5 items-center"
+            className="border cursor-pointer mb-5 bg-white p-5 rounded-lg border-borderColorLight flex gap-5 items-center"
           >
             <SalesImgSvg />
             <div className="">
@@ -155,7 +155,7 @@ const Standard = () => {
           </Link>
           <Link
             to="/businessDashboard/sales-list"
-            className="border cursor-pointer bg-white p-5 rounded-lg border-[#8AE3E7] flex gap-5 items-center"
+            className="border cursor-pointer bg-white p-5 rounded-lg border-borderColorLight flex gap-5 items-center"
           >
             <SalesImgSvg />
             <div className="">
@@ -174,7 +174,7 @@ const Standard = () => {
         <div>
           <Link
             to="/businessDashboard/payment-summery"
-            className="border cursor-pointer mb-5 bg-white p-5 rounded-lg border-[#8AE3E7] flex gap-5 items-center"
+            className="border cursor-pointer mb-5 bg-white p-5 rounded-lg border-borderColorLight flex gap-5 items-center"
           >
             <FinanceSvg />
             <div className="">
@@ -188,7 +188,7 @@ const Standard = () => {
           </Link>
           <Link
             to="/businessDashboard/payment-transition"
-            className="border cursor-pointer bg-white p-5 rounded-lg border-[#8AE3E7] flex gap-5 items-center"
+            className="border cursor-pointer bg-white p-5 rounded-lg border-borderColorLight flex gap-5 items-center"
           >
             <FinanceSvg />
             <div className="">

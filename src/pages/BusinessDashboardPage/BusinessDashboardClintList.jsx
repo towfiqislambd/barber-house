@@ -213,7 +213,7 @@ const BusinessDashboardClintList = () => {
         {/* Export */}
         <Popover>
           <PopoverTrigger>
-            <button className="px-2 lg:px-4 py-2 lg:py-[10px] flex gap-2 lg:gap-2 items-center outline-none rounded-lg border border-[#00C2CB]">
+            <button className="px-2 lg:px-4 py-2 lg:py-[10px] flex gap-2 lg:gap-2 items-center outline-none rounded-lg border border-primary">
               <ExportSvg />
               <p>Option</p>
               <DropdownSvg />
@@ -237,7 +237,7 @@ const BusinessDashboardClintList = () => {
           </PopoverContent>
         </Popover>
       </div>
-      <div className="border-t border-[#008A90] mt-5 md:mt-10 pb-5 md:pb-10"></div>
+      <div className="border-t border-primary mt-5 md:mt-10 pb-5 md:pb-10"></div>
 
       {/* Table part */}
       <div className="w-full overflow-x-auto">
@@ -326,7 +326,7 @@ const BusinessDashboardClintList = () => {
               <button className="px-5 py-[5px] border rounded font-medium text-lg">
                 Actions
               </button>
-              <button className="sm:px-5 px-[10px] bg-[#00C2CB] text-white py-[5px] border rounded font-medium text-lg">
+              <button className="sm:px-5 px-[10px] bg-primary text-white py-[5px] border rounded font-medium text-lg">
                 Book now
               </button>
             </div>
@@ -378,7 +378,7 @@ const BusinessDashboardClintList = () => {
             </h3>
             <div className="mb-3">
               <p className="text-[#000] mb-2 font-medium text-lg">Wallet</p>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-[#8AE3E7]">
+              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
                 <p className="text-[#757575] text-sm 3xl:text-base font-medium">
                   Balance
                 </p>
@@ -389,7 +389,7 @@ const BusinessDashboardClintList = () => {
             </div>
             <div className="mb-3">
               <p className="text-[#000] mb-2 font-medium text-lg">Summary</p>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-[#8AE3E7]">
+              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
                 <p className="text-[#757575] text-sm 3xl:text-base font-medium">
                   Total sales
                 </p>
@@ -399,7 +399,7 @@ const BusinessDashboardClintList = () => {
               </div>
             </div>
             <div className="grid xl:grid-cols-2 gap-5">
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-[#8AE3E7]">
+              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
                 <p className="text-[#757575] text-sm 3xl:text-base font-medium">
                   Appointment
                 </p>
@@ -407,7 +407,7 @@ const BusinessDashboardClintList = () => {
                   2
                 </h3>
               </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-[#8AE3E7]">
+              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
                 <p className="text-[#757575] text-sm 3xl:text-base font-medium">
                   Rating
                 </p>
@@ -415,7 +415,7 @@ const BusinessDashboardClintList = () => {
                   5
                 </h3>
               </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-[#8AE3E7]">
+              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
                 <p className="text-[#757575] text-sm 3xl:text-base font-medium">
                   Cancel
                 </p>
@@ -423,7 +423,7 @@ const BusinessDashboardClintList = () => {
                   2
                 </h3>
               </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-[#8AE3E7]">
+              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
                 <p className="text-[#757575] text-sm 3xl:text-base font-medium">
                   No show
                 </p>
@@ -431,7 +431,7 @@ const BusinessDashboardClintList = () => {
                   5
                 </h3>
               </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-[#8AE3E7]">
+              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
                 <p className="text-[#757575] text-sm 3xl:text-base font-medium">
                   Cancel
                 </p>
@@ -439,7 +439,7 @@ const BusinessDashboardClintList = () => {
                   2
                 </h3>
               </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-[#8AE3E7]">
+              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
                 <p className="text-[#757575] text-sm 3xl:text-base font-medium">
                   Cancel
                 </p>

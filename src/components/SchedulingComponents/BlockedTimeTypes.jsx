@@ -108,7 +108,7 @@ export default function BlockedTimeTypes() {
             <div className="relative action-container">
               <button
                 onClick={() => actionFunc(index)}
-                className="flex items-center justify-center gap-[10px] border border-[#008A90] rounded-[24px] text-[#008A90] w-[127px] 2xl:py-3 py-2 px-4 font-medium 2xl:mb-[5px]"
+                className="flex items-center justify-center gap-[10px] border border-primary rounded-[24px] text-primary w-[127px] 2xl:py-3 py-2 px-4 font-medium 2xl:mb-[5px]"
               >
                 Actions
                 <span className="text-[22px]">
@@ -149,13 +149,13 @@ export default function BlockedTimeTypes() {
           <div className="flex gap-[20px] mt-[40px]">
             <button
               onClick={handleCancel}
-              className="w-[50%] p-[10px] rounded-[8px] text-[#2C2C2C] font-manrope text-[18px] font-semibold border border-[#DFE1E6] hover:text-[#fff] transition-all duration-300 hover:bg-[#008A90]"
+              className="w-[50%] p-[10px] rounded-[8px] text-[#2C2C2C] font-manrope text-[18px] font-semibold border border-[#DFE1E6] hover:text-[#fff] transition-all duration-300 hover:bg-primary"
             >
               Cancel
             </button>
             <button
               onClick={handleOk}
-              className="w-[50%] p-[10px] rounded-[8px] font-manrope text-[18px] font-semibold border border-[#DFE1E6] hover:text-[#fff] transition-all duration-300 text-[#fff] bg-[#008A90]"
+              className="w-[50%] p-[10px] rounded-[8px] font-manrope text-[18px] font-semibold border border-[#DFE1E6] hover:text-[#fff] transition-all duration-300 text-[#fff] bg-primary"
             >
               Delete
             </button>

@@ -57,11 +57,11 @@ export default function EditTimeAndCalander() {
       <div className="container mt-10 md:mt-0 ">
         <div className="flex md:gap-[20px] gap-3 justify-end">
           <Link to="/businessDashboard/scheduling">
-            <button className="border border-[#DFE1E6] rounded-[8px] text-[#2C2C2C] font-manrope md:text-xl text-base font-semibold 2xl:p-[14px] p-2 md:min-w-[218px] hover:bg-[#008A90] hover:text-[#FFF] transition-all duration-300 hover:scale-95">
+            <button className="border border-[#DFE1E6] rounded-[8px] text-[#2C2C2C] font-manrope md:text-xl text-base font-semibold 2xl:p-[14px] p-2 md:min-w-[218px] hover:bg-primary hover:text-[#FFF] transition-all duration-300 hover:scale-95">
               Close
             </button>
           </Link>
-          <button className="border border-[#DFE1E6] rounded-[8px] bg-[#008A90] text-[#FFF] font-manrope md:text-xl text-base font-semibold 2xl:p-[14px] p-2 md:min-w-[218px] hover:scale-95 transition-all duration-300">
+          <button className="border border-[#DFE1E6] rounded-[8px] bg-primary text-[#FFF] font-manrope md:text-xl text-base font-semibold 2xl:p-[14px] p-2 md:min-w-[218px] hover:scale-95 transition-all duration-300">
             Save
           </button>
         </div>

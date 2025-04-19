@@ -127,7 +127,7 @@ export default function Taxrates() {
           {Groups.map((card, index) => (
             <div
               key={card.id}
-              className="px-[15px] xl:px-[50px] py-4 xl:py-[35px] border rounded-[8px] border-[#DFE1E6] bg-white flex items-center justify-between cursor-pointer hover:border-[#00C2CB] flex-shrink-0"
+              className="px-[15px] xl:px-[50px] py-4 xl:py-[35px] border rounded-[8px] border-[#DFE1E6] bg-white flex items-center justify-between cursor-pointer hover:border-borderColorLight flex-shrink-0"
             >
               <div className="">
                 <div className="flex gap-[10px] xl:gap-[24px] flex-col xl:flex-row items-center">
@@ -146,7 +146,7 @@ export default function Taxrates() {
               <div className="relative action-container">
                 <button
                   onClick={() => groupFunc(index)}
-                  className="flex items-center justify-center gap-[10px] border border-[#008A90] rounded-[24px] text-[#008A90] w-[127px] py-[10px] xl:py-[12px] px-[16px] font-medium mb-[5px]"
+                  className="flex items-center justify-center gap-[10px] border border-borderColorLight rounded-[24px] text-primary w-[127px] py-[10px] xl:py-[12px] px-[16px] font-medium mb-[5px]"
                 >
                   Actions
                   <span className="text-[22px]">
@@ -180,7 +180,7 @@ export default function Taxrates() {
             {Rates.map((rate, index) => (
               <div
                 key={rate.id}
-                className="px-[15px] xl:px-[50px] py-4 xl:py-[35px] border rounded-[8px] border-[#DFE1E6] bg-white flex items-center justify-between cursor-pointer hover:border-[#00C2CB] flex-shrink-0"
+                className="px-[15px] xl:px-[50px] py-4 xl:py-[35px] border rounded-[8px] border-[#DFE1E6] bg-white flex items-center justify-between cursor-pointer hover:border-primary flex-shrink-0"
               >
                 <div className=" xl:w-auto">
                   <div className="flex gap-[10px] xl:gap-[24px] flex-col xl:flex-row justify-between xl:items-center">
@@ -201,7 +201,7 @@ export default function Taxrates() {
                 <div className="relative action-container ">
                   <button
                     onClick={() => actionFunc(index)}
-                    className="flex items-center justify-center gap-[10px] border border-[#008A90] rounded-[24px] text-[#008A90] w-[127px] py-[10px] xl:py-[12px] px-[16px] font-medium mb-[5px]"
+                    className="flex items-center justify-center gap-[10px] border border-primary rounded-[24px] text-primary w-[127px] py-[10px] xl:py-[12px] px-[16px] font-medium mb-[5px]"
                   >
                     Actions
                     <span className="text-[22px]">
@@ -245,13 +245,13 @@ export default function Taxrates() {
           <div className="flex gap-[20px] mt-[40px]">
             <button
               onClick={handleCancel}
-              className="w-[50%] p-[10px] rounded-[8px] text-[#2C2C2C] font-manrope text-[18px] font-semibold border border-[#DFE1E6] hover:text-[#fff] transition-all duration-300 hover:bg-[#008A90]"
+              className="w-[50%] p-[10px] rounded-[8px] text-[#2C2C2C] font-manrope text-[18px] font-semibold border border-[#DFE1E6] hover:text-[#fff] transition-all duration-300 hover:bg-primary"
             >
               Cancel
             </button>
             <button
               onClick={handleOk}
-              className="w-[50%] p-[10px] rounded-[8px] font-manrope text-[18px] font-semibold border border-[#DFE1E6] hover:text-[#fff] transition-all duration-300 bg-[#008A90] text-white"
+              className="w-[50%] p-[10px] rounded-[8px] font-manrope text-[18px] font-semibold border border-[#DFE1E6] hover:text-[#fff] transition-all duration-300 bg-primary text-white"
             >
               Delete
             </button>

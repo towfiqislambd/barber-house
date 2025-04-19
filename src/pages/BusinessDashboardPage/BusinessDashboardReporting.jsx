@@ -22,9 +22,9 @@ const BusinessDashboardReporting = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-3 2xl:px-5 py-1 xl:py-2 xl:w-full xl:block text-center xl:text-left transition-all duration-300 hover:bg-[#008A90] hover:text-white rounded-lg ${
+              className={`px-3 2xl:px-5 py-1 xl:py-2 xl:w-full xl:block text-center xl:text-left transition-all duration-300 hover:bg-primary hover:text-white rounded-lg ${
                 activeTab === tab.id
-                  ? "text-white bg-[#008A90]"
+                  ? "text-white bg-primary"
                   : "text-[#2C2C2C]"
               }`}
             >
