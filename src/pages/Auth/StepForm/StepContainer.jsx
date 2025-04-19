@@ -46,7 +46,7 @@ const StepContainer = () => {
         >
           <path
             d="M2 2H162"
-            stroke={step === 1 ? "#008A90" : "#DFE1E6"}
+            stroke={step === 1 ? "#EE6C9C" : "#DFE1E6"}
             strokeWidth="4"
             strokeLinecap="round"
           />
@@ -60,7 +60,7 @@ const StepContainer = () => {
         >
           <path
             d="M2 2H162"
-            stroke={step === 2 ? "#008A90" : "#DFE1E6"}
+            stroke={step === 2 ? "#EE6C9C" : "#DFE1E6"}
             strokeWidth="4"
             strokeLinecap="round"
           />
@@ -74,7 +74,7 @@ const StepContainer = () => {
         >
           <path
             d="M2 2H162"
-            stroke={step === 3 ? "#008A90" : "#DFE1E6"}
+            stroke={step === 3 ? "#EE6C9C" : "#DFE1E6"}
             strokeWidth="4"
             strokeLinecap="round"
           />
@@ -88,7 +88,7 @@ const StepContainer = () => {
         >
           <path
             d="M2 2H162"
-            stroke={step === 4 ? "#008A90" : "#DFE1E6"}
+            stroke={step === 4 ? "#EE6C9C" : "#DFE1E6"}
             strokeWidth="4"
             strokeLinecap="round"
           />
@@ -102,7 +102,7 @@ const StepContainer = () => {
         >
           <path
             d="M2 2H162"
-            stroke={step === 5 ? "#008A90" : "#DFE1E6"}
+            stroke={step === 5 ? "#EE6C9C" : "#DFE1E6"}
             strokeWidth="4"
             strokeLinecap="round"
           />
@@ -116,7 +116,7 @@ const StepContainer = () => {
         >
           <path
             d="M2 2H162"
-            stroke={step === 6 ? "#008A90" : "#DFE1E6"}
+            stroke={step === 6 ? "#EE6C9C" : "#DFE1E6"}
             strokeWidth="4"
             strokeLinecap="round"
           />

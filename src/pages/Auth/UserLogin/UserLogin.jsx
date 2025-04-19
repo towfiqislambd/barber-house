@@ -135,7 +135,7 @@ const UserLogin = () => {
             </div>
           </div>
           <div className="flex flex-col gap-y-2 2xl:gap-y-4 w-full relative  items-center ">
-            <button className="w-full 2xl:px-6 px-3 py-2 2xl:py-4 h-auto bg-[#008A90] font-manrope text-base 2xl:text-2xl font-semibold text-white rounded-[16px] ">
+            <button className="w-full 2xl:px-6 px-3 py-2 2xl:py-4 h-auto bg-primary font-manrope text-base 2xl:text-2xl font-semibold text-white rounded-[16px] ">
               Log in{" "}
             </button>
             <span className="font-manrope text-base 2xl:text-2xl font-semibold text-[#2C2C2C] rounded-[16px]">

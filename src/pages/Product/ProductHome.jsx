@@ -110,7 +110,7 @@ const ProductHome = () => {
           </div>
           <div className="px-5 py-5">
             <Link to="/checkout">
-              <button className="w-full block rounded-full text-center font-semibold text-white bg-[#00C2CB] py-3">
+              <button className="w-full block rounded-full text-center font-semibold text-white bg-primary py-3">
                 Checkout
               </button>
             </Link>

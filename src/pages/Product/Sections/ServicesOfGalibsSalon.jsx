@@ -47,7 +47,7 @@ const ServicesOfGalibsSalon = ({ setActiveCart }) => {
                 value={data.id}
                 className="hidden peer"
               />
-              <div className="flex justify-between items-center border xl:p-5 p-3 rounded-xl peer-checked:border-[#01BAC2] peer-checked:bg-[#F8FFFF]">
+              <div className="flex justify-between items-center border xl:p-5 p-3 rounded-xl peer-checked:border-primary peer-checked:bg-primaryLight">
                 <div className="xl:space-y-2">
                   <h3 className="text-[#2C2C2C] font-manrope text-lg xl:text-xl font-semibold">
                     {data.title}
@@ -57,7 +57,8 @@ const ServicesOfGalibsSalon = ({ setActiveCart }) => {
                   </h4>
                   <div className="flex gap-2 items-center">
                     <img src={servicesBg} alt="servicesBg" />
-                    <p className="font-manrope font-semibold text-[#008A90] text-lg">
+                    <p className="font-manrope font-semibold text-primary text-lg">
+
                       {data.count}
                     </p>
                   </div>

@@ -17,7 +17,7 @@ export default function SearchBoxl() {
               <form action="">
                 <div className="relative">
                   <input
-                    className="w-full text-[14px] font-manrope font-semibold text-[#545454] py-[8px] xl:py-[10px] pl-[40px] border rounded-[16px] focus:border-[#00C2CB] focus:outline-none leading-[40px]"
+                    className="w-full text-[14px] font-manrope font-semibold text-[#545454] py-[8px] xl:py-[10px] pl-[40px] border rounded-[16px] focus:border-primary focus:outline-none leading-[40px]"
                     type="text"
                     placeholder="Search our help center"
                   />

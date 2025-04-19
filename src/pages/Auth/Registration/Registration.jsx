@@ -130,11 +130,11 @@ const Registration = () => {
             >
               <h1 className="text-textSecondary font-outfit leading-[22.96px]">
                 I agree to the{" "}
-                <span className="text-[#008A90] font-outfit leading-[22.96px]">
+                <span className="text-primary font-outfit leading-[22.96px]">
                   Privacy Policy, Terms of Service
                 </span>{" "}
                 and
-                <span className="text-[#008A90] font-outfit leading-[22.96px]">
+                <span className="text-primary font-outfit leading-[22.96px]">
                   Terms of Business.
                 </span>
               </h1>

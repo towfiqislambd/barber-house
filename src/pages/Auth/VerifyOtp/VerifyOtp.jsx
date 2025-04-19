@@ -49,7 +49,7 @@ const VerifyOtp = () => {
               onClick={() => {
                 navigate("/create-pass");
               }}
-              className="w-full xl:px-6 px-3 xl:py-4 py-2 h-auto bg-[#008A90] font-manrope text-base xl:text-xl font-semibold text-white rounded-[16px] "
+              className="w-full xl:px-6 px-3 xl:py-4 py-2 h-auto bg-primary font-manrope text-base xl:text-xl font-semibold text-white rounded-[16px] "
             >
               Verify
             </button>

@@ -81,7 +81,7 @@ const CreatePass = () => {
             </div>
           </div>
           <div className="flex flex-col gap-y-4 w-full relative  items-center ">
-            <button className="w-full px-3 xl:px-6 py-2 xl:py-4 h-auto bg-[#008A90] font-manrope text-base xl:text-xl font-semibold text-white rounded-[16px] ">
+            <button className="w-full px-3 xl:px-6 py-2 xl:py-4 h-auto bg-primary font-manrope text-base xl:text-xl font-semibold text-white rounded-[16px] ">
               Reset password
             </button>
           </div>

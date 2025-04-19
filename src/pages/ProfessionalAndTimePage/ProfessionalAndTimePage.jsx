@@ -105,7 +105,7 @@ const ProfessionalAndTimePage = () => {
                       return (
                         <div
                           key={index}
-                          className="flex flex-row w-[925px] h-auto p-[28px] border-[1px] border-solid border-[#B0ECEF] rounded-[16px]  justify-between items-center  "
+                          className="flex flex-row w-[925px] h-auto p-[28px] border-[1px] border-solid border-borderColorLight rounded-[16px]  justify-between items-center  "
                         >
                           <div className="flex flex-col gap-y-4 ">
                             <div className="flex flex-col gap-y-[6px]">
@@ -115,7 +115,7 @@ const ProfessionalAndTimePage = () => {
                               <span className="text-[#545454] text-basee  font-medium font-outfit">
                                 5 - 10 mins
                               </span>
-                              <h2 className="text-[#008A90] text-2xl  font-medium font-outfit">
+                              <h2 className="text-primary text-2xl  font-medium font-outfit">
                                 {" "}
                                 SAR 10{" "}
                               </h2>
@@ -125,7 +125,7 @@ const ProfessionalAndTimePage = () => {
                               individual requirements
                             </span>
                           </div>
-                          <div className="border-[1px] border-solid border-[#B0ECEF] p-3  h-[54px] w-[244px] rounded-[40px]  flex flex-row gap-x-[10px]  items-center   ">
+                          <div className="border-[1px] border-solid border-borderColorLight p-3  h-[54px] w-[244px] rounded-[40px]  flex flex-row gap-x-[10px]  items-center   ">
                             <div className="bg-[#85DDB1] w-[32px] h-[32px] rounded-full flex flex-row items-center justify-center   ">
                               <UserIcon />
                             </div>
@@ -165,12 +165,12 @@ const ProfessionalAndTimePage = () => {
                           <div
                             className={`${
                               activeProfessional?.id === therapist.id
-                                ? " border-[#01BAC2] bg-[#F8FFFF] "
-                                : "bg-[#FFF] border-[#B0ECEF] "
+                                ? " border-borderColorLight bg-[#F8FFFF] "
+                                : "bg-[#FFF] border-borderColorLight "
                             } cursor-pointer min-h-[139px] py-3 xl:py-5 px-5 xl:px-8 border-[0.4px] ease-in-out duration-300 rounded-[12px] space-y-2`}
                           >
                             <img src={therapist.image} alt={therapist.name} />
-                            <h1 className="text-[#008A90] text-xl font-manrope font-semibold">
+                            <h1 className="text-primary text-xl font-manrope font-semibold">
                               {therapist.name}
                             </h1>
                             <p className="text-base text-textLight font-manrope font-medium">
@@ -189,7 +189,7 @@ const ProfessionalAndTimePage = () => {
                 </div>
               )}
               {/* This is the right side div */}
-              <div className="self-start w-full border-[#B0ECEF] border-[0.4px] border-solid h-auto rounded-2xl xl:w-[400px] px-[19px] py-6">
+              <div className="self-start w-full border-borderColorLight border-[0.4px] border-solid h-auto rounded-2xl xl:w-[400px] px-[19px] py-6">
                 <div className="flex gap-2">
                   <figure className="h-[91px] w-[91px]">
                     <img
@@ -280,8 +280,8 @@ const ProfessionalAndTimePage = () => {
                     <div
                       className={`${
                         activeProfessional?.id === therapist.id
-                          ? " border-[#01BAC2] bg-[#F8FFFF] "
-                          : "bg-[#FFF] border-[#B0ECEF] "
+                          ? " border-borderColorLight bg-[#F8FFFF] "
+                          : "bg-[#FFF] border-borderColorLight "
                       } cursor-pointer min-h-[139px] py-3 xl:py-5 px-5 xl:px-8 border-[0.4px] ease-in-out duration-300 rounded-[12px] space-y-2`}
                     >
                       <img src={therapist.image} alt={therapist.name} />

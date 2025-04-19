@@ -999,7 +999,7 @@ export function LeftSideArrowSvg() {
     >
       <path
         d="M9.57 5.93018L3.5 12.0002L9.57 18.0702"
-        stroke="#292D32"
+        stroke="#EE6C9C"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -1007,7 +1007,7 @@ export function LeftSideArrowSvg() {
       />
       <path
         d="M20.5019 12H3.67188"
-        stroke="#292D32"
+        stroke="#EE6C9C"
         strokeWidth="1.5"
         strokeMiterlimit="10"
         strokeLinecap="round"
@@ -2029,13 +2029,13 @@ export function PlusIconSvg() {
     >
       <path
         d="M24 44C35.046 44 44 35.046 44 24C44 12.954 35.046 4 24 4C12.954 4 4 12.954 4 24C4 35.046 12.954 44 24 44Z"
-        stroke="#00C2CB"
+        stroke="#EE6C9C"
         strokeWidth="2"
         strokeLinejoin="round"
       />
       <path
         d="M24 16V32M16 24H32"
-        stroke="#00C2CB"
+        stroke="#EE6C9C"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

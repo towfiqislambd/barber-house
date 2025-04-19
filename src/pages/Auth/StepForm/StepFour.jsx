@@ -31,7 +31,7 @@ const StepFour = ({ step, setStep, setFormData }) => {
         <button onClick={handlePrevStep} className="cursor-pointer">
           <LeftSideArrowSvg />
         </button>
-        <button className="py-[8px] xl:py-4 px-6 font-manrope text-lg bg-[#008A90] text-white font-semibold rounded-lg mt-5">
+        <button className="py-[8px] xl:py-4 px-6 font-manrope text-lg bg-primary text-white font-semibold rounded-lg mt-5">
           Continue
         </button>
       </div>

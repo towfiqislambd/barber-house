@@ -59,7 +59,7 @@ const ProductsOfGalibsSalon = ({ setActiveCart }) => {
         <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 lg:gap-5">
           {productsData.map((data) => (
             <div key={data.id} className="group">
-              <div className="group-hover:bg-[#F8FFFF] border border-[#b0ecef85] rounded-xl bg-white p-6 duration-300 transition-all group-hover:border-[#01BAC2]">
+              <div className="group-hover:bg-[#F8FFFF] border border-borderColorLight rounded-xl bg-white p-6 duration-300 transition-all group-hover:border-borderColor">
                 <Link to="/productDetails">
                   <figure className="bg-[#E6F7F9] rounded-lg flex items-center justify-center relative">
                     <img src={data.thumbnail} alt="" />
@@ -79,13 +79,13 @@ const ProductsOfGalibsSalon = ({ setActiveCart }) => {
                 </h3>
                 <div className="flex gap-2 items-center pb-3">
                   <img src={servicesBg} alt="servicesBg" />
-                  <p className="font-manrope font-semibold text-[#008A90] text-lg">
+                  <p className="font-manrope font-semibold text-primary text-lg">
                     {data.count}
                   </p>
                 </div>
                 <button
                   onClick={() => setActiveCart(true)}
-                  className="px-5 group-hover:bg-[#008A90] group-hover:text-white py-2 rounded-full border duration-300 transition-all border-[#00C2CB] font-manrope font-lg font-medium"
+                  className="px-5 group-hover:bg-primary group-hover:text-white py-2 rounded-full border duration-300 transition-all border-primary font-manrope font-lg font-medium"
                 >
                   Add to cart
                 </button>

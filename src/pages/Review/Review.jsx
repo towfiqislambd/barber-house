@@ -179,7 +179,7 @@ export default function Review() {
               </div>
             </div>
           </div>
-          <div className="h-[500px] border-[#00C2CB] border rounded-[16px] py-[69px] px-[66px] w-full">
+          <div className="h-[500px] border-primary border rounded-[16px] py-[69px] px-[66px] w-full">
             <div className="flex gap-[5px] mb-[15px]">
               {Array(5)
                 .fill()

@@ -68,7 +68,7 @@ const StepSix = ({ step, setStep, setFormData }) => {
         <button onClick={handlePrevStep} className="cursor-pointer">
           <LeftSideArrowSvg />
         </button>
-        <button type="submit" className="py-[8px] xl:py-4 px-6 font-manrope text-lg bg-[#008A90] text-white font-semibold rounded-lg mt-5">
+        <button type="submit" className="py-[8px] xl:py-4 px-6 font-manrope text-lg bg-primary text-white font-semibold rounded-lg mt-5">
           Submit
         </button>
       </div>
@@ -100,7 +100,7 @@ const StepSix = ({ step, setStep, setFormData }) => {
                   </div>
                   <p className="text-[#757575] font-outfit text-[15px]">Accepted file types JPEG, Doc, PDF, PNG</p>
                 </div>
-                <p className="text-[#008A90] font-outfit px-5 py-[5px] rounded border border-[#00C2CB]">upload</p>
+                <p className="text-primary font-outfit px-5 py-[5px] rounded border border-borderColorLight">upload</p>
               </label>
             </Dragger>
             {errors[name] && <p className="text-red-500 text-sm mt-1">{errors[name].message}</p>}

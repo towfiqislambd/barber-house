@@ -57,7 +57,7 @@ const Allsalons = () => {
                       }}
                       className={`px-6 rounded-[36px] cursor-pointer xl:py-[10px] py-2 border-[1px]   ${
                         item === activeTab
-                          ? "border-transparent bg-[#008A90] text-white"
+                          ? "border-transparent bg-primary text-white"
                           : "border-solid border-[#B3BAC5] text-[#545454]"
                       } `}
                     >

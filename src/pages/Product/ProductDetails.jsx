@@ -80,11 +80,11 @@ const ProductDetails = () => {
           <h3 className="mb-3 font-manrope text-2xl font-semibold">A $64</h3>
           <div className="flex gap-3 items-center">
             <Link to="/checkout">
-              <button className="sm:px-5 px-3 text-white bg-[#00848A] sm:py-3 py-1.5 rounded-lg border duration-300 transition-all border-[#00848A] font-manrope font-lg font-medium">
+              <button className="sm:px-5 px-3 text-white bg-primary sm:py-3 py-1.5 rounded-lg border duration-300 transition-all border-primary font-manrope font-lg font-medium">
                 Buy now
               </button>
             </Link>
-            <button className="sm:px-5 px-3 text-[#00848A] sm:py-3 py-1.5 rounded-lg border duration-300 transition-all border-[#00848A] font-manrope font-lg font-medium">
+            <button className="sm:px-5 px-3 text-primary sm:py-3 py-1.5 rounded-lg border duration-300 transition-all border-primary font-manrope font-lg font-medium">
               Add to cart
             </button>
           </div>
@@ -142,7 +142,7 @@ const ProductDetails = () => {
       <div className="grid md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 lg:gap-5">
         {productsData.map((data) => (
           <div key={data.id} className="group">
-            <div className="group-hover:bg-[#F8FFFF] border border-[#b0ecef85] rounded-xl bg-white p-6 duration-300 transition-all group-hover:border-[#01BAC2]">
+            <div className="group-hover:bg-[#F8FFFF] border border-primary rounded-xl bg-white p-6 duration-300 transition-all group-hover:border-borderColorLight">
               <figure className="bg-[#E6F7F9] rounded-lg flex items-center justify-center relative">
                 <img src={data.thumbnail} alt="" />
                 <span
@@ -164,7 +164,7 @@ const ProductDetails = () => {
                   {data.count}
                 </p>
               </div>
-              <button className="px-5 group-hover:bg-[#008A90] group-hover:text-white py-2 rounded-full border duration-300 transition-all border-[#00C2CB] font-manrope font-lg font-medium">
+              <button className="px-5 group-hover:bg-primary group-hover:text-white py-2 rounded-full border duration-300 transition-all border-primary font-manrope font-lg font-medium">
                 Add to cart
               </button>
             </div>

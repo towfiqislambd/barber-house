@@ -80,7 +80,7 @@ const Checkout = () => {
             <button className="px-10 text-[#2C2C2C] font-medium py-[10px] rounded border">
               Pick Up
             </button>
-            <button className="px-10 !bg-[#B0ECEF] text-[#2C2C2C] font-medium py-[10px] rounded border">
+            <button className="px-10 !bg-primaryLight text-[#2C2C2C] font-medium py-[10px] rounded border">
               Delivery
             </button>
           </div>
@@ -215,11 +215,12 @@ const Checkout = () => {
             </div>
           </div>
           <div className="flex gap-2 xl:gap-0 xl:justify-between items-center mt-7">
-            <button className="xl:px-7 px-[10px] text-[#00848A] font-semibold xl:py-[10px] py-2 rounded-lg border border-[#00848A] xl:text-lg text-base">
+            <button className="xl:px-7 px-[10px] text-primary
+             font-semibold xl:py-[10px] py-2 rounded-lg border border-primary xl:text-lg text-base">
               Back to Shipping
             </button>
             <Link to="/confirmation-with-pay">
-              <button className="xl:px-7 px-[10px] text-white bg-[#00848A] font-semibold xl:py-[10px] py-2 rounded-lg border border-[#00848A] xl:text-lg text-base">
+              <button className="xl:px-7 px-[10px] text-white bg-primary font-semibold xl:py-[10px] py-2 rounded-lg border border-primary xl:text-lg text-base">
                 Complete Order
               </button>
             </Link>
@@ -267,7 +268,7 @@ const Checkout = () => {
               className="py-3 border outline-none flex-grow px-3 rounded-lg w-full"
               placeholder="Discount Code"
             />
-            <button className="px-5 text-white flex-shrink-0 bg-[#00848A] font-semibold py-[10px] rounded-lg border border-[#00848A] text-base xl:text-lg">
+            <button className="px-5 text-white flex-shrink-0 bg-primary font-semibold py-[10px] rounded-lg border border-borderColor text-base xl:text-lg">
               Apply Coupon
             </button>
           </div>

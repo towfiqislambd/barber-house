@@ -41,7 +41,7 @@ const Login = () => {
             placeholder="Enter email here"
           />
           {/*  */}
-          <button className="bg-[#008A90] py-4 px-6 rounded-2xl text-[#FFF] font-manrope text-xl font-semibold mt-6 hover:bg-secondary/80 hover:text-black hover:border-[#008A90] border">
+          <button className="bg-primary py-4 px-6 rounded-2xl text-[#FFF] font-manrope text-xl font-semibold mt-6 hover:bg-primaryLight hover:text-black hover:border-primary border">
             Log in
           </button>
           {/*  */}
@@ -74,7 +74,7 @@ const Login = () => {
           <div className="max-w-[439px] mx-auto mt-[28px]">
             <h1 className="text-textSecondary font-outfit font-medium leading-[29.52px] text-lg">
               Are you a customer looking to booking an appointment{" "}
-              <span className="text-[#008A90] font-outfit text-lg leading-[29.52px]">
+              <span className="text-primary font-outfit text-lg leading-[29.52px]">
                 Go to BS Business for customer
               </span>
             </h1>
