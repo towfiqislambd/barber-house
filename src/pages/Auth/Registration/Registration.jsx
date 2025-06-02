@@ -25,6 +25,7 @@ const Registration = () => {
       last_name: "",
       email: "",
       number: "",
+      password: "",
       country: "",
       agree_to_terms: false,
       avatar: null,
@@ -159,13 +160,28 @@ const Registration = () => {
             )}
           </div>
 
+          {/* Password */}
+          <div className="space-y-2">
+            <label className="text-[#050F2B] font-outfit text-base">
+              Password
+            </label>
+            <Input
+              type="password"
+              {...register("password", { required: "Password is required" })}
+              placeholder="Enter your password"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
+            )}
+          </div>
+
           {/* Mobile Number */}
           <div className="space-y-2">
             <label className="text-[#050F2B] font-outfit text-base">
               Mobile Number
             </label>
             <Input
-              type="tel"
+              type="number"
               {...register("number", { required: "Mobile number is required" })}
               placeholder="Mobile Number"
             />
