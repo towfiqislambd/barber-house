@@ -32,7 +32,7 @@ const SelectAccount = () => {
         <div className="mt-[60px] space-y-6 ">
           {/*  */}
           <div className="border border-[#797979] px-[20px]  xl:px-8 py-[20px] xl:py-7 flex items-center justify-between rounded-[10px] group hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer">
-            <Link to={"/business/login"} className="">
+            <Link to={"/business/login/customer"} className="">
               <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
                 Log in BS for customers
               </h1>
@@ -44,7 +44,7 @@ const SelectAccount = () => {
           </div>
           {/*  */}
           <div className="border border-[#797979] px-[20px]  xl:px-8 py-[20px] xl:py-7 flex items-center justify-between rounded-[10px] group hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer">
-            <Link to={"/business/login"} className="">
+            <Link to={"/business/login/business"} className="">
               <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
                 Log in BS for salon or spamanagemnets
               </h1>

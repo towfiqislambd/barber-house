@@ -32,7 +32,7 @@ const SignOrLogin = () => {
         <div className="mt-[60px] space-y-6 ">
           {/*  */}
           <div className="border border-[#797979] px-8 py-7 flex items-center justify-between rounded-[10px] group hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer">
-            <Link to={"/business/registration"} className="">
+            <Link to={"/business/registration/customer"} className="">
               <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
                 BS for customers
               </h1>
@@ -44,7 +44,7 @@ const SignOrLogin = () => {
           </div>
           {/*  */}
           <div className="border border-[#797979] px-8 py-7 flex items-center justify-between rounded-[10px] group hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer">
-            <Link to={"/business/registration"} className="">
+            <Link to={"/business/registration/business"} className="">
               <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
                 BS for salon or spamanagemnets
               </h1>

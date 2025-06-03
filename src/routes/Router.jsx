@@ -284,7 +284,7 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "registration",
+        path: "registration/:type",
         element: <Registration />,
       },
       {

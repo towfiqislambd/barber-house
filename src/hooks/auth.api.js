@@ -2,7 +2,19 @@ import { axiosPublic } from "./useAxiosPublic";
 import { axiosSecure } from "./useAxiosSecure";
 
 // register:
-export const RegisterFunc = async (payload) => {
-  const { data } = await axiosPublic.post('/api/users/register', payload);
+export const RegisterFunc = async payload => {
+  const { data } = await axiosPublic.post("/api/users/register", payload);
+  return data?.data;
+};
+
+// login:
+export const LoginFunc = async payload => {
+  const { data } = await axiosPublic.post("/api/users/login", payload);
+  return data?.data;
+};
+
+// social login:
+export const GoogleLoginFunc = async payload => {
+  const { data } = await axiosPublic.post("/api/social-login", payload);
   return data?.data;
 };

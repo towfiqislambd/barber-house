@@ -1,6 +1,6 @@
 import loginImg from "../../../assets/images/loginImage.png";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { LeftSideArrowSvg } from "@/components/svgContainer/SvgContainer";
 import { useState } from "react";
 import icon from "../../../assets/images/icon.png";
@@ -9,10 +9,17 @@ import { Button } from "@/components/ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { FaUser } from "react-icons/fa";
 import { useRegister } from "@/hooks/auth.hook.";
+import { CgSpinnerTwoAlt } from "react-icons/cg";
 
 const Registration = () => {
-  const { mutateAsync: registerMutation } = useRegister();
-
+  const navigate = useNavigate();
+  const [userAvatar, setUserAvatar] = useState(null);
+  const [avatarError, setAvatarError] = useState("");
+  const { mutateAsync: registerMutation, isPending } = useRegister();
+  const { type } = useParams();
+  const handlePrev = () => {
+    navigate(-1);
+  };
   const {
     register,
     handleSubmit,
@@ -27,13 +34,11 @@ const Registration = () => {
       number: "",
       password: "",
       country: "",
-      agree_to_terms: false,
+      agree_to_terms: 0,
       avatar: null,
+      role: type,
     },
   });
-
-  const [userAvatar, setUserAvatar] = useState(null);
-  const [avatarError, setAvatarError] = useState("");
 
   const handleImageChange = event => {
     const file = event.target.files[0];
@@ -50,6 +55,18 @@ const Registration = () => {
       setAvatarError("Avatar is required");
       return;
     }
+
+    const formData = new FormData();
+    formData.append("first_name", data.first_name);
+    formData.append("last_name", data.last_name);
+    formData.append("email", data.email);
+    formData.append("number", data.number);
+    formData.append("password", data.password);
+    formData.append("country", data.country);
+    formData.append("role", data.role);
+    formData.append("agree_to_terms", data.agree_to_terms ? "1" : "0");
+    formData.append("avatar", data.avatar);
+
     await registerMutation(data);
   };
 
@@ -57,14 +74,13 @@ const Registration = () => {
     <section className="container flex flex-col xl:flex-row gap-[20px] xl:gap-[132px] mb-[50px] items-start h-[100vh] overflow-hidden">
       {/* Left Side */}
       <div className="mt-3 xl:h-[100vh] xl:sticky xl:top-0 flex-shrink-0">
-        <Link className="w-full block" to={"/business/signorlogin"}>
+        <button onClick={handlePrev}>
           <LeftSideArrowSvg />
-        </Link>
+        </button>
         <div className="hidden xl:block">
           <img
             className="mt-3 w-[100%] h-[200px] xl:w-[750px] xl:h-[850px] rounded-[32px] object-cover"
             src={loginImg}
-            alt=""
           />
         </div>
       </div>
@@ -209,15 +225,19 @@ const Registration = () => {
             <Controller
               control={control}
               name="agree_to_terms"
-              rules={{ required: "You must agree to the terms" }}
+              rules={{
+                validate: value =>
+                  value === true || "You must agree to the terms",
+              }}
               render={({ field }) => (
                 <Checkbox
                   id="terms"
                   checked={field.value}
-                  onCheckedChange={checked => field.onChange(!!checked)}
+                  onCheckedChange={value => field.onChange(value)}
                 />
               )}
             />
+
             <label htmlFor="terms" className="text-sm font-medium leading-none">
               <h1 className="text-textSecondary font-outfit leading-[22.96px]">
                 I agree to the{" "}
@@ -237,11 +257,16 @@ const Registration = () => {
 
         {/* Submit Button */}
         <Button
+          disable={isPending}
           type="submit"
-          className="h-[58px] text-gray-200 font-manrope text-xl font-semibold block w-full rounded-2xl mt-5"
+          className="h-[58px] text-gray-200 flex justify-center items-center font-manrope !text-xl font-semibold w-full rounded-2xl mt-5"
           variant="secondary"
         >
-          Continue
+          {isPending ? (
+            <CgSpinnerTwoAlt className="!text-3xl animate-spin cursor-not-allowed" />
+          ) : (
+            "Continue"
+          )}
         </Button>
       </form>
     </section>
