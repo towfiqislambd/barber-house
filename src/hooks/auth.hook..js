@@ -23,10 +23,13 @@ export const useRegister = () => {
       // setLoading(true);
     },
     onSuccess: data => {
-      // setLoading(false);
-      toast.success("Registration Successful");
       if (data?.token) {
-        navigate("/login");
+        if (data?.role === "customer") {
+          toast.success("Registration Successful");
+          navigate("/");
+        } else {
+          navigate("/stepContainer");
+        }
       }
     },
     onError: err => {
@@ -49,11 +52,16 @@ export const useLogin = () => {
       // setLoading(true);
     },
     onSuccess: data => {
+      console.log(data);
       // setLoading(false);
       toast.success("Login Successful");
       if (data?.token) {
         // setToken(data?.data?.token);
-        navigate((location?.state && location.state) || "/");
+        if (data?.role === "customer") {
+          navigate((location?.state && location.state) || "/");
+        } else {
+          alert(data?.role);
+        }
       }
     },
     onError: err => {

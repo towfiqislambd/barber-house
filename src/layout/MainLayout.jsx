@@ -18,7 +18,8 @@ const MainLayout = () => {
     location.pathname === "/registration/customer" ||
     location.pathname === "/verify-account" ||
     location.pathname === "/verify-otp" ||
-    location.pathname === "/create-pass";
+    location.pathname === "/create-pass" ||
+    location.pathname === "/stepContainer";
 
   return (
     <>

@@ -235,6 +235,10 @@ export const router = createBrowserRouter([
         path: "/create-pass",
         element: <CreatePass />,
       },
+      {
+        path: "stepContainer",
+        element: <StepContainer />,
+      },
       // Auth Flow End
 
       {
@@ -311,10 +315,6 @@ export const router = createBrowserRouter([
       {
         path: "sitemap",
         element: <Sitemap />,
-      },
-      {
-        path: "stepContainer",
-        element: <StepContainer />,
       },
     ],
   },
