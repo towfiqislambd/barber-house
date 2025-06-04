@@ -13,7 +13,7 @@ import UserDashboardLayout from "@/layout/UserDashboardLayout";
 import Login from "@/pages/Auth/Login/Login";
 import Registration from "@/pages/Auth/Registration/Registration";
 import SelectAccount from "@/pages/Auth/SelectAccount/SelectAccount";
-import SignOrLogin from "@/pages/Auth/SignOrLogin/SignOrLogin";
+import SignOrLogin from "@/pages/Auth/BS/BS";
 import StepContainer from "@/pages/Auth/StepForm/StepContainer";
 import Blog from "@/pages/Blog/Blog";
 import BlogDetails from "@/pages/Blog/BlogDetails";
@@ -128,6 +128,7 @@ import Allsalons from "@/pages/Allsalons/Allsalons";
 import ProfessionalAndTimePage from "@/pages/ProfessionalAndTimePage/ProfessionalAndTimePage";
 import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
 import Inventory from "@/pages/BusinessDashboardPage/Inventory";
+import BS from "@/pages/Auth/BS/BS";
 
 export const router = createBrowserRouter([
   {
@@ -208,6 +209,16 @@ export const router = createBrowserRouter([
         path: "message",
         element: <Message />,
       },
+
+      // Auth Flow Start
+      {
+        path: "/bs",
+        element: <BS />,
+      },
+      {
+        path: "registration/:type",
+        element: <Registration />,
+      },
       {
         path: "/login",
         element: <UserLogin />,
@@ -224,6 +235,8 @@ export const router = createBrowserRouter([
         path: "/create-pass",
         element: <CreatePass />,
       },
+      // Auth Flow End
+
       {
         path: "/all-salon",
         element: <Allsalons />,

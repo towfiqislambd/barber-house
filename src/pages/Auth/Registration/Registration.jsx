@@ -1,21 +1,27 @@
 import loginImg from "../../../assets/images/loginImage.png";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { LeftSideArrowSvg } from "@/components/svgContainer/SvgContainer";
+import {
+  GoogleSvg,
+  LeftSideArrowSvg,
+} from "@/components/svgContainer/SvgContainer";
 import { useState } from "react";
 import icon from "../../../assets/images/icon.png";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { FaUser } from "react-icons/fa";
-import { useRegister } from "@/hooks/auth.hook.";
+import { useRegister, useSocialLogin } from "@/hooks/auth.hook.";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 const Registration = () => {
   const navigate = useNavigate();
   const [userAvatar, setUserAvatar] = useState(null);
   const [avatarError, setAvatarError] = useState("");
   const { mutateAsync: registerMutation, isPending } = useRegister();
+  const { mutateAsync: socialLoginMutation } = useSocialLogin();
   const { type } = useParams();
   const handlePrev = () => {
     navigate(-1);
@@ -69,6 +75,38 @@ const Registration = () => {
 
     await registerMutation(data);
   };
+
+  // login with google:
+  const handleLoginWithGoogle = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      const token = tokenResponse.access_token;
+      try {
+        const { data } = await axios(
+          `${import.meta.env.VITE_GOOGLE_URL}/oauth2/v2/userinfo`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const updatedData = {
+          token,
+          provider: "google",
+          username: data?.name,
+          email: data?.email,
+          avatar: data?.picture,
+          // avatar: null,
+        };
+        await socialLoginMutation(updatedData);
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
+    },
+    onError: error => {
+      console.error("Google Login Failed:", error);
+    },
+  });
 
   return (
     <section className="container flex flex-col xl:flex-row gap-[20px] xl:gap-[132px] mb-[50px] items-start h-[100vh] overflow-hidden">
@@ -176,21 +214,6 @@ const Registration = () => {
             )}
           </div>
 
-          {/* Password */}
-          <div className="space-y-2">
-            <label className="text-[#050F2B] font-outfit text-base">
-              Password
-            </label>
-            <Input
-              type="password"
-              {...register("password", { required: "Password is required" })}
-              placeholder="Enter your password"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
-          </div>
-
           {/* Mobile Number */}
           <div className="space-y-2">
             <label className="text-[#050F2B] font-outfit text-base">
@@ -217,6 +240,21 @@ const Registration = () => {
             />
             {errors.country && (
               <p className="text-red-500 text-sm">{errors.country.message}</p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div className="space-y-2">
+            <label className="text-[#050F2B] font-outfit text-base">
+              Password
+            </label>
+            <Input
+              type="password"
+              {...register("password", { required: "Password is required" })}
+              placeholder="Enter your password"
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email.message}</p>
             )}
           </div>
 
@@ -265,9 +303,25 @@ const Registration = () => {
           {isPending ? (
             <CgSpinnerTwoAlt className="!text-3xl animate-spin cursor-not-allowed" />
           ) : (
-            "Continue"
+            "Sign Up"
           )}
         </Button>
+
+        <button
+          onClick={() => handleLoginWithGoogle()}
+          className="flex gap-3 mt-5 w-full justify-center border border-[#1E1E1E] py-[14px] px-[16px] rounded-[10px] items-center"
+        >
+          <GoogleSvg />
+          <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
+            Continue with Google
+          </h1>
+        </button>
+        <p className="flex flex-col items-center md:flex-row mt-5 flex justify-center items-center gap-x-1 ">
+          Already have an account?
+          <Link to="/login" className="underline font-bold cursor-pointer ">
+            Log In
+          </Link>{" "}
+        </p>
       </form>
     </section>
   );

@@ -4,16 +4,21 @@ import {
   SupportSvg,
 } from "@/components/svgContainer/SvgContainer";
 import loginImg from "../../../assets/images/loginImage.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const SignOrLogin = () => {
+const BS = () => {
+  const navigate = useNavigate();
+  const handlePrev = () => {
+    navigate(-1);
+  };
+
   return (
     <section className="container flex flex-col xl:flex-row gap-[20px] xl:gap-[196px]">
       {/* This is the left side div */}
       <div className="mt-3">
-        <Link to={"/business"}>
+        <button onClick={handlePrev}>
           <LeftSideArrowSvg />
-        </Link>
+        </button>
         <img
           className="mt-3  w-full xl:w-[750px] h-[200px] xl:h-[850px] rounded-[32px] object-cover"
           src={loginImg}
@@ -31,29 +36,35 @@ const SignOrLogin = () => {
         {/*  */}
         <div className="mt-[60px] space-y-6 ">
           {/*  */}
-          <div className="border border-[#797979] px-8 py-7 flex items-center justify-between rounded-[10px] group hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer">
-            <Link to={"/business/registration/customer"} className="">
+          <Link
+            to={"/registration/customer"}
+            className="border border-[#797979] px-8 py-7 flex items-center justify-between rounded-[10px] group hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer"
+          >
+            <div>
               <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
                 BS for customers
               </h1>
               <p className="text-textLight font-outfit text-base leading-[26.24px]">
                 Book salons and spa near your address
               </p>
-            </Link>
+            </div>
             <SelectAccountSvg />
-          </div>
+          </Link>
           {/*  */}
-          <div className="border border-[#797979] px-8 py-7 flex items-center justify-between rounded-[10px] group hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer">
-            <Link to={"/business/registration/business"} className="">
+          <Link
+            to={"/registration/business"}
+            className="border border-[#797979] px-8 py-7 flex items-center justify-between rounded-[10px] group hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer"
+          >
+            <div>
               <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
                 BS for salon or spamanagemnets
               </h1>
               <p className="text-textLight font-outfit text-base leading-[26.24px]">
                 Manage and grow your business
               </p>
-            </Link>
+            </div>
             <SelectAccountSvg />
-          </div>
+          </Link>
         </div>
 
         {/*  */}
@@ -68,4 +79,4 @@ const SignOrLogin = () => {
   );
 };
 
-export default SignOrLogin;
+export default BS;

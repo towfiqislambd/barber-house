@@ -1,8 +1,26 @@
+import { useVerifyOtp } from "@/hooks/auth.hook.";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom";
+import OTPInput from "react-otp-input";
+import { CgSpinnerTwoAlt } from "react-icons/cg";
 
 const VerifyOtp = () => {
-  const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email;
+  const { mutateAsync: verifyOtpMutation, isPending } = useVerifyOtp();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async data => {
+    const updatedData = { email, otp: data.otp };
+    await verifyOtpMutation(updatedData);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen  ">
       <div className=" h-auto p-6 xl:p-8 bg-[#FCFCFC] shadow-lg w-[300px] md:w-[400px] xl:w-[524px] flex flex-col items-center gap-y-6 xl:gap-y-12 ">
@@ -12,9 +30,6 @@ const VerifyOtp = () => {
               <h2 className="text-[36px] font-semibold leading-[230.961%]   ">
                 Verify otp
               </h2>
-              <span className="text-[#5A5C5F] text-[16px]  font-medium leading-[175%] tracking-[-0.064%] text-center ">
-                Sign up to continue
-              </span>
             </div>
             <div className="flex flex-col gap-y-6 w-full relative ">
               <div className="flex flex-col gap-y-2 w-full relative ">
@@ -23,43 +38,56 @@ const VerifyOtp = () => {
                     Enter 4 digit code
                   </span>
                 </div>
-                <div className="flex flex-row  justify-center gap-x-3 xl:gap-x-5  w-full ">
-                  <input
-                    type="text"
-                    className=" px-5 rounded-[16px] py-2 bg-[#ECF1EE] border-[1px] w-[50px] md:w-[60px] xl:w-[96px] border-solid  h-[50px] xl:h-[64px]  "
-                  />
-                  <input
-                    type="text"
-                    className=" px-5 rounded-[16px] py-2 bg-[#ECF1EE] border-[1px] w-[50px] md:w-[60px] xl:w-[96px] border-solid  h-[50px] xl:h-[64px]  "
-                  />
-                  <input
-                    type="text"
-                    className=" px-5 rounded-[16px] py-2 bg-[#ECF1EE] border-[1px] w-[50px] md:w-[60px] xl:w-[96px] border-solid  h-[50px] xl:h-[64px] "
-                  />
-                  <input
-                    type="text"
-                    className=" px-5 rounded-[16px] py-2 bg-[#ECF1EE] border-[1px] w-[50px] md:w-[60px] xl:w-[96px] border-solid  h-[50px] xl:h-[64px]  "
-                  />
-                </div>
+                {/* form */}
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="lg:mt-8 space-y-6"
+                >
+                  {/* Otp */}
+                  <div id="otp_container" className="sm:mt-10 mt-6 mb-7">
+                    <Controller
+                      name="otp"
+                      control={control}
+                      rules={{
+                        required: "OTP is required",
+                        minLength: {
+                          value: 4,
+                          message: "OTP must be 4 digits",
+                        },
+                      }}
+                      render={({ field }) => (
+                        <OTPInput
+                          {...field}
+                          value={field.value || ""}
+                          onChange={field.onChange}
+                          numInputs={4}
+                          renderSeparator={false}
+                          renderInput={props => <input {...props} />}
+                        />
+                      )}
+                    />
+                    {errors.otp && (
+                      <p className="text-red-500 text-center mt-3">
+                        {errors.otp.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-y-4 w-full relative  items-center ">
+                    <button className="w-full xl:px-6 px-3 xl:py-4 py-2 h-auto bg-primary font-manrope text-base xl:text-xl font-semibold text-white rounded-[16px] flex justify-center items-center">
+                      {isPending ? (
+                        <CgSpinnerTwoAlt className="!text-3xl animate-spin cursor-not-allowed" />
+                      ) : (
+                        "Verify OTP"
+                      )}
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-y-4 w-full relative  items-center ">
-            <button
-              onClick={() => {
-                navigate("/create-pass");
-              }}
-              className="w-full xl:px-6 px-3 xl:py-4 py-2 h-auto bg-primary font-manrope text-base xl:text-xl font-semibold text-white rounded-[16px] "
-            >
-              Verify
-            </button>
-          </div>
         </div>
         <span className="flex gap-x-1 ">
-          {" "}
-          <p className="underline font-bold cursor-pointer ">
-            Back to login
-          </p>{" "}
+          <p className="underline font-bold cursor-pointer ">Back to login</p>
         </span>
       </div>
     </div>

@@ -18,3 +18,30 @@ export const GoogleLoginFunc = async payload => {
   const { data } = await axiosPublic.post("/api/social-login", payload);
   return data?.data;
 };
+
+// verify email:
+export const VerifyEmailFunc = async payload => {
+  const { data } = await axiosPublic.post(
+    "/api/users/login/email-verify",
+    payload
+  );
+  return data?.data;
+};
+
+// otp verify:
+export const OtpVerifyFunc = async payload => {
+  const { data } = await axiosPublic.post(
+    "/api/users/login/otp-verify",
+    payload
+  );
+  return data?.data;
+};
+
+// reset password::
+export const ResetPasswordFunc = async payload => {
+  const { data } = await axiosPublic.post(
+    "/api/users/login/reset-password",
+    payload
+  );
+  return data?.data;
+};

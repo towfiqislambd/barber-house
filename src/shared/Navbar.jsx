@@ -1,4 +1,4 @@
-import logo from "../assets/images/logo.jpg" ;
+import logo from "../assets/images/logo.jpg";
 import { RxCross2 } from "react-icons/rx";
 import {
   DownArrowSvg,
@@ -60,7 +60,7 @@ const Navbar = () => {
             </Link>
 
             {/* Get started btn */}
-            <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+            {/* <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
               <PopoverTrigger>
                 <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium flex items-center gap-2 text-white">
                   <span>Get Started</span>
@@ -117,7 +117,14 @@ const Navbar = () => {
                   </p>
                 </div>
               </PopoverContent>
-            </Popover>
+            </Popover> */}
+
+            {/* Sign Up btn */}
+            <Link to="/bs">
+              <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium text-white">
+                <span>Sign Up</span>
+              </button>
+            </Link>
           </div>
         </div>
 
