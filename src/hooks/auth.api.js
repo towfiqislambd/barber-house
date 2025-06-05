@@ -51,3 +51,9 @@ export const ResetPasswordFunc = async payload => {
   );
   return data?.data;
 };
+
+// logout:
+export const LogOutFunc = async () => {
+  const { data } = await axiosSecure.post("/api/users/logout");
+  return data?.data;
+};

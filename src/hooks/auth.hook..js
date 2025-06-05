@@ -3,6 +3,7 @@ import {
   GetUserDataFunc,
   GoogleLoginFunc,
   LoginFunc,
+  LogOutFunc,
   OtpVerifyFunc,
   RegisterFunc,
   ResetPasswordFunc,
@@ -70,7 +71,7 @@ export const useLogin = () => {
       if (data?.token) {
         setToken(data?.token);
         if (data?.role === "customer") {
-          navigate((location?.state && location.state) || "/");
+          navigate((location?.state && location?.state) || "/");
         } else {
           alert(data?.role);
         }
@@ -85,7 +86,7 @@ export const useLogin = () => {
 
 // social login:
 export const useSocialLogin = setSslLoading => {
-  // const { setToken } = useAuth();
+  const { setToken } = useAuth();
   const navigate = useNavigate();
   return useMutation({
     mutationKey: ["social-login"],
@@ -95,7 +96,7 @@ export const useSocialLogin = setSslLoading => {
     },
     onSuccess: data => {
       // setSslLoading(false);
-      // setToken(data?.token);
+      setToken(data?.token);
       navigate((location?.state && location.state) || "/");
       toast.success("Login Successful");
     },
@@ -108,25 +109,25 @@ export const useSocialLogin = setSslLoading => {
 
 // verify email:
 export const useVerifyEmail = () => {
-  // const { setLoading } = useAuth();
+  const { setLoading } = useAuth();
   const navigate = useNavigate();
 
   return useMutation({
     mutationKey: ["verify-email"],
     mutationFn: payload => VerifyEmailFunc(payload),
     onMutate: () => {
-      // setLoading(true);
+      setLoading(true);
     },
     onSuccess: data => {
       if (data?.email) {
-        navigate("/auth/verify-otp", { state: { email: data.email } });
-        // setLoading(false);
+        navigate("/verify-otp", { state: { email: data.email } });
+        setLoading(false);
         toast.success("Otp sent to your email address");
       }
     },
     onError: err => {
       console.log(err);
-      // setLoading(false);
+      setLoading(false);
       toast.error(err?.response?.data?.data?.email?.[0]);
     },
   });
@@ -134,14 +135,14 @@ export const useVerifyEmail = () => {
 
 // verify otp:
 export const useVerifyOtp = () => {
-  // const { setLoading } = useAuth();
+  const { setLoading } = useAuth();
   const navigate = useNavigate();
 
   return useMutation({
     mutationKey: ["verify-otp"],
     mutationFn: payload => OtpVerifyFunc(payload),
     onMutate: () => {
-      // setLoading(true);
+      setLoading(true);
     },
     onSuccess: data => {
       if (data) {
@@ -153,8 +154,7 @@ export const useVerifyOtp = () => {
       }
     },
     onError: err => {
-      // setLoading(false);
-      // reset();
+      setLoading(false);
       toast.error(err?.response?.data?.message);
     },
   });
@@ -162,24 +162,47 @@ export const useVerifyOtp = () => {
 
 // reset password:
 export const useResetPassword = () => {
-  // const { setLoading } = useAuth();
+  const { setLoading } = useAuth();
   const navigate = useNavigate();
 
   return useMutation({
     mutationKey: ["reset-password"],
     mutationFn: payload => ResetPasswordFunc(payload),
     onMutate: () => {
-      // setLoading(true);
+      setLoading(true);
     },
     onSuccess: data => {
       if (data) {
-        // setLoading(false);
+        setLoading(false);
         toast.success("Password reset successfully");
         navigate("/login");
       }
     },
     onError: err => {
-      // setLoading(false);
+      setLoading(false);
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// logout:
+export const useLogOut = () => {
+  const { setLoading, clearToken } = useAuth();
+  const navigate = useNavigate();
+
+  return useMutation({
+    mutationKey: ["logout"],
+    mutationFn: LogOutFunc,
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: () => {
+      clearToken();
+      navigate("/login");
+      setLoading(false);
+      toast.success("User Logged out Successfully");
+    },
+    onError: err => {
       toast.error(err?.response?.data?.message);
     },
   });
