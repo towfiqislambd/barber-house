@@ -65,15 +65,18 @@ export const useLogin = () => {
       setLoading(true);
     },
     onSuccess: data => {
-      console.log(data);
       setLoading(false);
-      toast.success("Login Successful");
       if (data?.token) {
         setToken(data?.token);
         if (data?.role === "customer") {
           navigate((location?.state && location?.state) || "/");
+          toast.success("Login Successful");
         } else {
-          alert(data?.role);
+          if (data?.flag) {
+            navigate((location?.state && location?.state) || "/");
+          } else {
+            navigate("/stepContainer");
+          }
         }
       }
     },
