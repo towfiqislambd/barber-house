@@ -22,7 +22,7 @@ const StepFour = ({ step, setStep, setFormData }) => {
     const payload = {
       address: data.address,
       do_not_business_address: data.do_not_business_address ? 1 : 0,
-      calendly: data.calendly ? 1 : 0,
+      calendly: data.calendly
     };
 
     setStep(step + 1);
@@ -105,10 +105,18 @@ const StepFour = ({ step, setStep, setFormData }) => {
           </p>
 
           <div className="flex gap-2 items-center mt-5">
-            <input id="calendly" type="checkbox" {...register("calendly")} />
-            <label htmlFor="calendly" className="text-sm text-[#1E1E1E]">
-              Calendly
-            </label>
+            <div className="relative">
+              <input
+                id="calendly"
+                type="text"
+                placeholder="Calendly"
+                className="block mt-3 w-full px-10 mb-2 py-3 border rounded-lg border-[#797979]"
+                {...register("calendly", { required: true })}
+              />
+              {errors.calendly && (
+                <span className="text-red-400">This field is required</span>
+              )}
+            </div>
           </div>
         </div>
       </div>

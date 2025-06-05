@@ -56,7 +56,15 @@ const StepFive = ({ step, setStep, setFormData, formData }) => {
 
       setFormData(prev => ({ ...prev, ...mappedData }));
     }
-    await boardingMutation(formData);
+
+
+    const allData = {
+      ...formData,
+      longitude: "93.545512",
+      latitude: "25.809232",
+    };
+
+    await boardingMutation(allData);
   };
 
   const handlePrevStep = e => {

@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import {
+  GetUserDataFunc,
   GoogleLoginFunc,
   LoginFunc,
   OtpVerifyFunc,
@@ -7,33 +8,44 @@ import {
   ResetPasswordFunc,
   VerifyEmailFunc,
 } from "./auth.api";
-// import useAuth from "./useAuth";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import useAuth from "./useAuth";
+
+// get user data:
+export const useGetUserData = token => {
+  return useQuery({
+    queryKey: ["user", token],
+    queryFn: GetUserDataFunc,
+    enabled: !!token, // Only run the query if token is truthy
+    refetchInterval: 1000 * 60 * 60, // refetch every hour
+  });
+};
 
 // Register:
 export const useRegister = () => {
-  // const { setLoading } = useAuth();
+  const { setLoading, setToken } = useAuth();
   const navigate = useNavigate();
 
   return useMutation({
     mutationKey: ["register"],
     mutationFn: payload => RegisterFunc(payload),
     onMutate: () => {
-      // setLoading(true);
+      setLoading(true);
     },
     onSuccess: data => {
       if (data?.token) {
         if (data?.role === "customer") {
           toast.success("Registration Successful");
-          navigate("/");
+          navigate("/login");
         } else {
+          setToken(data?.token);
           navigate("/stepContainer");
         }
       }
     },
     onError: err => {
-      // setLoading(false);
+      setLoading(false);
       toast.error(err?.response?.data?.message);
     },
   });
@@ -41,7 +53,7 @@ export const useRegister = () => {
 
 // Login:
 export const useLogin = () => {
-  // const { setLoading, setToken } = useAuth();
+  const { setLoading, setToken } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,14 +61,14 @@ export const useLogin = () => {
     mutationKey: ["login"],
     mutationFn: payload => LoginFunc(payload),
     onMutate: () => {
-      // setLoading(true);
+      setLoading(true);
     },
     onSuccess: data => {
       console.log(data);
-      // setLoading(false);
+      setLoading(false);
       toast.success("Login Successful");
       if (data?.token) {
-        // setToken(data?.data?.token);
+        setToken(data?.token);
         if (data?.role === "customer") {
           navigate((location?.state && location.state) || "/");
         } else {
@@ -65,7 +77,7 @@ export const useLogin = () => {
       }
     },
     onError: err => {
-      // setLoading(false);
+      setLoading(false);
       toast.error(err?.response?.data?.message);
     },
   });
