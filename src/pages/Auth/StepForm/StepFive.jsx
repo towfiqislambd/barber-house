@@ -3,12 +3,8 @@ import {
   UploadSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { useForm } from "react-hook-form";
-import { message, Upload } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useOnboard } from "@/hooks/cms.mutations";
-
-const { Dragger } = Upload;
 
 const StepFive = ({ step, setStep, setFormData, formData }) => {
   const { mutateAsync: boardingMutation, isPending } = useOnboard();
@@ -26,6 +22,30 @@ const StepFive = ({ step, setStep, setFormData, formData }) => {
     passportCopy: null,
     bankStatement: null,
   });
+
+  const [messages, setMessages] = useState({
+    tradeLicense: null,
+    vatCertificate: null,
+    passportCopy: null,
+    bankStatement: null,
+  });
+
+  const handlePrevStep = e => {
+    e.preventDefault();
+    setStep(step - 1);
+  };
+
+  const handleFileChange = (e, fieldName) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setUploadedFiles(prev => ({ ...prev, [fieldName]: file }));
+      clearErrors(fieldName);
+      setMessages(prev => ({
+        ...prev,
+        [fieldName]: `✅ ${file.name} added successfully.`,
+      }));
+    }
+  };
 
   const onSubmit = async data => {
     let isValid = true;
@@ -45,50 +65,58 @@ const StepFive = ({ step, setStep, setFormData, formData }) => {
       isValid = false;
     }
 
-    if (isValid) {
-      const mappedData = {
-        trade_license: uploadedFiles.tradeLicense,
-        vat_registration_certificate: uploadedFiles.vatCertificate,
-        passport_copy: uploadedFiles.passportCopy,
-        account_statement: uploadedFiles.bankStatement,
-        terms_and_condition: data.terms_and_condition ? 1 : 0,
-      };
+    if (!isValid) return;
 
-      setFormData(prev => ({ ...prev, ...mappedData }));
-    }
+    const formDataToSend = new FormData();
 
+    // Attach files
+    formDataToSend.append("trade_license", uploadedFiles.tradeLicense);
+    formDataToSend.append(
+      "vat_registration_certificate",
+      uploadedFiles.vatCertificate
+    );
+    formDataToSend.append("passport_copy", uploadedFiles.passportCopy);
+    formDataToSend.append("account_statement", uploadedFiles.bankStatement);
 
-    const allData = {
-      ...formData,
-      longitude: "93.545512",
-      latitude: "25.809232",
-    };
+    // Attach other fields explicitly from formData
+    formDataToSend.append("business_name", formData.business_name);
+    formDataToSend.append("website_url", formData.website_url);
 
-    await boardingMutation(allData);
+    // service_id is an array; append each value individually or as JSON string
+    formData.service_id.forEach(id => {
+      formDataToSend.append("service_id[]", id); // or just "service_id"
+    });
+
+    formDataToSend.append("team_size", formData.team_size);
+    formDataToSend.append("address", formData.address);
+    formDataToSend.append(
+      "do_not_business_address",
+      formData.do_not_business_address.toString()
+    );
+    formDataToSend.append("calendly", formData.calendly.toString());
+
+    // Terms and conditions checkbox
+    formDataToSend.append(
+      "terms_and_condition",
+      data.terms_and_condition ? "1" : "0"
+    );
+
+    // Fixed latitude and longitude
+    formDataToSend.append("latitude", "25.809232");
+    formDataToSend.append("longitude", "93.545512");
+
+    await boardingMutation(formDataToSend);
   };
 
-  const handlePrevStep = e => {
-    e.preventDefault();
-    setStep(step - 1);
-  };
-
-  const handleFileChange = (fieldName, info) => {
-    const { file } = info;
-    if (file.status !== "removed") {
-      setUploadedFiles(prev => ({ ...prev, [fieldName]: file }));
-      clearErrors(fieldName);
-      message.success(`${file.name} added successfully.`);
-    }
-  };
-
-  const uploadProps = fieldName => ({
-    name: "file",
-    multiple: false,
-    beforeUpload: file => {
-      handleFileChange(fieldName, { file });
-      return false;
+  const fileFields = [
+    { name: "tradeLicense", label: "Trade license" },
+    { name: "vatCertificate", label: "VAT registration certificate" },
+    { name: "passportCopy", label: "Owner’s passport copy" },
+    {
+      name: "bankStatement",
+      label: "Business Bank Account Statement (Last 3 Months)",
     },
-  });
+  ];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -115,36 +143,40 @@ const StepFive = ({ step, setStep, setFormData, formData }) => {
         </p>
       </div>
 
-      <div id="dragger" className="max-w-[550px] mx-auto space-y-5">
-        {[
-          { name: "tradeLicense", label: "Trade license" },
-          { name: "vatCertificate", label: "VAT registration certificate" },
-          { name: "passportCopy", label: "Owner’s passport copy" },
-          {
-            name: "bankStatement",
-            label: "Business Bank Account Statement (Last 3 Months)",
-          },
-        ].map(({ name, label }) => (
+      <div className="max-w-[550px] mx-auto space-y-5">
+        {fileFields.map(({ name, label }) => (
           <div key={name}>
             <h4 className="font-outfit text-lg mb-2">{label}</h4>
-            <Dragger {...uploadProps(name)}>
-              <label className="border cursor-pointer rounded p-5 flex justify-between items-center">
-                <div>
-                  <div className="flex gap-2 items-center mb-2">
-                    <UploadSvg />
-                    <p className="text-[#545454] font-outfit">
-                      Drag and drop files here or upload
-                    </p>
-                  </div>
-                  <p className="text-[#757575] font-outfit text-[15px]">
-                    Accepted file types JPEG, Doc, PDF, PNG
+
+            <label
+              htmlFor={name}
+              className="border cursor-pointer rounded p-5 flex justify-between items-center"
+            >
+              <div>
+                <div className="flex gap-2 items-center mb-2">
+                  <UploadSvg />
+                  <p className="text-[#545454] font-outfit">
+                    Drag and drop files here or upload
                   </p>
                 </div>
-                <p className="text-primary font-outfit px-5 py-[5px] rounded border border-borderColorLight">
-                  upload
+                <p className="text-[#757575] font-outfit text-[15px]">
+                  Accepted file types JPEG, Doc, PDF, PNG
                 </p>
-              </label>
-            </Dragger>
+              </div>
+              <p className="text-primary font-outfit px-5 py-[5px] rounded border border-borderColorLight">
+                Upload
+              </p>
+              <input
+                id={name}
+                type="file"
+                onChange={e => handleFileChange(e, name)}
+                className="hidden"
+              />
+            </label>
+
+            {messages[name] && (
+              <p className="text-green-600 text-sm mt-1">{messages[name]}</p>
+            )}
             {errors[name] && (
               <p className="text-red-500 text-sm mt-1">
                 {errors[name].message}
