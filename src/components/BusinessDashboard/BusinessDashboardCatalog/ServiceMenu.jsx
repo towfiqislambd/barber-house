@@ -26,54 +26,58 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-const categoryData = [
-  {
-    id: 1,
-    category: "Hair & styling",
-    info: [
-      {
-        service: "Haircut",
-        duration: "30 min",
-        price: "SAR 20.00",
-      },
-      {
-        service: "Hair color",
-        duration: "30 min",
-        price: "SAR 20.00",
-      },
-      {
-        service: "Blow dry",
-        duration: "30 min",
-        price: "SAR 20.00",
-      },
-    ],
-  },
-  {
-    id: 2,
-    category: "Nails",
-    info: [
-      {
-        service: "Manicure",
-        duration: "30 min",
-        price: "SAR 20.00",
-      },
-    ],
-  },
-  {
-    id: 3,
-    category: "Messaging",
-    info: [
-      {
-        service: "Body message",
-        duration: "30 min",
-        price: "SAR 20.00",
-      },
-    ],
-  },
-];
+import { Link } from "react-router-dom";
+import { useCatalogue } from "@/hooks/cms.queries";
+// const categoryData = [
+//   {
+//     id: 1,
+//     category: "Hair & styling",
+//     info: [
+//       {
+//         service: "Haircut",
+//         duration: "30 min",
+//         price: "SAR 20.00",
+//       },
+//       {
+//         service: "Hair color",
+//         duration: "30 min",
+//         price: "SAR 20.00",
+//       },
+//       {
+//         service: "Blow dry",
+//         duration: "30 min",
+//         price: "SAR 20.00",
+//       },
+//     ],
+//   },
+//   {
+//     id: 2,
+//     category: "Nails",
+//     info: [
+//       {
+//         service: "Manicure",
+//         duration: "30 min",
+//         price: "SAR 20.00",
+//       },
+//     ],
+//   },
+//   {
+//     id: 3,
+//     category: "Messaging",
+//     info: [
+//       {
+//         service: "Body message",
+//         duration: "30 min",
+//         price: "SAR 20.00",
+//       },
+//     ],
+//   },
+// ];
 
 const ServiceMenu = () => {
   const [activeTab, setActiveTab] = useState("all-categories");
+  const { data: categoryData } = useCatalogue();
+
   return (
     <div>
       <h3 className="text-[#2C2C2C] font-outfit text-2xl font-medium mb-2">
@@ -82,6 +86,7 @@ const ServiceMenu = () => {
       <p className="text-[#2C2C2C] lg:text-lg font-medium mb-5 lg:mb-10">
         Track, analyze & grow your salon business daily
       </p>
+
       {/* Upper part */}
       <div className="flex justify-between items-center flex-wrap gap-5">
         <div className="flex gap-3 lg:gap-5 items-center flex-wrap">
@@ -100,50 +105,26 @@ const ServiceMenu = () => {
           {/* Filter */}
           <CatalogFilterModal />
         </div>
-        {/* Export */}
-        <div className="flex items-center gap-2 lg:gap-3">
-          <Popover>
-            <PopoverTrigger>
-              <button className="px-2 lg:px-4 py-[5px] lg:py-[10px] flex gap-2 items-center outline-none rounded-lg border border-borderColor">
-                <ExportSvg />
-                <p>Option</p>
-                <DropdownSvg />
-              </button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[210px] py-5 px-4">
-              <div className="space-y-4">
-                <button className="flex gap-2 items-center">
-                  <AppointmentPdfSvg />
-                  <p className="text-[#545454] font-medium">Download PDF</p>
-                </button>
-                <button className="flex gap-2 items-center">
-                  <AppointmentCsvSvg />
-                  <p className="text-[#545454] font-medium">Download CSV</p>
-                </button>
-                <button className="flex gap-2 items-center">
-                  <AppointmentExcelSvg />
-                  <p className="text-[#545454] font-medium">Download Excel</p>
-                </button>
-              </div>
-            </PopoverContent>
-          </Popover>
-          <button className="px-3 lg:px-4 py-[5px] lg:py-[10px] bg-primary flex gap-2 items-center outline-none rounded-lg text-white">
-            <AddNowSvg />
-            <p>Add</p>
-          </button>
-        </div>
+        <Link
+          to="/businessDashboard/addService"
+          className="px-3 lg:px-4 py-[5px] lg:py-[10px] bg-primary flex gap-2 items-center outline-none rounded-lg text-white"
+        >
+          <AddNowSvg />
+          <p>Add Service</p>
+        </Link>
       </div>
+
       {/* Lower part */}
       <section className="flex flex-col 2xl:flex-row gap-7 3xl:gap-10 mt-10">
         <div className="p-5 3xl:p-8 bg-white rounded-lg shadow h-full">
           <h3 className="mb-3 text-xl font-semibold">Categories</h3>
-          <div className="2xl:hidden">
+          {/* <div className="2xl:hidden">
             <Select>
               <SelectTrigger className="w-full text-base border !py-5 border-[#B3BAC5]">
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="1">
+                <SelectItem>
                   <button
                     onClick={() => setActiveTab("all-categories")}
                     className="flex gap-2 items-center"
@@ -160,7 +141,7 @@ const ServiceMenu = () => {
                     </p>
                   </button>
                 </SelectItem>
-                <SelectItem value="2">
+                <SelectItem>
                   <button
                     onClick={() => setActiveTab("hairAndStyling")}
                     className="flex gap-2 items-center"
@@ -177,7 +158,7 @@ const ServiceMenu = () => {
                     </p>
                   </button>
                 </SelectItem>
-                <SelectItem value="3">
+                <SelectItem>
                   <button
                     onClick={() => setActiveTab("nailCare")}
                     className="flex gap-2 items-center"
@@ -192,7 +173,7 @@ const ServiceMenu = () => {
                     </p>
                   </button>
                 </SelectItem>
-                <SelectItem value="4">
+                <SelectItem>
                   <button
                     onClick={() => setActiveTab("messaging")}
                     className="flex gap-2 items-center"
@@ -214,85 +195,32 @@ const ServiceMenu = () => {
                 </SelectItem>
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
           <div className="hidden 2xl:block bg-white rounded-lg border-gray-300 p-4 3xl:p-6 h-full w-[300px] border">
             <ul className="space-y-5 text-lg font-medium">
-              <button
-                onClick={() => setActiveTab("all-categories")}
-                className={` px-3 py-2 w-full rounded-lg ${
-                  activeTab === "all-categories"
-                    ? " shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                <p>All categories</p>
-                <p
-                  className={`w-6 h-6 text-sm rounded-full font-bold grid place-items-center ${
-                    activeTab === "all-categories"
-                      ? "text-white bg-primary"
-                      : "text-[#2C2C2C] bg-gray-200 shadow-sm"
-                  }`}
+              {categoryData?.map(item => (
+                <button
+                  key={item?.id}
+                  onClick={() => setActiveTab("all-categories")}
+                  className={` px-3 py-2 w-full rounded-lg
+                     ${
+                       activeTab === "all-categories"
+                         ? " shadow border"
+                         : "text-[#2C2C2C] border-transparent"
+                     } flex justify-between items-center`}
                 >
-                  5
-                </p>
-              </button>
-              <button
-                onClick={() => setActiveTab("hairAndStyling")}
-                className={` px-3 py-2 w-full rounded-lg ${
-                  activeTab === "hairAndStyling"
-                    ? " shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                <p>Hair & styling</p>
-                <p
-                  className={`w-6 h-6 text-sm rounded-full font-bold grid place-items-center ${
-                    activeTab === "hairAndStyling"
-                      ? "text-white bg-primary"
-                      : "text-[#2C2C2C] bg-gray-200 shadow-sm"
-                  }`}
-                >
-                  3
-                </p>
-              </button>
-              <button
-                onClick={() => setActiveTab("nailCare")}
-                className={` px-3 py-2 w-full rounded-lg ${
-                  activeTab === "nailCare"
-                    ? " shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                <p>Nail care</p>
-                <p
-                  className={`w-6 h-6 text-sm rounded-full font-bold grid place-items-center ${
-                    activeTab === "nailCare"
-                      ? "text-white bg-primary"
-                      : "text-[#2C2C2C] bg-gray-200 shadow-sm"
-                  }`}
-                >
-                  1
-                </p>
-              </button>
-              <button
-                onClick={() => setActiveTab("messaging")}
-                className={` px-3 py-2 w-full rounded-lg ${
-                  activeTab === "messaging"
-                    ? " shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                <p>Messaging</p>
-                <p
-                  className={`w-6 h-6 text-sm rounded-full font-bold grid place-items-center ${
-                    activeTab === "messaging"
-                      ? "text-white bg-primary"
-                      : "text-[#2C2C2C] bg-gray-200 shadow-sm"
-                  }`}
-                >
-                  1
-                </p>
-              </button>
+                  <p>{item?.name}</p>
+                  <p
+                    className={`w-6 h-6 text-sm rounded-full font-bold grid place-items-center ${
+                      activeTab === "all-categories"
+                        ? "text-white bg-primary"
+                        : "text-[#2C2C2C] bg-gray-200 shadow-sm"
+                    }`}
+                  >
+                    {item?.catalog_services_count}
+                  </p>
+                </button>
+              ))}
               <AddCategoryModal />
             </ul>
           </div>
@@ -301,13 +229,13 @@ const ServiceMenu = () => {
           {activeTab === "all-categories" && (
             <AllCategories categoryData={categoryData} />
           )}
-          {activeTab === "hairAndStyling" && (
+          {/* {activeTab === "hairAndStyling" && (
             <HairAndStyle categoryData={categoryData} />
           )}
           {activeTab === "nailCare" && <NailCare categoryData={categoryData} />}
           {activeTab === "messaging" && (
             <Messaging categoryData={categoryData} />
-          )}
+          )} */}
         </div>
       </section>
     </div>
