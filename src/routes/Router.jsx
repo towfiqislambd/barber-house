@@ -26,7 +26,6 @@ import BusinessDashboardMarketing from "@/pages/BusinessDashboardPage/BusinessDa
 import BusinessDashboardMemberList from "@/pages/BusinessDashboardPage/BusinessDashboardMemberList";
 import BusinessDashboardMessage from "@/pages/BusinessDashboardPage/BusinessDashboardMessage";
 import BusinessDashboardOnlineProfile from "@/pages/BusinessDashboardPage/BusinessDashboardOnlineProfile";
-import BusinessDashboardReporting from "@/pages/BusinessDashboardPage/BusinessDashboardReporting";
 import BusinessDashboardSales from "@/pages/BusinessDashboardPage/BusinessDashboardSales";
 import EditService from "@/pages/BusinessDashboardPage/EditService";
 import MembershipCreation from "@/pages/BusinessDashboardPage/MembershipCreation";
@@ -430,10 +429,6 @@ export const router = createBrowserRouter([
       {
         path: "members-list",
         element: <BusinessDashboardMemberList />,
-      },
-      {
-        path: "reporting",
-        element: <BusinessDashboardReporting />,
       },
       {
         path: "tellusaboutyourbusiness",

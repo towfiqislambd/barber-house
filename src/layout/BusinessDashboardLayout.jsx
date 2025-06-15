@@ -11,7 +11,6 @@ import {
   BusinessDashboardSeven,
   BusinessDashboardEight,
   BusinessDashboardNine,
-  BusinessDashboardTen,
   BusinessNotificationSvg,
   BusinessSearchSvg,
 } from "@/components/svgContainer/SvgContainer";
@@ -44,56 +43,65 @@ const excludedPaths = [
 ];
 
 const routingList = [
-  { id: "one", to: "/businessDashboard", Icon: BusinessDashboardOne, label: 'Home' },
-  { id: "three", to: "/businessDashboard/sales", Icon: BusinessDashboardThree, label: 'Sales' },
+  {
+    id: "one",
+    to: "/businessDashboard",
+    Icon: BusinessDashboardOne,
+    label: "Home",
+  },
+  {
+    id: "three",
+    to: "/businessDashboard/sales",
+    Icon: BusinessDashboardThree,
+    label: "Sales",
+  },
   {
     id: "four",
     to: "/businessDashboard/clients-list",
     Icon: BusinessDashboardFour,
-    label: 'Clients'
+    label: "Clients",
   },
   {
     id: "five",
     to: "/businessDashboard/catalogue",
     Icon: BusinessDashboardFive,
-    label: 'Catalogue'
+    label: "Catalogue",
   },
   {
     id: "six",
     to: "/businessDashboard/online-profile",
     Icon: BusinessDashboardSix,
-    label: 'Online Booking'
+    label: "Online Booking",
   },
   {
     id: "seven",
     to: "/businessDashboard/marketing",
     Icon: BusinessDashboardSeven,
-    label: 'Marketing'
+    label: "Marketing",
   },
   {
     id: "eight",
     to: "/businessDashboard/message",
     Icon: BusinessDashboardEight,
-    label: 'Messaging'
+    label: "Messaging",
   },
   {
     id: "nine",
     to: "/businessDashboard/members-list",
     Icon: BusinessDashboardNine,
-    label: 'Team'
+    label: "Team",
   },
-  { id: "ten", to: "/businessDashboard/reporting", Icon: BusinessDashboardTen, label: 'Reports' },
 ];
 
 const BusinessDashboardLayout = () => {
-  const [isOpen, setOpen] = useState(false)
+  const [isOpen, setOpen] = useState(false);
   const [active, setActive] = useState("one");
   const location = useLocation();
   const isExcluded = excludedPaths.includes(location.pathname);
-  const handleActive = (id) => {
-    setActive(id)
-    setOpen(false)
-  }
+  const handleActive = id => {
+    setActive(id);
+    setOpen(false);
+  };
 
   return (
     <section className="min-h-screen max-h-screen flex flex-col">
