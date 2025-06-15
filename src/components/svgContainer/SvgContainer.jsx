@@ -2687,46 +2687,46 @@ export function BusinessDashboardOne({ color }) {
     </svg>
   );
 }
-export function BusinessDashboardTwo({ color }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-      fill="none"
-    >
-      <path
-        d="M24 2.66699V5.33366M8 2.66699V5.33366"
-        stroke="#2C2C2C"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4 10.667H28"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M3.33203 16.3243C3.33203 10.5146 3.33203 7.60971 5.00152 5.80485C6.67102 4 9.35802 4 14.732 4H17.2654C22.6394 4 25.3264 4 26.9959 5.80485C28.6654 7.60971 28.6654 10.5146 28.6654 16.3243V17.0091C28.6654 22.8188 28.6654 25.7236 26.9959 27.5285C25.3264 29.3333 22.6394 29.3333 17.2654 29.3333H14.732C9.35802 29.3333 6.67102 29.3333 5.00152 27.5285C3.33203 25.7236 3.33203 22.8188 3.33203 17.0091V16.3243Z"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 20H20"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+// export function BusinessDashboardTwo({ color }) {
+//   return (
+//     <svg
+//       xmlns="http://www.w3.org/2000/svg"
+//       width="32"
+//       height="32"
+//       viewBox="0 0 32 32"
+//       fill="none"
+//     >
+//       <path
+//         d="M24 2.66699V5.33366M8 2.66699V5.33366"
+//         stroke="#2C2C2C"
+//         strokeWidth="1.5"
+//         strokeLinecap="round"
+//         strokeLinejoin="round"
+//       />
+//       <path
+//         d="M4 10.667H28"
+//         stroke={color}
+//         strokeWidth="1.5"
+//         strokeLinecap="round"
+//         strokeLinejoin="round"
+//       />
+//       <path
+//         d="M3.33203 16.3243C3.33203 10.5146 3.33203 7.60971 5.00152 5.80485C6.67102 4 9.35802 4 14.732 4H17.2654C22.6394 4 25.3264 4 26.9959 5.80485C28.6654 7.60971 28.6654 10.5146 28.6654 16.3243V17.0091C28.6654 22.8188 28.6654 25.7236 26.9959 27.5285C25.3264 29.3333 22.6394 29.3333 17.2654 29.3333H14.732C9.35802 29.3333 6.67102 29.3333 5.00152 27.5285C3.33203 25.7236 3.33203 22.8188 3.33203 17.0091V16.3243Z"
+//         stroke={color}
+//         strokeWidth="1.5"
+//         strokeLinecap="round"
+//         strokeLinejoin="round"
+//       />
+//       <path
+//         d="M12 20H20"
+//         stroke={color}
+//         strokeWidth="1.5"
+//         strokeLinecap="round"
+//         strokeLinejoin="round"
+//       />
+//     </svg>
+//   );
+// }
 export function BusinessDashboardThree({ color }) {
   return (
     <svg

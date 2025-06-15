@@ -4,7 +4,6 @@ import logo from "../assets/images/logo.jpg";
 import profile from "../assets/images/profile.png";
 import {
   BusinessDashboardOne,
-  BusinessDashboardTwo,
   BusinessDashboardThree,
   BusinessDashboardFour,
   BusinessDashboardFive,
@@ -46,7 +45,6 @@ const excludedPaths = [
 
 const routingList = [
   { id: "one", to: "/businessDashboard", Icon: BusinessDashboardOne, label: 'Home' },
-  { id: "two", to: "/businessDashboard/calendar", Icon: BusinessDashboardTwo, label: 'Calender' },
   { id: "three", to: "/businessDashboard/sales", Icon: BusinessDashboardThree, label: 'Sales' },
   {
     id: "four",

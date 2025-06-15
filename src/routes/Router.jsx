@@ -19,7 +19,6 @@ import Blog from "@/pages/Blog/Blog";
 import BlogDetails from "@/pages/Blog/BlogDetails";
 import AddNewProduct from "@/pages/BusinessDashboardPage/AddNewProduct";
 import AddService from "@/pages/BusinessDashboardPage/AddService";
-import BusinessDashboardCalendar from "@/pages/BusinessDashboardPage/BusinessDashboardCalendar";
 import BusinessDashboardCatalogue from "@/pages/BusinessDashboardPage/BusinessDashboardCatalogue";
 import BusinessDashboardClintList from "@/pages/BusinessDashboardPage/BusinessDashboardClintList";
 import BusinessDashboardHome from "@/pages/BusinessDashboardPage/BusinessDashboardHome";
@@ -407,10 +406,6 @@ export const router = createBrowserRouter([
       {
         path: "sales",
         element: <BusinessDashboardSales />,
-      },
-      {
-        path: "calendar",
-        element: <BusinessDashboardCalendar />,
       },
       {
         path: "clients-list",
