@@ -184,13 +184,6 @@ const ServiceMenu = () => {
           {activeTab === "all-categories" && (
             <AllCategories categoryData={categoryData} />
           )}
-          {/* {activeTab === "hairAndStyling" && (
-            <HairAndStyle categoryData={categoryData} />
-          )}
-          {activeTab === "nailCare" && <NailCare categoryData={categoryData} />}
-          {activeTab === "messaging" && (
-            <Messaging categoryData={categoryData} />
-          )} */}
         </div>
       </section>
     </div>
