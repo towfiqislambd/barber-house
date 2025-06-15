@@ -22,7 +22,6 @@ const AllCategories = ({ categoryData }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
-  console.log(selectedService);
 
   const { mutateAsync: deleteService } = useDeleteService();
 
@@ -37,12 +36,7 @@ const AllCategories = ({ categoryData }) => {
   };
 
   const confirmDelete = async () => {
-    if (!selectedService) return;
-
     try {
-      if (!selectedService) {
-        return;
-      }
       await deleteService(selectedService);
       setDeleteDialogOpen(false);
       setSelectedService(null);
@@ -133,8 +127,7 @@ const AllCategories = ({ categoryData }) => {
             </DialogTitle>
             <DialogDescription>
               <p className="font-medium text-base text-[#2C2C2C]">
-                Are you sure you want to delete{" "}
-                <strong>{selectedService?.name}</strong>?
+                Are you sure you want to delete this service?
               </p>
               <div className="flex gap-3 justify-end mt-8">
                 <button
