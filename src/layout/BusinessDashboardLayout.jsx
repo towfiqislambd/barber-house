@@ -13,7 +13,6 @@ import {
   BusinessDashboardEight,
   BusinessDashboardNine,
   BusinessDashboardTen,
-  BusinessDashboardEleven,
   BusinessNotificationSvg,
   BusinessSearchSvg,
 } from "@/components/svgContainer/SvgContainer";
@@ -86,12 +85,6 @@ const routingList = [
     label: 'Team'
   },
   { id: "ten", to: "/businessDashboard/reporting", Icon: BusinessDashboardTen, label: 'Reports' },
-  {
-    id: "eleven",
-    to: "/businessDashboard/settings",
-    Icon: BusinessDashboardEleven,
-    label: 'Settings'
-  },
 ];
 
 const BusinessDashboardLayout = () => {

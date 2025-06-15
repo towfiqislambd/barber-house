@@ -16,7 +16,7 @@ export const useOnboard = () => {
   return useMutation({
     mutationKey: ["onboard"],
     mutationFn: payload => OnBoarding(payload),
-    onSuccess: data => {
+    onSuccess: () => {
       navigate("/");
       toast.success("Registration Successful");
     },
@@ -87,7 +87,7 @@ export const useDeleteService = () => {
   return useMutation({
     mutationKey: ["delete-service"],
     mutationFn: id => DeleteService(id),
-    onSuccess: data => {
+    onSuccess: () => {
       toast.success("Service has been deleted");
     },
     onError: err => {

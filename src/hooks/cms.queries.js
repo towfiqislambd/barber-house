@@ -9,7 +9,6 @@ export const useServicesType = () => {
   });
 };
 
-
 // Catalogue
 export const useCatalogue = () => {
   return useQuery({
