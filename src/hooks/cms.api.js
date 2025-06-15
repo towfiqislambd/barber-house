@@ -27,3 +27,12 @@ export const CatalogueFilter = async () => {
   const { data } = await axiosPublic("/api/catalog-service-categories");
   return data?.data;
 };
+
+// Edit Category:
+export const EditCategory = async (id, payload) => {
+  const { data } = await axiosPublic.post(
+    `catalog/edit-service-categories/${id}`,
+    payload
+  );
+  return data?.data;
+};

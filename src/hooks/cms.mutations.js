@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { OnBoarding } from "./cms.api";
+import { EditCategory, OnBoarding } from "./cms.api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,21 @@ export const useOnboard = () => {
     },
     onError: err => {
       toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Edit Category:
+
+export const useEditCategory = () => {
+  return useMutation({
+    mutationKey: ["edit-category"],
+    mutationFn: ({ id, payload }) => EditCategory(id, payload),
+    onSuccess: () => {
+      toast.success("Category has been updated");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message || "Failed to update category");
     },
   });
 };

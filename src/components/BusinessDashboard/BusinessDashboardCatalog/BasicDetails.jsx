@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import Input from "antd/es/input/Input";
-import AddVarientModal from "../Modals/AddVarientModal";
 
 const BasicDetails = () => {
   return (
@@ -132,8 +131,6 @@ const BasicDetails = () => {
           </Select>
         </div>
       </div>
-      {/* Modal */}
-      <AddVarientModal />
     </div>
   );
 };

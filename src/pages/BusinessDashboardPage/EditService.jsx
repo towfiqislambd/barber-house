@@ -1,6 +1,4 @@
 import BasicDetailsForEditService from "@/components/BusinessDashboard/BusinessDashboardCatalog/BasicDetailsForEditService";
-import OnlineBooking from "@/components/BusinessDashboard/BusinessDashboardCatalog/OnlineBooking";
-import Settings from "@/components/BusinessDashboard/BusinessDashboardCatalog/Settings";
 import TeamMembers from "@/components/BusinessDashboard/BusinessDashboardCatalog/TeamMembers";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -58,36 +56,12 @@ const EditService = () => {
                   3
                 </p>
               </button>
-              <div className="border-t border-[#00C2CB]"></div>
-              <h3>Settings</h3>
-              <button
-                onClick={() => setActiveTab("online_booking")}
-                className={`px-3 py-2 w-full rounded-lg ${
-                  activeTab === "online_booking"
-                    ? "text-[#008A90] shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                Online booking
-              </button>
-              <button
-                onClick={() => setActiveTab("settings")}
-                className={`px-3 py-2 w-full rounded-lg ${
-                  activeTab === "settings"
-                    ? "text-[#008A90] shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                Settings
-              </button>
             </ul>
           </div>
         </div>
         <div className="flex-grow">
           {activeTab === "basic_details" && <BasicDetailsForEditService />}
           {activeTab === "team_members" && <TeamMembers />}
-          {activeTab === "online_booking" && <OnlineBooking />}
-          {activeTab === "settings" && <Settings />}
         </div>
       </section>
     </div>
