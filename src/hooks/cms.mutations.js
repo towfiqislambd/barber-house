@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { AddCategory, EditCategory, EditService, OnBoarding } from "./cms.api";
+import { AddCategory, DeleteService, EditCategory, EditService, OnBoarding } from "./cms.api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -47,13 +47,27 @@ export const useAddCategory = () => {
   });
 };
 
-// Edit Category:
+// Edit Service:
 export const useEditService = () => {
   return useMutation({
     mutationKey: ["edit-service"],
     mutationFn: ({ id, payload }) => EditService(id, payload),
     onSuccess: () => {
       toast.success("Service has been updated");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message || "Failed to update category");
+    },
+  });
+};
+
+// Delete Service:
+export const useDeleteService = (id) => {
+  return useMutation({
+    mutationKey: ["delete-service"],
+    mutationFn: () => DeleteService(id),
+    onSuccess: () => {
+      toast.success("Service has been deleted");
     },
     onError: err => {
       toast.error(err?.response?.data?.message || "Failed to update category");

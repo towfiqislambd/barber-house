@@ -54,3 +54,10 @@ export const EditService = async (id, payload) => {
   );
   return data?.data;
 };
+
+// Delete Service:
+export const DeleteService = async (id) => {
+  const { data } = await axiosPublic.delete(
+    `api/catalog-services/destroy/${id}`);
+  return data?.data;
+};

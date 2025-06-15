@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
-import PermanentlyDeleteModal from "../Modals/PermanentlyDeleteModal";
 import EditCategoryModal from "../Modals/EditCategoryModal";
 import { MdOutlineEdit } from "react-icons/md";
 import {
@@ -9,14 +8,47 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useDeleteService } from "@/hooks/cms.mutations";
 
 const AllCategories = ({ categoryData }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+  console.log(selectedService);
+
+  const { mutateAsync: deleteService } = useDeleteService();
 
   const handleEditClick = id => {
     setSelectedId(id);
     setIsEditOpen(true);
+  };
+
+  const handleDeleteClick = id => {
+    setSelectedService(id);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (!selectedService) return;
+
+    try {
+      if (!selectedService) {
+        return;
+      }
+      await deleteService(selectedService);
+      setDeleteDialogOpen(false);
+      setSelectedService(null);
+    } catch (error) {
+      console.error("Failed to delete service:", error);
+    }
   };
 
   return (
@@ -43,11 +75,7 @@ const AllCategories = ({ categoryData }) => {
                 data?.catalog_services?.map((infoData, idx) => (
                   <div
                     key={idx}
-                    className={`${
-                      data?.catalog_services_count > 0
-                        ? "border-borderColorLight"
-                        : "border-[#BDBDBD]"
-                    } bg-white rounded-xl border-l-[5px] py-5 3xl:py-8 3xl:px-5 px-3 shadow-[0px_0px_4px_0px_rgba(4,0,116,0.10)] flex justify-between items-center`}
+                    className="bg-white rounded-xl border-l-[5px] py-5 3xl:py-8 3xl:px-5 px-3 shadow-[0px_0px_4px_0px_rgba(4,0,116,0.10)] flex justify-between items-center"
                   >
                     <div>
                       <h4 className="text-lg font-semibold text-[#1E1E1E] mb-2">
@@ -57,7 +85,6 @@ const AllCategories = ({ categoryData }) => {
                     </div>
                     <div className="flex gap-3 items-center">
                       <p>SAR :{infoData.price}</p>
-                      {/* your existing popover here */}
                       <Popover>
                         <PopoverTrigger asChild>
                           <button type="button">
@@ -72,7 +99,12 @@ const AllCategories = ({ categoryData }) => {
                             >
                               Edit service
                             </Link>
-                            <PermanentlyDeleteModal />
+                            <button
+                              onClick={() => handleDeleteClick(infoData?.id)}
+                              className="font-medium text-[#D21837]"
+                            >
+                              Permanently delete
+                            </button>
                           </div>
                         </PopoverContent>
                       </Popover>
@@ -85,12 +117,43 @@ const AllCategories = ({ categoryData }) => {
         ))}
       </div>
 
-      {/* Global Edit Category Modal */}
+      {/* Edit Category Modal */}
       <EditCategoryModal
         id={selectedId}
         isOpen={isEditOpen}
         onClose={() => setIsEditOpen(false)}
       />
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="mb-3 text-lg">
+              Permanently delete service
+            </DialogTitle>
+            <DialogDescription>
+              <p className="font-medium text-base text-[#2C2C2C]">
+                Are you sure you want to delete{" "}
+                <strong>{selectedService?.name}</strong>?
+              </p>
+              <div className="flex gap-3 justify-end mt-8">
+                <button
+                  onClick={() => setDeleteDialogOpen(false)}
+                  className="px-4 py-[5px] rounded-lg border border-[#222] font-medium text-[#2C2C2C]"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmDelete}
+                  className="px-4 py-2 bg-[#D21837] text-white rounded-lg border border-[#D21837] font-medium"
+                >
+                  Delete
+                </button>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
