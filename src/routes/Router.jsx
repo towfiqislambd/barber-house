@@ -475,7 +475,7 @@ export const router = createBrowserRouter([
         element: <BusinessDashboardStepFormContainer />,
       },
       {
-        path: "editService",
+        path: "editService/:id",
         element: <EditService />,
       },
       {

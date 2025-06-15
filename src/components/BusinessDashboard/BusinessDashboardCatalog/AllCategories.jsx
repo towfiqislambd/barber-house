@@ -59,8 +59,8 @@ const AllCategories = ({ categoryData }) => {
                       <p>SAR :{infoData.price}</p>
                       {/* your existing popover here */}
                       <Popover>
-                        <PopoverTrigger>
-                          <button>
+                        <PopoverTrigger asChild>
+                          <button type="button">
                             <PiDotsThreeOutlineVerticalFill className="text-xl" />
                           </button>
                         </PopoverTrigger>
@@ -68,7 +68,7 @@ const AllCategories = ({ categoryData }) => {
                           <div className="space-y-6 flex flex-col text-left items-start">
                             <Link
                               className="text-[#545454] font-medium hover:text-primary"
-                              to="/businessDashboard/editService"
+                              to={`/businessDashboard/editService/${infoData?.id}`}
                             >
                               Edit service
                             </Link>
