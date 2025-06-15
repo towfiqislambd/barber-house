@@ -55,6 +55,15 @@ export const EditService = async (id, payload) => {
   return data?.data;
 };
 
+// Add Service:
+export const AddService = async payload => {
+  const { data } = await axiosPublic.post(
+    `api/catalog-services/store`,
+    payload
+  );
+  return data?.data;
+};
+
 // Delete Service:
 export const DeleteService = async id => {
   const { data } = await axiosPublic.delete(

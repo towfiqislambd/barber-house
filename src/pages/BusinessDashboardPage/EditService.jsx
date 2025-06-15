@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const EditService = () => {
   const [activeTab, setActiveTab] = useState("basic_details");
+  
   return (
     <div className="4xl:px-40 px-5 lg:px-5 xl:py-10 py-5">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-5 sm:gap-0">

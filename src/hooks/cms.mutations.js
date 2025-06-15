@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import {
   AddCategory,
+  AddService,
   DeleteService,
   EditCategory,
   EditService,
@@ -60,6 +61,20 @@ export const useEditService = () => {
     mutationFn: ({ id, payload }) => EditService(id, payload),
     onSuccess: () => {
       toast.success("Service has been updated");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message || "Failed to update category");
+    },
+  });
+};
+
+// Add Service:
+export const useAddService = () => {
+  return useMutation({
+    mutationKey: ["add-service"],
+    mutationFn: ({ payload }) => AddService(payload),
+    onSuccess: () => {
+      toast.success("Service has been added");
     },
     onError: err => {
       toast.error(err?.response?.data?.message || "Failed to update category");
