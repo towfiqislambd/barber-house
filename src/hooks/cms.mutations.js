@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { EditCategory, OnBoarding } from "./cms.api";
+import { AddCategory, EditCategory, OnBoarding } from "./cms.api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +20,6 @@ export const useOnboard = () => {
 };
 
 // Edit Category:
-
 export const useEditCategory = () => {
   return useMutation({
     mutationKey: ["edit-category"],
@@ -30,6 +29,20 @@ export const useEditCategory = () => {
     },
     onError: err => {
       toast.error(err?.response?.data?.message || "Failed to update category");
+    },
+  });
+};
+
+// Add Category:
+export const useAddCategory = () => {
+  return useMutation({
+    mutationKey: ["add-category"],
+    mutationFn: payload => AddCategory(payload),
+    onSuccess: () => {
+      toast.success("Category has been created");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message || "Failed to add category");
     },
   });
 };

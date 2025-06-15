@@ -28,51 +28,6 @@ import {
 } from "@/components/ui/select";
 import { Link } from "react-router-dom";
 import { useCatalogue } from "@/hooks/cms.queries";
-// const categoryData = [
-//   {
-//     id: 1,
-//     category: "Hair & styling",
-//     info: [
-//       {
-//         service: "Haircut",
-//         duration: "30 min",
-//         price: "SAR 20.00",
-//       },
-//       {
-//         service: "Hair color",
-//         duration: "30 min",
-//         price: "SAR 20.00",
-//       },
-//       {
-//         service: "Blow dry",
-//         duration: "30 min",
-//         price: "SAR 20.00",
-//       },
-//     ],
-//   },
-//   {
-//     id: 2,
-//     category: "Nails",
-//     info: [
-//       {
-//         service: "Manicure",
-//         duration: "30 min",
-//         price: "SAR 20.00",
-//       },
-//     ],
-//   },
-//   {
-//     id: 3,
-//     category: "Messaging",
-//     info: [
-//       {
-//         service: "Body message",
-//         duration: "30 min",
-//         price: "SAR 20.00",
-//       },
-//     ],
-//   },
-// ];
 
 const ServiceMenu = () => {
   const [activeTab, setActiveTab] = useState("all-categories");

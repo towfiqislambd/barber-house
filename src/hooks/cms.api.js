@@ -31,7 +31,16 @@ export const CatalogueFilter = async () => {
 // Edit Category:
 export const EditCategory = async (id, payload) => {
   const { data } = await axiosPublic.post(
-    `catalog/edit-service-categories/${id}`,
+    `api/catalog/edit-service-categories/${id}`,
+    payload
+  );
+  return data?.data;
+};
+
+// Add Category:
+export const AddCategory = async payload => {
+  const { data } = await axiosPublic.post(
+    `api/catalog/add-service-categories`,
     payload
   );
   return data?.data;
