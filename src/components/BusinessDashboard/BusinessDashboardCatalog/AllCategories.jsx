@@ -61,7 +61,7 @@ const AllCategories = ({ categoryData, isLoading }) => {
                   </button>
                 </div>
                 <div className="space-y-4">
-                  {data?.catalog_services_count === 0 ? (
+                  {data?.filtered_services_count === 0 ? (
                     <div className="bg-white rounded-xl border-l-[5px] mb-5 border-[#BDBDBD] py-5 3xl:py-8 3xl:px-5 px-3 shadow-[0px_0px_4px_0px_rgba(4,0,116,0.10)]">
                       <p className="text-[#757575] text-lg font-medium">
                         No service

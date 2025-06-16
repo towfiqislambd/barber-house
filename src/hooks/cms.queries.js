@@ -10,10 +10,10 @@ export const useServicesType = () => {
 };
 
 // Catalogue
-export const useCatalogue = category_id => {
+export const useCatalogue = (category_id, search, selectedTeamMember) => {
   return useQuery({
-    queryKey: ["get-catalogue", category_id],
-    queryFn: () => Catalogue(category_id),
+    queryKey: ["get-catalogue", category_id, search, selectedTeamMember],
+    queryFn: () => Catalogue(category_id, search, selectedTeamMember),
   });
 };
 

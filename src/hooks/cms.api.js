@@ -76,10 +76,12 @@ export const addTeamMembers = async (id, payload) => {
 };
 
 // Catalogue:
-export const Catalogue = async category_id => {
+export const Catalogue = async (category_id, search, selectedTeamMember) => {
   let url = "/api/catalog-service-categories?";
 
   if (category_id) url += `catalog_service_category_id=${category_id}&`;
+  if (search) url += `query=${search}&`;
+  if (selectedTeamMember) url += `team_member=${selectedTeamMember}&`;
 
   url = url.endsWith("&") ? url.slice(0, -1) : url;
   url = url.endsWith("?") ? url.slice(0, -1) : url;

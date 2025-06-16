@@ -1,18 +1,7 @@
 import {
   AddNowSvg,
-  AppointmentCsvSvg,
-  AppointmentExcelSvg,
-  AppointmentPdfSvg,
-  DropdownSvg,
-  ExportSvg,
   ServicesSearch,
 } from "@/components/svgContainer/SvgContainer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import CatalogFilterModal from "../Modals/CatalogFilterModal";
 import { useState } from "react";
 import AllCategories from "./AllCategories";
 import AddCategoryModal from "../Modals/AddCategoryModal";
@@ -24,11 +13,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Link } from "react-router-dom";
-import { useCatalogue } from "@/hooks/cms.queries";
+import { useAllTeamMembers, useCatalogue } from "@/hooks/cms.queries";
 
 const ServiceMenu = ({ allCategoryData }) => {
   const [activeTab, setActiveTab] = useState(null);
-  const { data: categoryData, isLoading } = useCatalogue(activeTab);
+  const [search, setSearch] = useState(null);
+  const [selectedTeamMember, setSelectedTeamMember] = useState(null);
+
+  const { data: allTeamMembers } = useAllTeamMembers();
+  const { data: categoryData, isLoading } = useCatalogue(
+    activeTab,
+    search,
+    selectedTeamMember
+  );
+
+  const handleReset = () => {
+    setActiveTab(null);
+    setSearch(null);
+    setSelectedTeamMember(null);
+  };
 
   return (
     <div>
@@ -47,7 +50,8 @@ const ServiceMenu = ({ allCategoryData }) => {
             <input
               type="text"
               className="rounded-lg bg-white w-full py-2 lg:py-3 ps-10 pe-5 shadow outline-none border border-gray-100"
-              placeholder="Search by service name"
+              placeholder="Search by service name, category name"
+              onChange={e => setSearch(e.target.value)}
             />
             <button className="absolute left-4 top-[15px] lg:top-[18px]">
               <ServicesSearch />
@@ -55,7 +59,37 @@ const ServiceMenu = ({ allCategoryData }) => {
           </div>
 
           {/* Filter */}
-          <CatalogFilterModal />
+          <Select
+            value={selectedTeamMember}
+            onValueChange={setSelectedTeamMember}
+          >
+            <SelectTrigger className="w-[220px] text-base border !py-5 border-[#B3BAC5]">
+              <SelectValue>
+                {allTeamMembers?.find(
+                  member => member.id.toString() === selectedTeamMember
+                )?.first_name || "Filter by team member"}
+              </SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              {allTeamMembers?.map(item => (
+                <SelectItem
+                  key={item.id}
+                  value={item.id.toString()}
+                  className="!text-black"
+                >
+                  {item.first_name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {/* reset */}
+          <button
+            onClick={handleReset}
+            className="px-3 lg:px-4 py-[5px] lg:py-[10px] bg-primary flex gap-2 items-center outline-none rounded-lg text-white"
+          >
+            Reset
+          </button>
         </div>
         <Link
           to="/businessDashboard/addService"
@@ -152,9 +186,9 @@ const ServiceMenu = ({ allCategoryData }) => {
             <ul className="space-y-5 text-lg font-medium">
               {/* All Categories Button */}
               <button
-                onClick={() => setActiveTab("all")}
+                onClick={() => setActiveTab(null)}
                 className={`px-3 py-2 w-full rounded-lg text-[#2C2C2C] flex justify-between items-center ${
-                  activeTab === "all"
+                  !activeTab
                     ? "bg-primary text-white shadow border"
                     : "border-transparent"
                 }`}
