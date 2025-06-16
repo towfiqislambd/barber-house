@@ -47,6 +47,16 @@ const BasicDetails = () => {
         business_profile_id,
       },
     });
+    console.log({
+      duration,
+      price,
+      price_type,
+      description,
+      name,
+      service_id,
+      catalog_service_category_id,
+      business_profile_id,
+    });
   };
 
   return (
@@ -82,14 +92,13 @@ const BasicDetails = () => {
       </div>
 
       <div className="flex flex-col lg:flex-row gap-5 mb-5">
-        {/* Service Type (not connected for now, just UI) */}
         {/* Service Type */}
         <div className="lg:flex-1 w-full">
           <label className="text-[#2C2C2C] mb-2 text-base md:text-lg block font-medium">
             Service type
           </label>
           <Controller
-            name="catalog_service_category_id"
+            name="service_id"
             control={control}
             rules={{ required: "Service type is required" }}
             render={({ field }) => (
@@ -112,10 +121,8 @@ const BasicDetails = () => {
               </Select>
             )}
           />
-          {errors.catalog_service_category_id && (
-            <p className="text-red-500 text-sm">
-              {errors.catalog_service_category_id.message}
-            </p>
+          {errors.service_id && (
+            <p className="text-red-500 text-sm">{errors.service_id.message}</p>
           )}
           <p className="mt-2 text-[15px] text-[#757575] font-medium">
             Helping clients to find their services
@@ -128,7 +135,7 @@ const BasicDetails = () => {
             Menu category
           </label>
           <Controller
-            name="service_id"
+            name="catalog_service_category_id"
             control={control}
             rules={{ required: "Menu category is required" }}
             render={({ field }) => (
@@ -146,8 +153,10 @@ const BasicDetails = () => {
               </Select>
             )}
           />
-          {errors.service_id && (
-            <p className="text-red-500 text-sm">{errors.service_id.message}</p>
+          {errors.catalog_service_category_id && (
+            <p className="text-red-500 text-sm">
+              {errors.catalog_service_category_id.message}
+            </p>
           )}
           <p className="mt-2 text-[15px] text-[#757575] font-medium">
             The category displayed to you, and to clients online

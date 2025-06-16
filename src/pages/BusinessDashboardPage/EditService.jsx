@@ -10,16 +10,6 @@ const EditService = () => {
     <div className="4xl:px-40 px-5 lg:px-5 xl:py-10 py-5">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-5 sm:gap-0">
         <h3 className="font-outfit text-3xl font-semibold">Edit service</h3>
-        <div className="flex gap-3 items-center">
-          <Link to="/businessDashboard/catalogue">
-            <button className="text-[#545454] border font-medium border-[#00C2CB] rounded-lg sm:px-8 px-4 sm:py-2 py-1">
-              Close
-            </button>
-          </Link>
-          <button className="text-[#fff] bg-[#008A90] font-medium rounded-lg sm:px-8 px-4 sm:py-2 py-1">
-            Save
-          </button>
-        </div>
       </div>
 
       {/* Lower part */}
