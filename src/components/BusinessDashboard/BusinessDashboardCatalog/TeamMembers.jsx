@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useAddTeamMembers } from "@/hooks/cms.mutations";
 
-const TeamMembers = ({ allTeamMembers }) => {
+const TeamMembers = ({ allTeamMembers, serviceId }) => {
   const { mutateAsync: addTeamMembers } = useAddTeamMembers();
   const [selectedMembers, setSelectedMembers] = useState([]);
 
@@ -24,7 +24,10 @@ const TeamMembers = ({ allTeamMembers }) => {
 
   const handleSubmit = () => {
     if (selectedMembers.length > 0) {
-      // addTeamMembers()
+      addTeamMembers({
+        id: serviceId,
+        payload: { team_ids: selectedMembers },
+      });
     }
   };
 

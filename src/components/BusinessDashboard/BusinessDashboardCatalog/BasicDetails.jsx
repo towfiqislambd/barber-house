@@ -7,15 +7,12 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useAddService } from "@/hooks/cms.mutations";
-import {
-  useCatalogue,
-  useServicesType,
-} from "@/hooks/cms.queries";
+import { useCatalogue, useServicesType } from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
 import Input from "antd/es/input/Input";
 import { useForm, Controller } from "react-hook-form";
 
-const BasicDetails = () => {
+const BasicDetails = ({ onNext }) => {
   const { data: categoryData } = useCatalogue();
   const { user } = useAuth();
   const business_profile_id = user?.business_profile?.id;
@@ -39,18 +36,24 @@ const BasicDetails = () => {
       catalog_service_category_id,
     } = data;
 
-    await addService({
-      payload: {
-        duration,
-        price,
-        price_type,
-        description,
-        name,
-        service_id,
-        catalog_service_category_id,
-        business_profile_id,
-      },
-    });
+    try {
+      const response = await addService({
+        payload: {
+          duration,
+          price,
+          price_type,
+          description,
+          name,
+          service_id,
+          catalog_service_category_id,
+          business_profile_id,
+        },
+      });
+
+      onNext(response?.id);
+    } catch (error) {
+      console.error("Error adding service:", error);
+    }
   };
 
   return (
@@ -276,7 +279,7 @@ const BasicDetails = () => {
         type="submit"
         className="mt-5 bg-black text-white px-6 py-2 rounded-lg"
       >
-        Submit
+        Next
       </button>
     </form>
   );

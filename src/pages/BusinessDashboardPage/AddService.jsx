@@ -5,7 +5,13 @@ import { useState } from "react";
 
 const AddService = () => {
   const [activeTab, setActiveTab] = useState("basic_details");
+  const [serviceId, setServiceId] = useState(null);
   const { data: allTeamMembers = [] } = useAllTeamMembers();
+
+  const handleNext = createdServiceId => {
+    setServiceId(createdServiceId);
+    setActiveTab("team_members");
+  };
 
   return (
     <div className="4xl:px-40 px-5 lg:px-5 xl:py-10 py-5">
@@ -52,9 +58,14 @@ const AddService = () => {
           </div>
         </div>
         <div className="flex-grow">
-          {activeTab === "basic_details" && <BasicDetails />}
+          {activeTab === "basic_details" && (
+            <BasicDetails onNext={handleNext} />
+          )}
           {activeTab === "team_members" && (
-            <TeamMembers allTeamMembers={allTeamMembers} />
+            <TeamMembers
+              allTeamMembers={allTeamMembers}
+              serviceId={serviceId}
+            />
           )}
         </div>
       </section>

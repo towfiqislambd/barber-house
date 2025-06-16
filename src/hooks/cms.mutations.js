@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import {
   AddCategory,
   AddService,
+  addTeamMembers,
   DeleteService,
   EditCategory,
   EditService,
@@ -9,7 +10,6 @@ import {
 } from "./cms.api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import AddTeamMember from "@/pages/BusinessDashboardPage/AddTeamMember";
 
 // Onboard:
 export const useOnboard = () => {
@@ -75,7 +75,6 @@ export const useAddService = () => {
     mutationKey: ["add-service"],
     mutationFn: ({ payload }) => AddService(payload),
     onSuccess: data => {
-      console.log(data);
       toast.success("Service has been added");
     },
     onError: err => {
@@ -100,14 +99,16 @@ export const useDeleteService = () => {
 
 // Add Team Members
 export const useAddTeamMembers = () => {
+  const navigate = useNavigate();
   return useMutation({
     mutationKey: ["add-team-members"],
-    mutationFn: ({ id, payload }) => AddTeamMember(id, payload),
+    mutationFn: ({ id, payload }) => addTeamMembers(id, payload),
     onSuccess: () => {
       toast.success("Team Member has been added");
+      navigate("/businessDashboard/catalogue");
     },
     onError: err => {
-      toast.error(err?.response?.data?.message || "Failed to delete service");
+      toast.error(err?.response?.data?.message);
     },
   });
 };
