@@ -77,3 +77,12 @@ export const AllTeamMembers = async () => {
   const { data } = await axiosPublic("/api/teams");
   return data?.data;
 };
+
+// Add Team Members:
+export const addTeamMembers = async (id, payload) => {
+  const { data } = await axiosPublic.put(
+    `api/catalog-services/${id}/update-team-members`,
+    payload
+  );
+  return data?.data;
+};

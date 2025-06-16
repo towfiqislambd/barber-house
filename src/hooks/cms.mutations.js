@@ -9,6 +9,7 @@ import {
 } from "./cms.api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import AddTeamMember from "@/pages/BusinessDashboardPage/AddTeamMember";
 
 // Onboard:
 export const useOnboard = () => {
@@ -73,7 +74,8 @@ export const useAddService = () => {
   return useMutation({
     mutationKey: ["add-service"],
     mutationFn: ({ payload }) => AddService(payload),
-    onSuccess: () => {
+    onSuccess: data => {
+      console.log(data);
       toast.success("Service has been added");
     },
     onError: err => {
@@ -89,6 +91,20 @@ export const useDeleteService = () => {
     mutationFn: id => DeleteService(id),
     onSuccess: () => {
       toast.success("Service has been deleted");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message || "Failed to delete service");
+    },
+  });
+};
+
+// Add Team Members
+export const useAddTeamMembers = () => {
+  return useMutation({
+    mutationKey: ["add-team-members"],
+    mutationFn: ({ id, payload }) => AddTeamMember(id, payload),
+    onSuccess: () => {
+      toast.success("Team Member has been added");
     },
     onError: err => {
       toast.error(err?.response?.data?.message || "Failed to delete service");

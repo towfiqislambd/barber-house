@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useAddTeamMembers } from "@/hooks/cms.mutations";
 
 const TeamMembers = ({ allTeamMembers }) => {
+  const { mutateAsync: addTeamMembers } = useAddTeamMembers();
   const [selectedMembers, setSelectedMembers] = useState([]);
 
   const allSelected = selectedMembers.length === allTeamMembers.length;
@@ -18,6 +20,12 @@ const TeamMembers = ({ allTeamMembers }) => {
     setSelectedMembers(prev =>
       prev.includes(id) ? prev.filter(mid => mid !== id) : [...prev, id]
     );
+  };
+
+  const handleSubmit = () => {
+    if (selectedMembers.length > 0) {
+      // addTeamMembers()
+    }
   };
 
   return (
@@ -83,6 +91,13 @@ const TeamMembers = ({ allTeamMembers }) => {
           </div>
         ))}
       </div>
+      <button
+        onClick={handleSubmit}
+        type="submit"
+        className="mt-5 bg-black text-white px-6 py-2 rounded-lg"
+      >
+        Submit
+      </button>
     </div>
   );
 };
