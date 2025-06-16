@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useEditService } from "@/hooks/cms.mutations";
-import { useCatalogue } from "@/hooks/cms.queries";
+import { useCatalogue, useServicesType } from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
 import Input from "antd/es/input/Input";
 import { useForm, Controller } from "react-hook-form";
@@ -19,6 +19,7 @@ const BasicDetailsForEditService = () => {
   const { user } = useAuth();
   const business_profile_id = user?.business_profile?.id;
   const { mutateAsync: editService } = useEditService();
+  const { data: servicesTypes } = useServicesType();
 
   const {
     handleSubmit,
@@ -37,17 +38,6 @@ const BasicDetailsForEditService = () => {
       service_id,
       catalog_service_category_id,
     } = data;
-
-    console.log({
-      duration,
-      price,
-      price_type,
-      description,
-      name,
-      service_id,
-      catalog_service_category_id,
-      business_profile_id,
-    });
 
     await editService({
       id,
@@ -107,22 +97,29 @@ const BasicDetailsForEditService = () => {
             control={control}
             rules={{ required: "Service type is required" }}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                value={field.value?.toString()} // Ensure it's a string
+                defaultValue={field.value?.toString()}
+              >
                 <SelectTrigger className="w-full text-base border sm:!py-6 !py-5 bg-white">
                   <SelectValue placeholder="Select a service type" />
                 </SelectTrigger>
-                <SelectContent>
-                  {categoryData?.flatMap(item =>
-                    item.catalog_services?.map(service => (
-                      <SelectItem key={service.id} value={service.id}>
-                        {service.name}
-                      </SelectItem>
-                    ))
-                  )}
+                <SelectContent className="!text-black">
+                  {servicesTypes?.map(item => (
+                    <SelectItem
+                      key={item.id}
+                      value={item.id.toString()} // Convert to string if necessary
+                      className="!text-black"
+                    >
+                      {item.service_name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             )}
           />
+
           {errors.service_id && (
             <p className="text-red-500 text-sm">{errors.service_id.message}</p>
           )}
@@ -141,13 +138,19 @@ const BasicDetailsForEditService = () => {
             control={control}
             rules={{ required: "Menu category is required" }}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={field.onChange}
+                value={field.value?.toString()} // Ensure it's a string
+              >
                 <SelectTrigger className="w-full text-base border sm:!py-6 !py-5 bg-white">
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
                 <SelectContent>
                   {categoryData?.map(item => (
-                    <SelectItem key={item.id} value={item.id}>
+                    <SelectItem
+                      key={item.id}
+                      value={item.id.toString()} // Convert to string if needed
+                    >
                       {item.name}
                     </SelectItem>
                   ))}
@@ -155,6 +158,7 @@ const BasicDetailsForEditService = () => {
               </Select>
             )}
           />
+
           {errors.catalog_service_category_id && (
             <p className="text-red-500 text-sm">
               {errors.catalog_service_category_id.message}
@@ -172,11 +176,12 @@ const BasicDetailsForEditService = () => {
           htmlFor="description"
           className="text-[#2C2C2C] mb-2 text-base md:text-lg block font-medium"
         >
-          Description <span className="text-[#757575]">(optional)</span>
+          Description <span className="text-[#757575]"></span>
         </label>
         <Controller
           name="description"
           control={control}
+          rules={{ required: "Description is required" }}
           render={({ field }) => (
             <Textarea
               {...field}
@@ -187,6 +192,9 @@ const BasicDetailsForEditService = () => {
             />
           )}
         />
+        {errors.description && (
+          <p className="text-red-500 text-sm">{errors.description.message}</p>
+        )}
       </div>
 
       <h3 className="font-outfit text-2xl text-[#2C2C2C] font-medium mt-10 mb-5">
