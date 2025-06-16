@@ -15,9 +15,6 @@ import {
 import CatalogFilterModal from "../Modals/CatalogFilterModal";
 import { useState } from "react";
 import AllCategories from "./AllCategories";
-import HairAndStyle from "./HairAndStyle";
-import NailCare from "./NailCare";
-import Messaging from "./Messaging";
 import AddCategoryModal from "../Modals/AddCategoryModal";
 import {
   Select,
@@ -29,12 +26,9 @@ import {
 import { Link } from "react-router-dom";
 import { useCatalogue } from "@/hooks/cms.queries";
 
-const ServiceMenu = () => {
+const ServiceMenu = ({ allCategoryData }) => {
   const [activeTab, setActiveTab] = useState(null);
   const { data: categoryData, isLoading } = useCatalogue(activeTab);
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
 
   return (
     <div>
@@ -53,7 +47,7 @@ const ServiceMenu = () => {
             <input
               type="text"
               className="rounded-lg bg-white w-full py-2 lg:py-3 ps-10 pe-5 shadow outline-none border border-gray-100"
-              placeholder="Search by reference or client"
+              placeholder="Search by service name"
             />
             <button className="absolute left-4 top-[15px] lg:top-[18px]">
               <ServicesSearch />
@@ -156,36 +150,61 @@ const ServiceMenu = () => {
           </div> */}
           <div className="hidden 2xl:block bg-white rounded-lg border-gray-300 p-4 3xl:p-6 h-full w-[300px] border">
             <ul className="space-y-5 text-lg font-medium">
-              {categoryData?.map(item => (
+              {/* All Categories Button */}
+              <button
+                onClick={() => setActiveTab("all")}
+                className={`px-3 py-2 w-full rounded-lg text-[#2C2C2C] flex justify-between items-center ${
+                  activeTab === "all"
+                    ? "bg-primary text-white shadow border"
+                    : "border-transparent"
+                }`}
+              >
+                <p>All Categories</p>
+                <p
+                  className={`w-6 h-6 text-sm rounded-full font-bold grid place-items-center ${
+                    activeTab === "all"
+                      ? "text-black bg-white"
+                      : "text-[#2C2C2C] bg-gray-200 shadow-sm"
+                  }`}
+                >
+                  {allCategoryData?.reduce(
+                    (total, cat) => total + (cat?.filtered_services_count || 0),
+                    0
+                  )}
+                </p>
+              </button>
+
+              {/* Other Categories */}
+              {allCategoryData?.map(item => (
                 <button
                   key={item?.id}
                   onClick={() => setActiveTab(item?.id)}
-                  className={`px-3 py-2 w-full rounded-lg text-[#2C2C2C] border-transparent"
-                     } flex justify-between items-center
-                     ${
-                       activeTab
-                         ? " shadow border"
-                         : "text-[#2C2C2C] border-transparent"
-                     } flex justify-between items-center`}
+                  className={`px-3 py-2 w-full rounded-lg text-[#2C2C2C] flex justify-between items-center ${
+                    activeTab === item?.id
+                      ? "bg-primary text-white shadow border"
+                      : "border-transparent"
+                  }`}
                 >
                   <p>{item?.name}</p>
                   <p
                     className={`w-6 h-6 text-sm rounded-full font-bold grid place-items-center ${
-                      activeTab === "all-categories"
-                        ? "text-white bg-primary"
+                      activeTab === item?.id
+                        ? "text-black bg-white"
                         : "text-[#2C2C2C] bg-gray-200 shadow-sm"
                     }`}
                   >
-                    {item?.catalog_services_count}
+                    {item?.filtered_services_count}
                   </p>
                 </button>
               ))}
+
+              {/* Add Category */}
               <AddCategoryModal />
             </ul>
           </div>
         </div>
         <div className="flex-grow">
-          <AllCategories categoryData={categoryData} />
+          <AllCategories categoryData={categoryData} isLoading={isLoading} />
         </div>
       </section>
     </div>

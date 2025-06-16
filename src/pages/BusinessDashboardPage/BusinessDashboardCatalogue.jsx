@@ -1,9 +1,11 @@
 import ServiceMenu from "@/components/BusinessDashboard/BusinessDashboardCatalog/ServiceMenu";
 import { useState } from "react";
 import Product from "@/components/BusinessDashboard/BusinessDashboardCatalog/Product";
+import { useCatalogue } from "@/hooks/cms.queries";
 
 const BusinessDashboardCatalogue = () => {
   const [activeTab, setActiveTab] = useState("service_menu");
+  const { data: allCategoryData } = useCatalogue();
   return (
     <section className="xl:grid xl:grid-cols-12 gap-10 3xl:gap-20">
       <div className="xl:col-span-4 2xl:col-span-3 3xl:col-span-2 4xl:col-span-2 mb-5 xl:mb-0 bg-white rounded-xl 4xl:p-6 p-3 self-start">
@@ -33,7 +35,9 @@ const BusinessDashboardCatalogue = () => {
         </ul>
       </div>
       <div className="xl:col-span-8 2xl:col-span-9 3xl:col-span-10 px-4 pb-5">
-        {activeTab === "service_menu" && <ServiceMenu />}
+        {activeTab === "service_menu" && (
+          <ServiceMenu allCategoryData={allCategoryData} />
+        )}
         {activeTab === "products" && <Product />}
       </div>
     </section>
