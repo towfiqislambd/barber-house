@@ -113,6 +113,7 @@ import ProfessionalAndTimePage from "@/pages/ProfessionalAndTimePage/Professiona
 import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
 import Inventory from "@/pages/BusinessDashboardPage/Inventory";
 import BS from "@/pages/Auth/BS/BS";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -396,7 +397,11 @@ export const router = createBrowserRouter([
 
   {
     path: "/businessDashboard",
-    element: <BusinessDashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <BusinessDashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
