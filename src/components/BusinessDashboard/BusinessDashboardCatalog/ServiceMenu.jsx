@@ -30,8 +30,11 @@ import { Link } from "react-router-dom";
 import { useCatalogue } from "@/hooks/cms.queries";
 
 const ServiceMenu = () => {
-  const [activeTab, setActiveTab] = useState("all-categories");
-  const { data: categoryData } = useCatalogue();
+  const [activeTab, setActiveTab] = useState(null);
+  const { data: categoryData, isLoading } = useCatalogue(activeTab);
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div>
@@ -156,10 +159,11 @@ const ServiceMenu = () => {
               {categoryData?.map(item => (
                 <button
                   key={item?.id}
-                  onClick={() => setActiveTab("all-categories")}
-                  className={` px-3 py-2 w-full rounded-lg
+                  onClick={() => setActiveTab(item?.id)}
+                  className={`px-3 py-2 w-full rounded-lg text-[#2C2C2C] border-transparent"
+                     } flex justify-between items-center
                      ${
-                       activeTab === "all-categories"
+                       activeTab
                          ? " shadow border"
                          : "text-[#2C2C2C] border-transparent"
                      } flex justify-between items-center`}
@@ -181,9 +185,7 @@ const ServiceMenu = () => {
           </div>
         </div>
         <div className="flex-grow">
-          {activeTab === "all-categories" && (
-            <AllCategories categoryData={categoryData} />
-          )}
+          <AllCategories categoryData={categoryData} />
         </div>
       </section>
     </div>

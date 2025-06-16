@@ -16,18 +16,6 @@ export const OnBoarding = async payload => {
   return data?.data;
 };
 
-// Catalogue:
-export const Catalogue = async () => {
-  const { data } = await axiosPublic("/api/catalog-service-categories");
-  return data?.data;
-};
-
-// Catalogue Filter:
-export const CatalogueFilter = async () => {
-  const { data } = await axiosPublic("/api/catalog-service-categories");
-  return data?.data;
-};
-
 // Edit Category:
 export const EditCategory = async (id, payload) => {
   const { data } = await axiosPublic.post(
@@ -84,5 +72,18 @@ export const addTeamMembers = async (id, payload) => {
     `api/catalog-services/${id}/update-team-members`,
     payload
   );
+  return data?.data;
+};
+
+// Catalogue:
+export const Catalogue = async category_id => {
+  let url = "/api/catalog-service-categories?";
+
+  if (category_id) url += `catalog_service_category_id=${category_id}&`;
+
+  url = url.endsWith("&") ? url.slice(0, -1) : url;
+  url = url.endsWith("?") ? url.slice(0, -1) : url;
+
+  const { data } = await axiosPublic(url);
   return data?.data;
 };
