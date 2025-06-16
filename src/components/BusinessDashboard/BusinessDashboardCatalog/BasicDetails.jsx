@@ -6,8 +6,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useAddService, useEditService } from "@/hooks/cms.mutations";
-import { useCatalogue, useServicesType } from "@/hooks/cms.queries";
+import { useAddService } from "@/hooks/cms.mutations";
+import {
+  useCatalogue,
+  useServicesType,
+} from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
 import Input from "antd/es/input/Input";
 import { useForm, Controller } from "react-hook-form";

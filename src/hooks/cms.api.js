@@ -71,3 +71,9 @@ export const DeleteService = async id => {
   );
   return data?.data;
 };
+
+// All team members:
+export const AllTeamMembers = async () => {
+  const { data } = await axiosPublic("/api/teams");
+  return data?.data;
+};

@@ -1,9 +1,12 @@
 import BasicDetails from "@/components/BusinessDashboard/BusinessDashboardCatalog/BasicDetails";
 import TeamMembers from "@/components/BusinessDashboard/BusinessDashboardCatalog/TeamMembers";
+import { useAllTeamMembers } from "@/hooks/cms.queries";
 import { useState } from "react";
 
 const AddService = () => {
   const [activeTab, setActiveTab] = useState("basic_details");
+  const { data: allTeamMembers = [] } = useAllTeamMembers();
+
   return (
     <div className="4xl:px-40 px-5 lg:px-5 xl:py-10 py-5">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-5 sm:gap-0">
@@ -42,7 +45,7 @@ const AddService = () => {
                       : "text-[#2C2C2C] bg-gray-200 shadow-sm"
                   }`}
                 >
-                  3
+                  {allTeamMembers?.length}
                 </p>
               </button>
             </ul>
@@ -50,7 +53,9 @@ const AddService = () => {
         </div>
         <div className="flex-grow">
           {activeTab === "basic_details" && <BasicDetails />}
-          {activeTab === "team_members" && <TeamMembers />}
+          {activeTab === "team_members" && (
+            <TeamMembers allTeamMembers={allTeamMembers} />
+          )}
         </div>
       </section>
     </div>
