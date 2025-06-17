@@ -13,13 +13,12 @@ import UserDashboardLayout from "@/layout/UserDashboardLayout";
 import Login from "@/pages/Auth/Login/Login";
 import Registration from "@/pages/Auth/Registration/Registration";
 import SelectAccount from "@/pages/Auth/SelectAccount/SelectAccount";
-import SignOrLogin from "@/pages/Auth/SignOrLogin/SignOrLogin";
+import SignOrLogin from "@/pages/Auth/BS/BS";
 import StepContainer from "@/pages/Auth/StepForm/StepContainer";
 import Blog from "@/pages/Blog/Blog";
 import BlogDetails from "@/pages/Blog/BlogDetails";
 import AddNewProduct from "@/pages/BusinessDashboardPage/AddNewProduct";
 import AddService from "@/pages/BusinessDashboardPage/AddService";
-import BusinessDashboardCalendar from "@/pages/BusinessDashboardPage/BusinessDashboardCalendar";
 import BusinessDashboardCatalogue from "@/pages/BusinessDashboardPage/BusinessDashboardCatalogue";
 import BusinessDashboardClintList from "@/pages/BusinessDashboardPage/BusinessDashboardClintList";
 import BusinessDashboardHome from "@/pages/BusinessDashboardPage/BusinessDashboardHome";
@@ -27,9 +26,7 @@ import BusinessDashboardMarketing from "@/pages/BusinessDashboardPage/BusinessDa
 import BusinessDashboardMemberList from "@/pages/BusinessDashboardPage/BusinessDashboardMemberList";
 import BusinessDashboardMessage from "@/pages/BusinessDashboardPage/BusinessDashboardMessage";
 import BusinessDashboardOnlineProfile from "@/pages/BusinessDashboardPage/BusinessDashboardOnlineProfile";
-import BusinessDashboardReporting from "@/pages/BusinessDashboardPage/BusinessDashboardReporting";
 import BusinessDashboardSales from "@/pages/BusinessDashboardPage/BusinessDashboardSales";
-import BusinessDashboardSettings from "@/pages/BusinessDashboardPage/BusinessDashboardSettings";
 import EditService from "@/pages/BusinessDashboardPage/EditService";
 import MembershipCreation from "@/pages/BusinessDashboardPage/MembershipCreation";
 import BusinessHelpCenter from "@/pages/BusinessHelpCenter/BusinessHelpCenter";
@@ -76,9 +73,6 @@ import BlockedTimeEdit from "@/components/SchedulingComponents/BlockedTimeEdit";
 import OnlineAvailability from "@/components/SchedulingComponents/OnlineAvailability";
 import OptimizeOnlineBook from "@/components/SchedulingComponents/OptimizeOnlineBook";
 import Notification from "@/components/SchedulingComponents/Notification";
-import BusinessSetup from "@/components/BusinessDashboardSettings/BusinessSetup";
-import EditBusinessDetailsPage from "@/components/BusinessDashboardSettings/EditBusinessDetailsPage";
-import LocationSetUpPage from "@/components/BusinessDashboardSettings/LocationSetUpPage";
 import AddPaymentMethod from "@/components/SchedulingComponents/AddPaymentMethod";
 import PaymentMethod from "@/components/SchedulingComponents/PaymentMethod";
 import Taxrates from "@/components/SchedulingComponents/Taxrates";
@@ -91,15 +85,6 @@ import Tipping from "@/components/SchedulingComponents/Tipping";
 import EditTipping from "@/components/SchedulingComponents/EditTipping";
 import GiftCardSale from "@/components/SchedulingComponents/GiftCardSale";
 import EditGiftCardSale from "@/components/SchedulingComponents/EditGiftCardSale";
-import AddClientSources from "@/components/BusinessDashboardSettings/AddClientSources";
-import ContactDetailsPage from "@/components/BusinessDashboardSettings/ContactDetailsPage";
-import EditTaxDetails from "@/components/BusinessDashboardSettings/EditTaxDetails";
-import AddNewTax from "@/components/BusinessDashboardSettings/AddNewTax";
-import EditReceiptSequencing from "@/components/BusinessDashboardSettings/EditReceiptSequencing";
-import BusinessType from "@/components/BusinessDashboardSettings/BusinessType";
-import EditBusinessLocation from "@/components/BusinessDashboardSettings/EditBusinessLocation";
-import ChangeLocation from "@/components/BusinessDashboardSettings/ChangeLocation";
-import EditAddressDetails from "@/components/BusinessDashboardSettings/EditAddressDetails";
 import PresenceDashboard from "@/pages/BusinessDashboardPage/PresenceDashboard";
 import PerformanceDashboard from "@/pages/BusinessDashboardPage/PerformanceDashboard";
 import SalesSummary from "@/pages/BusinessDashboardPage/SalesSummary";
@@ -114,7 +99,6 @@ import PermissionPage from "@/pages/schedulingPage/PermissionPage";
 import TimeOfTypes from "@/components/Permissions/TimeOfTypes";
 import Combinssion from "@/components/Permissions/Combinssion";
 import EditTimeOfType from "@/components/Permissions/EditTimeOfType";
-import EditOpeningHours from "@/components/BusinessDashboardSettings/EditOpeningHours";
 import AddTeamMember from "@/pages/BusinessDashboardPage/AddTeamMember";
 import Shifts from "@/pages/BusinessDashboardPage/Shifts";
 import RefundSales from "@/components/BusinessDashboard/BusinessDashboardSales/RefundSales";
@@ -128,6 +112,8 @@ import Allsalons from "@/pages/Allsalons/Allsalons";
 import ProfessionalAndTimePage from "@/pages/ProfessionalAndTimePage/ProfessionalAndTimePage";
 import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
 import Inventory from "@/pages/BusinessDashboardPage/Inventory";
+import BS from "@/pages/Auth/BS/BS";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -208,6 +194,16 @@ export const router = createBrowserRouter([
         path: "message",
         element: <Message />,
       },
+
+      // Auth Flow Start
+      {
+        path: "/bs",
+        element: <BS />,
+      },
+      {
+        path: "registration/:type",
+        element: <Registration />,
+      },
       {
         path: "/login",
         element: <UserLogin />,
@@ -224,6 +220,12 @@ export const router = createBrowserRouter([
         path: "/create-pass",
         element: <CreatePass />,
       },
+      {
+        path: "stepContainer",
+        element: <StepContainer />,
+      },
+      // Auth Flow End
+
       {
         path: "/all-salon",
         element: <Allsalons />,
@@ -284,7 +286,7 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "registration",
+        path: "registration/:type",
         element: <Registration />,
       },
       {
@@ -298,10 +300,6 @@ export const router = createBrowserRouter([
       {
         path: "sitemap",
         element: <Sitemap />,
-      },
-      {
-        path: "stepContainer",
-        element: <StepContainer />,
       },
     ],
   },
@@ -399,7 +397,11 @@ export const router = createBrowserRouter([
 
   {
     path: "/businessDashboard",
-    element: <BusinessDashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <BusinessDashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,
@@ -408,10 +410,6 @@ export const router = createBrowserRouter([
       {
         path: "sales",
         element: <BusinessDashboardSales />,
-      },
-      {
-        path: "calendar",
-        element: <BusinessDashboardCalendar />,
       },
       {
         path: "clients-list",
@@ -438,14 +436,6 @@ export const router = createBrowserRouter([
         element: <BusinessDashboardMemberList />,
       },
       {
-        path: "reporting",
-        element: <BusinessDashboardReporting />,
-      },
-      {
-        path: "settings",
-        element: <BusinessDashboardSettings />,
-      },
-      {
         path: "tellusaboutyourbusiness",
         element: <TellUsAboutYourBusiness />,
       },
@@ -462,7 +452,7 @@ export const router = createBrowserRouter([
         element: <BusinessDashboardStepFormContainer />,
       },
       {
-        path: "editService",
+        path: "editService/:id",
         element: <EditService />,
       },
       {
@@ -522,18 +512,6 @@ export const router = createBrowserRouter([
         element: <Notification />,
       },
       {
-        path: "businessetup",
-        element: <BusinessSetup />,
-      },
-      {
-        path: "editbusinessdetailspage",
-        element: <EditBusinessDetailsPage />,
-      },
-      {
-        path: "locationsetuppage",
-        element: <LocationSetUpPage />,
-      },
-      {
         path: "paymentmethod",
         element: <PaymentMethod />,
       },
@@ -582,44 +560,8 @@ export const router = createBrowserRouter([
         element: <EditGiftCardSale />,
       },
       {
-        path: "addclientsources",
-        element: <AddClientSources />,
-      },
-      {
-        path: "contactdetailspage",
-        element: <ContactDetailsPage />,
-      },
-      {
-        path: "edittaxdetails",
-        element: <EditTaxDetails />,
-      },
-      {
-        path: "addnewtax",
-        element: <AddNewTax />,
-      },
-      {
-        path: "editreceiptsequencing",
-        element: <EditReceiptSequencing />,
-      },
-      {
         path: "edittipping",
         element: <EditTipping />,
-      },
-      {
-        path: "businesstype",
-        element: <BusinessType />,
-      },
-      {
-        path: "editbusinesslocation",
-        element: <EditBusinessLocation />,
-      },
-      {
-        path: "changelocation",
-        element: <ChangeLocation />,
-      },
-      {
-        path: "editaddressdetails",
-        element: <EditAddressDetails />,
       },
       {
         path: "performance",
@@ -680,10 +622,6 @@ export const router = createBrowserRouter([
       {
         path: "edittimeoftype",
         element: <EditTimeOfType />,
-      },
-      {
-        path: "editopeninghours",
-        element: <EditOpeningHours />,
       },
       {
         path: "add-team-member",

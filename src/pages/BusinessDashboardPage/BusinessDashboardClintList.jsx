@@ -1,4 +1,3 @@
-import AppointmentFilterModal from "@/components/BusinessDashboard/Modals/AppointmentFilterModal";
 import {
   AppointmentCalendarSvg,
   AppointmentCsvSvg,
@@ -195,8 +194,6 @@ const BusinessDashboardClintList = () => {
             </button>
           </div>
 
-          {/* Filter */}
-          <AppointmentFilterModal />
 
           {/* Date */}
           <button className="flex gap-2 focus:border-none border-gray-100 bg-white items-center py-2 lg:py-3 focus:outline-none px-3 lg:px-4 font-medium text-[#2C2C2C] rounded-full border shadow">

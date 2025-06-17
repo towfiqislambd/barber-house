@@ -15,7 +15,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import MembershipModal from "../Modals/MembershipModal";
 const isMember = false;
 const tableData = [
   {
@@ -93,8 +92,6 @@ const Product = () => {
                   <AppointmentsSearchSvg />
                 </button>
               </div>
-              {/* Filter */}
-              <MembershipModal />
             </div>
             <div className="flex gap-3 items-center">
               {/* Export */}

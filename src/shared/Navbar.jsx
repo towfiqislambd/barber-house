@@ -1,4 +1,4 @@
-import logo from "../assets/images/logo.jpg" ;
+import logo from "../assets/images/logo.jpg";
 import { RxCross2 } from "react-icons/rx";
 import {
   DownArrowSvg,
@@ -16,6 +16,8 @@ import { PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import { useEffect, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useLogOut } from "@/hooks/auth.hook.";
+import useAuth from "@/hooks/useAuth";
 
 const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -23,6 +25,9 @@ const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isSmallPopoverOpen, setIsSmallPopoverOpen] = useState(false);
+  const { mutate: logOutMutate } = useLogOut();
+  const { user } = useAuth();
+  console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +37,11 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleLogOut = () => {
+    setIsPopoverOpen(false);
+    logOutMutate();
+  };
 
   return (
     <header
@@ -58,66 +68,72 @@ const Navbar = () => {
             >
               For Business
             </Link>
-
-            {/* Get started btn */}
-            <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-              <PopoverTrigger>
-                <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium flex items-center gap-2 text-white">
-                  <span>Get Started</span>
-                  <DownArrowSvg />
-                </button>
-              </PopoverTrigger>
-              <PopoverContent className="w-72 mt-5">
-                <div className="!bg-white rounded-lg px-7 py-10">
-                  <ul className="font-medium text-[#2C2C2C] text-lg space-y-4">
-                    {[
-                      { icon: <HeaderSVGOne />, label: "Profile" },
-                      { icon: <HeaderSVGTwo />, label: "Appointments" },
-                      { icon: <HeaderSVGThree />, label: "Wallet" },
-                      { icon: <HeaderSVGFour />, label: "Favourites" },
-                      { icon: <HeaderSVGFive />, label: "Forms" },
-                      { icon: <HeaderSVGSix />, label: "Product orders" },
-                      { icon: <HeaderSVGSeven />, label: "Settings" },
-                    ].map(({ icon, label }) => (
+            {user ? (
+              <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+                <PopoverTrigger>
+                  <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium flex items-center gap-2 text-white">
+                    <span>Get Started</span>
+                    <DownArrowSvg />
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent className="w-72 mt-5">
+                  <div className="!bg-white rounded-lg px-7 py-10">
+                    <ul className="font-medium text-[#2C2C2C] text-lg space-y-4">
+                      {[
+                        { icon: <HeaderSVGOne />, label: "Profile" },
+                        { icon: <HeaderSVGTwo />, label: "Appointments" },
+                        { icon: <HeaderSVGThree />, label: "Wallet" },
+                        { icon: <HeaderSVGFour />, label: "Favourites" },
+                        { icon: <HeaderSVGFive />, label: "Forms" },
+                        { icon: <HeaderSVGSix />, label: "Product orders" },
+                        { icon: <HeaderSVGSeven />, label: "Settings" },
+                      ].map(({ icon, label }) => (
+                        <li
+                          key={label}
+                          className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
+                          onClick={() => setIsPopoverOpen(false)}
+                        >
+                          {icon}
+                          <p className="font-manrope text-lg font-medium">
+                            {label}
+                          </p>
+                        </li>
+                      ))}
                       <li
-                        key={label}
                         className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
-                        onClick={() => setIsPopoverOpen(false)}
+                        onClick={handleLogOut}
                       >
-                        {icon}
                         <p className="font-manrope text-lg font-medium">
-                          {label}
+                          Log Out
                         </p>
                       </li>
-                    ))}
-                    <li
+                    </ul>
+                    <div className="border-t border-primary-gradient my-5"></div>
+                    <h4 className="font-semibold text-xl text-[#222] mb-5">
+                      Others
+                    </h4>
+                    <p
                       className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
                       onClick={() => setIsPopoverOpen(false)}
                     >
-                      <p className="font-manrope text-lg font-medium">
-                        Log Out
-                      </p>
-                    </li>
-                  </ul>
-                  <div className="border-t border-primary-gradient my-5"></div>
-                  <h4 className="font-semibold text-xl text-[#222] mb-5">
-                    Others
-                  </h4>
-                  <p
-                    className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
-                    onClick={() => setIsPopoverOpen(false)}
-                  >
-                    For businesses
-                  </p>
-                  <p
-                    className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
-                    onClick={() => setIsPopoverOpen(false)}
-                  >
-                    Customer support
-                  </p>
-                </div>
-              </PopoverContent>
-            </Popover>
+                      For businesses
+                    </p>
+                    <p
+                      className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
+                      onClick={() => setIsPopoverOpen(false)}
+                    >
+                      Customer support
+                    </p>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            ) : (
+              <Link to="/bs">
+                <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium text-white">
+                  <span>Sign Up</span>
+                </button>
+              </Link>
+            )}
           </div>
         </div>
 
@@ -170,8 +186,8 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* cta */}
           <div className="flex flex-col items-center gap-5">
+            {/* business */}
             <Link
               to={"/business"}
               className="px-4 py-2 3xl:py-3.5 border border-textColor rounded-[32px] md:text-lg font-medium"

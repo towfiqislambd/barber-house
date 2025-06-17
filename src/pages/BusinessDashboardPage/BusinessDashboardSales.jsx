@@ -1,8 +1,5 @@
 import Appointments from "@/components/BusinessDashboard/BusinessDashboardSales/Appointments";
 import DailySales from "@/components/BusinessDashboard/BusinessDashboardSales/DailySales";
-import GiftCardSold from "@/components/BusinessDashboard/BusinessDashboardSales/GiftCardSold";
-import MembershipSold from "@/components/BusinessDashboard/BusinessDashboardSales/MembershipSold";
-import Payments from "@/components/BusinessDashboard/BusinessDashboardSales/Payments";
 import Sales from "@/components/BusinessDashboard/BusinessDashboardSales/Sales";
 import { useState } from "react";
 
@@ -19,9 +16,6 @@ const BusinessDashboardSales = () => {
             { id: "daisy-sales", label: "Daily Sales" },
             { id: "appointments", label: "Appointments" },
             { id: "sales", label: "Sales" },
-            { id: "payments", label: "Payments" },
-            { id: "gift-cards", label: "Gift Cards Sold" },
-            { id: "membership", label: "Memberships Sold" },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -43,9 +37,6 @@ const BusinessDashboardSales = () => {
         {activeTab === "daisy-sales" && <DailySales />}
         {activeTab === "appointments" && <Appointments />}
         {activeTab === "sales" && <Sales />}
-        {activeTab === "payments" && <Payments />}
-        {activeTab === "gift-cards" && <GiftCardSold />}
-        {activeTab === "membership" && <MembershipSold />}
       </div>
     </section>
   );

@@ -16,19 +16,18 @@ const BusinessNavbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
   const [salesetting, setSalesetting] = useState(false);
   const saleMobileMenuActive = () => {
-    setSalesetting(!salesetting)
-  }
+    setSalesetting(!salesetting);
+  };
 
   return (
     <section
-      className={`py-[14px] border-b shadow-businessNavShadow bg-[#FFF] fixed w-full z-50 top-0 left-0 transition-all duration-300 ${scrolling ? "bg-white" : "bg-white"
-        }`}
+      className={`py-[14px] border-b shadow-businessNavShadow bg-[#FFF] fixed w-full z-50 top-0 left-0 transition-all duration-300 ${
+        scrolling ? "bg-white" : "bg-white"
+      }`}
     >
       <div className="container flex justify-between items-center">
-
         <div>
           <Link to={"/business"}>
             <img
@@ -39,22 +38,40 @@ const BusinessNavbar = () => {
           </Link>
         </div>
 
-
         <div>
           <div>
-            <button onClick={saleMobileMenuActive} className="text-[24px] block xl:hidden"><HiMiniBars3 /></button>
+            <button
+              onClick={saleMobileMenuActive}
+              className="text-[24px] block xl:hidden"
+            >
+              <HiMiniBars3 />
+            </button>
           </div>
-          <div className={`flex-shrink-0  transition-all fixed xl:static bg-white xl:bg-white left-0 top-0 bottom-0 p-[20px] w-[230px] xl:w-[100%] ${salesetting ? "translate-x-[0%]" : "translate-x-[-100%] xl:translate-x-[0%]"}`}>
-
+          <div
+            className={`flex-shrink-0  transition-all fixed xl:static bg-white xl:bg-white left-0 top-0 bottom-0 p-[20px] w-[230px] xl:w-[100%] ${
+              salesetting
+                ? "translate-x-[0%]"
+                : "translate-x-[-100%] xl:translate-x-[0%]"
+            }`}
+          >
             <div className="block xl:hidden">
               <div className="border-b broder-[1px] border-primary pb-[15px] mb-[20px] flex justify-between items-center">
                 <div>
                   <Link to="/business">
-                    <img className="w-[30px] object-cover rounded-[5px]" src={logo} alt="" />
+                    <img
+                      className="w-[30px] object-cover rounded-[5px]"
+                      src={logo}
+                      alt=""
+                    />
                   </Link>
                 </div>
                 <div>
-                  <button onClick={() => saleMobileMenuActive(false)} className="text-[25px] text-primary"><LiaTimesCircle /></button>
+                  <button
+                    onClick={() => saleMobileMenuActive(false)}
+                    className="text-[25px] text-primary"
+                  >
+                    <LiaTimesCircle />
+                  </button>
                 </div>
               </div>
             </div>
@@ -100,7 +117,7 @@ const BusinessNavbar = () => {
                     ? "businessNavClass text-primary hover:text-primary"
                     : "businessNavClass hover:text-primary"
                 }
-                to={"/business/selectaccount"}
+                to={"/business/login"}
               >
                 Login
               </NavLink>

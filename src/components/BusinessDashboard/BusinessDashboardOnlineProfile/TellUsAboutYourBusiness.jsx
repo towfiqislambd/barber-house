@@ -58,24 +58,21 @@ const TellUsAboutYourBusiness = () => {
         </div>
         {/* This is right side div */}
         <div className="md:mt-8 mt-4 lg:mt-0">
-          {/* This is the user */}
-          <Link>
-            {steps.map((step) => (
-              <div key={step.id} className="flex gap-6 2xl:py-8 py-4 lg:px-2">
-                <div>
-                  <h1 className="text-textColor font-outfit text-xl md:text-2xl font-semibold leading-[28.8px]">
-                    {step.id} {step.title}
-                  </h1>
-                  <p className="text-[#757575] font-manrope text-base font-medium leading-6 md:mt-4 max-w-[341px] md:ml-4">
-                    {step.description}
-                  </p>
-                </div>
-                <div>
-                  <img src={step.imgSrc} alt="Step Image" />
-                </div>
+          {steps.map(step => (
+            <div key={step.id} className="flex gap-6 2xl:py-8 py-4 lg:px-2">
+              <div>
+                <h1 className="text-textColor font-outfit text-xl md:text-2xl font-semibold leading-[28.8px]">
+                  {step.id} {step.title}
+                </h1>
+                <p className="text-[#757575] font-manrope text-base font-medium leading-6 md:mt-4 max-w-[341px] md:ml-4">
+                  {step.description}
+                </p>
               </div>
-            ))}
-          </Link>
+              <div>
+                <img src={step.imgSrc} alt="Step Image" />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

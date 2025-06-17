@@ -14,6 +14,13 @@ const StepThree = ({ step, setStep, setFormData }) => {
     setStep(step - 1);
   };
 
+  const teamOptions = [
+    { label: "It's just me", value: 1 },
+    { label: "5 people", value: 5 },
+    { label: "10 people", value: 10 },
+    { label: "15 people", value: 15 },
+  ];
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* Navigation buttons */}
@@ -44,21 +51,19 @@ const StepThree = ({ step, setStep, setFormData }) => {
         </p>
 
         <div className="space-y-4">
-          {["It's just me", "2-5 people", "10-15 people", "15-25 people"].map(
-            (option, index) => (
-              <label key={index} className="block cursor-pointer">
-                <input
-                  type="radio"
-                  value={option}
-                  {...register("teamSize", { required: true })} // Automatically stores in data object
-                  className="hidden peer"
-                />
-                <p className="border py-4 px-5 font-medium border-[#797979] rounded-lg text-[#1E1E1E] peer-checked:border-borderColor peer-checked:bg-primaryLight">
-                  {option}
-                </p>
-              </label>
-            )
-          )}
+          {teamOptions?.map((option, index) => (
+            <label key={index} className="block cursor-pointer">
+              <input
+                type="radio"
+                value={option.value}
+                {...register("team_size", { required: true })}
+                className="hidden peer"
+              />
+              <p className="border py-4 px-5 font-medium border-[#797979] rounded-lg text-[#1E1E1E] peer-checked:border-borderColor peer-checked:bg-primaryLight">
+                {option.label}
+              </p>
+            </label>
+          ))}
         </div>
       </div>
     </form>

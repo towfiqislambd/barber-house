@@ -6,7 +6,8 @@ const BusinessLayout = () => {
   const location = useLocation();
   const isSignUpPage =
     location.pathname === "/business/login" ||
-    location.pathname === "/business/registration" ||
+    location.pathname === "/business/registration/business" ||
+    location.pathname === "/business/registration/customer" ||
     location.pathname === "/business/selectaccount" ||
     location.pathname === "/business/signorlogin" ||
     location.pathname === "/business/stepContainer";

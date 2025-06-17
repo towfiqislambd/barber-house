@@ -48,34 +48,34 @@ const StepOne = ({ step, setStep, setFormData }) => {
         {/* Business name */}
         <div className="self-end text-left mb-5">
           <label
-            htmlFor="businessName"
+            htmlFor="business_name"
             className="text-[16px] xl:text-xl font-medium"
           >
             Business name
           </label>
           <input
-            id="businessName"
+            id="business_name"
             type="text"
-            {...register("businessName", { required: true })}
+            {...register("business_name", { required: true })}
             placeholder="Input your first name"
             className="block mt-3 w-full px-4 mb-2 py-3 border rounded-lg border-[#797979]"
           />
-          {errors.businessName && (
+          {errors.business_name && (
             <span className="text-red-400">This field is required</span>
           )}
         </div>
         {/* Business website */}
         <div className="self-end text-left">
           <label
-            htmlFor="Website"
+            htmlFor="website_url"
             className="text-[16px] xl:text-xl font-medium"
           >
             Website (Optional)
           </label>
           <input
-            id="Website"
-            type="text"
-            {...register("Website")}
+            id="website_url"
+            type="url"
+            {...register("website_url")}
             placeholder="Enter your website name"
             className="block mt-3 w-full px-4 mb-2 py-3 border rounded-lg border-[#797979]"
           />
