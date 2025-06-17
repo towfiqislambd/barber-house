@@ -89,3 +89,15 @@ export const Catalogue = async (category_id, search, selectedTeamMember) => {
   const { data } = await axiosPublic(url);
   return data?.data;
 };
+
+// Products brand
+export const ProductsBrand = async () => {
+  const { data } = await axiosPublic("/api/product-brands");
+  return data?.data;
+};
+
+// Products Category
+export const ProductsCategory = async () => {
+  const { data } = await axiosPublic("/api/product-categories");
+  return data?.data;
+};

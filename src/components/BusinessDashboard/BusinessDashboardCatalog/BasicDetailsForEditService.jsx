@@ -11,9 +11,10 @@ import { useCatalogue, useServicesType } from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
 import Input from "antd/es/input/Input";
 import { useForm, Controller } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const BasicDetailsForEditService = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { data: categoryData } = useCatalogue();
   const { user } = useAuth();
@@ -52,6 +53,7 @@ const BasicDetailsForEditService = () => {
         business_profile_id,
       },
     });
+    navigate("/businessDashboard/catalogue");
   };
 
   return (
