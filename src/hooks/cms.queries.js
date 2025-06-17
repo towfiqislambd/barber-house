@@ -1,5 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { AllTeamMembers, Catalogue, ProductsBrand, ProductsCategory, ServicesType } from "./cms.api";
+import {
+  AllTeamMembers,
+  Catalogue,
+  ProductsBrand,
+  ProductsCategory,
+  ServicesType,
+} from "./cms.api";
 
 // Services Type
 export const useServicesType = () => {
@@ -18,10 +24,10 @@ export const useCatalogue = (category_id, search, selectedTeamMember) => {
 };
 
 // All Team Members
-export const useAllTeamMembers = () => {
+export const useAllTeamMembers = search => {
   return useQuery({
-    queryKey: ["team-members"],
-    queryFn: AllTeamMembers,
+    queryKey: ["team-members", search],
+    queryFn: AllTeamMembers(search),
   });
 };
 

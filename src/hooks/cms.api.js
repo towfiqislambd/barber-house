@@ -61,17 +61,13 @@ export const DeleteService = async id => {
 };
 
 // All team members:
-export const AllTeamMembers = async () => {
-  const { data } = await axiosPublic("/api/teams");
-  return data?.data;
-};
+export const AllTeamMembers = async search => {
+  let url = "/api/teams?";
+  if (search) url += `query=${search}&`;
+  url = url.endsWith("&") ? url.slice(0, -1) : url;
+  url = url.endsWith("?") ? url.slice(0, -1) : url;
 
-// Add Team Members:
-export const addTeamMembers = async (id, payload) => {
-  const { data } = await axiosSecure.put(
-    `api/catalog-services/${id}/update-team-members`,
-    payload
-  );
+  const { data } = await axiosSecure(url);
   return data?.data;
 };
 
@@ -87,6 +83,15 @@ export const Catalogue = async (category_id, search, selectedTeamMember) => {
   url = url.endsWith("?") ? url.slice(0, -1) : url;
 
   const { data } = await axiosSecure(url);
+  return data?.data;
+};
+
+// Add Team Members:
+export const addTeamMembers = async (id, payload) => {
+  const { data } = await axiosSecure.put(
+    `api/catalog-services/${id}/update-team-members`,
+    payload
+  );
   return data?.data;
 };
 
@@ -111,5 +116,11 @@ export const AddProduct = async payload => {
 // Delete Team Member:
 export const DeleteTeamMember = async id => {
   const { data } = await axiosSecure.delete(`api/teams/${id}`);
+  return data?.data;
+};
+
+// Add Team Member:
+export const AddTeamMember = async payload => {
+  const { data } = await axiosSecure.post(`api/teams`, payload);
   return data?.data;
 };

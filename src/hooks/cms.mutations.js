@@ -3,6 +3,7 @@ import {
   AddCategory,
   AddProduct,
   AddService,
+  AddTeamMember,
   addTeamMembers,
   DeleteService,
   DeleteTeamMember,
@@ -136,6 +137,22 @@ export const useDeleteTeamMember = () => {
     mutationFn: id => DeleteTeamMember(id),
     onSuccess: () => {
       toast.success("Team Member has been Deleted");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Add Team Member
+export const useAddTeamMember = () => {
+  const navigate = useNavigate();
+  return useMutation({
+    mutationKey: ["add-team-member"],
+    mutationFn: payload => AddTeamMember(payload),
+    onSuccess: () => {
+      toast.success("Team Member has been added");
+      navigate("/businessDashboard/members-list");
     },
     onError: err => {
       toast.error(err?.response?.data?.message);

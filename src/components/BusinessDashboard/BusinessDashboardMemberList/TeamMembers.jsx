@@ -3,9 +3,12 @@ import { useAllTeamMembers } from "@/hooks/cms.queries";
 import { Link } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { useDeleteTeamMember } from "@/hooks/cms.mutations";
+import { useState } from "react";
 
 const TeamMembers = () => {
-  const { data: allTeamMembers } = useAllTeamMembers();
+  const [search, setSearch] = useState(null);
+  const { data: allTeamMembers } = useAllTeamMembers(search);
+  console.log(allTeamMembers);
   const { mutateAsync: DeleteMemberMutation } = useDeleteTeamMember();
 
   return (
@@ -23,8 +26,9 @@ const TeamMembers = () => {
           <div className="relative w-[300px] xl:w-[450px]">
             <input
               type="text"
-              className="rounded-full bg-white w-full py-2 lg:py-3 px-3 lg:px-5 shadow outline-none border border-gray-100"
-              placeholder="Search by sale or client"
+              className="rounded-lg bg-white w-full py-2 lg:py-3 ps-10 pe-5 shadow outline-none border border-gray-100"
+              placeholder="Search by team members"
+              onChange={e => setSearch(e.target.value)}
             />
             <button className="absolute right-2 top-2 w-7 h-7 lg:w-9 lg:h-9 bg-black grid place-items-center rounded-full">
               <AppointmentsSearchSvg />
