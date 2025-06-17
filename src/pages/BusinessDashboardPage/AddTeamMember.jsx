@@ -1,4 +1,3 @@
-import AddressInfo from "@/components/BusinessDashboard/BusinessDashboardMemberList/AddressInfo";
 import ProfileInfo from "@/components/BusinessDashboard/BusinessDashboardMemberList/ProfileInfo";
 import { useState } from "react";
 
@@ -26,22 +25,11 @@ const AddTeamMember = () => {
               >
                 Profile
               </button>
-              <button
-                onClick={() => setActiveTab("address")}
-                className={` px-3 py-2 w-full rounded-lg ${
-                  activeTab === "address"
-                    ? "text-primary shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                Addresses
-              </button>
             </ul>
           </div>
         </div>
         <div className="flex-grow">
           {activeTab === "profile" && <ProfileInfo />}
-          {activeTab === "address" && <AddressInfo />}
         </div>
       </section>
     </div>

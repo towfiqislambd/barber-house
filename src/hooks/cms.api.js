@@ -107,3 +107,9 @@ export const AddProduct = async payload => {
   const { data } = await axiosSecure.post(`api/products`, payload);
   return data?.data;
 };
+
+// Delete Team Member:
+export const DeleteTeamMember = async id => {
+  const { data } = await axiosSecure.delete(`api/teams/${id}`);
+  return data?.data;
+};

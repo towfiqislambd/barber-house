@@ -5,6 +5,7 @@ import {
   AddService,
   addTeamMembers,
   DeleteService,
+  DeleteTeamMember,
   EditCategory,
   EditService,
   OnBoarding,
@@ -124,6 +125,20 @@ export const useAddProduct = () => {
     },
     onError: err => {
       toast.error(err?.response?.data?.message || "Failed to add product");
+    },
+  });
+};
+
+// Delete Team Member
+export const useDeleteTeamMember = () => {
+  return useMutation({
+    mutationKey: ["delete-team-member"],
+    mutationFn: id => DeleteTeamMember(id),
+    onSuccess: () => {
+      toast.success("Team Member has been Deleted");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
     },
   });
 };

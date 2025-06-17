@@ -1,62 +1,17 @@
-import {
-  AppointmentsSearchSvg,
-  DropdownSvg,
-  TeamMemberSvg,
-} from "@/components/svgContainer/SvgContainer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { AppointmentsSearchSvg } from "@/components/svgContainer/SvgContainer";
+import { useAllTeamMembers } from "@/hooks/cms.queries";
 import { Link } from "react-router-dom";
-const tableData = [
-  {
-    id: 1,
-    name: "M. R. Shihab",
-    image: <TeamMemberSvg />,
-    contact: "waledbinsalma123@gmail.com",
-    mail: "+966 14 123 4567",
-    rating: 4.8,
-  },
-  {
-    id: 2,
-    name: "M. R. Shihab",
-    image: <TeamMemberSvg />,
-    contact: "waledbinsalma123@gmail.com",
-    mail: "+966 14 123 4567",
-    rating: 4.8,
-  },
-  {
-    id: 3,
-    name: "M. R. Shihab",
-    image: <TeamMemberSvg />,
-    contact: "waledbinsalma123@gmail.com",
-    mail: "+966 14 123 4567",
-    rating: 4.8,
-  },
-  {
-    id: 4,
-    name: "M. R. Shihab",
-    image: <TeamMemberSvg />,
-    contact: "waledbinsalma123@gmail.com",
-    mail: "+966 14 123 4567",
-    rating: 4.8,
-  },
-  {
-    id: 5,
-    name: "M. R. Shihab",
-    image: <TeamMemberSvg />,
-    contact: "waledbinsalma123@gmail.com",
-    mail: "+966 14 123 4567",
-    rating: 4.8,
-  },
-];
+import { MdDeleteForever } from "react-icons/md";
+import { useDeleteTeamMember } from "@/hooks/cms.mutations";
 
 const TeamMembers = () => {
+  const { data: allTeamMembers } = useAllTeamMembers();
+  const { mutateAsync: DeleteMemberMutation } = useDeleteTeamMember();
+
   return (
     <div>
       <h3 className="text-[#2C2C2C] font-outfit text-2xl font-medium mb-2">
-        Team members (5)
+        Team members ({allTeamMembers?.length})
       </h3>
       <p className="text-[#2C2C2C] text-lg font-medium mb-5 xl:mb-10">
         Track, analyze & grow your salon business daily
@@ -91,40 +46,32 @@ const TeamMembers = () => {
           <tr className="text-lg text-gray-700 text-nowrap">
             <th className="px-4 py-2 text-left">Name</th>
             <th className="px-4 py-2 text-left">Contact</th>
-            <th className="px-4 py-2 text-left">All actions</th>
+            <th className="px-4 py-2 text-left">Delete</th>
           </tr>
           <tbody>
-            {tableData.map(data => (
+            {allTeamMembers?.map(data => (
               <tr
                 key={data.id}
                 className="hover:bg-gray-200 border-t first:border-none border-dashed text-[#545454] text-nowrap"
               >
-                <td className="px-4 text-[#545454] cursor-pointer font-medium py-3 flex gap-2 items-center">
-                  <div>{data?.image}</div>
+                <td className="px-4 text-[#545454] font-medium py-3 flex gap-2 items-center">
+                  <img
+                    className="w-11 h-11 rounded-full border"
+                    src={`${import.meta.env.VITE_SITE_URL}/${data?.profile}`}
+                    alt="img"
+                  />
                   <h3 className="text-[17px] font-medium text-[#2C2C2C]">
-                    {data.name}
+                    {data.first_name} {data.last_name}
                   </h3>
                 </td>
                 <td className="px-4 text-[#545454] font-medium py-3">
-                  <p>{data.contact}</p>
-                  <p>{data.mail}</p>
+                  <p>{data.phone}</p>
+                  <p>{data.email}</p>
                 </td>
                 <td className="px-4 text-[#545454] font-medium py-3">
-                  <Popover>
-                    <PopoverTrigger>
-                      <button className="px-3 lg:px-4 py-2 lg:py-[10px] flex gap-1 lg:gap-2 items-center outline-none rounded-full border border-borderColorLight">
-                        <p>Actions</p>
-                        <DropdownSvg />
-                      </button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-[220px] p-4">
-                      <div className="space-y-5">
-                        <p className="cursor-pointer text-[#545454] font-medium">
-                          Edit
-                        </p>
-                      </div>
-                    </PopoverContent>
-                  </Popover>
+                  <button onClick={() => DeleteMemberMutation(data?.id)}>
+                    <MdDeleteForever className="text-3xl text-red-500" />
+                  </button>
                 </td>
               </tr>
             ))}
