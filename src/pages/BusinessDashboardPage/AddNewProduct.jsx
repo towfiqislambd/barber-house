@@ -11,39 +11,44 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useProductsBrand, useProductsCategory } from "@/hooks/cms.queries";
 import { Link } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
+import { useAddProduct } from "@/hooks/cms.mutations";
 
 const AddNewProduct = () => {
+  const { user } = useAuth();
+  const business_profile_id = user?.business_profile?.id;
   const { data: productsBrand } = useProductsBrand();
   const { data: productsCategory } = useProductsCategory();
+  const { mutateAsync: addProductMutation } = useAddProduct();
 
   const {
     register,
     handleSubmit,
     control,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const selectedBrand = watch("brand_id");
-  const selectedCategory = watch("category_id");
+  const onSubmit = async data => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("barcode", data.barcode || "");
+    formData.append("brand_id", data.brand_id);
+    formData.append("category_id", data.category_id);
+    formData.append("measure", data.measure);
+    formData.append("amount", data.amount);
+    formData.append("short_description", data.short_description);
+    formData.append("description", data.description);
+    formData.append("supply_price", data.supply_price);
+    formData.append("price", data.price);
+    formData.append("stock_quantity", data.stock_quantity);
+    formData.append("business_profile_id", business_profile_id);
+    formData.append("image_url", data.image_url[0]);
 
-  const onSubmit = data => {
-    const formData = {
-      name: data.name,
-      barcode: data.barcode || "",
-      brand_id: data.brand_id,
-      category_id: data.category_id,
-      measure: data.measure,
-      amount: data.amount,
-      short_description: data.short_description,
-      description: data.description,
-      supply_price: data.supply_price,
-      price: data.price,
-      stock_quantity: data.stock_quantity,
-      image_url: data.image_url[0], // single file
-    };
-
-    console.log(formData);
+    try {
+      await addProductMutation(formData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

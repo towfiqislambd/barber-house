@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import {
   AddCategory,
+  AddProduct,
   AddService,
   addTeamMembers,
   DeleteService,
@@ -109,6 +110,20 @@ export const useAddTeamMembers = () => {
     },
     onError: err => {
       toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Add Product:
+export const useAddProduct = () => {
+  return useMutation({
+    mutationKey: ["add-product"],
+    mutationFn: payload => AddProduct(payload),
+    onSuccess: () => {
+      toast.success("Product has been added");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message || "Failed to add product");
     },
   });
 };

@@ -101,3 +101,9 @@ export const ProductsCategory = async () => {
   const { data } = await axiosPublic("/api/product-categories");
   return data?.data;
 };
+
+// Add Product:
+export const AddProduct = async payload => {
+  const { data } = await axiosPublic.post(`api/products`, payload);
+  return data?.data;
+};
