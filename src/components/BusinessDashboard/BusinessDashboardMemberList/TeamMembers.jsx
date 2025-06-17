@@ -99,9 +99,7 @@ const TeamMembers = () => {
                 key={data.id}
                 className="hover:bg-gray-200 border-t first:border-none border-dashed text-[#545454] text-nowrap"
               >
-                <td
-                  className="px-4 text-[#545454] cursor-pointer font-medium py-3 flex gap-2 items-center"
-                >
+                <td className="px-4 text-[#545454] cursor-pointer font-medium py-3 flex gap-2 items-center">
                   <div>{data?.image}</div>
                   <h3 className="text-[17px] font-medium text-[#2C2C2C]">
                     {data.name}
