@@ -5520,18 +5520,18 @@ export function WalkInSvg() {
   );
 }
 // ==================================== Walk In Svg End ==========================================
-export function ScheduledSvg() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="2xl:w-14 2xl:h-14 w-10 h-10"
-      viewBox="0 0 56 57"
-      fill="none"
-    >
-      <circle cx="28" cy="28.5" r="28" fill="#006590" />
-    </svg>
-  );
-}
+// export function ScheduledSvg() {
+//   return (
+//     <svg
+//       xmlns="http://www.w3.org/2000/svg"
+//       className="2xl:w-14 2xl:h-14 w-10 h-10"
+//       viewBox="0 0 56 57"
+//       fill="none"
+//     >
+//       <circle cx="28" cy="28.5" r="28" fill="#006590" />
+//     </svg>
+//   );
+// }
 // ===================================== Green Circle Svg Start ===================================
 export function GreenCircleSvg() {
   return (
