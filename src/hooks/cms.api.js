@@ -18,7 +18,7 @@ export const OnBoarding = async payload => {
 
 // Edit Category:
 export const EditCategory = async (id, payload) => {
-  const { data } = await axiosPublic.post(
+  const { data } = await axiosSecure.post(
     `api/catalog/edit-service-categories/${id}`,
     payload
   );
@@ -27,7 +27,7 @@ export const EditCategory = async (id, payload) => {
 
 // Add Category:
 export const AddCategory = async payload => {
-  const { data } = await axiosPublic.post(
+  const { data } = await axiosSecure.post(
     `api/catalog/add-service-categories`,
     payload
   );
@@ -45,7 +45,7 @@ export const EditService = async (id, payload) => {
 
 // Add Service:
 export const AddService = async payload => {
-  const { data } = await axiosPublic.post(
+  const { data } = await axiosSecure.post(
     `api/catalog-services/store`,
     payload
   );
@@ -54,7 +54,7 @@ export const AddService = async payload => {
 
 // Delete Service:
 export const DeleteService = async id => {
-  const { data } = await axiosPublic.delete(
+  const { data } = await axiosSecure.delete(
     `api/catalog-services/destroy/${id}`
   );
   return data?.data;
@@ -68,7 +68,7 @@ export const AllTeamMembers = async () => {
 
 // Add Team Members:
 export const addTeamMembers = async (id, payload) => {
-  const { data } = await axiosPublic.put(
+  const { data } = await axiosSecure.put(
     `api/catalog-services/${id}/update-team-members`,
     payload
   );
@@ -86,24 +86,24 @@ export const Catalogue = async (category_id, search, selectedTeamMember) => {
   url = url.endsWith("&") ? url.slice(0, -1) : url;
   url = url.endsWith("?") ? url.slice(0, -1) : url;
 
-  const { data } = await axiosPublic(url);
+  const { data } = await axiosSecure(url);
   return data?.data;
 };
 
 // Products brand
 export const ProductsBrand = async () => {
-  const { data } = await axiosPublic("/api/product-brands");
+  const { data } = await axiosSecure("/api/product-brands");
   return data?.data;
 };
 
 // Products Category
 export const ProductsCategory = async () => {
-  const { data } = await axiosPublic("/api/product-categories");
+  const { data } = await axiosSecure("/api/product-categories");
   return data?.data;
 };
 
 // Add Product:
 export const AddProduct = async payload => {
-  const { data } = await axiosPublic.post(`api/products`, payload);
+  const { data } = await axiosSecure.post(`api/products`, payload);
   return data?.data;
 };
