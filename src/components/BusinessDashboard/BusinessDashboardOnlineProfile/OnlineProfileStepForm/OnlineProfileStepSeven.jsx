@@ -21,9 +21,6 @@ const OnlineProfileStepSeven = ({ step, setStep }) => {
           <LeftSideArrowSvg />
         </button>
         <div className="flex flex-col sm:flex-row gap-4">
-          <h1 className="mt-[10px] text-[#0D1619] font-manrope text-base font-bold leading-6">
-            Preview
-          </h1>
           <button className="border border-[#0D1619] px-[18px] py-[10px] rounded-[10px] text-[#0D1619] font-manrope text-base font-bold leading-6">
             Close
           </button>

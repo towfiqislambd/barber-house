@@ -1,6 +1,4 @@
-import DropDown from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/DropDown";
 import onlineProfileImg from "../../assets/images/online-profile/onlineProfile.png";
-import ActionDropDown from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/ActionDropDown";
 import { Link } from "react-router-dom";
 
 const BusinessDashboardOnlineProfile = () => {
