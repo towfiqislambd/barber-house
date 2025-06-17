@@ -27,7 +27,7 @@ export const useCatalogue = (category_id, search, selectedTeamMember) => {
 export const useAllTeamMembers = search => {
   return useQuery({
     queryKey: ["team-members", search],
-    queryFn: AllTeamMembers(search),
+    queryFn: () => AllTeamMembers(search),
   });
 };
 

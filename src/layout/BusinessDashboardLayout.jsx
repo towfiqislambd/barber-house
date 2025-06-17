@@ -142,7 +142,7 @@ const BusinessDashboardLayout = () => {
             id="sidebar"
             className="w-[100px] hidden xl:block overflow-y-auto p-6 bg-white border-r h-full"
           >
-            <ul className="space-y-9">
+            <ul className="space-y-14">
               {routingList.map(({ id, to, Icon, label }) => (
                 <li key={id}>
                   <Tooltip placement="right" title={label}>
