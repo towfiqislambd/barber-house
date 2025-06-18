@@ -9,15 +9,68 @@ import { useAddOnlineStore } from "@/hooks/cms.mutations";
 const OnlineProfileStepTwelve = ({ step, setStep, formData, setFormData }) => {
   const { mutateAsync: addOnlineStore } = useAddOnlineStore();
   const { user } = useAuth();
-  const handleContinue = () => {
+
+  const handleContinue = async () => {
     const id = user?.business_profile?.id;
-    if (id) {
-      setFormData(prevData => ({
-        ...prevData,
-        business_profile_id: id,
-      }));
-      const formData = new FormData();
-      addOnlineStore(formData);
+    if (!id) return;
+
+    // Update state
+    const updatedFormData = {
+      ...formData,
+      business_profile_id: id,
+    };
+    setFormData(updatedFormData);
+
+    // Create FormData object
+    const fd = new FormData();
+    fd.append("name", updatedFormData.name);
+    fd.append("about", updatedFormData.about);
+    fd.append("phone", updatedFormData.phone);
+    fd.append("email", updatedFormData.email);
+    fd.append("day_name", updatedFormData.day_name);
+    fd.append("morning_start_time", updatedFormData.morning_start_time);
+    fd.append("morning_end_time", updatedFormData.morning_end_time);
+    fd.append("evening_start_time", updatedFormData.evening_start_time);
+    fd.append("evening_end_time", updatedFormData.evening_end_time);
+    fd.append("address", updatedFormData.address);
+    fd.append("latitude", updatedFormData.latitude);
+    fd.append("longitude", updatedFormData.longitude);
+    fd.append("business_profile_id", id);
+
+    // Append array values
+    updatedFormData.teams?.forEach(team => fd.append("teams[]", team));
+    updatedFormData.services?.forEach(service =>
+      fd.append("services[]", service)
+    );
+    updatedFormData.amenities?.forEach(amenity =>
+      fd.append("amenities[]", amenity)
+    );
+    updatedFormData.highlights?.forEach(highlight =>
+      fd.append("highlights[]", highlight)
+    );
+    updatedFormData.values?.forEach(value => fd.append("values[]", value));
+
+    // Fix for images - handle both file objects and existing file paths
+    updatedFormData.images?.forEach((imageObj, index) => {
+      if (imageObj instanceof File) {
+        fd.append(`images[${index}]`, imageObj);
+      } else if (imageObj?.originFileObj) {
+        fd.append(`images[${index}]`, imageObj.originFileObj);
+      } else if (imageObj?.url) {
+        // If it's an existing image URL
+        fd.append(`existing_images[${index}]`, imageObj.url);
+      }
+    });
+
+    try {
+      await addOnlineStore(fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      // Optionally: advance step or show success message
+    } catch (error) {
+      console.error("Upload failed:", error);
     }
   };
 

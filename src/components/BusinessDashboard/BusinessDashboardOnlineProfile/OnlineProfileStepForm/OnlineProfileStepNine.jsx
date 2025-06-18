@@ -126,22 +126,25 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
             <PopoverContent className="w-full max-h-[200px] overflow-y-auto p-0">
               <Command>
                 <CommandList>
-                  {allServices?.map(service => (
-                    <CommandItem
-                      key={service?.id}
-                      onSelect={() =>
-                        toggleSelection(service?.id, services, setServices)
-                      }
-                      className="cursor-pointer"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span>{service?.service?.service_name}</span>
-                        {services.includes(service?.id) && (
-                          <CheckIcon className="w-4 h-4 ml-auto text-green-500" />
-                        )}
-                      </div>
-                    </CommandItem>
-                  ))}
+                  {allServices?.map(serviceItem => {
+                    const service = serviceItem?.service;
+                    return (
+                      <CommandItem
+                        key={service?.id}
+                        onSelect={() =>
+                          toggleSelection(service?.id, services, setServices)
+                        }
+                        className="cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2">
+                          <span>{service?.service_name}</span>
+                          {services.includes(service?.id) && (
+                            <CheckIcon className="w-4 h-4 ml-auto text-green-500" />
+                          )}
+                        </div>
+                      </CommandItem>
+                    );
+                  })}
                 </CommandList>
               </Command>
             </PopoverContent>
