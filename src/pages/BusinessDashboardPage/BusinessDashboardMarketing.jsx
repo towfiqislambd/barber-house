@@ -1,12 +1,10 @@
-import Automations from "@/components/BusinessDashboard/BusinessDashboardMerketing/Automations";
-import MessageHistory from "@/components/BusinessDashboard/BusinessDashboardMerketing/MessageHistory";
 import Reveiws from "@/components/BusinessDashboard/BusinessDashboardMerketing/Reveiws";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const BusinessDashboardMarketing = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("Automations");
+  const [activeTab, setActiveTab] = useState("Reviews");
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
     if (activeTab === "Smart pricing") {
@@ -14,14 +12,7 @@ const BusinessDashboardMarketing = () => {
     }
   }, [activeTab, navigate]);
 
-  const tabs = [
-    { label: "Automations", category: null },
-    { label: "Messages history", category: null },
-    { label: "Promotion", category: "heading" },
-    { label: "Smart pricing", category: null },
-    { label: "Engage", category: "heading" },
-    { label: "Reviews", category: null },
-  ];
+  const tabs = [{ label: "Reviews", category: null }];
 
   return (
     <section className="flex flex-col xl:flex-row 4xl:gap-[244px] 3xl:gap-8 2xl:gap-40 gap-5 h-[100vh] overflow-hidden px-[26px] xl:px-0 pt-5 pb-10 md:py-0">
@@ -42,11 +33,8 @@ const BusinessDashboardMarketing = () => {
       isVisible ? "translate-x-0" : ""
     } xl:relative xl:translate-x-0 xl:block mt-10 xl:mt-0`}
         >
-          <h3 className="mb-3 text-xl font-semibold text-[#000] font-manrope leading-[30px]">
-            Messaging
-          </h3>
           <ul className="space-y-5 4xl:text-lg text-base font-medium mt-4">
-            {tabs.map((tab) =>
+            {tabs.map(tab =>
               tab.category === "heading" ? (
                 <h3
                   key={tab.label}
@@ -74,9 +62,6 @@ const BusinessDashboardMarketing = () => {
 
       {/*  */}
       <div className="flex-grow xl:max-w-[1080px] xl:overflow-y-auto xl:h-[100vh] hide-scrollbar">
-        {activeTab === "Automations" && <Automations />}
-        {activeTab === "Messages history" && <MessageHistory />}
-        {activeTab === "Smart pricing" && null}{" "}
         {activeTab === "Reviews" && <Reveiws />}
       </div>
     </section>
