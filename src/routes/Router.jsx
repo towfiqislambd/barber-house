@@ -1,5 +1,4 @@
 import AddMembership from "@/components/BusinessDashboard/BusinessDashboardCatalog/AddMembership";
-import FreshaMarketPlace from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/FreshaMarketPlace";
 import OnlineProfileContainer from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/OnlineProfileStepForm/OnlineProfileContainer";
 import TellUsAboutYourBusiness from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/TellUsAboutYourBusiness";
 import AutomationDetailsPage from "@/components/BusinessDashboardMarketing/AutomationDetailsPage/AutomationDetailsPage";
@@ -442,10 +441,6 @@ export const router = createBrowserRouter([
       {
         path: "businessContainer",
         element: <OnlineProfileContainer />,
-      },
-      {
-        path: "freshaMarketplace",
-        element: <FreshaMarketPlace />,
       },
       {
         path: "businessdashboardeditpage",

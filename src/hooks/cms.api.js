@@ -124,3 +124,21 @@ export const AddTeamMember = async payload => {
   const { data } = await axiosSecure.post(`api/teams`, payload);
   return data?.data;
 };
+
+// Amenities
+export const Amenities = async () => {
+  const { data } = await axiosSecure("/api/amenities");
+  return data?.data;
+};
+
+// Highlights
+export const Highlights = async () => {
+  const { data } = await axiosSecure("/api/highlights");
+  return data?.data;
+};
+
+// Values
+export const Values = async () => {
+  const { data } = await axiosSecure("/api/values");
+  return data?.data;
+};

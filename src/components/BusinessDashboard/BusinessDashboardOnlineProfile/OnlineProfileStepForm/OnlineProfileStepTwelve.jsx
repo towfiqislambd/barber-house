@@ -3,7 +3,6 @@ import {
   LeftSideArrowSvg,
 } from "@/components/svgContainer/SvgContainer";
 import step12Img from "../../../../assets/images/online-profile/step12.png";
-import { Link } from "react-router-dom";
 const OnlineProfileStepTwelve = ({ step, setStep }) => {
   return (
     <section className="px-[18px] xl:px-0 pb-10 lg:pb-0">
@@ -19,16 +18,12 @@ const OnlineProfileStepTwelve = ({ step, setStep }) => {
           <button className="border border-[#0D1619] px-[18px] py-[10px] rounded-[10px] text-[#0D1619] font-manrope text-base font-bold leading-6">
             Close
           </button>
-          <Link
-            to={"/businessDashboard/freshaMarketplace"}
-            className="bg-[#0D1619] rounded-[10px] text-[#FFF] w-[135px] flex items-center justify-center gap-[6px]"
-          >
+          <button className="bg-[#0D1619] rounded-[10px] text-[#FFF] w-[135px] flex items-center justify-center gap-[6px]">
             Continue
             <ContinueButtonArrowSvg />
-          </Link>
+          </button>
         </div>
       </div>
-      {/*  */}
       <div className="max-w-[752px] mx-auto mt-5 2xl:mt-0">
         <h1 className="text-textColor font-outfit text-2xl lg:text-3xl xl:text-4xl font-semibold lg:leading-[43.2px]">
           Enable online bookings on Fresha Marketplace
