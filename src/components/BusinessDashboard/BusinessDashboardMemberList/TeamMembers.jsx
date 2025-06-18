@@ -8,7 +8,6 @@ import { useState } from "react";
 const TeamMembers = () => {
   const [search, setSearch] = useState(null);
   const { data: allTeamMembers } = useAllTeamMembers(search);
-  console.log(allTeamMembers);
   const { mutateAsync: DeleteMemberMutation } = useDeleteTeamMember();
 
   return (
