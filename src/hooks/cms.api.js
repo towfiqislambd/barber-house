@@ -142,3 +142,9 @@ export const Values = async () => {
   const { data } = await axiosSecure("/api/values");
   return data?.data;
 };
+
+// All Services
+export const AllServices = async () => {
+  const { data } = await axiosSecure("/api/catalog-services");
+  return data?.data;
+};

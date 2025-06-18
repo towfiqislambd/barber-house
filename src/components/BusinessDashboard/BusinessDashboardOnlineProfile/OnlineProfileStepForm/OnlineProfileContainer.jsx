@@ -10,10 +10,10 @@ import OnlineProfileStepEleven from "./OnlineProfileStepEleven";
 import OnlineProfileStepTwelve from "./OnlineProfileStepTwelve";
 import OnlineProfileStepFour from "./OnlineProfileStepFour";
 import OnlineProfileStepEight from "./OnlineProfileStepEight";
+import OnlineProfileStepNine from "./OnlineProfileStepNine";
 
 const OnlineProfileContainer = () => {
   const [step, setStep] = useState(1);
-  console.log(step);
 
   // For step form
   const renderStep = () => {
@@ -42,12 +42,15 @@ const OnlineProfileContainer = () => {
       return <OnlineProfileStepEight step={step} setStep={setStep} />;
     }
     if (step === 9) {
-      return <OnlineProfileStepTen step={step} setStep={setStep} />;
+      return <OnlineProfileStepNine step={step} setStep={setStep} />;
     }
     if (step === 10) {
-      return <OnlineProfileStepEleven step={step} setStep={setStep} />;
+      return <OnlineProfileStepTen step={step} setStep={setStep} />;
     }
     if (step === 11) {
+      return <OnlineProfileStepEleven step={step} setStep={setStep} />;
+    }
+    if (step === 12) {
       return <OnlineProfileStepTwelve step={step} setStep={setStep} />;
     }
   };

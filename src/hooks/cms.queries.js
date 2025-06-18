@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  AllServices,
   AllTeamMembers,
   Amenities,
   Catalogue,
@@ -71,5 +72,13 @@ export const useValues = () => {
   return useQuery({
     queryKey: ["values"],
     queryFn: Values,
+  });
+};
+
+// All Services
+export const useAllServices = () => {
+  return useQuery({
+    queryKey: ["all-services"],
+    queryFn: AllServices,
   });
 };

@@ -22,13 +22,19 @@ const OnlineProfileStepFive = ({ step, setStep }) => {
 
   const location = watch("address");
   const [mapUrl, setMapUrl] = useState("");
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  const [locationError, setLocationError] = useState(""); // For lat/lng validation error
 
   useEffect(() => {
     const fetchCoordinates = async () => {
-      if (!location) return;
+      if (!location) {
+        setMapUrl("");
+        setCoordinates({ lat: null, lng: null });
+        return;
+      }
 
       try {
-        const API_KEY = "AIzaSyA_G_EhWhTWpRYaE6_kR8txUKUkmZkvNiQ"; // Replace with your real key
+        const API_KEY = "AIzaSyA_G_EhWhTWpRYaE6_kR8txUKUkmZkvNiQ"; // Replace with your actual key
         const response = await axios.get(
           `https://maps.googleapis.com/maps/api/geocode/json`,
           {
@@ -39,16 +45,22 @@ const OnlineProfileStepFive = ({ step, setStep }) => {
           }
         );
 
-        if (response.data.status === "OK") {
+        if (response.data.status === "OK" && response.data.results.length > 0) {
           const { lat, lng } = response.data.results[0].geometry.location;
-          setMapUrl(
-            `https://www.google.com/maps/embed/v1/place?key=${API_KEY}&q=${lat},${lng}`
-          );
+          setCoordinates({ lat, lng });
+          const mapEmbedUrl = `https://www.google.com/maps/embed/v1/view?key=${API_KEY}&center=${lat},${lng}&zoom=15&maptype=roadmap`;
+          setMapUrl(mapEmbedUrl);
+          setLocationError(""); 
         } else {
-          console.error("Geocoding error:", response.data.status);
+          setMapUrl("");
+          setCoordinates({ lat: null, lng: null });
+          setLocationError("Could not find coordinates for this address.");
         }
       } catch (error) {
         console.error("Error fetching location:", error);
+        setMapUrl("");
+        setCoordinates({ lat: null, lng: null });
+        setLocationError("Error fetching location data.");
       }
     };
 
@@ -56,7 +68,22 @@ const OnlineProfileStepFive = ({ step, setStep }) => {
   }, [location]);
 
   const onSubmit = data => {
-    console.log(data);
+    if (!coordinates.lat || !coordinates.lng) {
+      setLocationError(
+        "Please enter a valid address so the map can be loaded correctly."
+      );
+      return;
+    }
+
+    setLocationError(""); 
+
+    const submissionData = {
+      ...data,
+      latitude: coordinates.lat,
+      longitude: coordinates.lng,
+    };
+
+    console.log(submissionData);
     setStep(step + 1);
   };
 
@@ -110,33 +137,40 @@ const OnlineProfileStepFive = ({ step, setStep }) => {
                 <ZooSvg />
               </button>
             </div>
+
+            {/* react-hook-form validation */}
             {errors.address && (
               <p className="text-red-500 text-sm mt-1">
                 {errors.address.message}
               </p>
             )}
+            {/* Custom lat/lng validation */}
+            {locationError && (
+              <p className="text-red-500 text-sm mt-1">{locationError}</p>
+            )}
           </div>
 
           <div className="mt-6 rounded-t-[16px]">
-            <iframe
-              className="w-full max-w-[531px] h-[300px] mx-auto border-0"
-              src={mapUrl}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            {mapUrl ? (
+              <iframe
+                className="w-full max-w-[531px] h-[300px] mx-auto border-0"
+                src={mapUrl}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="business location map"
+              ></iframe>
+            ) : (
+              <div className="w-full max-w-[531px] h-[300px] mx-auto border border-gray-300 flex items-center justify-center rounded-t-[16px]">
+                <p className="text-gray-500">Loading map...</p>
+              </div>
+            )}
 
             <div className="border-b border-l border-r border-[#DFE1E6] max-w-[531px] mx-auto p-4 rounded-b-2xl">
               <div className="flex justify-between items-center">
                 <h1 className="text-textColor font-manrope text-sm font-semibold">
                   {location}
                 </h1>
-                <button
-                  type="button"
-                  className="border border-[#2C2C2C] px-5 py-2 h-[37px] rounded-[100px] text-textColor font-manrope text-sm font-bold leading-[21px]"
-                >
-                  Edit
-                </button>
               </div>
             </div>
 
