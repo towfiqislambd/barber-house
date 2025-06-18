@@ -1,10 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  AllServices,
   AllTeamMembers,
+  Amenities,
   Catalogue,
+  Highlights,
   ProductsBrand,
   ProductsCategory,
   ServicesType,
+  Values,
 } from "./cms.api";
 
 // Services Type
@@ -44,5 +48,37 @@ export const useProductsCategory = () => {
   return useQuery({
     queryKey: ["products-category"],
     queryFn: ProductsCategory,
+  });
+};
+
+// Amenities
+export const useAmenities = () => {
+  return useQuery({
+    queryKey: ["amenities"],
+    queryFn: Amenities,
+  });
+};
+
+// Highlights
+export const useHighlights = () => {
+  return useQuery({
+    queryKey: ["highlights"],
+    queryFn: Highlights,
+  });
+};
+
+// Values
+export const useValues = () => {
+  return useQuery({
+    queryKey: ["values"],
+    queryFn: Values,
+  });
+};
+
+// All Services
+export const useAllServices = () => {
+  return useQuery({
+    queryKey: ["all-services"],
+    queryFn: AllServices,
   });
 };

@@ -7,7 +7,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useForm, Controller } from "react-hook-form";
 
-const OnlineProfileStepThree = ({ step, setStep }) => {
+const OnlineProfileStepThree = ({ step, setStep, setFormData }) => {
   const {
     handleSubmit,
     control,
@@ -21,7 +21,7 @@ const OnlineProfileStepThree = ({ step, setStep }) => {
   });
 
   const onSubmit = data => {
-    console.log(data);
+    setFormData(prevData => ({ ...prevData, ...data }));
     setStep(step + 1);
   };
 
