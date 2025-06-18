@@ -79,7 +79,7 @@ const OnlineProfileStepFive = ({ step, setStep, setFormData }) => {
 
     const submissionData = {
       ...data,
-      latitude: coordinates.lat.toString(), 
+      latitude: coordinates.lat.toString(),
       longitude: coordinates.lng.toString(),
     };
 
