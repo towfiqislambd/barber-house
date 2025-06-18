@@ -148,3 +148,9 @@ export const AllServices = async () => {
   const { data } = await axiosSecure("/api/catalog-services");
   return data?.data;
 };
+
+// Add Online Store:
+export const AddOnlineStore = async payload => {
+  const { data } = await axiosSecure.post(`api/online-store/register`, payload);
+  return data?.data;
+};

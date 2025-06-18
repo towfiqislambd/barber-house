@@ -34,7 +34,7 @@ const OnlineProfileStepFive = ({ step, setStep, setFormData }) => {
       }
 
       try {
-        const API_KEY = "AIzaSyA_G_EhWhTWpRYaE6_kR8txUKUkmZkvNiQ"; // Replace with your actual key
+        const API_KEY = "AIzaSyDl7ias7CMBPanjqPisVXwhXXVth21Cl5Y"; // Replace with your actual key
         const response = await axios.get(
           `https://maps.googleapis.com/maps/api/geocode/json`,
           {
@@ -68,22 +68,22 @@ const OnlineProfileStepFive = ({ step, setStep, setFormData }) => {
   }, [location]);
 
   const onSubmit = data => {
-    // if (!coordinates.lat || !coordinates.lng) {
-    //   setLocationError(
-    //     "Please enter a valid address so the map can be loaded correctly."
-    //   );
-    //   return;
-    // }
+    if (!coordinates.lat || !coordinates.lng) {
+      setLocationError(
+        "Please enter a valid address so the map can be loaded correctly."
+      );
+      return;
+    }
 
-    // setLocationError("");
+    setLocationError("");
 
     const submissionData = {
       ...data,
-      latitude: coordinates.lat,
-      longitude: coordinates.lng,
+      latitude: coordinates.lat.toString(), 
+      longitude: coordinates.lng.toString(),
     };
 
-    console.log(submissionData);
+    setFormData(prevData => ({ ...prevData, ...submissionData }));
     setStep(step + 1);
   };
 

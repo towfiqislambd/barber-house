@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OnlineProfileStepOne from "./OnlineProfileStepOne";
 import OnlineProfileStepTwo from "./OnlineProfileStepTwo";
 import OnlineProfileStepThree from "./OnlineProfileStepThree";
@@ -15,6 +15,7 @@ import OnlineProfileStepNine from "./OnlineProfileStepNine";
 const OnlineProfileContainer = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(null);
+
   console.log(formData);
 
   // For step form
