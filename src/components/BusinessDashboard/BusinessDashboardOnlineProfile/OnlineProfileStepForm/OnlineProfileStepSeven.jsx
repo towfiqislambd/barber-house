@@ -9,7 +9,7 @@ import {
 import acceptableImg from "../../../../assets/images/online-profile/acceptableImg.png";
 import salon2Img from "../../../../assets/images/online-profile/salon2.png";
 
-const OnlineProfileStepSeven = ({ step, setStep }) => {
+const OnlineProfileStepSeven = ({ step, setStep, setFormData }) => {
   return (
     <section className="md:px-[14px] sm:px-6 lg:px-0">
       <div className="flex justify-between container mt-9">

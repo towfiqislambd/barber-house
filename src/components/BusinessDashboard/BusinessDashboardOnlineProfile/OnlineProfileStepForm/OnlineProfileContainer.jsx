@@ -14,44 +14,130 @@ import OnlineProfileStepNine from "./OnlineProfileStepNine";
 
 const OnlineProfileContainer = () => {
   const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState(null);
+  console.log(formData);
 
   // For step form
   const renderStep = () => {
     if (step === 1) {
-      return <OnlineProfileStepOne step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepOne
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 2) {
-      return <OnlineProfileStepTwo step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepTwo
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 3) {
-      return <OnlineProfileStepThree step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepThree
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 4) {
-      return <OnlineProfileStepFour step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepFour
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 5) {
-      return <OnlineProfileStepFive step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepFive
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 6) {
-      return <OnlineProfileStepSix step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepSix
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 7) {
-      return <OnlineProfileStepSeven step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepSeven
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 8) {
-      return <OnlineProfileStepEight step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepEight
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 9) {
-      return <OnlineProfileStepNine step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepNine
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 10) {
-      return <OnlineProfileStepTen step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepTen
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 11) {
-      return <OnlineProfileStepEleven step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepEleven
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 12) {
-      return <OnlineProfileStepTwelve step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepTwelve
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
   };
   return (

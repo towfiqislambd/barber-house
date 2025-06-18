@@ -2,7 +2,6 @@ import {
   ContinueButtonArrowSvg,
   LeftSideArrowSvg,
 } from "@/components/svgContainer/SvgContainer";
-import { Link } from "react-router-dom";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { useForm, Controller } from "react-hook-form";
 
-const OnlineProfileStepFour = ({ step, setStep }) => {
+const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
   const {
     handleSubmit,
     control,
@@ -31,7 +30,7 @@ const OnlineProfileStepFour = ({ step, setStep }) => {
   });
 
   const onSubmit = data => {
-    console.log(data);
+    setFormData(prevData => ({ ...prevData, ...data }));
     setStep(step + 1);
   };
 

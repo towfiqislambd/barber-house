@@ -6,7 +6,7 @@ import { useAmenities, useHighlights, useValues } from "@/hooks/cms.queries";
 import { useState } from "react";
 import clsx from "clsx";
 
-const OnlineProfileStepTen = ({ step, setStep }) => {
+const OnlineProfileStepTen = ({ step, setStep, setFormData }) => {
   const { data: allAmenities } = useAmenities();
   const { data: allHighlights } = useHighlights();
   const { data: allValues } = useValues();
@@ -35,9 +35,12 @@ const OnlineProfileStepTen = ({ step, setStep }) => {
     }
 
     setValidationError("");
-    console.log(amenities);
-    console.log(highlights);
-    console.log(values);
+    setFormData(prevData => ({
+      ...prevData,
+      amenities,
+      highlights,
+      values,
+    }));
     setStep(step + 1);
   };
 

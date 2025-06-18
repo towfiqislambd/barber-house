@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 
-const OnlineProfileStepTwo = ({ step, setStep }) => {
+const OnlineProfileStepTwo = ({ step, setStep, setFormData }) => {
   const {
     register,
     handleSubmit,
@@ -15,7 +15,7 @@ const OnlineProfileStepTwo = ({ step, setStep }) => {
   } = useForm();
 
   const onSubmit = data => {
-    console.log(data);
+    setFormData(prevData => ({ ...prevData, ...data }));
     setStep(step + 1);
   };
 

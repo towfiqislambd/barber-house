@@ -8,7 +8,7 @@ import {
 
 const { Dragger } = Upload;
 
-const OnlineProfileStepEight = ({ step, setStep }) => {
+const OnlineProfileStepEight = ({ step, setStep, setFormData }) => {
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
 
@@ -36,8 +36,7 @@ const OnlineProfileStepEight = ({ step, setStep }) => {
       setError("Please upload at least 2 images.");
       return;
     }
-
-    console.log(images);
+    setFormData(prevData => ({ ...prevData, images }));
     setError("");
     setStep(step + 1);
   };

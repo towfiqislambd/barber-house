@@ -8,7 +8,7 @@ import {
 } from "@/components/svgContainer/SvgContainer";
 import { Input } from "@/components/ui/input";
 
-const OnlineProfileStepFive = ({ step, setStep }) => {
+const OnlineProfileStepFive = ({ step, setStep, setFormData }) => {
   const {
     register,
     handleSubmit,
@@ -50,7 +50,7 @@ const OnlineProfileStepFive = ({ step, setStep }) => {
           setCoordinates({ lat, lng });
           const mapEmbedUrl = `https://www.google.com/maps/embed/v1/view?key=${API_KEY}&center=${lat},${lng}&zoom=15&maptype=roadmap`;
           setMapUrl(mapEmbedUrl);
-          setLocationError(""); 
+          setLocationError("");
         } else {
           setMapUrl("");
           setCoordinates({ lat: null, lng: null });
@@ -68,14 +68,14 @@ const OnlineProfileStepFive = ({ step, setStep }) => {
   }, [location]);
 
   const onSubmit = data => {
-    if (!coordinates.lat || !coordinates.lng) {
-      setLocationError(
-        "Please enter a valid address so the map can be loaded correctly."
-      );
-      return;
-    }
+    // if (!coordinates.lat || !coordinates.lng) {
+    //   setLocationError(
+    //     "Please enter a valid address so the map can be loaded correctly."
+    //   );
+    //   return;
+    // }
 
-    setLocationError(""); 
+    // setLocationError("");
 
     const submissionData = {
       ...data,

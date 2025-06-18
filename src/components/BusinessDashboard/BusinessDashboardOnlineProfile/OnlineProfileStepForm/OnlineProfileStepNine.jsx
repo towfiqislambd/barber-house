@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Command, CommandItem, CommandList } from "@/components/ui/command";
 import { CheckIcon } from "lucide-react";
 
-const OnlineProfileStepNine = ({ step, setStep }) => {
+const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
   const { data: allTeamMembers } = useAllTeamMembers();
   const { data: allServices } = useAllServices();
   const [teams, setTeams] = useState([]);
@@ -35,8 +35,7 @@ const OnlineProfileStepNine = ({ step, setStep }) => {
     setError(hasError);
 
     if (!hasError.team && !hasError.service) {
-      console.log(teams);
-      console.log(services);
+      setFormData(prevData => ({ ...prevData, teams, services }));
       setStep(step + 1);
     }
   };
