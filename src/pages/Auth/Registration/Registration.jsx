@@ -19,6 +19,8 @@ import axios from "axios";
 const Registration = () => {
   const navigate = useNavigate();
   const [userAvatar, setUserAvatar] = useState(null);
+  const [userFile, setUserFile] = useState(null);
+
   const [avatarError, setAvatarError] = useState("");
   const { mutateAsync: registerMutation, isPending } = useRegister();
   const { mutateAsync: socialLoginMutation } = useSocialLogin();
@@ -46,17 +48,19 @@ const Registration = () => {
     },
   });
 
-  const handleImageChange = event => {
+  const handleImageChange = (event) => {
     const file = event.target.files[0];
+
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setUserAvatar(imageUrl);
       setValue("avatar", file);
+      setUserFile(file);
       setAvatarError(""); // Clear error
     }
   };
 
-  const onSubmit = async data => {
+  const onSubmit = async (data) => {
     if (!data.avatar) {
       setAvatarError("Avatar is required");
       return;
@@ -73,12 +77,16 @@ const Registration = () => {
     formData.append("agree_to_terms", data.agree_to_terms ? "1" : "0");
     formData.append("avatar", data.avatar);
 
-    await registerMutation(data);
+    [...formData.entries()].map(([key, value]) => {
+      console.log("key", key, "value", value);
+    });
+
+    await registerMutation(formData);
   };
 
   // login with google:
   const handleLoginWithGoogle = useGoogleLogin({
-    onSuccess: async tokenResponse => {
+    onSuccess: async (tokenResponse) => {
       const token = tokenResponse.access_token;
       try {
         const { data } = await axios(
@@ -103,7 +111,7 @@ const Registration = () => {
         console.error("Error fetching user info:", error);
       }
     },
-    onError: error => {
+    onError: (error) => {
       console.error("Google Login Failed:", error);
     },
   });
@@ -264,14 +272,14 @@ const Registration = () => {
               control={control}
               name="agree_to_terms"
               rules={{
-                validate: value =>
+                validate: (value) =>
                   value === true || "You must agree to the terms",
               }}
               render={({ field }) => (
                 <Checkbox
                   id="terms"
                   checked={field.value}
-                  onCheckedChange={value => field.onChange(value)}
+                  onCheckedChange={(value) => field.onChange(value)}
                 />
               )}
             />
@@ -316,7 +324,7 @@ const Registration = () => {
             Continue with Google
           </h1>
         </button>
-        <p className="flex flex-col items-center md:flex-row mt-5 flex justify-center items-center gap-x-1 ">
+        <p className="flex flex-col items-center md:flex-row mt-5 justify-center  gap-x-1 ">
           Already have an account?
           <Link to="/login" className="underline font-bold cursor-pointer ">
             Log In
