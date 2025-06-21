@@ -26,7 +26,7 @@ export default function UserProfileNavbar() {
           </Link>
 
           {/* Full Form (2xl and up) */}
-          <div className="hidden 2xl:block w-full max-w-[900px] py-[18px] px-[18px] rounded-[48px] bg-[#FFF] shadow-[0px_0px_6px_0px_rgba(0,102,107,0.12)]">
+          {/* <div className="hidden 2xl:block w-full max-w-[900px] py-[18px] px-[18px] rounded-[48px] bg-[#FFF] shadow-[0px_0px_6px_0px_rgba(0,102,107,0.12)]">
             <form>
               <div className="relative">
                 <ul className="flex">
@@ -57,7 +57,7 @@ export default function UserProfileNavbar() {
                 </div>
               </div>
             </form>
-          </div>
+          </div> */}
 
           {/* Hamburger Icon (below 2xl) */}
           <div className="block 2xl:hidden">
