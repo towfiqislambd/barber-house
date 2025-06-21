@@ -17,7 +17,7 @@ export default function KnowledgeBase({ data, data2 }) {
         <div className="flex flex-wrap gap-x-[30px] gap-y-[30px] px-[15px] ">
           {data2.slice(0, visibleCards).map(knowledge => (
             <Link
-              to={"/business/businessdetails"}
+              to={`/business/businessdetails/${knowledge?.id}`}
               className="xl:w-[31.5%]"
               key={knowledge.id}
             >
@@ -36,6 +36,7 @@ export default function KnowledgeBase({ data, data2 }) {
                   <p className="text-[#545454] font-manrope leading-[24px]">
                     {knowledge?.sub_title}
                   </p>
+                  
                 </div>
               </div>
             </Link>

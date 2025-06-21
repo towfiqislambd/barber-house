@@ -4,6 +4,7 @@ import {
   AllTeamMembers,
   Amenities,
   BusinessHelp,
+  BusinessHelpDetails,
   BusinessHome,
   BusinessPricing,
   Catalogue,
@@ -107,5 +108,14 @@ export const useBusinessHelp = () => {
   return useQuery({
     queryKey: ["business-help"],
     queryFn: BusinessHelp,
+  });
+};
+
+// Business Details
+export const useBusinessHelpDetails = id => {
+  return useQuery({
+    queryKey: ["business-help", id],
+    queryFn: () => BusinessHelpDetails(id),
+    enabled: !!id,
   });
 };

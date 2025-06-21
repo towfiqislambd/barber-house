@@ -172,3 +172,9 @@ export const BusinessHelp = async () => {
   const { data } = await axiosPublic("/api/cms/business-help");
   return data?.data;
 };
+
+// Business Details
+export const BusinessHelpDetails = async id => {
+  const { data } = await axiosPublic(`/api/cms/knowledge-base/${id}`);
+  return data?.data;
+};
