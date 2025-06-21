@@ -154,3 +154,9 @@ export const AddOnlineStore = async payload => {
   const { data } = await axiosSecure.post(`api/online-store/register`, payload);
   return data?.data;
 };
+
+// Business Home
+export const BusinessHome = async () => {
+  const { data } = await axiosPublic("/api/cms/business-home");
+  return data?.data;
+};

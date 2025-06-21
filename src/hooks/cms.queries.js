@@ -3,6 +3,7 @@ import {
   AllServices,
   AllTeamMembers,
   Amenities,
+  BusinessHome,
   Catalogue,
   Highlights,
   ProductsBrand,
@@ -80,5 +81,13 @@ export const useAllServices = () => {
   return useQuery({
     queryKey: ["all-services"],
     queryFn: AllServices,
+  });
+};
+
+// Business Home
+export const useBusinessHome = () => {
+  return useQuery({
+    queryKey: ["business-home"],
+    queryFn: BusinessHome,
   });
 };
