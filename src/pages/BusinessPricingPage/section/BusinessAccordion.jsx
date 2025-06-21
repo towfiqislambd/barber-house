@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/accordion";
 
 const BusinessAccordion = ({ data }) => {
-
   return (
     <Accordion type="single" collapsible className="w-full space-y-4">
       {data?.map(item => (

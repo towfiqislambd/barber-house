@@ -178,3 +178,15 @@ export const BusinessHelpDetails = async id => {
   const { data } = await axiosPublic(`/api/cms/knowledge-base/${id}`);
   return data?.data;
 };
+
+// Blog
+export const Blog = async () => {
+  const { data } = await axiosPublic(`/api/cms/blog`);
+  return data?.data;
+};
+
+// Blog Details
+// export const BlogDetails = async id => {
+//   const { data } = await axiosPublic(`/api/cms/knowledge-base/${id}`);
+//   return data?.data;
+// };

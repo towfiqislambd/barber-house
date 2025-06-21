@@ -104,6 +104,17 @@ const BusinessNavbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "businessNavClass text-primary hover:text-primary"
+                    : "businessNavClass hover:text-primary"
+                }
+                to={"/business/blog"}
+              >
+                Blog
+              </NavLink>
+              <NavLink
+                onClick={() => saleMobileMenuActive(false)}
+                className={({ isActive }) =>
+                  isActive
+                    ? "businessNavClass text-primary hover:text-primary"
                     : "businessNavClass hover:text-primary "
                 }
                 to={"/business/signorlogin"}

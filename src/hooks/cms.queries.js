@@ -3,6 +3,7 @@ import {
   AllServices,
   AllTeamMembers,
   Amenities,
+  Blog,
   BusinessHelp,
   BusinessHelpDetails,
   BusinessHome,
@@ -117,5 +118,13 @@ export const useBusinessHelpDetails = id => {
     queryKey: ["business-help", id],
     queryFn: () => BusinessHelpDetails(id),
     enabled: !!id,
+  });
+};
+
+// Blog
+export const useBlog = () => {
+  return useQuery({
+    queryKey: ["blog"],
+    queryFn: Blog,
   });
 };

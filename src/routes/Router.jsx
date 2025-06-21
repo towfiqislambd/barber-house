@@ -30,7 +30,6 @@ import EditService from "@/pages/BusinessDashboardPage/EditService";
 import MembershipCreation from "@/pages/BusinessDashboardPage/MembershipCreation";
 import BusinessHelpCenter from "@/pages/BusinessHelpCenter/BusinessHelpCenter";
 import BusinessHelpCenterDetails from "@/pages/BusinessHelpCenter/BusinessHelpCenterDetails";
-import BusinessHelpCenterDetailsSingleView from "@/pages/BusinessHelpCenter/BusinessHelpCenterDetailsSingleView";
 import BusinessHomePage from "@/pages/BusinessHomePage/BusinessHomePage";
 import BusinessPricingPage from "@/pages/BusinessPricingPage/BusinessPricingPage";
 import ContactUs from "@/pages/ContactUs/ContactUs";
@@ -52,7 +51,6 @@ import ProductHome from "@/pages/Product/ProductHome";
 import Review from "@/pages/Review/Review";
 import SalesPage from "@/pages/schedulingPage/SalesPage";
 import Scheduling from "@/pages/schedulingPage/Scheduling";
-import Sitemap from "@/pages/Sitemap/Sitemap";
 import ChoosePeopleGiftCard from "@/pages/UserDashboardPage/ChoosePeopleGiftCard";
 import GiftCard from "@/pages/UserDashboardPage/GiftCard";
 import MembershipDone from "@/pages/UserDashboardPage/MembershipDone";
@@ -257,28 +255,16 @@ export const router = createBrowserRouter([
         element: <BusinessHelpCenterDetails />,
       },
       {
-        path: "businesssingleview",
-        element: <BusinessHelpCenterDetailsSingleView />,
-      },
-      {
         path: "blog",
         element: <Blog />,
       },
       {
-        path: "blogdetails",
-        element: <BlogDetails />,
-      },
-      {
         path: "contactus",
         element: <ContactUs />,
       },
       {
-        path: "blogdetails",
+        path: "blogdetails/:id",
         element: <BlogDetails />,
-      },
-      {
-        path: "contactus",
-        element: <ContactUs />,
       },
       {
         path: "login",
@@ -295,10 +281,6 @@ export const router = createBrowserRouter([
       {
         path: "signorlogin",
         element: <SignOrLogin />,
-      },
-      {
-        path: "sitemap",
-        element: <Sitemap />,
       },
     ],
   },
