@@ -7,22 +7,22 @@ export const axiosSecure = axios.create({
 
 // ✅ Attach token to requests if available
 axiosSecure.interceptors.request.use(
-  config => {
+  (config) => {
     const token = getItem("token");
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
   },
-  error => {
+  (error) => {
     return Promise.reject(error);
   }
 );
 
 // ✅ Handle expired/invalid tokens globally
 axiosSecure.interceptors.response.use(
-  response => response,
-  async error => {
+  (response) => response,
+  async (error) => {
     if (
       error.response &&
       (error.response.status === 401 || error.response.status === 403)

@@ -1,4 +1,4 @@
-import { axiosPublic } from "./useAxiosPublic";
+import { axiosPublic, axiosPublicReg } from "./useAxiosPublic";
 import { axiosSecure } from "./useAxiosSecure";
 
 // get user data:
@@ -8,25 +8,25 @@ export const GetUserDataFunc = async () => {
 };
 
 // register:
-export const RegisterFunc = async payload => {
-  const { data } = await axiosPublic.post("/api/users/register", payload);
+export const RegisterFunc = async (payload) => {
+  const { data } = await axiosPublicReg.post("/api/users/register", payload);
   return data?.data;
 };
 
 // login:
-export const LoginFunc = async payload => {
+export const LoginFunc = async (payload) => {
   const { data } = await axiosPublic.post("/api/users/login", payload);
   return data?.data;
 };
 
 // social login:
-export const GoogleLoginFunc = async payload => {
+export const GoogleLoginFunc = async (payload) => {
   const { data } = await axiosPublic.post("/api/social-login", payload);
   return data?.data;
 };
 
 // verify email:
-export const VerifyEmailFunc = async payload => {
+export const VerifyEmailFunc = async (payload) => {
   const { data } = await axiosPublic.post(
     "/api/users/login/email-verify",
     payload
@@ -35,7 +35,7 @@ export const VerifyEmailFunc = async payload => {
 };
 
 // otp verify:
-export const OtpVerifyFunc = async payload => {
+export const OtpVerifyFunc = async (payload) => {
   const { data } = await axiosPublic.post(
     "/api/users/login/otp-verify",
     payload
@@ -44,7 +44,7 @@ export const OtpVerifyFunc = async payload => {
 };
 
 // reset password::
-export const ResetPasswordFunc = async payload => {
+export const ResetPasswordFunc = async (payload) => {
   const { data } = await axiosPublic.post(
     "/api/users/login/reset-password",
     payload
