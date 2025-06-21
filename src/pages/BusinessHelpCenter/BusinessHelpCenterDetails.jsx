@@ -1,363 +1,81 @@
-import BreadCrumb from "@/components/BusinessHelpCenter/BreadCrumb/BreadCrumb";
-import calenderImg from "../../assets/images/detailsPageCalenderImg.png";
-import overviewImg from "../../assets/images/overviewImage.png";
-import CallToAction from "@/components/BusinessHomePageCommon/CallToAction/CallToAction";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { HiMiniBars3 } from "react-icons/hi2";
-import { FaRegCircleXmark } from "react-icons/fa6";
+import { UpNextArrowSign } from "@/components/svgContainer/SvgContainer";
+import { useBusinessHelpDetails } from "@/hooks/cms.queries";
+import { useParams } from "react-router-dom";
+import parse from "html-react-parser";
+import { Loader } from "@/components/Loader/Loader";
+import { useEffect } from "react";
 
 export default function BusinessHelpCenterDetails() {
+  const { id } = useParams();
+  const { data: businessHelpDetails, isLoading } = useBusinessHelpDetails(id);
 
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isLoading]);
 
-  const [salesetting, setSalesetting] = useState(false);
-  const saleMobileMenuActive = () => {
-    setSalesetting(!salesetting)
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
   }
 
   return (
-    <section className="">
-      <div className="fixed z-[30] top-[90px] block xl:hidden">
-        <button onClick={saleMobileMenuActive} className="bg-teal-600 text-white py-[1px] pl-[2px] pr-[5px] rounded-tr-[5px] rounded-br-[5px] text-[24px]" ><HiMiniBars3 /></button>
-      </div>
-      <div className="xl:py-[68px] container mb-[20px]">
-        <BreadCrumb
-          items={[
-            { label: "Help center", href: "/" },
-            { label: "Knowledge base", href: "/docs/components" },
-            { label: "Calendar and schedule" },
-          ]}
-        />
-        <div className="flex flex-col xl:flex-row items-start xl:items-center gap-3 mt-6">
-          <img src={calenderImg} alt="Not Found" />
-          <h1 className="text-textSecondary font-outfit text-[28px] xl:text-5xl font-semibold xl:leading-[57.6px]">
-            Calendar and schedule
-          </h1>
+    <section className="py-20">
+      <div className="container">
+        {/* Single item */}
+        <div className="flex h-[100%] flex-col gap-[18px] w-full rounded-[16px] shadow-[0px_2px_16px_0px_rgba(0,0,0,0.08)] border border-[#dfe1e6] py-[18px] px-[24px]">
+          <div className="w-[60px] h-[60px] m-auto xl:m-0">
+            <img
+              className="w-full h-full object-cover"
+              src={`${import.meta.env.VITE_SITE_URL}/${
+                businessHelpDetails?.knowledge_base_item?.icon
+              }`}
+              alt=""
+            />
+          </div>
+          <div className="text-center xl:text-start">
+            <h4 className="mb-[14px] text-[#1E1E1E] font-outfit text-[24px] font-semibold leading-[28px]">
+              {businessHelpDetails?.knowledge_base_item?.title}
+            </h4>
+            <p className="text-[#545454] font-manrope leading-[24px]">
+              {businessHelpDetails?.knowledge_base_item?.sub_title}
+            </p>
+            {typeof businessHelpDetails?.knowledge_base_item?.description ===
+            "string"
+              ? parse(businessHelpDetails?.knowledge_base_item?.description)
+              : businessHelpDetails?.knowledge_base_item?.description}
+          </div>
         </div>
-        <p className="max-w-[1053px] mt-2 text-textLight font-manrope text-[16px] xl:text-lg leading-[27px]">
-          The Fresha calendar is a powerful scheduling tool that allows your
-          businesses to manage appointments, team availability, and resources in
-          one central place. Designed for flexibility and ease, it helps you
-          stay on top of your bookings while reducing admin time.
-        </p>
-      </div>
-      {/* This is the right side section */}
-      <div className="container flex gap-[39px] pb-[40px] xl:pb-[129px] h-[100vh] overflow-hidden">
-        {/*  */}
 
-        {salesetting && (
+        {/* Map */}
+        {businessHelpDetails?.related_items?.map((appointment, index) => (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-5"
-            onClick={() => setSalesetting(false)}
-          ></div>
-        )}
-
-
-        <div className={`fixed z-[99] transition-all duration-300 xl:z-[10] w-[280px] xl:w-[343px] border bg-[#fff] border-[#DFE1E6] rounded-2xl px-[15px] xl:p-6 space-y-[20px] xl:space-y-[30px] h-[812px] xl:sticky top-0 ${salesetting ? "translate-x-[-6%]" : "translate-x-[-110%]  xl:translate-x-[0%]"} `}>
-          {/* Calendar and appointments */}
-
-          <div className="block xl:hidden">
-            <div className="mt-[20px] flex justify-end">
-              <button onClick={() => setSalesetting(false)} className="text-teal-600 text-[24px]"><FaRegCircleXmark /></button>
+            key={index}
+            className={`flex gap-2 pb-4 mt-[43px] ${
+              index !== businessHelpDetails.length - 1 ? "border-b" : ""
+            }`}
+          >
+            <UpNextArrowSign />
+            <div>
+              <h1 className="text-textSecondary font-manrope text-lg font-medium leading-[27px]">
+                {appointment.title}
+              </h1>
+              <p className="text-textLight font-manrope text-base leading-6">
+                {appointment.sub_title}
+              </p>
             </div>
           </div>
-          <div className="flex flex-col mt-[0px] ">
-            <h1 className="text-textSecondary font-outfit text-[18px] xl:text-[22px] font-medium leading-normal">
-              Calendar and appointments
-            </h1>
-            <Link
-              to={"#overview"}
-              className="text-textLight font-manrope text-[16px] xl:text-lg font-medium leading-[27px] mt-[0px] xl:mt-[10px]"
-            >
-              Overview
-            </Link>
-          </div>
-          {/* Scheduling */}
-          <div className="flex flex-col gap-[10px] xl:gap-[26px]">
-            <h1 className="text-textSecondary font-outfit text-[18px] xl:text-[22px] font-medium leading-normal">
-              Scheduling
-            </h1>
-            <Link
-              to={"/"}
-              className="text-textLight font-manrope xl:text-lg font-medium leading-[27px]"
-            >
-              Overview
-            </Link>
-            <Link
-              to={"#appointments"}
-              className="text-textLight font-manrope xl:text-lg font-medium leading-[27px]"
-            >
-              Appointments
-            </Link>
-            <Link
-              to={"#groupAppointments"}
-              className="text-textLight font-manrope xl:text-lg font-medium leading-[27px]"
-            >
-              Group appointments
-            </Link>
-            <Link
-              to={"#blockedTime"}
-              className="text-textLight font-manrope xl:text-lg font-medium leading-[27px]"
-            >
-              Blocked time
-            </Link>
-            <Link
-              to={"/"}
-              className="text-textLight font-manrope xl:text-lg font-medium leading-[27px]"
-            >
-              Waitlist
-            </Link>
-          </div>
-          {/* Calendar availability */}
-          <div className="flex flex-col gap-[10px] xl:gap-[26px]">
-            <h1 className="text-textSecondary font-outfit text-[18px] xl:text-[22px] font-medium leading-normal">
-              Calendar availability
-            </h1>
-            <Link
-              to={"/"}
-              className="text-textLight font-manrope xl:text-lg font-medium leading-[27px]"
-            >
-              Managing the schedule
-            </Link>
-            <Link
-              to={"/"}
-              className="text-textLight font-manrope xl:text-lg font-medium leading-[27px]"
-            >
-              Availability settings
-            </Link>
-          </div>
-          {/* Calendar settings */}
-          <div className="flex flex-col gap-[10px] xl:gap-[26px]">
-            <h1 className="text-textSecondary font-outfit text-[18px] xl:text-[22px] font-medium leading-normal">
-              Calendar and appointments
-            </h1>
-            <Link
-              to={"/"}
-              className="text-textLight font-manrope xl:text-lg font-medium leading-[27px]"
-            >
-              Calendar view
-            </Link>
-          </div>
-        </div>
-
-
-        {/*  */}
-        <div className="flex flex-col gap-y-[46px] overflow-y-auto h-full hide-scrollbar">
-          {/* Overview */}
-          <Link to={"/business/businesssingleview"}>
-            <h1
-              id="overview"
-              className="text-textSecondary font-outfit text-[24px] xl:text-[28px] font-semibold leading-[33.6px]"
-            >
-              Overview
-            </h1>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  About the calendar
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  An introduction to your calendar, an all in one scheduling
-                  tool.
-                </p>
-              </div>
-            </div>
-          </Link>
-          {/* Appointments */}
-          <Link to={"/business/businesssingleview"}>
-            <h1
-              id="appointments"
-              className="text-textSecondary font-outfit text-[24px] xl:text-[28px] font-semibold leading-[33.6px]"
-            >
-              Appointments
-            </h1>
-            {/* This is the image section */}
-            <div className="flex xl:flex-row flex-col gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  Create appointments
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  Start scheduling appointments with detailed client and service
-                  information.
-                </p>
-              </div>
-            </div>
-            {/* This is the image section */}
-            <div className="flex xl:flex-row flex-col gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  Create appointments
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  Start scheduling appointments with detailed client and service
-                  information.
-                </p>
-              </div>
-            </div>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  Create appointments
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  Start scheduling appointments with detailed client and service
-                  information.
-                </p>
-              </div>
-            </div>
-          </Link>
-          {/* Group appointments */}
-          <Link to={"/business/businesssingleview"}>
-            <h1
-              id="groupAppointments"
-              className="text-textSecondary font-outfit text-[24px] xl:text-[28px] font-semibold leading-[33.6px]"
-            >
-              Group appointments
-            </h1>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  Create appointments
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  Start scheduling appointments with detailed client and service
-                  information.
-                </p>
-              </div>
-            </div>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7  bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  Create appointments
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  Start scheduling appointments with detailed client and service
-                  information.
-                </p>
-              </div>
-            </div>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7  bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  About the calendar
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  An introduction to your calendar, an all in one scheduling
-                  tool.
-                </p>
-              </div>
-            </div>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  About the calendar
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  An introduction to your calendar, an all in one scheduling
-                  tool.
-                </p>
-              </div>
-            </div>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  About the calendar
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  An introduction to your calendar, an all in one scheduling
-                  tool.
-                </p>
-              </div>
-            </div>
-          </Link>
-          {/* Blocked time */}
-          <Link to={"/business/businesssingleview"}>
-            <h1
-              id="blockedTime"
-              className="text-textSecondary font-outfit text-[24px] xl:text-[28px] font-semibold leading-[33.6px]"
-            >
-              Blocked time
-            </h1>
-            {/* This is the image section */}
-            <div className=" flex flex-col xl:flex-row gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  Create appointments
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  Start scheduling appointments with detailed client and service
-                  information.
-                </p>
-              </div>
-            </div>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  Create appointments
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  Start scheduling appointments with detailed client and service
-                  information.
-                </p>
-              </div>
-            </div>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  About the calendar
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  An introduction to your calendar, an all in one scheduling
-                  tool.
-                </p>
-              </div>
-            </div>
-            {/* This is the image section */}
-            <div className="flex flex-col xl:flex-row gap-[17px] mt-7 bg-[#f7f7f7] xl:bg-transparent rounded-[10px] p-[15px]">
-              <img src={overviewImg} alt="Not Found" />
-              <div className="space-y-2">
-                <h1 className="text-textSecondary font-outfit text-[20px] xl:text-2xl font-medium leading-[28.8px]">
-                  About the calendar
-                </h1>
-                <p className="text-textLight font-manrope text-base leading-[24px]">
-                  An introduction to your calendar, an all in one scheduling
-                  tool.
-                </p>
-              </div>
-            </div>
-          </Link>
-        </div>
+        ))}
       </div>
-      {/* Here to help */}
-      <CallToAction
-        title={"Here to help"}
-        subtitle={
-          "Can't find an answer? We've got the solution. Find more support and connect with our team."
-        }
-        btnText={"Contact Us"}
-      />
     </section>
   );
 }

@@ -20,7 +20,7 @@ export function Loader() {
       width={isMobile ? "50" : "70"}
       color="grey"
       strokeWidth="5"
-      strokeColor={"pink"}
+      strokeColor="pink"
       animationDuration="0.75"
       ariaLabel="rotating-lines-loading"
       wrapperStyle={{}}

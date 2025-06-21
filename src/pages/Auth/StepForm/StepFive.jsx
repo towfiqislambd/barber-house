@@ -102,8 +102,8 @@ const StepFive = ({ step, setStep, setFormData, formData }) => {
     );
 
     // Fixed latitude and longitude
-    formDataToSend.append("latitude", "25.809232");
-    formDataToSend.append("longitude", "93.545512");
+    formDataToSend.append("latitude", formData.latitude);
+    formDataToSend.append("longitude", formData.longitude);
 
     await boardingMutation(formDataToSend);
   };

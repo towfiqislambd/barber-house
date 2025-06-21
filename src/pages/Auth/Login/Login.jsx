@@ -1,12 +1,10 @@
 import {
-  AppleLogoSvg,
-  FacebookLogoSvg,
   GoogleSvg,
   LeftSideArrowSvg,
 } from "@/components/svgContainer/SvgContainer";
 import loginImg from "../../../assets/images/loginImage.png";
 import orImg from "../../../assets/images/login/or.png";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useLogin, useSocialLogin } from "@/hooks/auth.hook.";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
 import { useForm } from "react-hook-form";
@@ -164,34 +162,6 @@ const Login = () => {
               Continue with Google
             </h1>
           </button>
-          <Link className="flex gap-3 justify-center border border-[#1E1E1E] py-[14px] px-[16px] rounded-[10px] items-center">
-            <FacebookLogoSvg />
-            <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
-              Continue with Facebook
-            </h1>
-          </Link>
-          <Link className="flex gap-3 justify-center border border-[#1E1E1E] py-[14px] px-[16px] rounded-[10px] items-center">
-            <AppleLogoSvg />
-            <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
-              Continue with Apple
-            </h1>
-          </Link>
-        </div>
-
-        {/* Footer Links */}
-        <div className="max-w-[439px] mx-auto mt-[28px]">
-          <h1 className="text-textSecondary font-outfit font-medium leading-[29.52px] text-lg">
-            Are you a customer looking to booking an appointment{" "}
-            <span className="text-primary font-outfit text-lg leading-[29.52px]">
-              Go to BS Business for customer
-            </span>
-          </h1>
-        </div>
-        <div className="max-w-[442px] mx-auto mt-[30px] xl:mt-24 mb-[30px]">
-          <h1 className="text-textSecondary font-outfit text-lg leading-[29.52px]">
-            This site is protected by reCAPTCHA Google Privacy Policy and Terms
-            of Service apply
-          </h1>
         </div>
       </div>
     </section>
