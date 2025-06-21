@@ -3,6 +3,7 @@ import {
   AllServices,
   AllTeamMembers,
   Amenities,
+  BusinessHelp,
   BusinessHome,
   BusinessPricing,
   Catalogue,
@@ -98,5 +99,13 @@ export const useBusinessPricing = () => {
   return useQuery({
     queryKey: ["business-pricing"],
     queryFn: BusinessPricing,
+  });
+};
+
+// Business Help
+export const useBusinessHelp = () => {
+  return useQuery({
+    queryKey: ["business-help"],
+    queryFn: BusinessHelp,
   });
 };

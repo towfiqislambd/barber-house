@@ -1,6 +1,6 @@
 import { IoSearchOutline } from "react-icons/io5";
 
-export default function SearchBoxl() {
+export default function SearchBoxl({ data }) {
   const buttonStyle =
     "border py-[10px] xl:py-[4px] px-[4px] text-[13px] font-manrope font-semibold rounded-[8px] text-[#2C2C2C] w-full xl:w-max";
   return (
@@ -9,7 +9,7 @@ export default function SearchBoxl() {
         <div className="flex gap-[30px] flex-col xl:flex-row items-center px-[15px]">
           <div className=" xl:w-[470px] flex-shrink-0">
             <h2 className="text-[24px] xl:text-[72px] font-semibold xl:leading-[86px] font-outfit">
-              Explore. Learn. Grow.
+              {data?.title}
             </h2>
           </div>
           <div className="w-full flex gap-[30px] flex-col">

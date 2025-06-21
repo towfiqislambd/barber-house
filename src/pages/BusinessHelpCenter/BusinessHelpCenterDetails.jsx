@@ -1,4 +1,3 @@
-import BreadCrumb from "@/components/BusinessHelpCenter/BreadCrumb/BreadCrumb";
 import calenderImg from "../../assets/images/detailsPageCalenderImg.png";
 import overviewImg from "../../assets/images/overviewImage.png";
 import CallToAction from "@/components/BusinessHomePageCommon/CallToAction/CallToAction";
@@ -8,8 +7,6 @@ import { HiMiniBars3 } from "react-icons/hi2";
 import { FaRegCircleXmark } from "react-icons/fa6";
 
 export default function BusinessHelpCenterDetails() {
-
-
   const [salesetting, setSalesetting] = useState(false);
   const saleMobileMenuActive = () => {
     setSalesetting(!salesetting)
@@ -21,13 +18,6 @@ export default function BusinessHelpCenterDetails() {
         <button onClick={saleMobileMenuActive} className="bg-teal-600 text-white py-[1px] pl-[2px] pr-[5px] rounded-tr-[5px] rounded-br-[5px] text-[24px]" ><HiMiniBars3 /></button>
       </div>
       <div className="xl:py-[68px] container mb-[20px]">
-        <BreadCrumb
-          items={[
-            { label: "Help center", href: "/" },
-            { label: "Knowledge base", href: "/docs/components" },
-            { label: "Calendar and schedule" },
-          ]}
-        />
         <div className="flex flex-col xl:flex-row items-start xl:items-center gap-3 mt-6">
           <img src={calenderImg} alt="Not Found" />
           <h1 className="text-textSecondary font-outfit text-[28px] xl:text-5xl font-semibold xl:leading-[57.6px]">
