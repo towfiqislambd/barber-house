@@ -5,7 +5,7 @@ import CallToAction from "@/components/BusinessHomePageCommon/CallToAction/CallT
 
 export default function BusinessHelpCenter() {
   return (
-    <main>
+    <>
       <SearchBoxl />
       <PopularArticals />
       <KnowledgeBase />
@@ -16,6 +16,6 @@ export default function BusinessHelpCenter() {
         }
         btnText={"Contact Us"}
       />
-    </main>
+    </>
   );
 }

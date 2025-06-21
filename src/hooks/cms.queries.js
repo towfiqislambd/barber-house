@@ -4,6 +4,7 @@ import {
   AllTeamMembers,
   Amenities,
   BusinessHome,
+  BusinessPricing,
   Catalogue,
   Highlights,
   ProductsBrand,
@@ -89,5 +90,13 @@ export const useBusinessHome = () => {
   return useQuery({
     queryKey: ["business-home"],
     queryFn: BusinessHome,
+  });
+};
+
+// Business Pricing
+export const useBusinessPricing = () => {
+  return useQuery({
+    queryKey: ["business-pricing"],
+    queryFn: BusinessPricing,
   });
 };

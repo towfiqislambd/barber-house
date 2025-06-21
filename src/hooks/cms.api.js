@@ -160,3 +160,9 @@ export const BusinessHome = async () => {
   const { data } = await axiosPublic("/api/cms/business-home");
   return data?.data;
 };
+
+// Business Pricing
+export const BusinessPricing = async () => {
+  const { data } = await axiosPublic("/api/cms/business-pricing");
+  return data?.data;
+};

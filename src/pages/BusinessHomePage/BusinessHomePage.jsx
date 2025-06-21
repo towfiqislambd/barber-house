@@ -31,7 +31,7 @@ const BusinessHomePage = () => {
   }
 
   return (
-    <div>
+    <>
       <BusinessHomeBanner data={businessHome} />
       <TopRated data={businessHome?.stats} />
       <GrowBusiness data={businessHome?.grow_business} />
@@ -43,7 +43,7 @@ const BusinessHomePage = () => {
         btnText={businessHome?.interested?.button_text}
       />
       <WhatOurUserSay data={businessHome?.client_says} />
-    </div>
+    </>
   );
 };
 

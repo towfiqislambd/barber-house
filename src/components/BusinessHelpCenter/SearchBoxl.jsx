@@ -30,30 +30,6 @@ export default function SearchBoxl() {
                 </div>
               </form>
             </div>
-            <div className="flex items-center flex-col xl:flex-row gap-[10px]">
-              <div className="flex-shrink-0 w-[120px] text-[#2C2C2C] font-manrope font-semibold text-[14px]">
-                {" "}
-                <p className="">Frequently asked:</p>{" "}
-              </div>
-              <div className="">
-                <form action="">
-                  <div className="flex gap-[10px] flex-wrap justify-center">
-                    <button className={buttonStyle}>
-                      How to create an appointment
-                    </button>
-                    <button className={buttonStyle}>
-                      How to create an appointment
-                    </button>
-                    <button className={buttonStyle}>
-                      How to create an appointment
-                    </button>
-                    <button className={buttonStyle}>
-                      How to create an appointment
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
           </div>
         </div>
       </div>
