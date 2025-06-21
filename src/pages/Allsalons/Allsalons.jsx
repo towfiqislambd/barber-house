@@ -1,6 +1,5 @@
 import { useState } from "react";
 import UserProfileNavbar from "./../../shared/UserProfile/UserProfileNavbar";
-import BrowseByCities from "@/components/HomePageComponents/BrowseByCities";
 import HomepageReview from "../Homepage/sections/HomepageReview";
 import LeftSideCard from "../Home/SearchResultPage/Section/LeftSideCard";
 import currencyImg from "../../assets/images/searchResultPage/currentcy.png";
@@ -100,7 +99,6 @@ const Allsalons = () => {
         </div>
       </div>
       <HomepageReview review={"Top Reviews of Hair Salons Near in Medina"} />
-      <BrowseByCities />
     </>
   );
 };

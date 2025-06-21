@@ -8,6 +8,7 @@ import { useEffect } from "react";
 export default function BusinessHelpCenterDetails() {
   const { id } = useParams();
   const { data: businessHelpDetails, isLoading } = useBusinessHelpDetails(id);
+
   useEffect(() => {
     if (isLoading) {
       document.body.style.overflow = "hidden";
