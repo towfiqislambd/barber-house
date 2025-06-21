@@ -29,7 +29,7 @@ const BusinessNavbar = () => {
     >
       <div className="container flex justify-between items-center">
         <div>
-          <Link to={"/business"}>
+          <Link to={"/"}>
             <img
               className="w-[60px] h-[60px] xl:w-[100px] xl:h-[100px] object-cover"
               src={logo}
@@ -104,6 +104,17 @@ const BusinessNavbar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "businessNavClass text-primary hover:text-primary"
+                    : "businessNavClass hover:text-primary"
+                }
+                to={"/business/blog"}
+              >
+                Blog
+              </NavLink>
+              <NavLink
+                onClick={() => saleMobileMenuActive(false)}
+                className={({ isActive }) =>
+                  isActive
+                    ? "businessNavClass text-primary hover:text-primary"
                     : "businessNavClass hover:text-primary "
                 }
                 to={"/business/signorlogin"}
@@ -121,7 +132,7 @@ const BusinessNavbar = () => {
               >
                 Login
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 onClick={() => saleMobileMenuActive(false)}
                 className={({ isActive }) =>
                   isActive
@@ -131,7 +142,7 @@ const BusinessNavbar = () => {
                 to={"/business/contactus"}
               >
                 Contact Us
-              </NavLink>
+              </NavLink> */}
               <div className="group flex gap-1 cursor-pointer items-center hover:text-primary">
                 <NavLink
                   onClick={() => saleMobileMenuActive(false)}

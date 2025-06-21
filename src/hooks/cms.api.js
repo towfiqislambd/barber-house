@@ -154,3 +154,39 @@ export const AddOnlineStore = async payload => {
   const { data } = await axiosSecure.post(`api/online-store/register`, payload);
   return data?.data;
 };
+
+// Business Home
+export const BusinessHome = async () => {
+  const { data } = await axiosPublic("/api/cms/business-home");
+  return data?.data;
+};
+
+// Business Pricing
+export const BusinessPricing = async () => {
+  const { data } = await axiosPublic("/api/cms/business-pricing");
+  return data?.data;
+};
+
+// Business Help
+export const BusinessHelp = async () => {
+  const { data } = await axiosPublic("/api/cms/business-help");
+  return data?.data;
+};
+
+// Business Details
+export const BusinessHelpDetails = async id => {
+  const { data } = await axiosPublic(`/api/cms/knowledge-base/${id}`);
+  return data?.data;
+};
+
+// Blog
+export const Blog = async () => {
+  const { data } = await axiosPublic(`/api/cms/blog`);
+  return data?.data;
+};
+
+// Blog Details
+export const BlogDetails = async slug => {
+  const { data } = await axiosPublic(`/api/cms/blog/${slug}`);
+  return data?.data;
+};

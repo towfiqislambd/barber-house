@@ -4,7 +4,7 @@ import explore2 from "../../assets/images/blog/blog-img-5.png";
 
 const ExploreMore = () => {
   return (
-    <section className="pt-8 bg-white relative">
+    <section className="pt-8 bg-white relative py-20">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 3xl:gap-10 lg:gap-20 gap-10">
           <div className="3xl:space-y-7 space-y-3">

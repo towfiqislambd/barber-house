@@ -3,6 +3,12 @@ import {
   AllServices,
   AllTeamMembers,
   Amenities,
+  Blog,
+  BlogDetails,
+  BusinessHelp,
+  BusinessHelpDetails,
+  BusinessHome,
+  BusinessPricing,
   Catalogue,
   Highlights,
   ProductsBrand,
@@ -80,5 +86,55 @@ export const useAllServices = () => {
   return useQuery({
     queryKey: ["all-services"],
     queryFn: AllServices,
+  });
+};
+
+// Business Home
+export const useBusinessHome = () => {
+  return useQuery({
+    queryKey: ["business-home"],
+    queryFn: BusinessHome,
+  });
+};
+
+// Business Pricing
+export const useBusinessPricing = () => {
+  return useQuery({
+    queryKey: ["business-pricing"],
+    queryFn: BusinessPricing,
+  });
+};
+
+// Business Help
+export const useBusinessHelp = () => {
+  return useQuery({
+    queryKey: ["business-help"],
+    queryFn: BusinessHelp,
+  });
+};
+
+// Business Details
+export const useBusinessHelpDetails = id => {
+  return useQuery({
+    queryKey: ["business-help", id],
+    queryFn: () => BusinessHelpDetails(id),
+    enabled: !!id,
+  });
+};
+
+// Blog
+export const useBlog = () => {
+  return useQuery({
+    queryKey: ["blog"],
+    queryFn: Blog,
+  });
+};
+
+// Business Details
+export const useBlogDetails = slug => {
+  return useQuery({
+    queryKey: ["blog-details", slug],
+    queryFn: () => BlogDetails(slug),
+    enabled: !!slug,
   });
 };

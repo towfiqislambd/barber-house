@@ -5,22 +5,51 @@ import GrowBusiness from "./section/GrowBusiness";
 import StayConnected from "./section/StayConnected";
 import TopRated from "./section/TopRated";
 import WhatOurUserSay from "./section/WhatOurUserSay";
+import { useBusinessHome, useServicesType } from "@/hooks/cms.queries";
+import { Loader } from "@/components/Loader/Loader";
+import { useEffect } from "react";
 
 const BusinessHomePage = () => {
+  const { data: businessHome, isLoading: businessLoading } = useBusinessHome();
+  const { data: servicesTypes, isLoading: servicesLoading } = useServicesType();
+  const isLoading = businessLoading || servicesLoading;
+
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isLoading]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
-    <div>
-      <BusinessHomeBanner />
-      <TopRated />
-      <GrowBusiness />
-      <StayConnected />
-      <GetStarted />
-      <CallToAction
-        title={"Interested to find out more?"}
-        subtitle={"Discover More and Begin Your Journey"}
-        btnText={"Get Start Now"}
+    <>
+      <BusinessHomeBanner data={businessHome} />
+      <TopRated data={businessHome?.stats} />
+      <GrowBusiness data={businessHome?.grow_business} />
+      <StayConnected data={businessHome?.stay_connected?.items} />
+      <GetStarted
+        data={businessHome?.get_started}
+        data2={servicesTypes}
       />
-      <WhatOurUserSay />
-    </div>
+      <CallToAction
+        title={businessHome?.interested?.title}
+        subtitle={businessHome?.interested?.sub_title}
+        btnText={businessHome?.interested?.button_text}
+      />
+      <WhatOurUserSay data={businessHome?.client_says} />
+    </>
   );
 };
 

@@ -3,7 +3,6 @@ import HomepageSliderContainer from "./sections/HomepageSliderContainer";
 import HomepageReview from "./sections/HomepageReview";
 import HomepageStat from "./sections/HomepageStat";
 import ExploreMore from "@/components/HomePageComponents/ExploreMore";
-import BrowseByCities from "@/components/HomePageComponents/BrowseByCities";
 import HomepageBanner from "./sections/HomepageBanner";
 
 const Homepage = () => {
@@ -44,7 +43,6 @@ const Homepage = () => {
       <HomepageReview />
       <HomepageStat />
       <ExploreMore />
-      <BrowseByCities />
     </>
   );
 };
