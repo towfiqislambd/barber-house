@@ -16,7 +16,7 @@ const StepTwo = ({ step, setStep, setFormData }) => {
       setStep(step + 1);
       setFormData(prevData => ({
         ...prevData,
-        service_id, // Only send this to backend
+        service_id,
       }));
     }
   };

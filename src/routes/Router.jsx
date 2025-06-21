@@ -263,7 +263,7 @@ export const router = createBrowserRouter([
         element: <ContactUs />,
       },
       {
-        path: "blogdetails/:id",
+        path: "blogdetails/:slug",
         element: <BlogDetails />,
       },
       {

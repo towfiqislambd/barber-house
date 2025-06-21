@@ -186,7 +186,7 @@ export const Blog = async () => {
 };
 
 // Blog Details
-// export const BlogDetails = async id => {
-//   const { data } = await axiosPublic(`/api/cms/knowledge-base/${id}`);
-//   return data?.data;
-// };
+export const BlogDetails = async slug => {
+  const { data } = await axiosPublic(`/api/cms/blog/${slug}`);
+  return data?.data;
+};

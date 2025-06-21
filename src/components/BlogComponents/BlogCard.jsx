@@ -10,7 +10,7 @@ export default function BlogCard({ blog }) {
           className="2xl:w-[30%] 3xl:w-[31%] 4xl:w-[32%] lg:w-[46%] xl:w-[45%] "
           key={blog.id}
         >
-          <Link to={`/business/blogdetails/${blog?.id}`} className="w-full">
+          <Link to={`/business/blogdetails/${blog?.slug}`} className="w-full">
             <div className="overflow-hidden rounded-tl-[16px] rounded-tr-[16px]">
               <img
                 className="w-full h-[300px] object-cover hover:scale-[1.1] cursor-pointer transition-all"

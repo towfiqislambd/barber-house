@@ -1,28 +1,88 @@
+import { useEffect, useState } from "react";
 import {
   LeftSideArrowSvg,
   LocationSvgInStepFrom,
 } from "@/components/svgContainer/SvgContainer";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const StepFour = ({ step, setStep, setFormData }) => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      address: "",
+      address: "Zoo Road, Dhaka, Bangladesh",
       do_not_business_address: 0,
       calendly: 0,
     },
   });
 
+  const address = watch("address");
+  const [mapUrl, setMapUrl] = useState("");
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  const [locationError, setLocationError] = useState("");
+
+  useEffect(() => {
+    const fetchCoordinates = async () => {
+      if (!address) {
+        setMapUrl("");
+        setCoordinates({ lat: null, lng: null });
+        return;
+      }
+
+      try {
+        const API_KEY = "AIzaSyDl7ias7CMBPanjqPisVXwhXXVth21Cl5Y"; // Replace with your actual key
+        const response = await axios.get(
+          `https://maps.googleapis.com/maps/api/geocode/json`,
+          {
+            params: {
+              address: address,
+              key: API_KEY,
+            },
+          }
+        );
+
+        if (response.data.status === "OK" && response.data.results.length > 0) {
+          const { lat, lng } = response.data.results[0].geometry.location;
+          setCoordinates({ lat, lng });
+          const mapEmbedUrl = `https://www.google.com/maps/embed/v1/view?key=${API_KEY}&center=${lat},${lng}&zoom=15&maptype=roadmap`;
+          setMapUrl(mapEmbedUrl);
+          setLocationError("");
+        } else {
+          setMapUrl("");
+          setCoordinates({ lat: null, lng: null });
+          setLocationError("Could not find coordinates for this address.");
+        }
+      } catch (error) {
+        console.error("Error fetching location:", error);
+        setMapUrl("");
+        setCoordinates({ lat: null, lng: null });
+        setLocationError("Error fetching location data.");
+      }
+    };
+
+    fetchCoordinates();
+  }, [address]);
+
   const onSubmit = data => {
-    // Ensure boolean values are converted to 1 or 0
+    if (!coordinates.lat || !coordinates.lng) {
+      setLocationError(
+        "Please enter a valid address so the map can be loaded correctly."
+      );
+      return;
+    }
+
+    setLocationError("");
+
     const payload = {
       address: data.address,
       do_not_business_address: data.do_not_business_address ? 1 : 0,
-      calendly: data.calendly
+      calendly: data.calendly,
+      latitude: coordinates.lat.toString(),
+      longitude: coordinates.lng.toString(),
     };
 
     setStep(step + 1);
@@ -72,9 +132,42 @@ const StepFour = ({ step, setStep, setFormData }) => {
             {errors.address && (
               <span className="text-red-400">This field is required</span>
             )}
+            {locationError && (
+              <span className="text-red-400">{locationError}</span>
+            )}
             <div className="absolute top-3 left-2">
               <LocationSvgInStepFrom />
             </div>
+          </div>
+
+          {/* Map display */}
+          <div className="mt-6">
+            {mapUrl ? (
+              <iframe
+                className="w-full h-[300px] border-0 rounded-t-[16px]"
+                src={mapUrl}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="business location map"
+              ></iframe>
+            ) : (
+              <div className="w-full h-[300px] border border-gray-300 flex items-center justify-center rounded-t-[16px]">
+                <p className="text-gray-500">Loading map...</p>
+              </div>
+            )}
+
+            <div className="border-b border-l border-r border-[#DFE1E6] p-4 rounded-b-2xl">
+              <div className="flex justify-between items-center">
+                <h1 className="text-textColor font-manrope text-sm font-semibold">
+                  {address}
+                </h1>
+              </div>
+            </div>
+
+            <h1 className="text-[#757575] font-manrope text-base font-medium leading-6 mt-2">
+              Drag the map to adjust the pin position
+            </h1>
           </div>
 
           <div className="flex gap-2 items-center mt-5">

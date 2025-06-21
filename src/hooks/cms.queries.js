@@ -4,6 +4,7 @@ import {
   AllTeamMembers,
   Amenities,
   Blog,
+  BlogDetails,
   BusinessHelp,
   BusinessHelpDetails,
   BusinessHome,
@@ -126,5 +127,14 @@ export const useBlog = () => {
   return useQuery({
     queryKey: ["blog"],
     queryFn: Blog,
+  });
+};
+
+// Business Details
+export const useBlogDetails = slug => {
+  return useQuery({
+    queryKey: ["blog-details", slug],
+    queryFn: () => BlogDetails(slug),
+    enabled: !!slug,
   });
 };
