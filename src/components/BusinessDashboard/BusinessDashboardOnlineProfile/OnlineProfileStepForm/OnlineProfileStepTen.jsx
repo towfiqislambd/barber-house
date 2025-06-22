@@ -3,13 +3,15 @@ import {
   LeftSideArrowSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { useAmenities, useHighlights, useValues } from "@/hooks/cms.queries";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { Loader } from "@/components/Loader/Loader";
 
 const OnlineProfileStepTen = ({ step, setStep, setFormData }) => {
-  const { data: allAmenities } = useAmenities();
-  const { data: allHighlights } = useHighlights();
-  const { data: allValues } = useValues();
+  const { data: allAmenities, isLoading: amenitiesLoading } = useAmenities();
+  const { data: allHighlights, isLoading: highlightsLoading } = useHighlights();
+  const { data: allValues, isLoading: valuesLoading } = useValues();
+  const isLoading = amenitiesLoading || highlightsLoading || valuesLoading;
 
   const [amenities, setAmenities] = useState([]);
   const [highlights, setHighlights] = useState([]);
@@ -43,6 +45,25 @@ const OnlineProfileStepTen = ({ step, setStep, setFormData }) => {
     }));
     setStep(step + 1);
   };
+
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isLoading]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <section className="lg:px-6 px-5 xl:px-0 pb-10 sm:pb-0">

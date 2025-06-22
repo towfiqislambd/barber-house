@@ -14,7 +14,7 @@ const ProfileInfo = () => {
   const [previewImage, setPreviewImage] = useState(null);
   const { user } = useAuth();
   const business_profile_id = user?.business_profile?.id;
-  const { mutateAsync: addTeamMember } = useAddTeamMember();
+  const { mutateAsync: addTeamMember, isPending } = useAddTeamMember();
   const {
     register,
     handleSubmit,
@@ -275,7 +275,7 @@ const ProfileInfo = () => {
         type="submit"
         className="mt-4 px-6 py-3 bg-black text-white rounded-lg transition"
       >
-        Submit
+        {isPending ? "Submitting...." : "Submit"}
       </button>
     </form>
   );
