@@ -16,8 +16,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useDeleteService } from "@/hooks/cms.mutations";
+import { Loader } from "@/components/Loader/Loader";
 
-const AllCategories = ({ categoryData, isLoading }) => {
+const AllCategories = ({ categoryData, isLoading, refetch }) => {
   const [selectedId, setSelectedId] = useState(null);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -38,6 +39,7 @@ const AllCategories = ({ categoryData, isLoading }) => {
   const confirmDelete = async () => {
     try {
       await deleteService(selectedService);
+      refetch();
       setDeleteDialogOpen(false);
       setSelectedService(null);
     } catch (error) {
@@ -48,75 +50,78 @@ const AllCategories = ({ categoryData, isLoading }) => {
   return (
     <>
       <div className="space-y-8">
-        {isLoading
-          ? "Loading...."
-          : categoryData?.map(data => (
-              <div key={data.id}>
-                <div className="flex items-center justify-between mb-5">
-                  <h3 className="font-outfit text-xl font-medium text-[#2C2C2C] mb-3">
-                    {data?.name}
-                  </h3>
-                  <button onClick={() => handleEditClick(data.id)}>
-                    <MdOutlineEdit className="text-xl" />
-                  </button>
-                </div>
-                <div className="space-y-4">
-                  {data?.filtered_services_count === 0 ? (
-                    <div className="bg-white rounded-xl border-l-[5px] mb-5 border-[#BDBDBD] py-5 3xl:py-8 3xl:px-5 px-3 shadow-[0px_0px_4px_0px_rgba(4,0,116,0.10)]">
-                      <p className="text-[#757575] text-lg font-medium">
-                        No service
-                      </p>
-                    </div>
-                  ) : (
-                    data?.catalog_services?.map((infoData, idx) => (
-                      <div
-                        key={idx}
-                        className="bg-white rounded-xl border-l-[5px] py-5 3xl:py-8 3xl:px-5 px-3 shadow-[0px_0px_4px_0px_rgba(4,0,116,0.10)] flex justify-between items-center"
-                      >
-                        <div>
-                          <h4 className="text-lg font-semibold text-[#1E1E1E] mb-2">
-                            {infoData.name}
-                          </h4>
-                          <h4>{infoData.duration} min</h4>
-                        </div>
-                        <div className="flex gap-3 items-center">
-                          <p>SAR :{infoData.price}</p>
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <button type="button">
-                                <PiDotsThreeOutlineVerticalFill className="text-xl" />
-                              </button>
-                            </PopoverTrigger>
-                            <PopoverContent className="w-[210px] absolute right-0 py-7 px-5">
-                              <div className="space-y-6 flex flex-col text-left items-start">
-                                <Link
-                                  className="text-[#545454] font-medium hover:text-primary"
-                                  to={`/businessDashboard/editService/${infoData?.id}`}
-                                >
-                                  Edit service
-                                </Link>
-                                <button
-                                  onClick={() =>
-                                    handleDeleteClick(infoData?.id)
-                                  }
-                                  className="font-medium text-[#D21837]"
-                                >
-                                  Permanently delete
-                                </button>
-                              </div>
-                            </PopoverContent>
-                          </Popover>
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
+        {isLoading ? (
+          <div className="py-32 flex justify-center">
+            <Loader />
+          </div>
+        ) : (
+          categoryData?.map(data => (
+            <div key={data.id}>
+              <div className="flex items-center justify-between mb-5">
+                <h3 className="font-outfit text-xl font-medium text-[#2C2C2C] mb-3">
+                  {data?.name}
+                </h3>
+                <button onClick={() => handleEditClick(data.id)}>
+                  <MdOutlineEdit className="text-xl" />
+                </button>
               </div>
-            ))}
+              <div className="space-y-4">
+                {data?.filtered_services_count === 0 ? (
+                  <div className="bg-white rounded-xl border-l-[5px] mb-5 border-[#BDBDBD] py-5 3xl:py-8 3xl:px-5 px-3 shadow-[0px_0px_4px_0px_rgba(4,0,116,0.10)]">
+                    <p className="text-[#757575] text-lg font-medium">
+                      No service
+                    </p>
+                  </div>
+                ) : (
+                  data?.catalog_services?.map((infoData, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-white rounded-xl border-l-[5px] py-5 3xl:py-8 3xl:px-5 px-3 shadow-[0px_0px_4px_0px_rgba(4,0,116,0.10)] flex justify-between items-center"
+                    >
+                      <div>
+                        <h4 className="text-lg font-semibold text-[#1E1E1E] mb-2">
+                          {infoData.name}
+                        </h4>
+                        <h4>{infoData.duration} min</h4>
+                      </div>
+                      <div className="flex gap-3 items-center">
+                        <p>SAR :{infoData.price}</p>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <button type="button">
+                              <PiDotsThreeOutlineVerticalFill className="text-xl" />
+                            </button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-[210px] absolute right-0 py-7 px-5">
+                            <div className="space-y-6 flex flex-col text-left items-start">
+                              <Link
+                                className="text-[#545454] font-medium hover:text-primary"
+                                to={`/businessDashboard/editService/${infoData?.id}`}
+                              >
+                                Edit service
+                              </Link>
+                              <button
+                                onClick={() => handleDeleteClick(infoData?.id)}
+                                className="font-medium text-[#D21837]"
+                              >
+                                Permanently delete
+                              </button>
+                            </div>
+                          </PopoverContent>
+                        </Popover>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Edit Category Modal */}
       <EditCategoryModal
+        refetch={refetch}
         id={selectedId}
         isOpen={isEditOpen}
         onClose={() => setIsEditOpen(false)}

@@ -10,16 +10,17 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useProductsBrand, useProductsCategory } from "@/hooks/cms.queries";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 import { useAddProduct } from "@/hooks/cms.mutations";
 
 const AddNewProduct = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const business_profile_id = user?.business_profile?.id;
   const { data: productsBrand } = useProductsBrand();
   const { data: productsCategory } = useProductsCategory();
-  const { mutateAsync: addProductMutation } = useAddProduct();
+  const { mutateAsync: addProductMutation, isPending } = useAddProduct();
 
   const {
     register,
@@ -46,6 +47,7 @@ const AddNewProduct = () => {
 
     try {
       await addProductMutation(formData);
+      navigate("/businessDashboard/catalogue");
     } catch (error) {
       console.error(error);
     }
@@ -62,7 +64,7 @@ const AddNewProduct = () => {
             type="submit"
             className="bg-[#008A90] text-white px-5 md:py-[10px] py-2 font-medium rounded-lg"
           >
-            Save Product
+            {isPending ? "Saving..." : "Save Product"}
           </button>
         </div>
 
@@ -117,13 +119,16 @@ const AddNewProduct = () => {
                 control={control}
                 rules={{ required: "Product brand is required" }}
                 render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select
+                    onValueChange={val => field.onChange(val)}
+                    value={field.value ? String(field.value) : ""}
+                  >
                     <SelectTrigger className="w-full text-base border !py-[22px]">
                       <SelectValue placeholder="Select a brand" />
                     </SelectTrigger>
                     <SelectContent>
                       {productsBrand?.map(brand => (
-                        <SelectItem key={brand.id} value={brand.id}>
+                        <SelectItem key={brand.id} value={String(brand.id)}>
                           {brand.name}
                         </SelectItem>
                       ))}
@@ -131,6 +136,7 @@ const AddNewProduct = () => {
                   </Select>
                 )}
               />
+
               {errors.brand_id && (
                 <p className="text-sm text-red-500 mt-1">
                   {errors.brand_id.message}
@@ -146,13 +152,19 @@ const AddNewProduct = () => {
                 control={control}
                 rules={{ required: "Product category is required" }}
                 render={({ field }) => (
-                  <Select onValueChange={field.onChange} value={field.value}>
+                  <Select
+                    onValueChange={val => field.onChange(val)}
+                    value={field.value ? String(field.value) : ""}
+                  >
                     <SelectTrigger className="w-full text-base border !py-[22px]">
                       <SelectValue placeholder="Select a Category" />
                     </SelectTrigger>
                     <SelectContent>
                       {productsCategory?.map(category => (
-                        <SelectItem key={category.id} value={category.id}>
+                        <SelectItem
+                          key={category.id}
+                          value={String(category.id)}
+                        >
                           {category.name}
                         </SelectItem>
                       ))}

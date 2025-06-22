@@ -3,7 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useAddTeamMembers } from "@/hooks/cms.mutations";
 
 const TeamMembers = ({ allTeamMembers, serviceId }) => {
-  const { mutateAsync: addTeamMembers } = useAddTeamMembers();
+  const { mutateAsync: addTeamMembers, isPending } = useAddTeamMembers();
   const [selectedMembers, setSelectedMembers] = useState([]);
 
   const allSelected = selectedMembers.length === allTeamMembers.length;
@@ -99,7 +99,7 @@ const TeamMembers = ({ allTeamMembers, serviceId }) => {
         type="submit"
         className="mt-5 bg-black text-white px-6 py-2 rounded-lg"
       >
-        Submit
+        {isPending ? "Submitting...." : "Submit"}
       </button>
     </div>
   );
