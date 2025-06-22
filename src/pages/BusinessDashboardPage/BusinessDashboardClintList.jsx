@@ -1,20 +1,9 @@
 import {
-  AppointmentCalendarSvg,
-  AppointmentCsvSvg,
-  AppointmentExcelSvg,
-  AppointmentPdfSvg,
   AppointmentsSearchSvg,
   ClintSvgOne,
   ClintSvgThree,
   ClintSvgTwo,
-  DropdownSvg,
-  ExportSvg,
 } from "@/components/svgContainer/SvgContainer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { useState } from "react";
 import {
   flexRender,
@@ -193,46 +182,7 @@ const BusinessDashboardClintList = () => {
               <AppointmentsSearchSvg />
             </button>
           </div>
-
-
-          {/* Date */}
-          <button className="flex gap-2 focus:border-none border-gray-100 bg-white items-center py-2 lg:py-3 focus:outline-none px-3 lg:px-4 font-medium text-[#2C2C2C] rounded-full border shadow">
-            <AppointmentCalendarSvg />
-            <p>Created at (newest first)</p>
-          </button>
-          <button className="flex gap-2 focus:border-none border-gray-100 bg-white items-center py-2 lg:py-3 focus:outline-none px-3 lg:px-4 font-medium text-[#2C2C2C] rounded-full border shadow">
-            <p>Bulk edit</p>
-          </button>
-          <button className="flex gap-2 focus:border-none border-gray-100 bg-white items-center py-2 lg:py-3 focus:outline-none px-3 lg:px-4 font-medium text-[#D21837] rounded-full border shadow">
-            <p>Delete</p>
-          </button>
         </div>
-        {/* Export */}
-        <Popover>
-          <PopoverTrigger>
-            <button className="px-2 lg:px-4 py-2 lg:py-[10px] flex gap-2 lg:gap-2 items-center outline-none rounded-lg border border-primary">
-              <ExportSvg />
-              <p>Option</p>
-              <DropdownSvg />
-            </button>
-          </PopoverTrigger>
-          <PopoverContent className="w-[150px] p-4">
-            <div className="space-y-4">
-              <button className="flex gap-2 items-center">
-                <AppointmentPdfSvg />
-                <p className="text-[#545454] font-medium">PDF</p>
-              </button>
-              <button className="flex gap-2 items-center">
-                <AppointmentCsvSvg />
-                <p className="text-[#545454] font-medium">CSV</p>
-              </button>
-              <button className="flex gap-2 items-center">
-                <AppointmentExcelSvg />
-                <p className="text-[#545454] font-medium">Excel</p>
-              </button>
-            </div>
-          </PopoverContent>
-        </Popover>
       </div>
       <div className="border-t border-primary mt-5 md:mt-10 pb-5 md:pb-10"></div>
 

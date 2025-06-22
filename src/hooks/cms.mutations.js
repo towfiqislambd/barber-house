@@ -22,7 +22,7 @@ export const useOnboard = () => {
     mutationKey: ["onboard"],
     mutationFn: payload => OnBoarding(payload),
     onSuccess: () => {
-      navigate("/");
+      navigate("/business/login");
       toast.success("Registration Successful");
     },
     onError: err => {
