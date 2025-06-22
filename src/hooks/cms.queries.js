@@ -14,6 +14,7 @@ import {
   ProductsBrand,
   ProductsCategory,
   ServicesType,
+  TeamMemberDetails,
   Values,
 } from "./cms.api";
 
@@ -136,5 +137,14 @@ export const useBlogDetails = slug => {
     queryKey: ["blog-details", slug],
     queryFn: () => BlogDetails(slug),
     enabled: !!slug,
+  });
+};
+
+// Team Member Details
+export const useTeamMemberDetails = id => {
+  return useQuery({
+    queryKey: ["team-member-details", id],
+    queryFn: () => TeamMemberDetails(id),
+    enabled: !!id,
   });
 };

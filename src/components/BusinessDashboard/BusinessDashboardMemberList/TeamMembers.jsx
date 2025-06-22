@@ -5,13 +5,10 @@ import { MdDeleteForever } from "react-icons/md";
 import { useDeleteTeamMember } from "@/hooks/cms.mutations";
 import { useState } from "react";
 import { Loader } from "@/components/Loader/Loader";
+import { FaRegEdit } from "react-icons/fa";
 
 const TeamMembers = () => {
   const [search, setSearch] = useState(null);
-
-  const handleTeamMember = () => {
-    alert("hi");
-  };
 
   const {
     data: allTeamMembers,
@@ -78,7 +75,6 @@ const TeamMembers = () => {
             <tbody>
               {allTeamMembers?.map(data => (
                 <tr
-                  onClick={handleTeamMember}
                   key={data.id}
                   className="hover:bg-gray-200 border-t first:border-none border-dashed text-[#545454] text-nowrap"
                 >
@@ -96,9 +92,12 @@ const TeamMembers = () => {
                     <p>{data.phone}</p>
                     <p>{data.email}</p>
                   </td>
-                  <td className="px-4 text-[#545454] font-medium py-3">
+                  <td className="px-4 text-[#545454] font-medium py-3 flex gap-3 items-center">
                     <button onClick={() => handleDelete(data?.id)}>
                       <MdDeleteForever className="text-3xl text-red-500" />
+                    </button>
+                    <button onClick={() => handleDelete(data?.id)}>
+                      <FaRegEdit className="text-2xl text-red-500" />
                     </button>
                   </td>
                 </tr>
