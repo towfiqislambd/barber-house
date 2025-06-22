@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import OnlineProfileStepOne from "./OnlineProfileStepOne";
 import OnlineProfileStepTwo from "./OnlineProfileStepTwo";
 import OnlineProfileStepThree from "./OnlineProfileStepThree";

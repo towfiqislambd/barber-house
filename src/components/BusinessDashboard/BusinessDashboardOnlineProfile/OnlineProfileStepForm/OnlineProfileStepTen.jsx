@@ -51,12 +51,9 @@ const OnlineProfileStepTen = ({ step, setStep, setFormData }) => {
           <LeftSideArrowSvg />
         </button>
         <div className="flex flex-col sm:flex-row gap-4">
-          <button className="border border-[#0D1619] px-[18px] py-[10px] rounded-[10px] text-[#0D1619] font-manrope text-base font-bold leading-6">
-            Close
-          </button>
           <button
             onClick={handleContinue}
-            className="bg-[#0D1619] rounded-[10px] text-[#FFF] w-[135px] py-[12px] sm:py-0 flex items-center justify-center gap-[6px]"
+            className="bg-[#0D1619] px-[18px] py-[10px] rounded-[10px] text-[#FFF] flex items-center justify-center gap-[6px]"
           >
             Continue
             <ContinueButtonArrowSvg />
