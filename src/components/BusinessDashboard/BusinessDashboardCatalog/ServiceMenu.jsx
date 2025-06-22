@@ -21,11 +21,11 @@ const ServiceMenu = ({ allCategoryData }) => {
   const [selectedTeamMember, setSelectedTeamMember] = useState(null);
 
   const { data: allTeamMembers } = useAllTeamMembers();
-  const { data: categoryData, isLoading } = useCatalogue(
-    activeTab,
-    search,
-    selectedTeamMember
-  );
+  const {
+    data: categoryData,
+    isLoading,
+    refetch,
+  } = useCatalogue(activeTab, search, selectedTeamMember);
 
   const handleReset = () => {
     setActiveTab(null);
@@ -233,12 +233,16 @@ const ServiceMenu = ({ allCategoryData }) => {
               ))}
 
               {/* Add Category */}
-              <AddCategoryModal />
+              <AddCategoryModal refetch={refetch} />
             </ul>
           </div>
         </div>
         <div className="flex-grow">
-          <AllCategories categoryData={categoryData} isLoading={isLoading} />
+          <AllCategories
+            categoryData={categoryData}
+            isLoading={isLoading}
+            refetch={refetch}
+          />
         </div>
       </section>
     </div>

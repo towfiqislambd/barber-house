@@ -1,7 +1,5 @@
-import logo from "../assets/images/logo.jpg";
 import {
   FooterCopyrightSvg,
-  FooterLangSvg,
   FooterSocialFour,
   FooterSocialOne,
   FooterSocialThree,
@@ -11,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="">
+    <footer>
       {/* upper part */}
       <div className="bg-[#EFF0F4] py-7 sm:py-14 px-5 xl:px-3 2xl:px-5">
         <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 sm:gap-8 md:gap-[35px] lg:gap-6 xl:gap-2 2xl:gap-5">
@@ -75,10 +73,6 @@ const Footer = () => {
       </div>
       {/* lower part */}
       <div className="bg-white py-5 flex items-center justify-between container px-5 4xl:px-0">
-        <p className="flex gap-1 items-center">
-          <FooterLangSvg />
-          <span className=" text-primary font-medium">English</span>
-        </p>
         <p className="flex gap-1 items-center">
           <FooterCopyrightSvg />
           <span className="text-[#545454] font-medium">

@@ -33,12 +33,9 @@ const TellUsAboutYourBusiness = () => {
     <section className="max-w-[1320px] mx-auto px-5 lg:px-0 mt-5 md:mt-0">
       {/* This is the button Section */}
       <div className="flex justify-end gap-4">
-        <button className="border border-[#0D1619] px-[18px] py-[10px] rounded-[10px] text-[#0D1619] font-manrope text-base font-bold leading-6">
-          Close
-        </button>
         <Link
           to={"/businessDashboard/businessContainer"}
-          className="bg-[#0D1619] rounded-[10px] text-[#FFF] text-base px-5 lg:px-0 lg:w-[135px] flex items-center justify-center gap-[6px]"
+          className="bg-[#0D1619] text-[#FFF] text-base px-[18px] py-[10px] rounded-[10px] flex items-center justify-center gap-[6px]"
         >
           Continue
           <ContinueButtonArrowSvg />

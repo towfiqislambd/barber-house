@@ -16,7 +16,7 @@ const BasicDetails = ({ onNext }) => {
   const { data: categoryData } = useCatalogue();
   const { user } = useAuth();
   const business_profile_id = user?.business_profile?.id;
-  const { mutateAsync: addService } = useAddService();
+  const { mutateAsync: addService, isPending } = useAddService();
   const { data: servicesTypes } = useServicesType();
 
   const {
@@ -279,7 +279,7 @@ const BasicDetails = ({ onNext }) => {
         type="submit"
         className="mt-5 bg-black text-white px-6 py-2 rounded-lg"
       >
-        Next
+        {isPending ? "Processing..." : "Next"}
       </button>
     </form>
   );

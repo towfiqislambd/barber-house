@@ -1,7 +1,4 @@
-import {
-  CalenderSvg,
-  SearchButtonSvg,
-} from "@/components/svgContainer/SvgContainer";
+import { SearchButtonSvg } from "@/components/svgContainer/SvgContainer";
 import homepageBg from "../../../assets/images/home-bg.jpg";
 import {
   Popover,
@@ -10,8 +7,6 @@ import {
 } from "@/components/ui/popover";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Calendar } from "@/components/ui/calendar";
-import { format } from "date-fns";
 
 const HomepageBanner = () => {
   const navigate = useNavigate();
@@ -19,8 +14,6 @@ const HomepageBanner = () => {
   const [category, setCategory] = useState("");
   const [openCategory, setOpenCategory] = useState(false);
   const [openLocation, setOpenLocation] = useState(false);
-  const [openDate, setOpenDate] = useState(false);
-  const [date, setDate] = useState(null);
 
   const handleSearch = () => {
     navigate("/searchresultpage");
@@ -41,7 +34,7 @@ const HomepageBanner = () => {
           Like Never Before
         </h1>
         {/* search filters */}
-        <div className="bg-white py-10 xl:py-0 rounded-xl xl:rounded-full w-full max-w-[500px] xl:max-w-[700px] 2xl:max-w-[1000px] 3xl:max-w-[1200px] mx-auto px-5 2xl:px-4 xl:px-2 2xl:py-1">
+        <div className="bg-white py-10 xl:py-0 rounded-xl xl:rounded-full w-full max-w-[500px] xl:max-w-[700px] 2xl:max-w-[1000px] mx-auto px-5 2xl:px-4 xl:px-2 2xl:py-1">
           <form
             action=""
             className="flex flex-wrap md:flex-nowrap flex-col xl:flex-row w-full 2xl:justify-between font-medium gap-3 2xl:gap-5 items-center"
@@ -68,7 +61,7 @@ const HomepageBanner = () => {
                       "Eyebrows & eyelashes",
                       "Massage",
                       "Barbering",
-                    ].map((item) => (
+                    ].map(item => (
                       <li
                         key={item}
                         onClick={() => {
@@ -103,7 +96,7 @@ const HomepageBanner = () => {
                       "Medina, Saudi Arabia",
                       "Jeddah, Saudi Arabia",
                       "Riyadh, Saudi Arabia",
-                    ].map((city) => (
+                    ].map(city => (
                       <li
                         key={city}
                         onClick={() => {
@@ -118,28 +111,6 @@ const HomepageBanner = () => {
                   </ul>
                 </PopoverContent>
               </Popover>
-            </Popover>
-            {/* For Date */}
-            <Popover open={openDate} onOpenChange={setOpenDate}>
-              <PopoverTrigger asChild>
-                <label className="flex w-full xl:w-auto xl:p-2 py-2 px-3 lg:p-5 rounded-md cursor-pointer gap-2 items-center border xl:border-none">
-                  <CalenderSvg className="h-5 text-gray-500 w-5" />
-                  <input
-                    readOnly
-                    className="border-none cursor-pointer focus:outline-none focus:ring-0 placeholder:text-gray-400 w-full"
-                    type="text"
-                    placeholder="Choose date"
-                    value={date ? format(date, "PPP") : ""}
-                  />
-                </label>
-              </PopoverTrigger>
-              <PopoverContent
-                side="bottom"
-                align="start"
-                className="bg-white p-3 rounded-md shadow-md w-auto"
-              >
-                <Calendar mode="single" selected={date} onSelect={setDate} />
-              </PopoverContent>
             </Popover>
             {/* Search btn */}
             <button

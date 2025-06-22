@@ -1,5 +1,5 @@
-import BusinessFooter from "@/shared/Business/BusinessFooter/BusinessFooter";
 import BusinessNavbar from "@/shared/Business/BusinessNavbar/BusinessNavbar";
+import Footer from "@/shared/Footer";
 import { Outlet, ScrollRestoration, useLocation } from "react-router-dom";
 
 const BusinessLayout = () => {
@@ -26,7 +26,7 @@ const BusinessLayout = () => {
       <div className={isSpecificPage ? "" : "pt-32"}>
         <Outlet />
       </div>
-      {!isSignUpPage && <BusinessFooter />}
+      {!isSignUpPage && <Footer />}
     </>
   );
 };

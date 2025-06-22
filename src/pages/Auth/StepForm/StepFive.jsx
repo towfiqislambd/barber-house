@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useOnboard } from "@/hooks/cms.mutations";
 
-const StepFive = ({ step, setStep, setFormData, formData }) => {
+const StepFive = ({ step, setStep, formData }) => {
   const { mutateAsync: boardingMutation, isPending } = useOnboard();
   const {
     handleSubmit,
@@ -128,7 +128,7 @@ const StepFive = ({ step, setStep, setFormData, formData }) => {
           type="submit"
           className="py-[8px] xl:py-4 px-6 font-manrope text-lg bg-primary text-white font-semibold rounded-lg mt-5"
         >
-          Submit
+          {isPending ? "Submitting..." : "Submit"}
         </button>
       </div>
 

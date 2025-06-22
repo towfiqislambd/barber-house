@@ -3,13 +3,15 @@ import {
   LeftSideArrowSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { useAmenities, useHighlights, useValues } from "@/hooks/cms.queries";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { Loader } from "@/components/Loader/Loader";
 
 const OnlineProfileStepTen = ({ step, setStep, setFormData }) => {
-  const { data: allAmenities } = useAmenities();
-  const { data: allHighlights } = useHighlights();
-  const { data: allValues } = useValues();
+  const { data: allAmenities, isLoading: amenitiesLoading } = useAmenities();
+  const { data: allHighlights, isLoading: highlightsLoading } = useHighlights();
+  const { data: allValues, isLoading: valuesLoading } = useValues();
+  const isLoading = amenitiesLoading || highlightsLoading || valuesLoading;
 
   const [amenities, setAmenities] = useState([]);
   const [highlights, setHighlights] = useState([]);
@@ -44,6 +46,25 @@ const OnlineProfileStepTen = ({ step, setStep, setFormData }) => {
     setStep(step + 1);
   };
 
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isLoading]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <section className="lg:px-6 px-5 xl:px-0 pb-10 sm:pb-0">
       <div className="flex justify-between container mt-9">
@@ -51,12 +72,9 @@ const OnlineProfileStepTen = ({ step, setStep, setFormData }) => {
           <LeftSideArrowSvg />
         </button>
         <div className="flex flex-col sm:flex-row gap-4">
-          <button className="border border-[#0D1619] px-[18px] py-[10px] rounded-[10px] text-[#0D1619] font-manrope text-base font-bold leading-6">
-            Close
-          </button>
           <button
             onClick={handleContinue}
-            className="bg-[#0D1619] rounded-[10px] text-[#FFF] w-[135px] py-[12px] sm:py-0 flex items-center justify-center gap-[6px]"
+            className="bg-[#0D1619] px-[18px] py-[10px] rounded-[10px] text-[#FFF] flex items-center justify-center gap-[6px]"
           >
             Continue
             <ContinueButtonArrowSvg />

@@ -190,3 +190,9 @@ export const BlogDetails = async slug => {
   const { data } = await axiosPublic(`/api/cms/blog/${slug}`);
   return data?.data;
 };
+
+// Team Member details
+export const TeamMemberDetails = async id => {
+  const { data } = await axiosPublic(`/api/teams/${id}`);
+  return data?.data;
+};

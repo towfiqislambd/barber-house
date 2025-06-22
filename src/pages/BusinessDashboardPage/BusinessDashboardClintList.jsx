@@ -1,20 +1,4 @@
-import {
-  AppointmentCalendarSvg,
-  AppointmentCsvSvg,
-  AppointmentExcelSvg,
-  AppointmentPdfSvg,
-  AppointmentsSearchSvg,
-  ClintSvgOne,
-  ClintSvgThree,
-  ClintSvgTwo,
-  DropdownSvg,
-  ExportSvg,
-} from "@/components/svgContainer/SvgContainer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { AppointmentsSearchSvg } from "@/components/svgContainer/SvgContainer";
 import { useState } from "react";
 import {
   flexRender,
@@ -33,8 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button, Drawer, Space } from "antd";
-import ellipse from "../../assets/images/ellipse.png";
+
 const data = [
   {
     id: "m5gr84i9",
@@ -95,14 +78,14 @@ const columns = [
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        onCheckedChange={value => row.toggleSelected(!!value)}
         aria-label="Select row"
       />
     ),
@@ -149,15 +132,6 @@ const columns = [
 const BusinessDashboardClintList = () => {
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
-  const [open, setOpen] = useState(false);
-  const [size, setSize] = useState();
-  const showLargeDrawer = () => {
-    setSize("large");
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
 
   const table = useReactTable({
     data,
@@ -193,46 +167,7 @@ const BusinessDashboardClintList = () => {
               <AppointmentsSearchSvg />
             </button>
           </div>
-
-
-          {/* Date */}
-          <button className="flex gap-2 focus:border-none border-gray-100 bg-white items-center py-2 lg:py-3 focus:outline-none px-3 lg:px-4 font-medium text-[#2C2C2C] rounded-full border shadow">
-            <AppointmentCalendarSvg />
-            <p>Created at (newest first)</p>
-          </button>
-          <button className="flex gap-2 focus:border-none border-gray-100 bg-white items-center py-2 lg:py-3 focus:outline-none px-3 lg:px-4 font-medium text-[#2C2C2C] rounded-full border shadow">
-            <p>Bulk edit</p>
-          </button>
-          <button className="flex gap-2 focus:border-none border-gray-100 bg-white items-center py-2 lg:py-3 focus:outline-none px-3 lg:px-4 font-medium text-[#D21837] rounded-full border shadow">
-            <p>Delete</p>
-          </button>
         </div>
-        {/* Export */}
-        <Popover>
-          <PopoverTrigger>
-            <button className="px-2 lg:px-4 py-2 lg:py-[10px] flex gap-2 lg:gap-2 items-center outline-none rounded-lg border border-primary">
-              <ExportSvg />
-              <p>Option</p>
-              <DropdownSvg />
-            </button>
-          </PopoverTrigger>
-          <PopoverContent className="w-[150px] p-4">
-            <div className="space-y-4">
-              <button className="flex gap-2 items-center">
-                <AppointmentPdfSvg />
-                <p className="text-[#545454] font-medium">PDF</p>
-              </button>
-              <button className="flex gap-2 items-center">
-                <AppointmentCsvSvg />
-                <p className="text-[#545454] font-medium">CSV</p>
-              </button>
-              <button className="flex gap-2 items-center">
-                <AppointmentExcelSvg />
-                <p className="text-[#545454] font-medium">Excel</p>
-              </button>
-            </div>
-          </PopoverContent>
-        </Popover>
       </div>
       <div className="border-t border-primary mt-5 md:mt-10 pb-5 md:pb-10"></div>
 
@@ -240,12 +175,12 @@ const BusinessDashboardClintList = () => {
       <div className="w-full overflow-x-auto">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map(headerGroup => (
               <TableRow
                 className="border-dashed text-nowrap"
                 key={headerGroup.id}
               >
-                {headerGroup.headers.map((header) => (
+                {headerGroup.headers.map(header => (
                   <TableHead key={header.id}>
                     {header.isPlaceholder
                       ? null
@@ -260,13 +195,12 @@ const BusinessDashboardClintList = () => {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row) => (
+              table.getRowModel().rows.map(row => (
                 <TableRow
-                  onClick={showLargeDrawer}
-                  className="border-dashed text-nowrap cursor-pointer"
+                  className="border-dashed text-nowrap"
                   key={row.id}
                 >
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells().map(cell => (
                     <TableCell className="py-7" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -292,162 +226,6 @@ const BusinessDashboardClintList = () => {
           </div>
         </div>
       </div>
-      <Drawer
-        className="!bg-[#F9F9F9]"
-        width="70%"
-        placement="right"
-        size={size}
-        onClose={onClose}
-        open={open}
-        extra={
-          <Space>
-            <Button type="primary" onClick={onClose}>
-              OK
-            </Button>
-          </Space>
-        }
-      >
-        <div className="grid 3xl:grid-cols-12 gap-5">
-          <div className="col-span-5 bg-white py-10 rounded-lg">
-            <img src={ellipse} className="mx-auto" />
-            <h3 className="text-center text-xl mt-5 mb-1 font-semibold text-[#1E1E1E]">
-              Waleedbinsalma
-            </h3>
-            <p className="text-center text-[#757575] text-sm sm:text-base">
-              Waleedbinsalma15@gmail.com
-            </p>
-            <p className="text-center text-[#757575] text-sm sm:text-base">
-              +444 09258964321
-            </p>
-            <div className="flex flex-col sm:flex-row gap-2 mb-5 mt-5 text-center justify-center items-center">
-              <button className="px-5 py-[5px] border rounded font-medium text-lg">
-                Actions
-              </button>
-              <button className="sm:px-5 px-[10px] bg-primary text-white py-[5px] border rounded font-medium text-lg">
-                Book now
-              </button>
-            </div>
-            <div className="border-t mb-10"></div>
-            <div className="space-y-3 sm:px-5 px-4">
-              <div className="flex gap-2 items-center">
-                <ClintSvgOne />
-                <p className="text-[#757575] text-base sm:text-lg">
-                  Add pronouns
-                </p>
-              </div>
-              <div className="flex gap-2 items-center">
-                <ClintSvgTwo />
-                <p className="text-[#757575] text-base sm:text-lg">
-                  Add date of birth
-                </p>
-              </div>
-              <div className="flex gap-2 items-center">
-                <ClintSvgThree />
-                <p className="text-[#757575] text-base sm:text-lg">
-                  Created 6 Feb 2025
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="3xl:col-span-2 col-span-5 rounded-lg flex flex-col px-5 py-10 items-start gap-7 bg-white !h-full">
-            <button className="text-[#2C2C2C] text-base font-medium">
-              Overview
-            </button>
-            <button className="text-[#2C2C2C] text-base font-medium">
-              Appointments
-            </button>
-            <button className="text-[#2C2C2C] text-base font-medium">
-              Sales
-            </button>
-            <button className="text-[#2C2C2C] text-base font-medium">
-              Client details
-            </button>
-            <button className="text-[#2C2C2C] text-base font-medium">
-              Wallet
-            </button>
-            <button className="text-[#2C2C2C] text-base font-medium">
-              Reviews
-            </button>
-          </div>
-          <div className="col-span-5">
-            <h3 className="mb-5 text-[#2C2C2C] font-outfit text-[22px] md:text-2xl font-medium">
-              Overview
-            </h3>
-            <div className="mb-3">
-              <p className="text-[#000] mb-2 font-medium text-lg">Wallet</p>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
-                <p className="text-[#757575] text-sm 3xl:text-base font-medium">
-                  Balance
-                </p>
-                <h3 className="text-[#2C2C2C] text-lg lg:text-xl 3xl:text-2xl font-semibold">
-                  SAR 152
-                </h3>
-              </div>
-            </div>
-            <div className="mb-3">
-              <p className="text-[#000] mb-2 font-medium text-lg">Summary</p>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
-                <p className="text-[#757575] text-sm 3xl:text-base font-medium">
-                  Total sales
-                </p>
-                <h3 className="text-[#2C2C2C] text-lg lg:text-xl 3xl:text-2xl font-semibold">
-                  SAR 152
-                </h3>
-              </div>
-            </div>
-            <div className="grid xl:grid-cols-2 gap-5">
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
-                <p className="text-[#757575] text-sm 3xl:text-base font-medium">
-                  Appointment
-                </p>
-                <h3 className="text-[#2C2C2C] text-lg lg:text-xl 3xl:text-2xl font-semibold">
-                  2
-                </h3>
-              </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
-                <p className="text-[#757575] text-sm 3xl:text-base font-medium">
-                  Rating
-                </p>
-                <h3 className="text-[#2C2C2C] text-lg lg:text-xl 3xl:text-2xl font-semibold">
-                  5
-                </h3>
-              </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
-                <p className="text-[#757575] text-sm 3xl:text-base font-medium">
-                  Cancel
-                </p>
-                <h3 className="text-[#2C2C2C] text-lg lg:text-xl 3xl:text-2xl font-semibold">
-                  2
-                </h3>
-              </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
-                <p className="text-[#757575] text-sm 3xl:text-base font-medium">
-                  No show
-                </p>
-                <h3 className="text-[#2C2C2C] text-lg lg:text-xl 3xl:text-2xl font-semibold">
-                  5
-                </h3>
-              </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
-                <p className="text-[#757575] text-sm 3xl:text-base font-medium">
-                  Cancel
-                </p>
-                <h3 className="text-[#2C2C2C] text-lg lg:text-xl 3xl:text-2xl font-semibold">
-                  2
-                </h3>
-              </div>
-              <div className="border cursor-pointer bg-white 3xl:p-5 p-3 rounded-xl border-primary">
-                <p className="text-[#757575] text-sm 3xl:text-base font-medium">
-                  Cancel
-                </p>
-                <h3 className="text-[#2C2C2C] text-lg lg:text-xl 3xl:text-2xl font-semibold">
-                  5
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Drawer>
     </div>
   );
 };

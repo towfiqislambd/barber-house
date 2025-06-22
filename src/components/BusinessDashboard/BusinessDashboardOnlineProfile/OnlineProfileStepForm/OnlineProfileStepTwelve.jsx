@@ -7,7 +7,7 @@ import useAuth from "@/hooks/useAuth";
 import { useAddOnlineStore } from "@/hooks/cms.mutations";
 
 const OnlineProfileStepTwelve = ({ step, setStep, formData, setFormData }) => {
-  const { mutateAsync: addOnlineStore } = useAddOnlineStore();
+  const { mutateAsync: addOnlineStore, isPending } = useAddOnlineStore();
   const { user } = useAuth();
 
   const handleContinue = async () => {
@@ -81,14 +81,11 @@ const OnlineProfileStepTwelve = ({ step, setStep, formData, setFormData }) => {
           <LeftSideArrowSvg />
         </button>
         <div className="flex gap-4">
-          <button className="border border-[#0D1619] px-[18px] py-[10px] rounded-[10px] text-[#0D1619] font-manrope text-base font-bold leading-6">
-            Close
-          </button>
           <button
             onClick={handleContinue}
-            className="bg-[#0D1619] rounded-[10px] text-[#FFF] w-[135px] flex items-center justify-center gap-[6px]"
+            className="bg-[#0D1619] px-[18px] py-[10px] rounded-[10px] text-[#FFF] flex items-center justify-center gap-[6px]"
           >
-            Continue
+            {isPending ? "Submitting..." : "Submit"}
             <ContinueButtonArrowSvg />
           </button>
         </div>
@@ -106,8 +103,7 @@ const OnlineProfileStepTwelve = ({ step, setStep, formData, setFormData }) => {
         <p className="text-textColor font-manrope text-sm sm:text-base lg:text-lg font-medium leading-[27px] mt-[13px]">
           By enabling online bookings on Fresha, your venue will be uploaded and
           made discoverable to clients through the Fresha marketplace, allowing
-          them to book your services directly.{" "}
-          <span className="text-[#055AD9]">Learn more</span>
+          them to book your services directly.
         </p>
       </div>
     </section>

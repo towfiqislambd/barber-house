@@ -19,7 +19,7 @@ const BasicDetailsForEditService = () => {
   const { data: categoryData } = useCatalogue();
   const { user } = useAuth();
   const business_profile_id = user?.business_profile?.id;
-  const { mutateAsync: editService } = useEditService();
+  const { mutateAsync: editService, isPending } = useEditService();
   const { data: servicesTypes } = useServicesType();
 
   const {
@@ -281,7 +281,7 @@ const BasicDetailsForEditService = () => {
         type="submit"
         className="mt-5 bg-black text-white px-6 py-2 rounded-lg"
       >
-        Submit
+        {isPending ? "Submitting...." : "Submit"}
       </button>
     </form>
   );

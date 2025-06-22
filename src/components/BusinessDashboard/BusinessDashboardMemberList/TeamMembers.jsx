@@ -4,11 +4,26 @@ import { Link } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { useDeleteTeamMember } from "@/hooks/cms.mutations";
 import { useState } from "react";
+import { Loader } from "@/components/Loader/Loader";
 
 const TeamMembers = () => {
   const [search, setSearch] = useState(null);
-  const { data: allTeamMembers } = useAllTeamMembers(search);
+
+  const {
+    data: allTeamMembers,
+    isLoading,
+    refetch,
+  } = useAllTeamMembers(search);
   const { mutateAsync: DeleteMemberMutation } = useDeleteTeamMember();
+
+  const handleDelete = async id => {
+    try {
+      await DeleteMemberMutation(id);
+      refetch();
+    } catch (error) {
+      console.error("Failed to delete member:", error);
+    }
+  };
 
   return (
     <div>
@@ -44,43 +59,49 @@ const TeamMembers = () => {
       </div>
       <div className="border-t border-borderColor mt-10 pb-10"></div>
       {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse min-w-[800px]">
-          <tr className="text-lg text-gray-700 text-nowrap">
-            <th className="px-4 py-2 text-left">Name</th>
-            <th className="px-4 py-2 text-left">Contact</th>
-            <th className="px-4 py-2 text-left">Delete</th>
-          </tr>
-          <tbody>
-            {allTeamMembers?.map(data => (
-              <tr
-                key={data.id}
-                className="hover:bg-gray-200 border-t first:border-none border-dashed text-[#545454] text-nowrap"
-              >
-                <td className="px-4 text-[#545454] font-medium py-3 flex gap-2 items-center">
-                  <img
-                    className="w-11 h-11 rounded-full border"
-                    src={`${import.meta.env.VITE_SITE_URL}/${data?.profile}`}
-                    alt="img"
-                  />
-                  <h3 className="text-[17px] font-medium text-[#2C2C2C]">
-                    {data.first_name} {data.last_name}
-                  </h3>
-                </td>
-                <td className="px-4 text-[#545454] font-medium py-3">
-                  <p>{data.phone}</p>
-                  <p>{data.email}</p>
-                </td>
-                <td className="px-4 text-[#545454] font-medium py-3">
-                  <button onClick={() => DeleteMemberMutation(data?.id)}>
-                    <MdDeleteForever className="text-3xl text-red-500" />
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {isLoading ? (
+        <div className="py-20 flex justify-center">
+          <Loader />
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse min-w-[800px]">
+            <tr className="text-lg text-gray-700 text-nowrap">
+              <th className="px-4 py-2 text-left">Name</th>
+              <th className="px-4 py-2 text-left">Contact</th>
+              <th className="px-4 py-2 text-left">Delete</th>
+            </tr>
+            <tbody>
+              {allTeamMembers?.map(data => (
+                <tr
+                  key={data.id}
+                  className="hover:bg-gray-200 border-t first:border-none border-dashed text-[#545454] text-nowrap"
+                >
+                  <td className="px-4 text-[#545454] font-medium py-3 flex gap-2 items-center">
+                    <img
+                      className="w-11 h-11 rounded-full border"
+                      src={`${import.meta.env.VITE_SITE_URL}/${data?.profile}`}
+                      alt="img"
+                    />
+                    <h3 className="text-[17px] font-medium text-[#2C2C2C]">
+                      {data.first_name} {data.last_name}
+                    </h3>
+                  </td>
+                  <td className="px-4 text-[#545454] font-medium py-3">
+                    <p>{data.phone}</p>
+                    <p>{data.email}</p>
+                  </td>
+                  <td className="px-4 text-[#545454] font-medium py-3 flex gap-3 items-center">
+                    <button onClick={() => handleDelete(data?.id)}>
+                      <MdDeleteForever className="text-3xl text-red-500" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

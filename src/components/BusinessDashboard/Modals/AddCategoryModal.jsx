@@ -13,7 +13,7 @@ import useAuth from "@/hooks/useAuth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const AddCategoryModal = () => {
+const AddCategoryModal = ({ refetch }) => {
   const { mutateAsync: addCategory } = useAddCategory();
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
@@ -29,6 +29,7 @@ const AddCategoryModal = () => {
     const business_profile_id = user?.business_profile?.id;
     const formData = { ...data, business_profile_id };
     await addCategory(formData);
+    refetch();
     setOpen(false);
     reset();
   };

@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { useEditCategory } from "@/hooks/cms.mutations";
 
-const EditCategoryModal = ({ id, isOpen, onClose }) => {
+const EditCategoryModal = ({ id, isOpen, onClose, refetch }) => {
   const { mutateAsync: editCategory } = useEditCategory();
 
   const {
@@ -23,6 +23,7 @@ const EditCategoryModal = ({ id, isOpen, onClose }) => {
   const onSubmit = async formData => {
     if (!id) return; // safeguard
     await editCategory({ id, payload: formData });
+    refetch();
     onClose();
     reset();
   };
