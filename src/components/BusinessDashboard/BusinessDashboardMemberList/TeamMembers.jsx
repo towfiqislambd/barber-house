@@ -8,6 +8,11 @@ import { Loader } from "@/components/Loader/Loader";
 
 const TeamMembers = () => {
   const [search, setSearch] = useState(null);
+
+  const handleTeamMember = () => {
+    alert("hi");
+  };
+
   const {
     data: allTeamMembers,
     isLoading,
@@ -73,6 +78,7 @@ const TeamMembers = () => {
             <tbody>
               {allTeamMembers?.map(data => (
                 <tr
+                  onClick={handleTeamMember}
                   key={data.id}
                   className="hover:bg-gray-200 border-t first:border-none border-dashed text-[#545454] text-nowrap"
                 >
