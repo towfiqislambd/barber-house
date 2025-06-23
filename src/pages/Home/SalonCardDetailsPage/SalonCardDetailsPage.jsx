@@ -11,11 +11,20 @@ import StaySharp from "./section/StaySharp";
 import AboutGhalibSalon from "./section/AboutGhalibSalon";
 import VenuesNearby from "./section/VenuesNearby";
 import ServicesGhalibSalon from "./section/ServicesGhalibSalon";
+import { useParams } from "react-router-dom";
+import { useStoreDetails } from "@/hooks/user.queries";
 
 const SalonCardDetailsPage = () => {
+  const { id } = useParams();
+  console.log(id);
+
+  const { data } = useStoreDetails(id);
+
+  console.log(data);
+
   return (
     <section className="pt-28 lg:pt-36">
-      <SalonCardDetailsBanner />
+      <SalonCardDetailsBanner data={data} />
       <ServicesGhalibSalon />
       <TeamofGhalib />
       <ProductOfGalib />

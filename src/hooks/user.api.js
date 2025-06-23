@@ -46,3 +46,8 @@ export const UserSearchStores = async (queryParams = {}) => {
   });
   return data?.data;
 };
+
+export const StoreDetails = async (id) => {
+  const { data } = await axiosPublic(`/api/online-store/show-details/${id}`);
+  return data;
+};
