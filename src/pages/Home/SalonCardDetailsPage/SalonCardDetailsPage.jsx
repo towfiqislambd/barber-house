@@ -33,7 +33,7 @@ const SalonCardDetailsPage = () => {
         <HomepageReview review={"Reviews of Ghalib's Barber Salon"} />
       </div>
       <VenuesNearby />
-      <StaySharp />
+      {/* <StaySharp /> */}
     </section>
   );
 };
