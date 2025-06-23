@@ -3,7 +3,7 @@ import {
   LeftSideArrowSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { Label } from "@/components/ui/label";
-import { useAllServices, useAllTeamMembers } from "@/hooks/cms.queries";
+import { useAllTeamMembers, useServicesType } from "@/hooks/cms.queries";
 import { useState } from "react";
 import {
   Popover,
@@ -16,7 +16,8 @@ import { CheckIcon } from "lucide-react";
 
 const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
   const { data: allTeamMembers } = useAllTeamMembers();
-  const { data: allServices } = useAllServices();
+  const { data: allServices } = useServicesType();
+  console.log(allServices);
   const [teams, setTeams] = useState([]);
   const [services, setServices] = useState([]);
   const [error, setError] = useState({ team: false, service: false });
@@ -124,18 +125,21 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
               <Command>
                 <CommandList>
                   {allServices?.map(serviceItem => {
-                    const service = serviceItem?.service;
                     return (
                       <CommandItem
-                        key={service?.id}
+                        key={serviceItem?.id}
                         onSelect={() =>
-                          toggleSelection(service?.id, services, setServices)
+                          toggleSelection(
+                            serviceItem?.id,
+                            services,
+                            setServices
+                          )
                         }
                         className="cursor-pointer"
                       >
                         <div className="flex items-center gap-2">
-                          <span>{service?.service_name}</span>
-                          {services.includes(service?.id) && (
+                          <span>{serviceItem?.service_name}</span>
+                          {services.includes(serviceItem?.id) && (
                             <CheckIcon className="w-4 h-4 ml-auto text-green-500" />
                           )}
                         </div>

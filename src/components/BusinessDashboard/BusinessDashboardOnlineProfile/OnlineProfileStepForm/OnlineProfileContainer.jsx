@@ -3,11 +3,9 @@ import OnlineProfileStepOne from "./OnlineProfileStepOne";
 import OnlineProfileStepTwo from "./OnlineProfileStepTwo";
 import OnlineProfileStepThree from "./OnlineProfileStepThree";
 import OnlineProfileStepSix from "./OnlineProfileStepSix";
-import OnlineProfileStepSeven from "./OnlineProfileStepSeven";
 import OnlineProfileStepFive from "./OnlineProfileStepFive";
 import OnlineProfileStepTen from "./OnlineProfileStepTen";
 import OnlineProfileStepEleven from "./OnlineProfileStepEleven";
-import OnlineProfileStepTwelve from "./OnlineProfileStepTwelve";
 import OnlineProfileStepFour from "./OnlineProfileStepFour";
 import OnlineProfileStepEight from "./OnlineProfileStepEight";
 import OnlineProfileStepNine from "./OnlineProfileStepNine";
@@ -80,17 +78,8 @@ const OnlineProfileContainer = () => {
         />
       );
     }
+
     if (step === 7) {
-      return (
-        <OnlineProfileStepSeven
-          step={step}
-          setStep={setStep}
-          formData={formData}
-          setFormData={setFormData}
-        />
-      );
-    }
-    if (step === 8) {
       return (
         <OnlineProfileStepEight
           step={step}
@@ -100,7 +89,7 @@ const OnlineProfileContainer = () => {
         />
       );
     }
-    if (step === 9) {
+    if (step === 8) {
       return (
         <OnlineProfileStepNine
           step={step}
@@ -110,7 +99,7 @@ const OnlineProfileContainer = () => {
         />
       );
     }
-    if (step === 10) {
+    if (step === 9) {
       return (
         <OnlineProfileStepTen
           step={step}
@@ -120,19 +109,9 @@ const OnlineProfileContainer = () => {
         />
       );
     }
-    if (step === 11) {
+    if (step === 10) {
       return (
         <OnlineProfileStepEleven
-          step={step}
-          setStep={setStep}
-          formData={formData}
-          setFormData={setFormData}
-        />
-      );
-    }
-    if (step === 12) {
-      return (
-        <OnlineProfileStepTwelve
           step={step}
           setStep={setStep}
           formData={formData}
@@ -190,16 +169,6 @@ const OnlineProfileContainer = () => {
         <div
           className={`w-40 h-2 rounded ${
             step === 9 ? "bg-primary" : "bg-[#DFE1E6]"
-          }`}
-        ></div>
-        <div
-          className={`w-40 h-2 rounded ${
-            step === 10 ? "bg-primary" : "bg-[#DFE1E6]"
-          }`}
-        ></div>
-        <div
-          className={`w-40 h-2 rounded ${
-            step === 11 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
       </div>
