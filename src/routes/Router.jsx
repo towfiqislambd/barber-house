@@ -138,7 +138,7 @@ export const router = createBrowserRouter([
         element: <ChooseProfessionalTimePage />,
       },
       {
-        path: "/saloncarddetails",
+        path: "/shop-info/:id",
         element: <SalonCardDetailsPage />,
       },
       {

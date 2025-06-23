@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { UserDataGet } from "./user.api";
+import { StoreDetails, UserDataGet, UserSearchStores } from "./user.api";
 
 export const useUserDataGet = () => {
   return useQuery({
@@ -8,3 +8,18 @@ export const useUserDataGet = () => {
   });
 };
 
+export const useUserSearchStore = (queryParams = {}) => {
+  return useQuery({
+    queryKey: ["user-search-stores", queryParams],
+    queryFn: () => UserSearchStores(queryParams),
+    enabled: !!queryParams,
+  });
+};
+
+export const useStoreDetails = (id) => {
+  return useQuery({
+    queryKey: ["store-details", id],
+    queryFn: () => StoreDetails(id),
+    enabled: !!id,
+  });
+};
