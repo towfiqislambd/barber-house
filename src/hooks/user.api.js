@@ -1,3 +1,4 @@
+import { axiosPublic } from "./useAxiosPublic";
 import { axiosSecure } from "./useAxiosSecure";
 
 export const UserDataGet = async () => {
@@ -37,4 +38,11 @@ export const deleteAddress = async (payload) => {
     payload
   );
   return data;
+};
+
+export const UserSearchStores = async (queryParams = {}) => {
+  const { data } = await axiosPublic("/api/online-store/show-all", {
+    params: queryParams,
+  });
+  return data?.data;
 };
