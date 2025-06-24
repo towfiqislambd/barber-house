@@ -27,7 +27,6 @@ const Navbar = () => {
   const [isSmallPopoverOpen, setIsSmallPopoverOpen] = useState(false);
   const { mutate: logOutMutate } = useLogOut();
   const { user } = useAuth();
-  console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {

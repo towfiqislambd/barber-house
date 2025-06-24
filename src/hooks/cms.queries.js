@@ -11,6 +11,7 @@ import {
   BusinessPricing,
   Catalogue,
   Highlights,
+  HomePageData,
   ProductsBrand,
   ProductsCategory,
   ServicesType,
@@ -146,5 +147,13 @@ export const useTeamMemberDetails = id => {
     queryKey: ["team-member-details", id],
     queryFn: () => TeamMemberDetails(id),
     enabled: !!id,
+  });
+};
+
+// Home page data
+export const useHomePageData = () => {
+  return useQuery({
+    queryKey: ["home-page-data"],
+    queryFn: HomePageData,
   });
 };

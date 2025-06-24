@@ -4,8 +4,12 @@ import HomepageReview from "./sections/HomepageReview";
 import HomepageStat from "./sections/HomepageStat";
 import ExploreMore from "@/components/HomePageComponents/ExploreMore";
 import HomepageBanner from "./sections/HomepageBanner";
+import { useHomePageData } from "@/hooks/cms.queries";
 
 const Homepage = () => {
+  const { data: homePageData } = useHomePageData();
+  console.log(homePageData)
+
   const containerItems = [
     {
       title: "Appointments",
@@ -40,9 +44,9 @@ const Homepage = () => {
           />
         ))}
       </div>
-      <HomepageReview />
-      <HomepageStat />
-      <ExploreMore />
+      <HomepageReview data={homePageData?.client_reviews} />
+      <HomepageStat data={homePageData?.stats} />
+      <ExploreMore data={homePageData?.banner} />
     </>
   );
 };

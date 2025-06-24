@@ -196,3 +196,9 @@ export const TeamMemberDetails = async id => {
   const { data } = await axiosPublic(`/api/teams/${id}`);
   return data?.data;
 };
+
+// Home page data
+export const HomePageData = async () => {
+  const { data } = await axiosPublic(`/api/cms/business-home-cms-without-signup`);
+  return data?.data;
+};
