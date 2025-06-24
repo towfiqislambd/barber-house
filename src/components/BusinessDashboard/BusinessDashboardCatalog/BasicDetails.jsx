@@ -213,6 +213,7 @@ const BasicDetails = ({ onNext }) => {
             rules={{ required: "Duration is required" }}
             render={({ field }) => (
               <Input
+                type="number"
                 {...field}
                 id="duration"
                 placeholder="Duration"

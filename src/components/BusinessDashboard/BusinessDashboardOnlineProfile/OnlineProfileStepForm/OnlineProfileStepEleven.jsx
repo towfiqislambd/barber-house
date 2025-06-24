@@ -28,7 +28,7 @@ const OnlineProfileStepEleven = ({ step, setStep, formData, setFormData }) => {
     fd.append("about", updatedFormData.about);
     fd.append("phone", updatedFormData.phone);
     fd.append("email", updatedFormData.email);
-    fd.append("day_name", updatedFormData.day_name);
+    // fd.append("day_name", updatedFormData.day_name);
     fd.append("morning_start_time", updatedFormData.morning_start_time);
     fd.append("morning_end_time", updatedFormData.morning_end_time);
     fd.append("evening_start_time", updatedFormData.evening_start_time);
@@ -40,6 +40,7 @@ const OnlineProfileStepEleven = ({ step, setStep, formData, setFormData }) => {
 
     // Append array values
     updatedFormData.teams?.forEach(team => fd.append("teams[]", team));
+    updatedFormData.day_name?.forEach(name => fd.append("day_name[]", name));
     updatedFormData.services?.forEach(service =>
       fd.append("services[]", service)
     );

@@ -122,7 +122,7 @@ export const useAddProduct = () => {
   return useMutation({
     mutationKey: ["add-product"],
     mutationFn: payload => AddProduct(payload),
-    onSuccess: () => {
+    onSuccess: data => {
       toast.success("Product has been added");
     },
     onError: err => {

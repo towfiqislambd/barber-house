@@ -1,68 +1,110 @@
-import Reveiws from "@/components/BusinessDashboard/BusinessDashboardMerketing/Reveiws";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  BusinessReviewStar,
+  GreatStarSvg,
+  YellowBorderSvg,
+} from "@/components/svgContainer/SvgContainer";
+import { useState } from "react";
+import reviewImg from "../../assets/images/reviews/reviewHumanPic.png";
 
 const BusinessDashboardMarketing = () => {
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("Reviews");
-  const [isVisible, setIsVisible] = useState(false);
-  useEffect(() => {
-    if (activeTab === "Smart pricing") {
-      navigate("/businessDashboard/smartpricingstepcontainer");
-    }
-  }, [activeTab, navigate]);
+  const ratings = [
+    { stars: 5, rating: 1 },
+    { stars: 4, rating: 2 },
+    { stars: 3, rating: 3 },
+    { stars: 2, rating: 4 },
+    { stars: 1, rating: 5 },
+  ];
 
-  const tabs = [{ label: "Reviews", category: null }];
+  const reviews = [
+    {
+      id: 1,
+      name: "Wendy Smith",
+      date: "10 Feb 2025 at 15:32",
+      service: "appointment",
+      salon: "SHIHAB",
+      reviewText:
+        "Had a wonderful experience at the salon! The staff was super friendly, and the haircut turned out exactly how I wanted. Will definitely be coming back!",
+      img: reviewImg,
+      rating: 5,
+    },
+    {
+      id: 2,
+      name: "John Doe",
+      date: "12 Feb 2025 at 10:00",
+      service: "haircut",
+      salon: "The Style Lab",
+      reviewText:
+        "Great experience! I loved the service and the staff were very professional. Highly recommend!",
+      img: reviewImg,
+      rating: 4,
+    },
+    {
+      id: 2,
+      name: "John Doe",
+      date: "12 Feb 2025 at 10:00",
+      service: "haircut",
+      salon: "The Style Lab",
+      reviewText:
+        "Great experience! I loved the service and the staff were very professional. Highly recommend!",
+      img: reviewImg,
+      rating: 4,
+    },
+  ];
 
   return (
-    <section className="flex flex-col xl:flex-row 4xl:gap-[244px] 3xl:gap-8 2xl:gap-40 gap-5 h-[100vh] overflow-hidden px-[26px] xl:px-0 pt-5 pb-10 md:py-0">
-      {/*  */}
-      <div className="relative">
-        {/* Toggle Button */}
-        <button
-          className="xl:hidden px-4 py-2 bg-primary text-white rounded-md xl:mb-4"
-          onClick={() => setIsVisible(!isVisible)}
-        >
-          {isVisible ? "Close Menu" : "Open Menu"}
-        </button>
-
-        {/* Sidebar */}
-        <div
-          className={`bg-white rounded-xl 4xl:p-6 3xl:p-3 p-5 h-full fixed top-12 left-0 transform -translate-x-full transition-transform duration-300 xl:w-[250px] w-[250px] shadow-lg z-50
-    ${
-      isVisible ? "translate-x-0" : ""
-    } xl:relative xl:translate-x-0 xl:block mt-10 xl:mt-0`}
-        >
-          <ul className="space-y-5 4xl:text-lg text-base font-medium mt-4">
-            {tabs.map(tab =>
-              tab.category === "heading" ? (
-                <h3
-                  key={tab.label}
-                  className="mb-3 text-xl font-semibold text-[#000] font-manrope leading-[30px]"
-                >
-                  {tab.label}
-                </h3>
-              ) : (
-                <button
-                  key={tab.label}
-                  onClick={() => setIsVisible(false) || setActiveTab(tab.label)}
-                  className={`px-5 py-2 w-full block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
-                    activeTab === tab.label
-                      ? "text-white bg-primary"
-                      : "text-[#2C2C2C]"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              )
-            )}
-          </ul>
-        </div>
+    <section className="xl:mt-[60px]">
+      <div>
+        <h1 className="text-[#000] font-outfit text-[28px] font-semibold leading-[33.6px]">
+          Reviews
+        </h1>
+        <p className="text-textLight font-manrope text-base font-medium leading-6 mt-4 mb-10">
+          See star ratings and reviews left by clients after their visit
+        </p>
       </div>
-
-      {/*  */}
-      <div className="flex-grow xl:max-w-[1080px] xl:overflow-y-auto xl:h-[100vh] hide-scrollbar">
-        {activeTab === "Reviews" && <Reveiws />}
+      <div className="flex flex-col xl:flex-row gap-7">
+        <div className="w-full">
+          {/* This is the right section */}
+          <div className="space-y-4">
+            {reviews.map(review => (
+              <div
+                key={review.id}
+                className="border border-[#B3BAC5] 3xl:p-8 p-4 rounded-2xl"
+              >
+                <div className="flex gap-[14px] items-center">
+                  <figure className="sm:w-[60px] sm:h-[60px]">
+                    <img
+                      className="w-full h-full object-cover"
+                      src={review.img}
+                      alt={review.name}
+                    />
+                  </figure>
+                  <div>
+                    <p className="text-textColor font-manrope text-base sm:text-xl font-semibold leading-[30px]">
+                      {review.name}
+                    </p>
+                    <p className="text-textColor font-manrope text-sm sm:text-base font-medium leading-6">
+                      {review.date} for an{" "}
+                      <span className="text-[#055AD9]">{review.service}</span>{" "}
+                      at {review.salon}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex sm:mt-6 mt-3">
+                  {[...Array(review.rating)].map((_, index) => (
+                    <BusinessReviewStar key={index} />
+                  ))}
+                </div>
+                <p className="text-textColor font-manrope text-base font-medium leading-6 mt-[6px]">
+                  {review.reviewText}
+                </p>
+              </div>
+            ))}
+          </div>
+          {/* Dynamic Results Count */}
+          <p className="text-center mt-6 text-textLight font-manrope text-sm font-semibold leading-6">
+            Showing {reviews.length} of {reviews.length} results
+          </p>
+        </div>
       </div>
     </section>
   );

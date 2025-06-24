@@ -12,6 +12,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useForm, Controller } from "react-hook-form";
+import { Checkbox } from "@/components/ui/checkbox";
+const days = [
+  "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+];
 
 const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
   const {
@@ -21,7 +31,7 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      day_name: "",
+      day_name: [],
       morning_start_time: "",
       morning_end_time: "",
       evening_start_time: "",
@@ -29,8 +39,24 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
     },
   });
 
+  const formatTimeTo12Hour = time24 => {
+    const [hour, minute] = time24.split(":");
+    const hourNum = parseInt(hour, 10);
+    const ampm = hourNum >= 12 ? "PM" : "AM";
+    const hour12 = hourNum % 12 || 12;
+    return `${hour12}:${minute} ${ampm}`;
+  };
+
   const onSubmit = data => {
-    setFormData(prevData => ({ ...prevData, ...data }));
+    const formattedData = {
+      ...data,
+      morning_start_time: formatTimeTo12Hour(data.morning_start_time),
+      morning_end_time: formatTimeTo12Hour(data.morning_end_time),
+      evening_start_time: formatTimeTo12Hour(data.evening_start_time),
+      evening_end_time: formatTimeTo12Hour(data.evening_end_time),
+    };
+
+    setFormData(prevData => ({ ...prevData, ...formattedData }));
     setStep(step + 1);
   };
 
@@ -66,22 +92,28 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
           <Controller
             name="day_name"
             control={control}
-            rules={{ required: "Please select a day" }}
-            render={({ field }) => (
-              <Select onValueChange={field.onChange} value={field.value}>
-                <SelectTrigger className="w-full text-base border !py-6">
-                  <SelectValue placeholder="Select a day" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="saturday">Saturday</SelectItem>
-                  <SelectItem value="sunday">Sunday</SelectItem>
-                  <SelectItem value="monday">Monday</SelectItem>
-                  <SelectItem value="tuesday">Tuesday</SelectItem>
-                  <SelectItem value="wednesday">Wednesday</SelectItem>
-                  <SelectItem value="thursday">Thursday</SelectItem>
-                  <SelectItem value="friday">Friday</SelectItem>
-                </SelectContent>
-              </Select>
+            rules={{
+              validate: value =>
+                value.length > 0 || "Please select at least one day",
+            }}
+            render={({ field: { value, onChange } }) => (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+                {days.map(day => (
+                  <label key={day} className="flex items-center space-x-2">
+                    <Checkbox
+                      checked={value.includes(day)}
+                      onCheckedChange={checked => {
+                        if (checked) {
+                          onChange([...value, day]);
+                        } else {
+                          onChange(value.filter(d => d !== day));
+                        }
+                      }}
+                    />
+                    <span className="text-sm">{day}</span>
+                  </label>
+                ))}
+              </div>
             )}
           />
           {errors.day_name && (
@@ -95,8 +127,8 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
             <Label htmlFor="morning_start_time">Morning start time</Label>
             <Input
               id="morning_start_time"
-              type="number"
-              placeholder="7.00"
+              type="time"
+              placeholder="7:00 AM"
               {...register("morning_start_time", {
                 required: "Start time is required",
               })}
@@ -113,8 +145,8 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
             <Label htmlFor="morning_end_time">Morning end time</Label>
             <Input
               id="morning_end_time"
-              type="number"
-              placeholder="9.00"
+              type="time"
+              placeholder="9:00 AM"
               {...register("morning_end_time", {
                 required: "End time is required",
               })}
@@ -131,8 +163,8 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
             <Label htmlFor="evening_start_time">Evening start time</Label>
             <Input
               id="evening_start_time"
-              type="number"
-              placeholder="7.00"
+              type="time"
+              placeholder="5:00 PM"
               {...register("evening_start_time", {
                 required: "Start time is required",
               })}
@@ -149,8 +181,8 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
             <Label htmlFor="evening_end_time">Evening end time</Label>
             <Input
               id="evening_end_time"
-              type="number"
-              placeholder="9.00"
+              type="time"
+              placeholder="9:00 PM"
               {...register("evening_end_time", {
                 required: "End time is required",
               })}

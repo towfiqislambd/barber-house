@@ -11,9 +11,11 @@ import {
   BusinessPricing,
   Catalogue,
   Highlights,
+  HomePageData,
   ProductsBrand,
   ProductsCategory,
   ServicesType,
+  SocialLinks,
   TeamMemberDetails,
   Values,
 } from "./cms.api";
@@ -23,6 +25,14 @@ export const useServicesType = () => {
   return useQuery({
     queryKey: ["services-type"],
     queryFn: ServicesType,
+  });
+};
+
+// Social Links
+export const useSocialLinks = () => {
+  return useQuery({
+    queryKey: ["social-links"],
+    queryFn: SocialLinks,
   });
 };
 
@@ -146,5 +156,13 @@ export const useTeamMemberDetails = id => {
     queryKey: ["team-member-details", id],
     queryFn: () => TeamMemberDetails(id),
     enabled: !!id,
+  });
+};
+
+// Home page data
+export const useHomePageData = () => {
+  return useQuery({
+    queryKey: ["home-page-data"],
+    queryFn: HomePageData,
   });
 };

@@ -7,6 +7,12 @@ export const ServicesType = async () => {
   return data?.data;
 };
 
+// Social Links
+export const SocialLinks = async () => {
+  const { data } = await axiosPublic("/api/social-links");
+  return data?.data;
+};
+
 // Onboard:
 export const OnBoarding = async payload => {
   const { data } = await axiosSecure.post(
@@ -194,5 +200,11 @@ export const BlogDetails = async slug => {
 // Team Member details
 export const TeamMemberDetails = async id => {
   const { data } = await axiosPublic(`/api/teams/${id}`);
+  return data?.data;
+};
+
+// Home page data
+export const HomePageData = async () => {
+  const { data } = await axiosPublic(`/api/cms/business-home-cms-without-signup`);
   return data?.data;
 };

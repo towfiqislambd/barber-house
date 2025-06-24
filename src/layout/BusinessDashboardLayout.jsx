@@ -77,7 +77,7 @@ const routingList = [
     id: "seven",
     to: "/businessDashboard/marketing",
     Icon: BusinessDashboardSeven,
-    label: "Marketing",
+    label: "Reviews",
   },
   {
     id: "eight",
@@ -89,7 +89,7 @@ const routingList = [
     id: "nine",
     to: "/businessDashboard/members-list",
     Icon: BusinessDashboardNine,
-    label: "Team",
+    label: "Teams",
   },
 ];
 
