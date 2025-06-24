@@ -91,17 +91,6 @@ const AboutGhalibSalon = ({ data }) => {
           </div>
         </div>
 
-        {/* Make your profile stand out */}
-        {/* <div className="mt-7 lg:mt-12">
-          <h1 className="text-textColor font-outfit text-2xl lg:text-[28px] font-semibold leading-[33.6px]">
-            Make your profile stand out
-          </h1>
-          <p className="text-textLight font-manrope text-base font-medium leading-6 max-w-[608px] mt-3">
-            Let cats know what makes your business spectal by secting any
-            samemtes or addittinar intamation that an important to you. Choose
-            many as opply
-          </p>
-        </div> */}
         {/* Amenities */}
         <div className="mt-8 max-w-[800px]">
           <h1 className="text-[#000] font-manrope text-lg font-bold leading-[27px]">
@@ -111,10 +100,11 @@ const AboutGhalibSalon = ({ data }) => {
           <div className="flex gap-[10px] mt-4 flex-wrap">
             {/* Parking available */}
             {data?.data?.store_amenities?.map((amenities) => {
-              console.log(amenities);
-
               return (
-                <div className="flex gap-[6px] border border-[#DFE1E6] py-2 px-3 rounded-[100px] cursor-pointer items-center">
+                <div
+                  key={amenities.id}
+                  className="flex gap-[6px] border border-[#DFE1E6] py-2 px-3 rounded-[100px] cursor-pointer items-center"
+                >
                   <img
                     src={`${import.meta.env.VITE_SITE_URL}/${
                       amenities?.amenity?.icon

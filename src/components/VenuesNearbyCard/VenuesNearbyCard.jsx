@@ -1,25 +1,15 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { StarSvg, WishButtonSvg } from "../svgContainer/SvgContainer";
 import { Link } from "react-router-dom";
 
-const VenuesNearbyCard = ({
-  name = "Trendy Trim",
-  rating = 4.8,
-  reviews = 1800,
-  location = "Mirpur, Dhaka",
-  category = "Barbershop",
-  image,
-}) => {
-  const [checked, setChecked] = useState(false);
-
+const VenuesNearbyCard = ({ venue }) => {
   return (
-    <div className="rounded-lg relative group">
+    <Link to={`/shop-info/${venue?.id}`} className="rounded-lg relative group">
       <div className="relative w-full h-52 rounded-t-lg overflow-hidden">
         {/* Actual Image */}
         <img
-          src={image}
-          alt={name}
+          src={`${import.meta.env.VITE_SITE_URL}/${venue?.image}}`}
+          alt={venue?.name}
           className="w-full h-full object-cover rounded-t-lg group-hover:scale-105 transition-all duration-300"
         />
         {/* Gradient Overlay */}
@@ -30,8 +20,8 @@ const VenuesNearbyCard = ({
       <div className="px-5 py-4 border border-borderColor rounded-b-lg flex flex-col gap-6">
         <div>
           <div className="w-full flex items-center justify-between">
-            <h3 className="text-2xl font-medium font-outfit">{name}</h3>
-            <div className="flex items-center gap-3">
+            <h3 className="text-2xl font-medium font-outfit">{venue?.name}</h3>
+            {/* <div className="flex items-center gap-3">
               <div className="flex items-center gap-1">
                 <p className="text-textLight font-medium text-lg">{rating}</p>
                 <StarSvg />
@@ -39,11 +29,13 @@ const VenuesNearbyCard = ({
               <span className="text-textLight font-medium text-lg">
                 ({reviews})
               </span>
-            </div>
+            </div> */}
           </div>
           {/* location */}
           <div className="mt-1">
-            <p className="text-lg font-medium text-textLight">{location}</p>
+            <p className="text-lg font-medium text-textLight">
+              {venue?.address}
+            </p>
           </div>
         </div>
 
@@ -54,18 +46,15 @@ const VenuesNearbyCard = ({
       </div>
 
       {/* category */}
-      <div className="px-3 py-1.5 rounded-sm bg-white/50 absolute top-3 left-3">
+      {/* <div className="px-3 py-1.5 rounded-sm bg-white/50 absolute top-3 left-3">
         {category}
-      </div>
+      </div> */}
 
       {/* wishlist button */}
-      <div
-        onClick={() => setChecked((prev) => !prev)}
-        className="size-8 cursor-pointer flex items-center justify-center rounded-full bg-white/50 absolute top-3 right-3"
-      >
-        <WishButtonSvg checked={checked} />
+      <div className="size-8 cursor-pointer flex items-center justify-center rounded-full bg-white/50 absolute top-3 right-3">
+        <WishButtonSvg />
       </div>
-    </div>
+    </Link>
   );
 };
 

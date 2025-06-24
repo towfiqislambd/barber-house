@@ -8,7 +8,7 @@ import { useState } from "react";
 import VenuesNearbyCard from "@/components/VenuesNearbyCard/VenuesNearbyCard";
 import img1 from "../../../../assets/images/venuesCard/venuesNearbyCard.jpg";
 
-const VenuesNearby = () => {
+const VenuesNearby = ({ data }) => {
   const [swiperRef, setSwiperRef] = useState(null);
   const venues = [
     {
@@ -88,9 +88,9 @@ const VenuesNearby = () => {
               1200: { slidesPerView: 4 },
             }}
           >
-            {venues?.map((venue) => (
+            {data?.data?.nearby_stores?.map((venue) => (
               <SwiperSlide key={venue.id} className="flex justify-center">
-                <VenuesNearbyCard key={venue.id} {...venue} />
+                <VenuesNearbyCard key={venue.id} venue={venue} />
               </SwiperSlide>
             ))}
           </Swiper>
