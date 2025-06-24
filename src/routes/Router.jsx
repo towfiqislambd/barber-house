@@ -57,13 +57,10 @@ import MembershipDone from "@/pages/UserDashboardPage/MembershipDone";
 import SendGiftCard from "@/pages/UserDashboardPage/SendGiftCard";
 import UserAppointments from "@/pages/UserDashboardPage/UserAppointments";
 import UserFavourites from "@/pages/UserDashboardPage/UserFavourites";
-import UserForms from "@/pages/UserDashboardPage/UserForms";
 import UserMembership from "@/pages/UserDashboardPage/UserMembership";
 import UserMembershipCheckout from "@/pages/UserDashboardPage/UserMembershipCheckout";
 import UserProductOrder from "@/pages/UserDashboardPage/UserProductOrder";
 import UserProfile from "@/pages/UserDashboardPage/UserProfile";
-import UserSetting from "@/pages/UserDashboardPage/UserSetting";
-import UserWallet from "@/pages/UserDashboardPage/UserWallet";
 import { createBrowserRouter } from "react-router-dom";
 import EditTimeAndCalander from "@/components/SchedulingComponents/EditTimeAndCalander";
 import BlockedTimeEdit from "@/components/SchedulingComponents/BlockedTimeEdit";
@@ -298,24 +295,12 @@ export const router = createBrowserRouter([
         element: <UserAppointments />,
       },
       {
-        path: "wallet",
-        element: <UserWallet />,
-      },
-      {
         path: "favourites",
         element: <UserFavourites />,
       },
       {
-        path: "forms",
-        element: <UserForms />,
-      },
-      {
         path: "productorder",
         element: <UserProductOrder />,
-      },
-      {
-        path: "settings",
-        element: <UserSetting />,
       },
       {
         path: "usermembership",

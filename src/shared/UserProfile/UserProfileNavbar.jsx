@@ -10,11 +10,7 @@ import userDashboardLogo from "../../assets/images/logo.jpg";
 
 export default function UserProfileNavbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
-  const menulistyle =
-    "pe-[14px] mr-[14px] border-r border-[#B0B0B0] flex flex-wrap items-center";
 
   return (
     <>
@@ -24,40 +20,6 @@ export default function UserProfileNavbar() {
           <Link to="/">
             <img className="h-[60px] w-[60px] object-cover rounded-4 "  src={userDashboardLogo} alt="User Logo" />
           </Link>
-
-          {/* Full Form (2xl and up) */}
-          {/* <div className="hidden 2xl:block w-full max-w-[900px] py-[18px] px-[18px] rounded-[48px] bg-[#FFF] shadow-[0px_0px_6px_0px_rgba(0,102,107,0.12)]">
-            <form>
-              <div className="relative">
-                <ul className="flex">
-                  <li className={menulistyle}>
-                    <img src={Icon1} alt="" />
-                    <p className="ps-3">All treatments & venues</p>
-                  </li>
-                  <li className={menulistyle}>
-                    <img src={Icon2} alt="" />
-                    <p className="ps-3">Current location</p>
-                  </li>
-                  <li className={menulistyle}>
-                    <img src={Icon3} alt="" />
-                    <p className="ps-3">Any date</p>
-                  </li>
-                  <li className="flex items-center">
-                    <img src={Icon4} alt="" />
-                    <p className="ps-3">Any time</p>
-                  </li>
-                </ul>
-                <div className="absolute right-[-10px] top-[-12px]">
-                  <button
-                    className="py-[12px] px-[20px] rounded-[32px] text-white bg-[#2C2C2C] min-w-[128px]"
-                    type="submit"
-                  >
-                    Search
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div> */}
 
           {/* Hamburger Icon (below 2xl) */}
           <div className="block 2xl:hidden">
