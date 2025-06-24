@@ -12,6 +12,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useForm, Controller } from "react-hook-form";
+import { Checkbox } from "@/components/ui/checkbox";
+const days = [
+  "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+];
 
 const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
   const {
@@ -21,7 +31,7 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      day_name: "",
+      day_name: [],
       morning_start_time: "",
       morning_end_time: "",
       evening_start_time: "",
@@ -82,22 +92,28 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
           <Controller
             name="day_name"
             control={control}
-            rules={{ required: "Please select a day" }}
-            render={({ field }) => (
-              <Select onValueChange={field.onChange} value={field.value}>
-                <SelectTrigger className="w-full text-base border !py-6">
-                  <SelectValue placeholder="Select a day" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="saturday">Saturday</SelectItem>
-                  <SelectItem value="sunday">Sunday</SelectItem>
-                  <SelectItem value="monday">Monday</SelectItem>
-                  <SelectItem value="tuesday">Tuesday</SelectItem>
-                  <SelectItem value="wednesday">Wednesday</SelectItem>
-                  <SelectItem value="thursday">Thursday</SelectItem>
-                  <SelectItem value="friday">Friday</SelectItem>
-                </SelectContent>
-              </Select>
+            rules={{
+              validate: value =>
+                value.length > 0 || "Please select at least one day",
+            }}
+            render={({ field: { value, onChange } }) => (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-4">
+                {days.map(day => (
+                  <label key={day} className="flex items-center space-x-2">
+                    <Checkbox
+                      checked={value.includes(day)}
+                      onCheckedChange={checked => {
+                        if (checked) {
+                          onChange([...value, day]);
+                        } else {
+                          onChange(value.filter(d => d !== day));
+                        }
+                      }}
+                    />
+                    <span className="text-sm">{day}</span>
+                  </label>
+                ))}
+              </div>
             )}
           />
           {errors.day_name && (
