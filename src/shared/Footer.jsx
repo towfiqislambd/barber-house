@@ -4,10 +4,14 @@ import {
   FooterSocialOne,
   FooterSocialThree,
   FooterSocialTwo,
+  InstagramSvg,
 } from "@/components/svgContainer/SvgContainer";
+import { useSocialLinks } from "@/hooks/cms.queries";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const { data: socialLinks } = useSocialLinks();
+
   return (
     <footer>
       {/* upper part */}
@@ -28,7 +32,6 @@ const Footer = () => {
             <ul className="text-[#2C2C2C] space-y-1 xl:space-y-3 flex flex-col">
               <Link to={"/business/businesshelpcenter"}>Customer Support</Link>
               <Link to={"/business/blog"}>Blog</Link>
-              <Link to={"/business/sitemap"}>Sitemap</Link>
             </ul>
           </div>
           <div className="">
@@ -55,18 +58,18 @@ const Footer = () => {
               Contact Us
             </h3>
             <div className="flex gap-1 2xl:gap-3 items-center">
-              <button className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient ">
-                <FooterSocialOne />
-              </button>
-              <button className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient ">
-                <FooterSocialTwo />
-              </button>
-              <button className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient ">
-                <FooterSocialThree />
-              </button>
-              <button className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient">
-                <FooterSocialFour />
-              </button>
+              {socialLinks?.map((item, idx) => (
+                <a
+                  target="_blank"
+                  href={item?.profile_link}
+                  className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient "
+                >
+                  {item?.social_media === "facebook" && <FooterSocialOne />}
+                  {item?.social_media === "twitter" && <FooterSocialThree />}
+                  {item?.social_media === "instagram" && <InstagramSvg />}
+                  {item?.social_media === "linkedin" && <FooterSocialFour />}
+                </a>
+              ))}
             </div>
           </div>
         </div>

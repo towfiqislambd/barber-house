@@ -7,6 +7,12 @@ export const ServicesType = async () => {
   return data?.data;
 };
 
+// Social Links
+export const SocialLinks = async () => {
+  const { data } = await axiosPublic("/api/social-links");
+  return data?.data;
+};
+
 // Onboard:
 export const OnBoarding = async payload => {
   const { data } = await axiosSecure.post(

@@ -29,8 +29,24 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
     },
   });
 
+  const formatTimeTo12Hour = time24 => {
+    const [hour, minute] = time24.split(":");
+    const hourNum = parseInt(hour, 10);
+    const ampm = hourNum >= 12 ? "PM" : "AM";
+    const hour12 = hourNum % 12 || 12;
+    return `${hour12}:${minute} ${ampm}`;
+  };
+
   const onSubmit = data => {
-    setFormData(prevData => ({ ...prevData, ...data }));
+    const formattedData = {
+      ...data,
+      morning_start_time: formatTimeTo12Hour(data.morning_start_time),
+      morning_end_time: formatTimeTo12Hour(data.morning_end_time),
+      evening_start_time: formatTimeTo12Hour(data.evening_start_time),
+      evening_end_time: formatTimeTo12Hour(data.evening_end_time),
+    };
+
+    setFormData(prevData => ({ ...prevData, ...formattedData }));
     setStep(step + 1);
   };
 
@@ -95,8 +111,8 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
             <Label htmlFor="morning_start_time">Morning start time</Label>
             <Input
               id="morning_start_time"
-              type="number"
-              placeholder="7.00"
+              type="time"
+              placeholder="7:00 AM"
               {...register("morning_start_time", {
                 required: "Start time is required",
               })}
@@ -113,8 +129,8 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
             <Label htmlFor="morning_end_time">Morning end time</Label>
             <Input
               id="morning_end_time"
-              type="number"
-              placeholder="9.00"
+              type="time"
+              placeholder="9:00 AM"
               {...register("morning_end_time", {
                 required: "End time is required",
               })}
@@ -131,8 +147,8 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
             <Label htmlFor="evening_start_time">Evening start time</Label>
             <Input
               id="evening_start_time"
-              type="number"
-              placeholder="7.00"
+              type="time"
+              placeholder="5:00 PM"
               {...register("evening_start_time", {
                 required: "Start time is required",
               })}
@@ -149,8 +165,8 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
             <Label htmlFor="evening_end_time">Evening end time</Label>
             <Input
               id="evening_end_time"
-              type="number"
-              placeholder="9.00"
+              type="time"
+              placeholder="9:00 PM"
               {...register("evening_end_time", {
                 required: "End time is required",
               })}

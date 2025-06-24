@@ -15,6 +15,7 @@ import {
   ProductsBrand,
   ProductsCategory,
   ServicesType,
+  SocialLinks,
   TeamMemberDetails,
   Values,
 } from "./cms.api";
@@ -24,6 +25,14 @@ export const useServicesType = () => {
   return useQuery({
     queryKey: ["services-type"],
     queryFn: ServicesType,
+  });
+};
+
+// Social Links
+export const useSocialLinks = () => {
+  return useQuery({
+    queryKey: ["social-links"],
+    queryFn: SocialLinks,
   });
 };
 
