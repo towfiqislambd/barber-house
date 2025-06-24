@@ -1,73 +1,176 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const availableSerivices = [
-  {
-    id: 1,
-    tittle: "Nails",
-    subTittle: "SAR 55.00",
-  },
-  {
-    id: 2,
-    tittle: "Haircut",
-    subTittle: "SAR 55.00",
-  },
-  {
-    id: 3,
-    tittle: "Nails",
-    subTittle: "SAR 55.00",
-  },
-  {
-    id: 4,
-    tittle: "Haricut",
-    subTittle: "SAR 55.00",
-  },
-  {
-    id: 5,
-    tittle: "Nails",
-    subTittle: "SAR 55.00",
-  },
-  {
-    id: 6,
-    tittle: "Haircut",
-    subTittle: "SAR 55.00",
-  },
-  {
-    id: 7,
-    tittle: "Nails",
-    subTittle: "SAR 55.00",
-  },
-  {
-    id: 8,
-    tittle: "Haircut",
-    subTittle: "SAR 55.00",
-  },
-];
-
+import { toast } from "react-toastify";
 const initialState = {
-  Services: availableSerivices,
-  selectedServices: [],
+  cartItems: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [],
+  cartTotalAmount: 0,
 };
 
-const CartSlice = createSlice({
-  name: "CartSlice",
-  initialState: initialState,
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
   reducers: {
-    addSelectedServices: (state, actions) => {
-      const item = actions.payload;
-      const exists = state.selectedServices.some(
-        service => service.id === item.id
+    addtoCart(state, action) {
+      //if the item already in the cart
+      const existedItemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      console.log(existedItemIndex);
+
+      //if exist
+      if (existedItemIndex >= 0) {
+        //increase quantity
+        state.cartItems[existedItemIndex].cartQuantity += 1;
+        toast.info("Quantity Increased", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        //add to cart
+        const assemblingItem = {
+          ...action.payload,
+          cartQuantity: 1,
+        };
+        toast.success("Product added", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        state.cartItems.push(assemblingItem);
+      }
+      //set data in local storage
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    removeFromCart(state, action) {
+      //filter item which are not deleted
+      const updatedCartItem = state.cartItems.filter(
+        (item) => item.id !== action.payload.id
+      );
+      toast.error("Product Removed", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      //update the item
+      state.cartItems = updatedCartItem;
+
+      //updated local storage
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    removeAllFromCart(state, action) {
+      state.cartItems = [];
+      // toast.error("Cart Cleared", {
+      //   position: "bottom-left",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
+      //updated local storage
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    decreaseCart(state, action) {
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      //if item exist
+
+      if (state.cartItems[itemIndex].cartQuantity > 1) {
+        state.cartItems[itemIndex].cartQuantity -= 1;
+
+        toast.warn("Quantity Decreased", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else if (state.cartItems[itemIndex].cartQuantity === 1) {
+        const updatedCartItem = state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+        toast.error("Product Removed", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        state.cartItems = updatedCartItem;
+      }
+      //updated local storage
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    getSubtotal(state, action) {
+      const subTotal = state.cartItems.reduce((acc, item) => {
+        const { variantPrice, cartQuantity } = item;
+        const itemTotal = +variantPrice * cartQuantity;
+
+        acc += itemTotal;
+        return acc;
+      }, 0);
+
+      state.cartTotalAmount = subTotal;
+    },
+    addToSingleCart: (state, action) => {
+      const item = state.cartItems.find(
+        (product) => product.id === action.payload.id
       );
 
-      if (exists) {
-        state.selectedServices = state.selectedServices.filter(
-          service => service.id !== item.id
-        );
+      if (item) {
+        item.cartQuantity += action.payload.cartQuantity;
       } else {
-        state.selectedServices.push(item);
+        toast.success("Product added", {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        state.cartItems.push(action.payload);
       }
+      //updated local storage
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
   },
 });
 
-export const { addSelectedServices } = CartSlice.actions;
-export default CartSlice.reducer;
+export const {
+  addtoCart,
+  removeFromCart,
+  removeAllFromCart,
+  decreaseCart,
+  getSubtotal,
+  addToSingleCart,
+} = cartSlice.actions;
+
+export default cartSlice.reducer;

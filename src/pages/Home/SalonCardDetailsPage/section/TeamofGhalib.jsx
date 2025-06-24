@@ -3,8 +3,10 @@ import galibsPic2 from "../../../../assets/images/team-of-galib/galibsPic1.png";
 import galibsPic3 from "../../../../assets/images/team-of-galib/galibsPic2.png";
 import galibsPic4 from "../../../../assets/images/team-of-galib/galibsPic3.png";
 import galibsPic5 from "../../../../assets/images/team-of-galib/galibsPic4.png";
+import users from "../../../../assets/images/icon/user_icon.jpg";
+const TeamofGhalib = ({ data }) => {
+  console.log(data?.data?.store_teams);
 
-const TeamofGhalib = () => {
   const people = [
     {
       name: "Mohammed Amin",
@@ -36,26 +38,39 @@ const TeamofGhalib = () => {
   return (
     <section className="container pb-10 2xl:py-20 lg:px-5 xl:px-7 2xl:px-10 3xl:px-12 4xl:px-0">
       <h1 className="text-[#2C2C2C] font-outfit text-2xl xl:text-3xl 2xl:text-[32px] font-medium">
-        Team of galibi&apos;s Barber Salon
+        Team of {data?.data?.name}
       </h1>
       {/* card section */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 place-items-center">
-        {people.map((person, index) => (
-          <div
-            key={index}
-            className="bg-primaryLight  border-[0.4px] border-primary max-w-[249px] rounded-tl-[52px] rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] p-6 mt-8"
-          >
-            <img src={person.pic} alt={person.name} />
-            <div className="text-center mt-2">
-              <h1 className="text-[#2C2C2C] font-manrope text-lg font-semibold">
-                {person.name}
-              </h1>
-              <p className="text-[#2C2C2C] font-manrope text-lg font-semibold mt-1">
-                {person.job}
-              </p>
+        {data?.data?.store_teams?.map((person, index) => {
+          return (
+            <div
+              key={index}
+              className="bg-primaryLight  border-[0.4px] border-primary max-w-[249px] rounded-tl-[52px] rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] p-6 mt-8"
+            >
+              {person?.team?.photo ? (
+                <img
+                  className="w-full h-32"
+                  src={`${import.meta.env.VITE_SITE_URL}/${
+                    person?.team?.photo
+                  }}`}
+                  alt={person.name}
+                />
+              ) : (
+                <img className="w-full h-32" src={users} alt={"team avatar"} />
+              )}
+
+              <div className="text-center mt-2">
+                <h1 className="text-[#2C2C2C] font-manrope text-lg font-semibold">
+                  {person?.team?.first_name}
+                </h1>
+                <p className="text-[#2C2C2C] font-manrope text-lg font-semibold mt-1">
+                  {person?.team?.job_title}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

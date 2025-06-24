@@ -26,9 +26,9 @@ const SalonCardDetailsPage = () => {
     <section className="pt-28 lg:pt-36">
       <SalonCardDetailsBanner data={data} />
       <ServicesGhalibSalon />
-      <TeamofGhalib />
-      <ProductOfGalib />
-      <AboutGhalibSalon />
+      <TeamofGhalib data={data} />
+      <ProductOfGalib data={data} />
+      <AboutGhalibSalon data={data} />
       <div className="py-10 2xl:py-20 bg-[#FCFCFC]">
         <HomepageReview review={"Reviews of Ghalib's Barber Salon"} />
       </div>

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { addSelectedServices } from "@/redux/features/cartSlice";
+// import { addSelectedServices } from "@/redux/features/cartSlice";
 import Appoinment from "@/components/SalesDrawer/Appoinment";
 import Service from "@/components/SalesDrawer/Service";
 import Product from "@/components/SalesDrawer/Product";
@@ -22,7 +22,7 @@ export default function SalesDrawer() {
   const dispatch = useDispatch();
 
   const handleAddCart = (item) => {
-    dispatch(addSelectedServices(item));
+    // dispatch(addSelectedServices(item));
   };
 
   const tabArr = [

@@ -10,51 +10,14 @@ import productImg1 from "../../../../assets/images/productOfGalib/productOfGalib
 import productImg2 from "../../../../assets/images/productOfGalib/productOfGalibImg2.png";
 import currencyImg from "../../../../assets/images/searchResultPage/currentcy.png";
 
-const ProductOfGalib = () => {
+const ProductOfGalib = ({ data }) => {
   const [swiperRef, setSwiperRef] = useState(null);
-  const products = [
-    {
-      id: 1,
-      imgSrc: productImg1,
-      title: "Valor & Co Perfume",
-      price: 10,
-      inStock: true,
-    },
-    {
-      id: 2,
-      imgSrc: productImg2,
-      title: "Luxury Fragrance",
-      price: 15,
-      inStock: true,
-    },
-    {
-      id: 3,
-      imgSrc: productImg1,
-      title: "Signature Scent",
-      price: 12,
-      inStock: true,
-    },
-    {
-      id: 4,
-      imgSrc: productImg1,
-      title: "Signature Scent",
-      price: 12,
-      inStock: true,
-    },
-    {
-      id: 5,
-      imgSrc: productImg1,
-      title: "Signature Scent",
-      price: 12,
-      inStock: true,
-    },
-  ];
 
   return (
     <section className="bg-[#FCFCFC] py-10 2xl:py-24 px-5 xl:px-7 2xl:px-10 3xl:px-12 4xl:px-0">
       <div className="container">
         <h1 className="text-[#2C2C2C] font-outfit text-2xl 2xl:text-[32px]">
-          Products of galibi&apos;s Barber Salon
+          Products of {data?.data?.name}
         </h1>
         <div className="relative">
           {/* prev-button */}
@@ -79,14 +42,11 @@ const ProductOfGalib = () => {
               1200: { slidesPerView: 4 },
             }}
           >
-            {products?.map((product) => (
+            {data?.data?.products?.map((product) => (
               <SwiperSlide key={product.id} className="flex justify-center">
                 <ProductOfGalibCard
-                  imgSrc={product.imgSrc}
-                  title={product.title}
-                  price={product.price}
                   currencyImgSrc={currencyImg}
-                  inStock={product.inStock}
+                  product={product}
                 />
               </SwiperSlide>
             ))}
