@@ -7,6 +7,7 @@ import {
   UserDataGet,
   UserSearchStores,
 } from "./user.api";
+import useAuth from "./useAuth";
 
 export const useUserDataGet = () => {
   return useQuery({
@@ -32,9 +33,11 @@ export const useStoreDetails = (id) => {
 };
 
 export const useBookmarkGet = () => {
+  const { user } = useAuth();
   return useQuery({
     queryKey: ["bookmarks"],
     queryFn: () => BookmarkGet(),
+    enabled: !!user,
   });
 };
 
