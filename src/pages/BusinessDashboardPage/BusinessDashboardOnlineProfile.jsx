@@ -6,6 +6,7 @@ import chartImg from "../../../src/assets/images/online-profile/chart.png";
 import clientImg from "../../../src/assets/images/online-profile/client.png";
 import { Loader } from "@/components/Loader/Loader";
 
+
 const BusinessDashboardOnlineProfile = () => {
   const { user } = useAuth();
 
