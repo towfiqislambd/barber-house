@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { message, Upload } from "antd";
 import {
   ContinueButtonArrowSvg,
   LeftSideArrowSvg,
   UploadImageSvg,
 } from "@/components/svgContainer/SvgContainer";
-
 const { Dragger } = Upload;
 
 const OnlineProfileStepEight = ({ step, setStep, setFormData }) => {
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (images.length >= 3) {
+      setError("");
+    }
+  }, [images]);
 
   const props = {
     name: "file",
@@ -24,7 +29,7 @@ const OnlineProfileStepEight = ({ step, setStep, setFormData }) => {
       }
 
       setImages(prev => [...prev, file]);
-      return false; // prevent default upload
+      return false;
     },
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
@@ -32,12 +37,12 @@ const OnlineProfileStepEight = ({ step, setStep, setFormData }) => {
   };
 
   const handleContinue = () => {
-    if (images.length < 2) {
-      setError("Please upload at least 2 images.");
+    if (images.length < 3) {
+      setError("Please upload at least 3 images.");
       return;
     }
+
     setFormData(prevData => ({ ...prevData, images }));
-    setError("");
     setStep(step + 1);
   };
 
@@ -63,7 +68,7 @@ const OnlineProfileStepEight = ({ step, setStep, setFormData }) => {
           Update venue images
         </h1>
         <p className="text-textColor font-manrope text-sm lg:text-base xl:text-lg font-medium leading-[27px] lg:mt-[13px] mt-2">
-          Add at least 2 images of your location to your profile. You can add
+          Add at least 3 images of your location to your profile. You can add
           more or make changes later.
         </p>
 

@@ -205,6 +205,22 @@ export const TeamMemberDetails = async id => {
 
 // Home page data
 export const HomePageData = async () => {
-  const { data } = await axiosPublic(`/api/cms/business-home-cms-without-signup`);
+  const { data } = await axiosPublic(
+    `/api/cms/business-home-cms-without-signup`
+  );
+  return data?.data;
+};
+
+// Get store
+export const GetStore = async id => {
+  const { data } = await axiosSecure(`/api/online-store/details/${id}`);
+  return data?.data;
+};
+
+// Store details
+export const StoreDetails = async id => {
+  const { data } = await axiosSecure(
+    `api/online-store/show?online_store_id=${id}`
+  );
   return data?.data;
 };

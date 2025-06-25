@@ -24,6 +24,7 @@ const TeamMembers = () => {
       console.error("Failed to delete member:", error);
     }
   };
+  console.log(allTeamMembers);
 
   return (
     <div>
@@ -80,7 +81,7 @@ const TeamMembers = () => {
                   <td className="px-4 text-[#545454] font-medium py-3 flex gap-2 items-center">
                     <img
                       className="w-11 h-11 rounded-full border"
-                      src={`${import.meta.env.VITE_SITE_URL}/${data?.profile}`}
+                      src={`${import.meta.env.VITE_SITE_URL}/${data?.photo}`}
                       alt="img"
                     />
                     <h3 className="text-[17px] font-medium text-[#2C2C2C]">
