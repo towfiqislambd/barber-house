@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 
-const OnlineProfileStepTwo = ({ step, setStep, setFormData }) => {
+const OnlineProfileStepTwo = ({ step, setStep, setFormData, details }) => {
   const {
     register,
     handleSubmit,
@@ -55,6 +55,7 @@ const OnlineProfileStepTwo = ({ step, setStep, setFormData }) => {
               Display Name
             </Label>
             <Input
+              defaultValue={details?.name}
               id="name"
               className="lg:w-[608px] w-full lg:h-[55px] h-12 px-4 rounded-lg"
               type="text"
@@ -75,6 +76,7 @@ const OnlineProfileStepTwo = ({ step, setStep, setFormData }) => {
               About
             </Label>
             <Textarea
+              defaultValue={details?.about}
               id="about"
               className="h-[130px]"
               placeholder="Type your message here."

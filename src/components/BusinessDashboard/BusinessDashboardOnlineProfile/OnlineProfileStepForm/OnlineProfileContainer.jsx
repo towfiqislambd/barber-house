@@ -9,11 +9,20 @@ import OnlineProfileStepEleven from "./OnlineProfileStepEleven";
 import OnlineProfileStepFour from "./OnlineProfileStepFour";
 import OnlineProfileStepEight from "./OnlineProfileStepEight";
 import OnlineProfileStepNine from "./OnlineProfileStepNine";
+import useAuth from "@/hooks/useAuth";
+import { useGetStore, useStoreDetails } from "@/hooks/cms.queries";
+import { Loader } from "@/components/Loader/Loader";
 
 const OnlineProfileContainer = () => {
+  const { user } = useAuth();
+  const business_profile_id = user?.business_profile?.id;
+  const { data: get_online_store_id } = useGetStore(business_profile_id);
+  const { data: storeDetails, isLoading } = useStoreDetails(
+    get_online_store_id?.online_store_id
+  );
+
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(null);
-
   console.log(formData);
 
   // For step form
@@ -35,6 +44,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={storeDetails?.store}
         />
       );
     }
@@ -120,6 +130,13 @@ const OnlineProfileContainer = () => {
       );
     }
   };
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className="mt-5 md:mt-0">
       {/* Step bar */}

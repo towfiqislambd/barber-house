@@ -53,14 +53,12 @@ const OnlineProfileStepEleven = ({ step, setStep, formData, setFormData }) => {
     );
     updatedFormData.values?.forEach(value => fd.append("values[]", value));
 
-    // Fix for images - handle both file objects and existing file paths
     updatedFormData.images?.forEach((imageObj, index) => {
       if (imageObj instanceof File) {
         fd.append(`images[${index}]`, imageObj);
       } else if (imageObj?.originFileObj) {
         fd.append(`images[${index}]`, imageObj.originFileObj);
       } else if (imageObj?.url) {
-        // If it's an existing image URL
         fd.append(`existing_images[${index}]`, imageObj.url);
       }
     });
