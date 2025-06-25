@@ -14,25 +14,42 @@ import { Button } from "@/components/ui/button";
 import { Command, CommandItem, CommandList } from "@/components/ui/command";
 import { CheckIcon } from "lucide-react";
 
-const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
+const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
   const { data: allTeamMembers } = useAllTeamMembers();
   const { data: allServices } = useServicesType();
+
   const [teams, setTeams] = useState([]);
   const [services, setServices] = useState([]);
   const [error, setError] = useState({ team: false, service: false });
 
-  const toggleSelection = (id, array, setArray) => {
-    setArray(prev =>
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
-    );
-  };
+  // ✅ Populate defaults from details
+  useEffect(() => {
+    if (details?.store_teams?.length > 0) {
+      const defaultTeamIds = details.store_teams.map(item => item.team_id);
+      setTeams(defaultTeamIds);
+    }
 
+    if (details?.store_services?.length > 0) {
+      const defaultServiceIds = details.store_services.map(
+        item => item.service_id
+      );
+      setServices(defaultServiceIds);
+    }
+  }, [details]);
+
+  // Update error when teams/services change
   useEffect(() => {
     setError({
       team: teams.length === 0,
       service: services.length === 0,
     });
   }, [teams, services]);
+
+  const toggleSelection = (id, array, setArray) => {
+    setArray(prev =>
+      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
+    );
+  };
 
   const handleContinue = () => {
     const hasError = {
@@ -135,6 +152,7 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
               <Command>
                 <CommandList>
                   {allServices?.map(serviceItem => {
+                    const isSelected = services.includes(serviceItem?.id);
                     return (
                       <CommandItem
                         key={serviceItem?.id}
@@ -147,9 +165,9 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
                         }
                         className="cursor-pointer"
                       >
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 w-full">
                           <span>{serviceItem?.service_name}</span>
-                          {services.includes(serviceItem?.id) && (
+                          {isSelected && (
                             <CheckIcon className="w-4 h-4 ml-auto text-green-500" />
                           )}
                         </div>

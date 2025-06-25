@@ -47,6 +47,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -57,6 +58,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -67,6 +69,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -88,6 +91,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -98,6 +102,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -108,6 +113,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }

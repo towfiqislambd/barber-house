@@ -5,18 +5,40 @@ import {
   LeftSideArrowSvg,
   UploadImageSvg,
 } from "@/components/svgContainer/SvgContainer";
+
 const { Dragger } = Upload;
 
-const OnlineProfileStepEight = ({ step, setStep, setFormData }) => {
+const OnlineProfileStepEight = ({ step, setStep, setFormData, details }) => {
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
 
+  // Populate default images on mount
+  useEffect(() => {
+    if (details?.store_images?.length > 0) {
+      const defaultImages = details.store_images.map(item => ({
+        uid: item.id.toString(),
+        name: item.images.split("/").pop(),
+        url: item.images,
+        originFileObj: null, // differentiate from newly added files
+        isDefault: true,
+      }));
+      setImages(defaultImages);
+    }
+  }, [details]);
+
+  // Validate image count
   useEffect(() => {
     if (images.length >= 3) {
       setError("");
     }
   }, [images]);
 
+  // Remove image handler
+  const handleRemoveImage = uid => {
+    setImages(prev => prev.filter(img => img.uid !== uid));
+  };
+
+  // Upload config
   const props = {
     name: "file",
     multiple: true,
@@ -28,14 +50,23 @@ const OnlineProfileStepEight = ({ step, setStep, setFormData }) => {
         return false;
       }
 
-      setImages(prev => [...prev, file]);
+      const newFile = {
+        uid: Date.now().toString(),
+        name: file.name,
+        originFileObj: file,
+        isDefault: false,
+      };
+
+      setImages(prev => [...prev, newFile]);
       return false;
     },
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
     },
+    fileList: [], // disable antd's own preview
   };
 
+  // Continue to next step
   const handleContinue = () => {
     if (images.length < 3) {
       setError("Please upload at least 3 images.");
@@ -73,7 +104,7 @@ const OnlineProfileStepEight = ({ step, setStep, setFormData }) => {
         </p>
 
         <div className="border border-[#E6E7EA] xl:mt-8 mt-4 rounded-xl sm:p-6 p-4">
-          <Dragger {...props} fileList={[]}>
+          <Dragger {...props}>
             <p className="flex justify-center">
               <UploadImageSvg />
             </p>
@@ -92,16 +123,26 @@ const OnlineProfileStepEight = ({ step, setStep, setFormData }) => {
             <p className="text-red-500 mt-2 font-medium text-sm">{error}</p>
           )}
 
+          {/* Image List */}
           {images.length > 0 && (
             <div className="mt-5">
               <h3 className="font-semibold mb-2">Uploaded Files:</h3>
-              <ul className="list-disc list-inside text-sm text-gray-700">
-                {images.slice(0, 3).map((file, index) => (
-                  <li key={index}>{file.name}</li>
+              <ul className="space-y-2 text-sm text-gray-700">
+                {images.map((file, index) => (
+                  <li
+                    key={file.uid}
+                    className="flex justify-between items-center bg-gray-50 rounded px-3 py-2"
+                  >
+                    <span className="truncate max-w-[80%]">{file.name}</span>
+                    <button
+                      type="button"
+                      className="text-red-500 text-xs font-semibold"
+                      onClick={() => handleRemoveImage(file.uid)}
+                    >
+                      Remove
+                    </button>
+                  </li>
                 ))}
-                {images.length > 3 && (
-                  <li>+ {images.length - 3} more files uploaded</li>
-                )}
               </ul>
             </div>
           )}
