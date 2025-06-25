@@ -49,13 +49,15 @@ const TeamofGhalib = ({ data }) => {
               className="bg-primaryLight  border-[0.4px] border-primary max-w-[249px] rounded-tl-[52px] rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] p-6 mt-8"
             >
               {person?.team?.photo ? (
-                <img
-                  className="w-full h-32"
-                  src={`${import.meta.env.VITE_SITE_URL}/${
-                    person?.team?.photo
-                  }}`}
-                  alt={person.name}
-                />
+                <div className="  rounded-tl-[52px] rounded-tr-[16px] rounded-br-[16px] rounded-bl-[16px] overflow-hidden">
+                  <img
+                    className="w-full h-32"
+                    src={`${import.meta.env.VITE_SITE_URL}/${
+                      person?.team?.photo
+                    }`}
+                    alt={person.name}
+                  />
+                </div>
               ) : (
                 <img className="w-full h-32" src={users} alt={"team avatar"} />
               )}

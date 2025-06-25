@@ -1,6 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   addAddress,
+  BookMarkAdd,
+  BookMarkRemove,
   deleteAddress,
   updateAddress,
   updateProfile,
@@ -43,7 +45,7 @@ export const useUpdateAddress = () => {
       toast.success(data?.message);
     },
     onError: (err) => {
-      toast.error(err?.data?.response?.message);
+      toast.error(err?.response?.data?.message);
     },
   });
 };
@@ -58,9 +60,39 @@ export const useDeleteAddress = () => {
     },
 
     onError: (err) => {
-      console.log(err);
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
 
-      toast.error(err?.data?.response?.message);
+export const useBookmarkAdd = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["bookmark add"],
+    mutationFn: (payload) => BookMarkAdd(payload),
+
+    onSuccess: (data) => {
+      toast.success(data?.message);
+      queryClient.invalidateQueries(["bookmarks"]);
+    },
+    onError: (err) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+export const useBookmarkRemove = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationKey: ["bookmark remove"],
+    mutationFn: (storeId) => BookMarkRemove(storeId),
+    onSuccess: (data) => {
+      toast.success(data?.message || "Bookmark removed!");
+      queryClient.invalidateQueries(["bookmarks"]);
+    },
+    onError: (err) => {
+      toast.error(err?.response?.data?.message || "Failed to remove bookmark");
     },
   });
 };

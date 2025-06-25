@@ -1,5 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
-import { StoreDetails, UserDataGet, UserSearchStores } from "./user.api";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  BookmarkGet,
+  BookMarkRemove,
+  StoreDetails,
+  stores,
+  UserDataGet,
+  UserSearchStores,
+} from "./user.api";
 
 export const useUserDataGet = () => {
   return useQuery({
@@ -21,5 +28,19 @@ export const useStoreDetails = (id) => {
     queryKey: ["store-details", id],
     queryFn: () => StoreDetails(id),
     enabled: !!id,
+  });
+};
+
+export const useBookmarkGet = () => {
+  return useQuery({
+    queryKey: ["bookmarks"],
+    queryFn: () => BookmarkGet(),
+  });
+};
+
+export const useStores = () => {
+  return useQuery({
+    queryKey: ["store"],
+    queryFn: () => stores(),
   });
 };

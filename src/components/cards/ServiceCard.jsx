@@ -4,6 +4,7 @@ import {
   ServicesGhalibSalonSvg,
 } from "../svgContainer/SvgContainer";
 import currencyImg from "../../assets/images/searchResultPage/currentcy.png";
+import { currencyFormatter } from "@/lib/currencyFormatter";
 
 const ServiceCard = ({ service }) => {
   console.log(service);
@@ -19,16 +20,11 @@ const ServiceCard = ({ service }) => {
           {service?.catalog_service?.name}
         </h1>
         <p className="text-textLight font-manrope text-base font-semibold">
-          {service?.catalog_service?.duration}
+          Duration : {service?.catalog_service?.duration}
         </p>
         <div className="flex gap-1 mt-3 items-center">
-          <img
-            className="w-[19px] h-6 object-cover"
-            src={currencyImg}
-            alt="Currency"
-          />
           <h1 className="text-primary font-manrope text-xl font-medium leading-[30px]">
-            {service?.catalog_service?.price}
+            {currencyFormatter(+service?.catalog_service?.price)}
           </h1>
         </div>
       </div>

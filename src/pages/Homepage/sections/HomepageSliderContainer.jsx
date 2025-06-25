@@ -13,14 +13,17 @@ import {
   PrevSliderSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { useState } from "react";
+import VenuesNearbyCard from "@/components/VenuesNearbyCard/VenuesNearbyCard";
 
 const HomepageSliderContainer = ({ data, isLastItem }) => {
   const [swiperRef, setSwiperRef] = useState(null);
+  console.log(data);
 
   return (
     <section
-      className={`${!isLastItem ? "2xl:pb-24 pb-12" : ""
-        } container px-8 xl:px-10 2xl:px-14 4xl:px-0`}
+      className={`${
+        !isLastItem ? "2xl:pb-24 pb-12" : ""
+      } container px-8 xl:px-10 2xl:px-14 4xl:px-0`}
     >
       {/* title */}
       <div>
@@ -55,10 +58,10 @@ const HomepageSliderContainer = ({ data, isLastItem }) => {
             1200: { slidesPerView: 4 },
           }}
         >
-          {data?.data?.map((item, index) => (
-            <SwiperSlide key={item.id || index}>
+          {data?.data?.data?.map((venue, index) => (
+            <SwiperSlide key={venue.id || index}>
               {" "}
-              <ProductCard item={item} />
+              <VenuesNearbyCard homepage={true} key={venue.id} venue={venue} />
             </SwiperSlide>
           ))}
         </Swiper>

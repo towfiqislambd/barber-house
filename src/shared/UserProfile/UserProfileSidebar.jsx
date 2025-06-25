@@ -1,22 +1,10 @@
-import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function UserProfileSidebar() {
-  const [activeItem, setActiveItem] = useState(
-    localStorage.getItem("activeTab") || "profile"
-  );
-
-  const linkStyle =
-    "py-[16px] px-[32px] rounded-[8px] text-[#2C2C2C] font-manrope font-medium leading-[27px] text-[18px] block";
-  const activeStyle = "bg-primary text-white";
-
-  useEffect(() => {
-    localStorage.setItem("activeTab", activeItem);
-  }, [activeItem]);
-
-  const handleClick = item => {
-    setActiveItem(item);
-  };
+  const baseClass =
+    "py-[16px] px-[32px] rounded-[8px] font-manrope font-medium leading-[27px] text-[18px] block";
+  const activeClass = "bg-primary text-white";
+  const inactiveClass = "text-[#2C2C2C]";
 
   return (
     <div className="relative">
@@ -24,43 +12,40 @@ export default function UserProfileSidebar() {
         <li>
           <NavLink
             to="/userdashboard"
-            className={`${linkStyle} ${
-              activeItem === "profile" ? activeStyle : ""
-            }`}
-            onClick={() => handleClick("profile")}
+            end
+            className={({ isActive }) =>
+              `${baseClass} ${isActive ? activeClass : inactiveClass}`
+            }
           >
             Profile
           </NavLink>
         </li>
         <li>
           <NavLink
-            to="appointments"
-            className={`${linkStyle} ${
-              activeItem === "appointments" ? activeStyle : ""
-            }`}
-            onClick={() => handleClick("appointments")}
+            to="/userdashboard/appointments"
+            className={({ isActive }) =>
+              `${baseClass} ${isActive ? activeClass : inactiveClass}`
+            }
           >
             Appointments
           </NavLink>
         </li>
         <li>
           <NavLink
-            to="favourites"
-            className={`${linkStyle} ${
-              activeItem === "favourites" ? activeStyle : ""
-            }`}
-            onClick={() => handleClick("favourites")}
+            to="/userdashboard/favourites"
+            className={({ isActive }) =>
+              `${baseClass} ${isActive ? activeClass : inactiveClass}`
+            }
           >
             Favourites
           </NavLink>
         </li>
         <li>
           <NavLink
-            to="productorder"
-            className={`${linkStyle} ${
-              activeItem === "productorder" ? activeStyle : ""
-            }`}
-            onClick={() => handleClick("productorder")}
+            to="/userdashboard/productorder"
+            className={({ isActive }) =>
+              `${baseClass} ${isActive ? activeClass : inactiveClass}`
+            }
           >
             Product Orders
           </NavLink>

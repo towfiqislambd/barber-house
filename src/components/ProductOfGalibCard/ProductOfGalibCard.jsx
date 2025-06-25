@@ -8,6 +8,7 @@ import {
 } from "@/redux/features/cartSlice";
 import { Loader } from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
+import { currencyFormatter } from "@/lib/currencyFormatter";
 
 const ProductOfGalibCard = ({ currencyImgSrc, product }) => {
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const ProductOfGalibCard = ({ currencyImgSrc, product }) => {
   return (
     <div className="bg-primaryLight max-w-[365px] py-5 lg:py-8 px-5 lg:px-8 border-[0.4px] border-primary rounded-2xl relative">
       {/* Product Image */}
-      <div className="bg-[#E6F7F9] flex justify-center">
+      <div className="flex justify-center">
         <img
           src={`${import.meta.env.VITE_SITE_URL}/${product.image_url}`}
           alt={product.name}
@@ -64,13 +65,13 @@ const ProductOfGalibCard = ({ currencyImgSrc, product }) => {
           {product.name}
         </h1>
         <div className="flex gap-1 mt-1 items-center">
-          <img
+          {/* <img
             className="w-[19px] h-6 object-cover"
             src={currencyImgSrc}
             alt="Currency"
-          />
+          /> */}
           <h1 className="text-[#3E3E3E] font-manrope text-lg lg:text-2xl font-medium leading-[27px]">
-            {product.price}
+            {currencyFormatter(+product.price)}
           </h1>
         </div>
       </div>
