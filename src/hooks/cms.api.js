@@ -22,6 +22,15 @@ export const OnBoarding = async payload => {
   return data?.data;
 };
 
+// Stripe:
+export const OnStripe = async payload => {
+  const { data } = await axiosSecure.post(
+    "/api/stripe/account/connect",
+    payload
+  );
+  return data?.data;
+};
+
 // Edit Category:
 export const EditCategory = async (id, payload) => {
   const { data } = await axiosSecure.post(

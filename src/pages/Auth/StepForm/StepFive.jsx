@@ -4,10 +4,12 @@ import {
 } from "@/components/svgContainer/SvgContainer";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useOnboard } from "@/hooks/cms.mutations";
+import { useOnboard, useStripe } from "@/hooks/cms.mutations";
 
 const StepFive = ({ step, setStep, formData }) => {
   const { mutateAsync: boardingMutation, isPending } = useOnboard();
+  const { mutateAsync: stripeMutation } = useStripe();
+
   const {
     handleSubmit,
     setError,
@@ -48,6 +50,11 @@ const StepFive = ({ step, setStep, formData }) => {
   };
 
   const onSubmit = async data => {
+    const stripeData = {
+      success_redirect_url: `${window.location.origin}/businessDashboard`,
+      cancel_redirect_url: `${window.location.origin}`,
+    };
+
     let isValid = true;
 
     Object.keys(uploadedFiles).forEach(key => {
@@ -106,6 +113,7 @@ const StepFive = ({ step, setStep, formData }) => {
     formDataToSend.append("longitude", formData.longitude);
 
     await boardingMutation(formDataToSend);
+    await stripeMutation(stripeData);
   };
 
   const fileFields = [

@@ -73,7 +73,9 @@ export const useLogin = () => {
           toast.success("Login Successful");
         } else {
           if (data?.flag) {
-            navigate((location?.state && location?.state) || "/");
+            navigate(
+              (location?.state && location?.state) || "/businessDashboard"
+            );
           } else {
             navigate("/stepContainer");
           }
