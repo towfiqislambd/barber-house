@@ -18,7 +18,11 @@ export default function UserProfileNavbar() {
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/">
-            <img className="h-[60px] w-[60px] object-cover rounded-4 "  src={userDashboardLogo} alt="User Logo" />
+            <img
+              className="h-[60px] w-[60px] object-cover rounded-4 "
+              src={userDashboardLogo}
+              alt="User Logo"
+            />
           </Link>
 
           {/* Hamburger Icon (below 2xl) */}

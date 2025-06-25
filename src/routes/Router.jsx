@@ -283,7 +283,7 @@ export const router = createBrowserRouter([
   },
   // user profile layout
   {
-    path: "/userdashboard",
+    path: "/userdashboard/",
     element: <UserDashboardLayout />,
     children: [
       {

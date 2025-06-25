@@ -23,7 +23,7 @@ const VenuesNearbyCard = ({ venue }) => {
 
     try {
       if (isBookmarked) {
-        await removeBookmark.mutateAsync(venue?.id);
+        await removeBookmark.mutateAsync({ online_store_id: venue?.id });
       } else {
         await addBookmark.mutateAsync({ online_store_id: venue?.id });
       }
