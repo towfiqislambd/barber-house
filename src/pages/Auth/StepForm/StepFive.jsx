@@ -4,10 +4,16 @@ import {
 } from "@/components/svgContainer/SvgContainer";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useOnboard } from "@/hooks/cms.mutations";
+import { useOnboard, useStripe } from "@/hooks/cms.mutations";
 
 const StepFive = ({ step, setStep, formData }) => {
   const { mutateAsync: boardingMutation, isPending } = useOnboard();
+  const { mutateAsync: stripeMutation } = useStripe();
+  const data = {
+    success_redirect_url: `${window.location.origin}`,
+    cancel_redirect_url: `${window.location.origin}`,
+  };
+
   const {
     handleSubmit,
     setError,
@@ -106,6 +112,7 @@ const StepFive = ({ step, setStep, formData }) => {
     formDataToSend.append("longitude", formData.longitude);
 
     await boardingMutation(formDataToSend);
+    await stripeMutation(data);
   };
 
   const fileFields = [

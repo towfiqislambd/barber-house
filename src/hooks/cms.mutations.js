@@ -11,19 +11,34 @@ import {
   EditCategory,
   EditService,
   OnBoarding,
+  OnStripe,
 } from "./cms.api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 // Onboard:
 export const useOnboard = () => {
-  const navigate = useNavigate();
   return useMutation({
     mutationKey: ["onboard"],
     mutationFn: payload => OnBoarding(payload),
-    onSuccess: () => {
-      navigate("/businessDashboard");
-      toast.success("Registration Successful");
+    onSuccess: () => {},
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Stripe:
+export const useStripe = () => {
+  const navigate = useNavigate();
+  return useMutation({
+    mutationKey: ["stripe"],
+    mutationFn: payload => OnStripe(payload),
+    onSuccess: data => {
+      const redirectUrl = data?.url;
+      if (redirectUrl) {
+        window.location.href = redirectUrl;
+      }
     },
     onError: err => {
       toast.error(err?.response?.data?.message);
