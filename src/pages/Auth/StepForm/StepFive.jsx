@@ -9,10 +9,6 @@ import { useOnboard, useStripe } from "@/hooks/cms.mutations";
 const StepFive = ({ step, setStep, formData }) => {
   const { mutateAsync: boardingMutation, isPending } = useOnboard();
   const { mutateAsync: stripeMutation } = useStripe();
-  const data = {
-    success_redirect_url: `${window.location.origin}`,
-    cancel_redirect_url: `${window.location.origin}`,
-  };
 
   const {
     handleSubmit,
@@ -54,6 +50,11 @@ const StepFive = ({ step, setStep, formData }) => {
   };
 
   const onSubmit = async data => {
+    const stripeData = {
+      success_redirect_url: `${window.location.origin}/businessDashboard`,
+      cancel_redirect_url: `${window.location.origin}`,
+    };
+
     let isValid = true;
 
     Object.keys(uploadedFiles).forEach(key => {
@@ -112,7 +113,7 @@ const StepFive = ({ step, setStep, formData }) => {
     formDataToSend.append("longitude", formData.longitude);
 
     await boardingMutation(formDataToSend);
-    await stripeMutation(data);
+    await stripeMutation(stripeData);
   };
 
   const fileFields = [
