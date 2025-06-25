@@ -70,6 +70,7 @@ const OnlineProfileStepEleven = ({ step, setStep, formData, setFormData }) => {
         },
       });
       navigate("/businessDashboard/online-profile");
+      window.location.reload();
     } catch (error) {
       console.error("Upload failed:", error);
     }
