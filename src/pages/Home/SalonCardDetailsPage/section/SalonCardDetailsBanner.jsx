@@ -91,11 +91,11 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
       </div>
 
       {/* Banner Section */}
-      <div className="flex flex-col xl:flex-row gap-16 4xl:gap-[105px] mt-8">
+      <div className="flex flex-col xl:flex-row gap-16 4xl:gap-[105px] mt-8 items-center">
         {/* Left Side */}
         <div className="w-full">
           <img
-            className="w-full xl:max-w-[500px] 2xl:max-w-[650px] 3xl:max-w-[745px] rounded-xl h-[250px] lg:h-[350px] 2xl:h-[400px] 3xl:h-[517px] object-cover"
+            className="w-full xl:max-w-[500px] 2xl:max-w-[650px] 3xl:max-w-[745px] rounded-xl h-[250px] lg:h-[350px] 2xl:h-[400px]  object-cover"
             src={selectedBanner}
             alt="Salon Preview"
           />

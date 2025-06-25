@@ -10,7 +10,7 @@ import VenuesNearby from "./section/VenuesNearby";
 import ServicesGhalibSalon from "./section/ServicesGhalibSalon";
 import { useParams } from "react-router-dom";
 import { useStoreDetails } from "@/hooks/user.queries";
-import { Loader } from "@/components/Loader/Loader"; // ✅ Import your Loader
+import { Loader } from "@/components/Loader/Loader";
 
 const SalonCardDetailsPage = () => {
   const { id } = useParams();

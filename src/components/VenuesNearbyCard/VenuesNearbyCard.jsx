@@ -1,8 +1,36 @@
-import { useState } from "react";
-import { StarSvg, WishButtonSvg } from "../svgContainer/SvgContainer";
+import useAuth from "@/hooks/useAuth";
+import { WishButtonSvg } from "../svgContainer/SvgContainer";
 import { Link } from "react-router-dom";
+import { useBookmarkGet } from "@/hooks/user.queries";
+import { useBookmarkAdd, useBookmarkRemove } from "@/hooks/user.mutation";
 
 const VenuesNearbyCard = ({ venue }) => {
+  const { user } = useAuth();
+  const { data: bookmark } = useBookmarkGet();
+  const addBookmark = useBookmarkAdd();
+  const removeBookmark = useBookmarkRemove();
+
+  const isBookmarked = bookmark?.some((item) => item.id === venue?.id);
+
+  const handleBookmark = async (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    if (!user) {
+      toast.error("Please login first");
+      return;
+    }
+
+    try {
+      if (isBookmarked) {
+        await removeBookmark.mutateAsync(venue?.id);
+      } else {
+        await addBookmark.mutateAsync({ online_store_id: venue?.id });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <Link to={`/shop-info/${venue?.id}`} className="rounded-lg relative group">
       <div className="relative w-full h-52 rounded-t-lg overflow-hidden">
@@ -53,8 +81,13 @@ const VenuesNearbyCard = ({ venue }) => {
       </div> */}
 
       {/* wishlist button */}
-      <div className="size-8 cursor-pointer flex items-center justify-center rounded-full bg-white/50 absolute top-3 right-3">
-        <WishButtonSvg />
+      <div
+        onClick={(e) => handleBookmark(e)}
+        className={`size-8 cursor-pointer flex items-center justify-center rounded-full absolute top-3 right-3 transition-colors duration-300 ${
+          isBookmarked ? "bg-primary" : "bg-white/50 hover:bg-primary"
+        }`}
+      >
+        <WishButtonSvg color={isBookmarked ? "#fff" : "#232342"} />
       </div>
     </Link>
   );

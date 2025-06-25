@@ -44,7 +44,7 @@ const ProductOfGalibCard = ({ currencyImgSrc, product }) => {
   return (
     <div className="bg-primaryLight max-w-[365px] py-5 lg:py-8 px-5 lg:px-8 border-[0.4px] border-primary rounded-2xl relative">
       {/* Product Image */}
-      <div className="bg-[#E6F7F9] flex justify-center">
+      <div className="flex justify-center">
         <img
           src={`${import.meta.env.VITE_SITE_URL}/${product.image_url}`}
           alt={product.name}
