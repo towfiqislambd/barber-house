@@ -3,6 +3,7 @@ import {
   BookmarkGet,
   BookMarkRemove,
   StoreDetails,
+  stores,
   UserDataGet,
   UserSearchStores,
 } from "./user.api";
@@ -37,3 +38,9 @@ export const useBookmarkGet = () => {
   });
 };
 
+export const useStores = () => {
+  return useQuery({
+    queryKey: ["store"],
+    queryFn: () => stores(),
+  });
+};

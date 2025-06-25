@@ -74,3 +74,9 @@ export const BookMarkRemove = async (payload) => {
   );
   return data;
 };
+
+export const stores = async () => {
+  const { data } = await axiosPublic.get("/api/online-store/show-all");
+
+  return data?.data;
+};

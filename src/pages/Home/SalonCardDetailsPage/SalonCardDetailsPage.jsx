@@ -34,7 +34,7 @@ const SalonCardDetailsPage = () => {
       {/* <div className="py-10 2xl:py-20 bg-[#FCFCFC]">
         <HomepageReview review={"Reviews of Ghalib's Barber Salon"} />
       </div> */}
-      <VenuesNearby data={data} />
+      <VenuesNearby homepage={false} data={data} />
     </section>
   );
 };
