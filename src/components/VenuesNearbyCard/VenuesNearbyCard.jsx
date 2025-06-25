@@ -3,16 +3,13 @@ import { StarSvg, WishButtonSvg } from "../svgContainer/SvgContainer";
 import { Link } from "react-router-dom";
 
 const VenuesNearbyCard = ({ venue }) => {
-  console.log(venue);
-  console.log(venue?.store_images[0].images);
-
   return (
     <Link to={`/shop-info/${venue?.id}`} className="rounded-lg relative group">
       <div className="relative w-full h-52 rounded-t-lg overflow-hidden">
         {/* Actual Image */}
         <img
           src={`${import.meta.env.VITE_SITE_URL}/${
-            venue?.store_images[0].images
+            venue?.store_images[0]?.images
           }`}
           alt={venue?.name}
           className="w-full h-full object-cover rounded-t-lg group-hover:scale-105 transition-all duration-300"

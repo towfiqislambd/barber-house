@@ -5,22 +5,29 @@ import "swiper/css";
 import "swiper/css/pagination";
 import {
   AddressSvg,
-  ClockSvg,
-  DownloadSvg,
   LeftSideArrowSvg,
   LeftSideArrowSwiperSvg,
   LoveSvg,
   MessageSvg,
   OpeningTimeSvg,
   RightSideArrowSwiperSvg,
-  StarSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { useEffect, useState } from "react";
 import { Pagination } from "swiper/modules";
 import { Link, useNavigate } from "react-router-dom";
 import moment from "moment";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
+import { useBookmarkAdd } from "@/hooks/user.mutation";
+import { useBookmarkGet } from "@/hooks/user.queries";
+import { useBookmarkRemove } from "@/hooks/user.mutation";
 
 const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
+  const { user } = useAuth();
+  const mutateAync = useBookmarkAdd();
+  const { data: bookmark } = useBookmarkGet();
+  const removeBookmark = useBookmarkRemove();
+
   const [swiperRef, setSwiperRef] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -37,11 +44,6 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
     }
   }, [salonImages]);
 
-  const navOptionArr = [
-    { icon: MessageSvg, redirectLink: "/message" },
-    { icon: LoveSvg, redirectLink: "/" },
-  ];
-
   const openingHours = data?.data?.opening_hours || [];
 
   const currentDay = moment().format("dddd").toLowerCase();
@@ -49,6 +51,25 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
     (entry) => entry.day_name.toLowerCase() === currentDay
   );
 
+  const storeId = data?.data?.id;
+  const isBookmarked = bookmark?.some((item) => item.id === storeId);
+  const handleBookmark = async () => {
+    if (!user) {
+      toast.error("Please Login First");
+      navigate("/login");
+      return;
+    }
+
+    try {
+      if (isBookmarked) {
+        await removeBookmark.mutateAsync({ online_store_id: data?.data?.id });
+      } else {
+        await mutateAync.mutateAsync({ online_store_id: data?.data?.id });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <div className="container mb-10 lg:mb-20 4xl:mb-[120px] lg:px-5 xl:px-7 2xl:px-10 3xl:px-12 4xl:px-0">
       {/* Back and Breadcrumb */}
@@ -131,15 +152,25 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
               {data?.data?.name}
             </h1>
             <div className="flex gap-3">
-              {navOptionArr.map((item, index) => (
-                <div
-                  key={index}
-                  onClick={() => navigate(item.redirectLink)}
-                  className="bg-[#B3BAC5] cursor-pointer hover:bg-primary ease-in-out duration-300 border border-[#B3BAC5] w-9 h-9 lg:w-12 lg:h-12 rounded-full flex items-center justify-center"
-                >
-                  <item.icon />
-                </div>
-              ))}
+              <Link
+                to={"/message"}
+                className="bg-[#B3BAC5] cursor-pointer hover:bg-primary ease-in-out duration-300 border border-[#B3BAC5] w-9 h-9 lg:w-12 lg:h-12 rounded-full flex items-center justify-center"
+              >
+                <MessageSvg />
+              </Link>
+              <div
+                onClick={handleBookmark}
+                className={`cursor-pointer border w-9 h-9 lg:w-12 lg:h-12 rounded-full flex items-center justify-center 
+    transition-colors duration-300
+    ${
+      isBookmarked
+        ? "bg-primary border-primary"
+        : "bg-[#B3BAC5] border-[#B3BAC5] hover:bg-primary"
+    }
+  `}
+              >
+                <LoveSvg color={isBookmarked ? "#fff" : "#232342"} />
+              </div>
             </div>
           </div>
 

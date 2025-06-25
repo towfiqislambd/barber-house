@@ -51,3 +51,26 @@ export const StoreDetails = async (id) => {
   const { data } = await axiosPublic(`/api/online-store/show-details/${id}`);
   return data;
 };
+export const BookMarkAdd = async (payload) => {
+  const { data } = await axiosSecure.post(
+    "/api/online-store/bookmark/add",
+    payload
+  );
+  return data;
+};
+
+export const BookmarkGet = async () => {
+  const { data } = await axiosSecure.get(
+    "/api/customer-dashboard/my-favorites"
+  );
+
+  return data?.data;
+};
+
+export const BookMarkRemove = async (payload) => {
+  const { data } = await axiosSecure.post(
+    `/api/online-store/bookmark/remove`,
+    payload
+  );
+  return data;
+};
