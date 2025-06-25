@@ -4,7 +4,7 @@ import {
 } from "@/components/svgContainer/SvgContainer";
 import { Label } from "@/components/ui/label";
 import { useAllTeamMembers, useServicesType } from "@/hooks/cms.queries";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Popover,
   PopoverContent,
@@ -14,13 +14,36 @@ import { Button } from "@/components/ui/button";
 import { Command, CommandItem, CommandList } from "@/components/ui/command";
 import { CheckIcon } from "lucide-react";
 
-const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
+const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
   const { data: allTeamMembers } = useAllTeamMembers();
   const { data: allServices } = useServicesType();
-  console.log(allServices);
+
   const [teams, setTeams] = useState([]);
   const [services, setServices] = useState([]);
   const [error, setError] = useState({ team: false, service: false });
+
+  // ✅ Populate defaults from details
+  useEffect(() => {
+    if (details?.store_teams?.length > 0) {
+      const defaultTeamIds = details.store_teams.map(item => item.team_id);
+      setTeams(defaultTeamIds);
+    }
+
+    if (details?.store_services?.length > 0) {
+      const defaultServiceIds = details.store_services.map(
+        item => item.service_id
+      );
+      setServices(defaultServiceIds);
+    }
+  }, [details]);
+
+  // Update error when teams/services change
+  useEffect(() => {
+    setError({
+      team: teams.length === 0,
+      service: services.length === 0,
+    });
+  }, [teams, services]);
 
   const toggleSelection = (id, array, setArray) => {
     setArray(prev =>
@@ -33,12 +56,14 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
       team: teams.length === 0,
       service: services.length === 0,
     };
-    setError(hasError);
 
-    if (!hasError.team && !hasError.service) {
-      setFormData(prevData => ({ ...prevData, teams, services }));
-      setStep(step + 1);
+    if (hasError.team || hasError.service) {
+      setError(hasError);
+      return;
     }
+
+    setFormData(prevData => ({ ...prevData, teams, services }));
+    setStep(step + 1);
   };
 
   return (
@@ -75,25 +100,27 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
                   : "Select team member(s)"}
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-full max-h-[200px] overflow-y-auto p-0">
+            <PopoverContent className="w-full max-h-[240px] overflow-y-auto p-0">
               <Command>
                 <CommandList>
-                  {allTeamMembers?.map(member => (
-                    <CommandItem
-                      key={member?.id}
-                      onSelect={() =>
-                        toggleSelection(member?.id, teams, setTeams)
-                      }
-                      className="cursor-pointer"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span>{member?.first_name}</span>
-                        {teams.includes(member?.id) && (
-                          <CheckIcon className="w-4 h-4 ml-auto text-green-500" />
-                        )}
-                      </div>
-                    </CommandItem>
-                  ))}
+                  {allTeamMembers?.map(member => {
+                    const isSelected = teams.includes(member?.id);
+                    return (
+                      <CommandItem key={member?.id} className="cursor-pointer">
+                        <label className="flex items-center gap-3 w-full cursor-pointer px-2 py-2">
+                          <input
+                            type="checkbox"
+                            checked={isSelected}
+                            onChange={() =>
+                              toggleSelection(member?.id, teams, setTeams)
+                            }
+                            className="w-4 h-4 accent-[#0D1619]"
+                          />
+                          <span className="text-sm">{member?.first_name}</span>
+                        </label>
+                      </CommandItem>
+                    );
+                  })}
                 </CommandList>
               </Command>
             </PopoverContent>
@@ -125,6 +152,7 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
               <Command>
                 <CommandList>
                   {allServices?.map(serviceItem => {
+                    const isSelected = services.includes(serviceItem?.id);
                     return (
                       <CommandItem
                         key={serviceItem?.id}
@@ -137,9 +165,9 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData }) => {
                         }
                         className="cursor-pointer"
                       >
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 w-full">
                           <span>{serviceItem?.service_name}</span>
-                          {services.includes(serviceItem?.id) && (
+                          {isSelected && (
                             <CheckIcon className="w-4 h-4 ml-auto text-green-500" />
                           )}
                         </div>

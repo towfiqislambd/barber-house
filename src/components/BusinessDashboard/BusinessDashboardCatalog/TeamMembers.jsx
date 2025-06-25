@@ -3,6 +3,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useAddTeamMembers } from "@/hooks/cms.mutations";
 
 const TeamMembers = ({ allTeamMembers, serviceId }) => {
+  console.log(allTeamMembers);
   const { mutateAsync: addTeamMembers, isPending } = useAddTeamMembers();
   const [selectedMembers, setSelectedMembers] = useState([]);
 
@@ -73,9 +74,9 @@ const TeamMembers = ({ allTeamMembers, serviceId }) => {
               onCheckedChange={() => toggleMember(member.id)}
             />
             <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100">
-              {member.image ? (
+              {member?.photo ? (
                 <img
-                  src={`${import.meta.env.VITE_SITE_URL}/${member.image}`}
+                  src={`${import.meta.env.VITE_SITE_URL}/${member?.photo}`}
                   alt="img"
                   className="w-full h-full object-cover"
                 />

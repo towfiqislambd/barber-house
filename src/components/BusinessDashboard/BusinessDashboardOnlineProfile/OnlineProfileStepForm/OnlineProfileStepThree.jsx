@@ -7,7 +7,7 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useForm, Controller } from "react-hook-form";
 
-const OnlineProfileStepThree = ({ step, setStep, setFormData }) => {
+const OnlineProfileStepThree = ({ step, setStep, setFormData, details }) => {
   const {
     handleSubmit,
     control,
@@ -15,8 +15,8 @@ const OnlineProfileStepThree = ({ step, setStep, setFormData }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      phone: "",
-      email: "",
+      phone: details?.phone || "",
+      email: details?.email || "",
     },
   });
 
@@ -71,7 +71,6 @@ const OnlineProfileStepThree = ({ step, setStep, setFormData }) => {
                 <PhoneInput
                   {...field}
                   country="de"
-                  regions={"europe"}
                   inputStyle={{
                     width: "100%",
                     height: "51px",

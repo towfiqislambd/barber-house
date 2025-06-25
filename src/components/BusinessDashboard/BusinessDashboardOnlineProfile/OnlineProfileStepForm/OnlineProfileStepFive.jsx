@@ -8,7 +8,7 @@ import {
 } from "@/components/svgContainer/SvgContainer";
 import { Input } from "@/components/ui/input";
 
-const OnlineProfileStepFive = ({ step, setStep, setFormData }) => {
+const OnlineProfileStepFive = ({ step, setStep, setFormData, details }) => {
   const {
     register,
     handleSubmit,
@@ -16,14 +16,14 @@ const OnlineProfileStepFive = ({ step, setStep, setFormData }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      address: "Zoo Road, Dhaka, Bangladesh",
+      address: details?.address || "",
     },
   });
 
   const location = watch("address");
   const [mapUrl, setMapUrl] = useState("");
   const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
-  const [locationError, setLocationError] = useState(""); // For lat/lng validation error
+  const [locationError, setLocationError] = useState(""); 
 
   useEffect(() => {
     const fetchCoordinates = async () => {

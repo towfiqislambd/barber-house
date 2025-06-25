@@ -2,7 +2,7 @@ import {
   ContinueButtonArrowSvg,
   LeftSideArrowSvg,
 } from "@/components/svgContainer/SvgContainer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import step1Image from "../../../../assets/images/online-profile/step3Img.png";
 import { useAddOnlineStore } from "@/hooks/cms.mutations";
 import useAuth from "@/hooks/useAuth";
@@ -10,6 +10,7 @@ import useAuth from "@/hooks/useAuth";
 const OnlineProfileStepEleven = ({ step, setStep, formData, setFormData }) => {
   const { mutateAsync: addOnlineStore, isPending } = useAddOnlineStore();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const handleContinue = async () => {
     const id = user?.business_profile?.id;
@@ -52,14 +53,12 @@ const OnlineProfileStepEleven = ({ step, setStep, formData, setFormData }) => {
     );
     updatedFormData.values?.forEach(value => fd.append("values[]", value));
 
-    // Fix for images - handle both file objects and existing file paths
     updatedFormData.images?.forEach((imageObj, index) => {
       if (imageObj instanceof File) {
         fd.append(`images[${index}]`, imageObj);
       } else if (imageObj?.originFileObj) {
         fd.append(`images[${index}]`, imageObj.originFileObj);
       } else if (imageObj?.url) {
-        // If it's an existing image URL
         fd.append(`existing_images[${index}]`, imageObj.url);
       }
     });
@@ -70,7 +69,8 @@ const OnlineProfileStepEleven = ({ step, setStep, formData, setFormData }) => {
           "Content-Type": "multipart/form-data",
         },
       });
-      // Optionally: advance step or show success message
+      navigate("/businessDashboard/online-profile");
+      window.location.reload();
     } catch (error) {
       console.error("Upload failed:", error);
     }
@@ -108,11 +108,11 @@ const OnlineProfileStepEleven = ({ step, setStep, formData, setFormData }) => {
             Step 3
           </h1>
           <p className="mt-[6px] text-textColor font-outfit text-3xl sm:text-[36px] font-semibold sm:leading-[43.2px]">
-            Accept online bookings on Fresha Marketplace
+            Accept online bookings
           </p>
           <p className="max-w-[608px] sm:mt-6 mt-2 text-textLight font-manrope text-sm sm:text-base font-medium leading-6">
             With a complete profile you are ready to start taking online
-            bookings directly and on the Fresha marketplace
+            bookings directly.
           </p>
         </div>
       </div>

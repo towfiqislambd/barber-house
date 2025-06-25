@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { useForm, Controller } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
+
 const days = [
   "Saturday",
   "Sunday",
@@ -23,7 +24,28 @@ const days = [
   "Friday",
 ];
 
-const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
+const OnlineProfileStepFour = ({ step, setStep, setFormData, details }) => {
+  // Extract selected days
+  const selectedDays = details?.opening_hours?.map(item => item.day_name) || [];
+
+  // Use first entry for time values
+  const defaultTimeData = details?.opening_hours?.[0] || {
+    morning_start_time: "",
+    morning_end_time: "",
+    evening_start_time: "",
+    evening_end_time: "",
+  };
+
+  // Convert 12-hour format to 24-hour for input[type="time"]
+  const convertTo24Hour = time12h => {
+    if (!time12h) return "";
+    const [time, modifier] = time12h.split(" ");
+    let [hours, minutes] = time.split(":");
+    if (hours === "12") hours = "00";
+    if (modifier === "PM") hours = parseInt(hours, 10) + 12;
+    return `${String(hours).padStart(2, "0")}:${minutes}`;
+  };
+
   const {
     handleSubmit,
     control,
@@ -31,15 +53,16 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      day_name: [],
-      morning_start_time: "",
-      morning_end_time: "",
-      evening_start_time: "",
-      evening_end_time: "",
+      day_name: selectedDays,
+      morning_start_time: convertTo24Hour(defaultTimeData.morning_start_time),
+      morning_end_time: convertTo24Hour(defaultTimeData.morning_end_time),
+      evening_start_time: convertTo24Hour(defaultTimeData.evening_start_time),
+      evening_end_time: convertTo24Hour(defaultTimeData.evening_end_time),
     },
   });
 
   const formatTimeTo12Hour = time24 => {
+    if (!time24) return "";
     const [hour, minute] = time24.split(":");
     const hourNum = parseInt(hour, 10);
     const ampm = hourNum >= 12 ? "PM" : "AM";

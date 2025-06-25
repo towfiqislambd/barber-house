@@ -9,11 +9,12 @@ import OnlineProfileStepEleven from "./OnlineProfileStepEleven";
 import OnlineProfileStepFour from "./OnlineProfileStepFour";
 import OnlineProfileStepEight from "./OnlineProfileStepEight";
 import OnlineProfileStepNine from "./OnlineProfileStepNine";
+import useAuth from "@/hooks/useAuth";
 
 const OnlineProfileContainer = () => {
+  const { user } = useAuth();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(null);
-
   console.log(formData);
 
   // For step form
@@ -35,6 +36,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -45,6 +47,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -55,6 +58,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -65,6 +69,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -86,6 +91,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -96,6 +102,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }
@@ -106,6 +113,7 @@ const OnlineProfileContainer = () => {
           setStep={setStep}
           formData={formData}
           setFormData={setFormData}
+          details={user?.business_profile?.online_store}
         />
       );
     }

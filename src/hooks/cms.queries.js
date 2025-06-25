@@ -10,12 +10,14 @@ import {
   BusinessHome,
   BusinessPricing,
   Catalogue,
+  GetStore,
   Highlights,
   HomePageData,
   ProductsBrand,
   ProductsCategory,
   ServicesType,
   SocialLinks,
+  StoreDetails,
   TeamMemberDetails,
   Values,
 } from "./cms.api";
@@ -164,5 +166,23 @@ export const useHomePageData = () => {
   return useQuery({
     queryKey: ["home-page-data"],
     queryFn: HomePageData,
+  });
+};
+
+// Business Details
+export const useGetStore = id => {
+  return useQuery({
+    queryKey: ["get-store", id],
+    queryFn: () => GetStore(id),
+    enabled: !!id,
+  });
+};
+
+// Store Details
+export const useStoreDetails = id => {
+  return useQuery({
+    queryKey: ["store-details", id],
+    queryFn: () => StoreDetails(id),
+    enabled: !!id,
   });
 };

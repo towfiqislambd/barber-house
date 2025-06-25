@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Loader } from "@/components/Loader/Loader";
 
-const OnlineProfileStepTen = ({ step, setStep, setFormData }) => {
+const OnlineProfileStepTen = ({ step, setStep, setFormData, details }) => {
   const { data: allAmenities, isLoading: amenitiesLoading } = useAmenities();
   const { data: allHighlights, isLoading: highlightsLoading } = useHighlights();
   const { data: allValues, isLoading: valuesLoading } = useValues();
@@ -17,6 +17,28 @@ const OnlineProfileStepTen = ({ step, setStep, setFormData }) => {
   const [highlights, setHighlights] = useState([]);
   const [values, setValues] = useState([]);
   const [validationError, setValidationError] = useState("");
+
+  // ✅ Set default selected items from details
+  useEffect(() => {
+    if (details?.store_amenities?.length > 0) {
+      const defaultAmenityIds = details.store_amenities.map(
+        item => item.amenity_id
+      );
+      setAmenities(defaultAmenityIds);
+    }
+
+    if (details?.store_highlights?.length > 0) {
+      const defaultHighlightIds = details.store_highlights.map(
+        item => item.highlight_id
+      );
+      setHighlights(defaultHighlightIds);
+    }
+
+    if (details?.store_values?.length > 0) {
+      const defaultValueIds = details.store_values.map(item => item.value_id);
+      setValues(defaultValueIds);
+    }
+  }, [details]);
 
   const toggleItem = (id, list, setList) => {
     setList(prev =>
