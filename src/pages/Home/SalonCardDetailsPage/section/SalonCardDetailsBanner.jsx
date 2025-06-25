@@ -43,9 +43,10 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
   ];
 
   const openingHours = data?.data?.opening_hours || [];
+
   const currentDay = moment().format("dddd").toLowerCase();
   const todayHours = openingHours.find(
-    (entry) => entry.day_name === currentDay
+    (entry) => entry.day_name.toLowerCase() === currentDay
   );
 
   return (
