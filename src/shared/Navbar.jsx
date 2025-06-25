@@ -3,12 +3,9 @@ import { RxCross2 } from "react-icons/rx";
 import {
   DownArrowSvg,
   DownArrowSvgTwo,
-  HeaderSVGFive,
   HeaderSVGFour,
   HeaderSVGOne,
-  HeaderSVGSeven,
   HeaderSVGSix,
-  HeaderSVGThree,
   HeaderSVGTwo,
 } from "@/components/svgContainer/SvgContainer";
 import { Popover } from "@/components/ui/popover";
@@ -79,15 +76,29 @@ const Navbar = () => {
                   <div className="!bg-white rounded-lg px-7 py-10">
                     <ul className="font-medium text-[#2C2C2C] text-lg space-y-4">
                       {[
-                        { icon: <HeaderSVGOne />, label: "Profile" },
-                        { icon: <HeaderSVGTwo />, label: "Appointments" },
-                        { icon: <HeaderSVGThree />, label: "Wallet" },
-                        { icon: <HeaderSVGFour />, label: "Favourites" },
-                        { icon: <HeaderSVGFive />, label: "Forms" },
-                        { icon: <HeaderSVGSix />, label: "Product orders" },
-                        { icon: <HeaderSVGSeven />, label: "Settings" },
-                      ].map(({ icon, label }) => (
-                        <li
+                        {
+                          icon: <HeaderSVGOne />,
+                          label: "Profile",
+                          path: "/userdashboard",
+                        },
+                        {
+                          icon: <HeaderSVGTwo />,
+                          label: "Appointments",
+                          path: "/userdashboard/appointments",
+                        },
+                        {
+                          icon: <HeaderSVGFour />,
+                          label: "Favourites",
+                          path: "/userdashboard/favourites",
+                        },
+                        {
+                          icon: <HeaderSVGSix />,
+                          label: "Product orders",
+                          path: "/userdashboard/productorder",
+                        },
+                      ].map(({ icon, label, path }) => (
+                        <Link
+                          to={path}
                           key={label}
                           className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
                           onClick={() => setIsPopoverOpen(false)}
@@ -96,7 +107,7 @@ const Navbar = () => {
                           <p className="font-manrope text-lg font-medium">
                             {label}
                           </p>
-                        </li>
+                        </Link>
                       ))}
                       <li
                         className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
@@ -107,27 +118,11 @@ const Navbar = () => {
                         </p>
                       </li>
                     </ul>
-                    <div className="border-t border-primary-gradient my-5"></div>
-                    <h4 className="font-semibold text-xl text-[#222] mb-5">
-                      Others
-                    </h4>
-                    <p
-                      className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
-                      onClick={() => setIsPopoverOpen(false)}
-                    >
-                      For businesses
-                    </p>
-                    <p
-                      className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
-                      onClick={() => setIsPopoverOpen(false)}
-                    >
-                      Customer support
-                    </p>
                   </div>
                 </PopoverContent>
               </Popover>
             ) : (
-              <Link to="/bs">
+              <Link to="/login">
                 <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium text-white">
                   <span>Sign Up</span>
                 </button>
@@ -209,22 +204,36 @@ const Navbar = () => {
                 <div className="!bg-white rounded-lg ">
                   <ul className="font-medium text-[#2C2C2C] text-[17px] space-y-1">
                     {[
-                      { icon: <HeaderSVGOne />, label: "Profile" },
-                      { icon: <HeaderSVGTwo />, label: "Appointments" },
-                      { icon: <HeaderSVGThree />, label: "Wallet" },
-                      { icon: <HeaderSVGFour />, label: "Favourites" },
-                      { icon: <HeaderSVGFive />, label: "Forms" },
-                      { icon: <HeaderSVGSix />, label: "Product orders" },
-                      { icon: <HeaderSVGSeven />, label: "Settings" },
-                    ].map(({ icon, label }) => (
-                      <li
+                      {
+                        icon: <HeaderSVGOne />,
+                        label: "Profile",
+                        path: "/userdashboard",
+                      },
+                      {
+                        icon: <HeaderSVGTwo />,
+                        label: "Appointments",
+                        path: "/userdashboard/appointments",
+                      },
+                      {
+                        icon: <HeaderSVGFour />,
+                        label: "Favourites",
+                        path: "/userdashboard/favourites",
+                      },
+                      {
+                        icon: <HeaderSVGSix />,
+                        label: "Product orders",
+                        path: "/userdashboard/productorder",
+                      },
+                    ].map(({ icon, label, path }) => (
+                      <Link
+                        to={path}
                         key={label}
                         className="cursor-pointer flex gap-2 items-center hover:bg-[#008a90] hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded py-2 px-3"
                         onClick={() => setIsPopoverOpen(false)}
                       >
                         {icon}
                         <p className="font-manrope font-medium">{label}</p>
-                      </li>
+                      </Link>
                     ))}
                     <li
                       className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded py-1"
@@ -235,22 +244,6 @@ const Navbar = () => {
                       </p>
                     </li>
                   </ul>
-                  <div className="border-t border-primary-gradient my-3"></div>
-                  <h4 className="font-semibold text-lg text-[#222] mb-2">
-                    Others
-                  </h4>
-                  <p
-                    className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded"
-                    onClick={() => setIsPopoverOpen(false)}
-                  >
-                    For businesses
-                  </p>
-                  <p
-                    className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded pt-1 mb-5"
-                    onClick={() => setIsPopoverOpen(false)}
-                  >
-                    Customer support
-                  </p>
                 </div>
               </PopoverContent>
             </Popover>
