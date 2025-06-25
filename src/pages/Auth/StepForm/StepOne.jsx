@@ -1,10 +1,6 @@
-import { LeftSideArrowSvg } from "@/components/svgContainer/SvgContainer";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 const StepOne = ({ step, setStep, setFormData }) => {
-  const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -18,17 +14,12 @@ const StepOne = ({ step, setStep, setFormData }) => {
     }
   };
 
-  const handlePrevStep = e => {
-    e.preventDefault();
-    navigate("/business/registration");
-  };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* Next, Prev btns */}
       <div className="flex justify-between items-center mb-5">
-        <button onClick={handlePrevStep} className="cursor-pointer">
-          <LeftSideArrowSvg />
+        <button className="cursor-pointer">
+          
         </button>
         <button className="py-[8px] xl:py-4 px-6 font-manrope text-lg bg-primary text-white font-semibold rounded-lg mt-5">
           Continue

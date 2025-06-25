@@ -14,9 +14,9 @@ const StepFour = ({ step, setStep, setFormData }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      address: "Zoo Road, Dhaka, Bangladesh",
+      address: "",
       do_not_business_address: 0,
-      calendly: 0,
+      calendly: "Markloo",
     },
   });
 
@@ -194,7 +194,7 @@ const StepFour = ({ step, setStep, setFormData }) => {
           </h3>
           <p className="font-outfit  xl:text-xl text-[#8993A4] mb-5">
             If you&apos;re looking to switch, we can help speed up your business
-            setup and import your data into your new Fresha account.
+            setup and import your data.
           </p>
 
           <div className="flex gap-2 items-center mt-5">
