@@ -94,14 +94,7 @@ const BusinessDashboardClientList = () => {
           {selectedClient && (
             <div className="grid grid-cols-2 gap-3 mt-4 text-sm">
               <div className="col-span-2 border rounded-md p-3">
-                <p className="text-gray-500">Balance</p>
-                <p className="font-semibold">
-                  SAR {selectedClient.total_spent}
-                </p>
-              </div>
-
-              <div className="col-span-2 border rounded-md p-3">
-                <p className="text-gray-500">Total Sales</p>
+                <p className="text-gray-500">Total purchased</p>
                 <p className="font-semibold">
                   SAR {selectedClient.total_spent}
                 </p>

@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const UpcomingAppointments = () => {
+const UpcomingAppointments = ({ data }) => {
   return (
     <div className="3xl:w-[750px] border p-6 border-[#B3BAC5] md:rounded-xl bg-white">
       <div className="flex flex-col lg:flex-row lg:gap-20 mb-10 justify-between 3xl:justify-start">
@@ -16,12 +16,11 @@ const UpcomingAppointments = () => {
             Upcoming appointments
           </h3>
           <p className="text-[#545454] mb-3">Last 7 Days</p>
-          <h3 className="font-medium text-xl text-[#2C2C2C] mb-2">1 booked</h3>
           <p className="mb-1 text-[#2C2C2C] font-medium">
-            Confirmed appointments : 1
+            Confirmed appointments : {data?.total_confirmed}
           </p>
           <p className="mb-7 text-[#2C2C2C] font-medium">
-            Cancelled appointments : 0
+            Cancelled appointments : {data?.total_canceled}
           </p>
         </div>
         <div className="border self-start flex-shrink-0 max-w-[300px] p-5 border-[#B3BAC5] rounded-xl bg-white">
@@ -47,7 +46,7 @@ const UpcomingAppointments = () => {
           </div>
         </div>
       </div>
-          <UpcomingAppointmentsChart />
+      <UpcomingAppointmentsChart data={data} />
     </div>
   );
 };

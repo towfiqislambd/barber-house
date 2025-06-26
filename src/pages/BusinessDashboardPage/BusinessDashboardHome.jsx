@@ -18,7 +18,6 @@ const BusinessDashboardHome = () => {
       </div>
     );
   }
-  console.log(analytics);
 
   return (
     <div className="space-y-5">
