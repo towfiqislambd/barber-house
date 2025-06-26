@@ -4,6 +4,7 @@ import LeftSideCard from "./Section/LeftSideCard";
 import { useUserSearchStore } from "@/hooks/user.queries";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useLocation } from "react-router-dom";
+import { Loader } from "@/components/Loader/Loader";
 const mapContainerStyle = {
   width: "100%",
   height: "100%",
@@ -60,13 +61,17 @@ const SearchResultPage = () => {
         {/* Left Side */}
         <div className="flex-grow xl:flex-shrink-0 xl:w-[400px] 2xl:w-[500px] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-5 xl:gap-8 overflow-y-auto xl:h-full hide-scrollbar">
           {isLoading ? (
-            <p>Loading...</p>
+            <div className="mt-64 mx-auto  ">
+              <Loader />
+            </div>
           ) : stores?.data?.length > 0 ? (
             stores.data.map((store) => (
               <LeftSideCard key={store.id} store={store} />
             ))
           ) : (
-            <p>No salons found for this search.</p>
+            <p className="text-center font-medium text-xl text-red-500">
+              No salons found for this search.
+            </p>
           )}
         </div>
 
@@ -74,7 +79,7 @@ const SearchResultPage = () => {
         <div className="sticky top-0 flex-shrink-0 w-full xl:w-[calc(100%-400px)] 2xl:w-[calc(100%-500px)] h-[300px] xl:h-full">
           {isLoaded && (
             <GoogleMap
-              mapContainerStyle={mapContainerStyle}
+              mapContainerStyle={{ width: "100%", height: "100%" }}
               center={center}
               zoom={13}
             >
@@ -86,6 +91,9 @@ const SearchResultPage = () => {
                     lng: parseFloat(store.longitude),
                   }}
                   title={store.name}
+                  icon={{
+                    scaledSize: new window.google.maps.Size(40, 40),
+                  }}
                 />
               ))}
             </GoogleMap>

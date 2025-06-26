@@ -196,19 +196,21 @@ export default function UserProfile() {
                   className="flex flex-col gap-[20px] mb-[30px]"
                   key={address.id}
                 >
-                  <div className="bg-[#F4F9FA] py-[10px] xl:py-[20px] px-[10px] xl:px-[24px] flex gap-[12px] rounded-[8px]">
-                    <div className="w-[40px] h-[40px] rounded-full p-[10px] bg-white shadow-md flex-shrink-0">
-                      <span className="text-primary text-[20px]">
-                        <IoMdHome />
-                      </span>
-                    </div>
-                    <div className="flex flex-col gap-[10px] xl:w-[337px]">
-                      <h4 className="text-[#1E1E1E] font-manrope xl:text-[20px] font-semibold xl:leading-[30px]">
-                        Address {index + 1}
-                      </h4>
-                      <h4 className="text-[#1E1E1E] font-manrope xl:text-[20px] font-semibold xl:leading-[30px]">
-                        {address.address}
-                      </h4>
+                  <div className="bg-[#F4F9FA] py-[10px] xl:py-[20px] px-[10px] xl:px-[24px] flex justify-between gap-[12px] rounded-[8px]">
+                    <div className="flex gap-[12px]">
+                      <div className="w-[40px] h-[40px] rounded-full p-[10px] bg-white shadow-md flex-shrink-0">
+                        <span className="text-primary text-[20px]">
+                          <IoMdHome />
+                        </span>
+                      </div>
+                      <div className="flex flex-col gap-[10px] xl:w-[337px]">
+                        <h4 className="text-[#1E1E1E] font-manrope xl:text-[20px] font-semibold xl:leading-[30px]">
+                          Address {index + 1}
+                        </h4>
+                        <h4 className="text-[#1E1E1E] font-manrope xl:text-[20px] font-semibold xl:leading-[30px]">
+                          {address.address}
+                        </h4>
+                      </div>
                     </div>
                     <div className="text-end flex justify-end items-start w-[48px] relative">
                       <button onClick={() => toggleDropdown(index)}>
