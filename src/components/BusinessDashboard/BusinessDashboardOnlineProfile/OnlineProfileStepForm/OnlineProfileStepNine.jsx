@@ -3,7 +3,7 @@ import {
   LeftSideArrowSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { Label } from "@/components/ui/label";
-import { useAllTeamMembers, useServicesType } from "@/hooks/cms.queries";
+import { useAllServices, useAllTeamMembers } from "@/hooks/cms.queries";
 import { useState, useEffect } from "react";
 import {
   Popover,
@@ -15,8 +15,9 @@ import { Command, CommandItem, CommandList } from "@/components/ui/command";
 import { CheckIcon } from "lucide-react";
 
 const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
+  console.log(details);
   const { data: allTeamMembers } = useAllTeamMembers();
-  const { data: allServices } = useServicesType();
+  const { data: allServices } = useAllServices();
 
   const [teams, setTeams] = useState([]);
   const [services, setServices] = useState([]);
@@ -31,7 +32,7 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
 
     if (details?.store_services?.length > 0) {
       const defaultServiceIds = details.store_services.map(
-        item => item.service_id
+        item => item.catalog_service_id
       );
       setServices(defaultServiceIds);
     }
@@ -166,7 +167,7 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
                         className="cursor-pointer"
                       >
                         <div className="flex items-center gap-2 w-full">
-                          <span>{serviceItem?.service_name}</span>
+                          <span>{serviceItem?.name}</span>
                           {isSelected && (
                             <CheckIcon className="w-4 h-4 ml-auto text-green-500" />
                           )}

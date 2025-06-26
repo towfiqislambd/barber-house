@@ -23,7 +23,7 @@ const BusinessDashboardHome = () => {
     <div className="space-y-5">
       <div className="flex gap-5 flex-col 3xl:flex-row">
         <RecentSales data={analytics} />
-        <UpcomingAppointments data={analytics} />
+        {/* <UpcomingAppointments data={analytics} /> */}
       </div>
       <div className="flex gap-5 flex-col 3xl:flex-row">
         <AppointmentsActivity data={analytics} />
