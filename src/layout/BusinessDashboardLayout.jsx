@@ -1,7 +1,6 @@
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/images/logo.jpg";
-import profile from "../assets/images/profile.png";
 import {
   BusinessDashboardOne,
   BusinessDashboardThree,
@@ -15,6 +14,7 @@ import {
 } from "@/components/svgContainer/SvgContainer";
 import { FaBars } from "react-icons/fa6";
 import { Tooltip } from "antd";
+import useAuth from "@/hooks/useAuth";
 
 const excludedPaths = [
   "/businessDashboard/editgifcardsale",
@@ -93,6 +93,7 @@ const routingList = [
 ];
 
 const BusinessDashboardLayout = () => {
+  const { user } = useAuth();
   const [isOpen, setOpen] = useState(false);
   const [active, setActive] = useState("one");
   const location = useLocation();
@@ -115,8 +116,8 @@ const BusinessDashboardLayout = () => {
               <BusinessNotificationSvg />
             </button>
             <img
-              src={profile}
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
+              src={`${import.meta.env.VITE_SITE_URL}/${user?.avatar}`}
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-primary"
               alt="Profile"
             />
             {/* Hamburger btn */}

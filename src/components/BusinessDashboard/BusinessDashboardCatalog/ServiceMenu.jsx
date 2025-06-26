@@ -19,7 +19,6 @@ const ServiceMenu = ({ allCategoryData }) => {
   const [activeTab, setActiveTab] = useState(null);
   const [search, setSearch] = useState(null);
   const [selectedTeamMember, setSelectedTeamMember] = useState(null);
-
   const { data: allTeamMembers } = useAllTeamMembers();
   const {
     data: categoryData,

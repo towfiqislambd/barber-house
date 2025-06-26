@@ -9,7 +9,7 @@ const Product = () => {
           Free to use
         </p>
         <h3 className="text-[#2C2C2C] max-w-[483px] font-outfit text-2xl xl:text-3xl 2xl:text-4xl font-semibold mb-5">
-          Manage your inventory with Fresha product list
+          Manage your inventory product list
         </h3>
         <p className="lg:text-lg font-medium max-w-[483px] text-[#545454] mb-3 lg:mb-5">
           Manage your inventory and stock levels for easy ordering, tracking and

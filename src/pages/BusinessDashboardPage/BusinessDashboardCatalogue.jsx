@@ -1,7 +1,7 @@
 import ServiceMenu from "@/components/BusinessDashboard/BusinessDashboardCatalog/ServiceMenu";
 import { useState } from "react";
-import Product from "@/components/BusinessDashboard/BusinessDashboardCatalog/Product";
 import { useCatalogue } from "@/hooks/cms.queries";
+import { Link } from "react-router-dom";
 
 const BusinessDashboardCatalogue = () => {
   const [activeTab, setActiveTab] = useState("service_menu");
@@ -23,25 +23,24 @@ const BusinessDashboardCatalogue = () => {
           >
             Service menu
           </button>
-          <button
-            onClick={() => setActiveTab("products")}
+          <Link
+            to={"/businessDashboard/addnew-product"}
+            // onClick={() => setActiveTab("products")}
             className={`xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
               activeTab === "products"
                 ? "text-white bg-primary"
                 : "text-[#2C2C2C]"
             }`}
           >
-            Products
-          </button>
+            Add Products
+          </Link>
         </ul>
       </div>
       <div className="xl:col-span-8 2xl:col-span-9 3xl:col-span-10 px-4 pb-5">
         {activeTab === "service_menu" && (
-          <ServiceMenu
-            allCategoryData={allCategoryData}
-          />
+          <ServiceMenu allCategoryData={allCategoryData} />
         )}
-        {activeTab === "products" && <Product />}
+        {/* {activeTab === "products" && <Product />} */}
       </div>
     </section>
   );
