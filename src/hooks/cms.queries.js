@@ -3,6 +3,7 @@ import {
   AllServices,
   AllTeamMembers,
   Amenities,
+  Analytics,
   Blog,
   BlogDetails,
   BusinessHelp,
@@ -193,6 +194,15 @@ export const useClientLists = id => {
   return useQuery({
     queryKey: ["client-lists", id],
     queryFn: () => ClientList(id),
+    enabled: !!id,
+  });
+};
+
+// Client List
+export const useAnalytics = id => {
+  return useQuery({
+    queryKey: ["analytics", id],
+    queryFn: () => Analytics(id),
     enabled: !!id,
   });
 };

@@ -1,12 +1,26 @@
+import { useState } from "react";
 import { Loader } from "@/components/Loader/Loader";
 import { AppointmentsSearchSvg } from "@/components/svgContainer/SvgContainer";
 import { useClientLists } from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const BusinessDashboardClientList = () => {
   const { user } = useAuth();
   const online_store_id = user?.business_profile?.online_store?.id;
   const { data: clientLists, isLoading } = useClientLists(online_store_id);
+  const [selectedClient, setSelectedClient] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const handleRowClick = client => {
+    setSelectedClient(client);
+    setOpen(true);
+  };
 
   return (
     <div className="p-5 md:p-0">
@@ -52,10 +66,14 @@ const BusinessDashboardClientList = () => {
             </thead>
             <tbody>
               {clientLists?.map((row, index) => (
-                <tr key={index} className="border-b border-dashed">
+                <tr
+                  key={index}
+                  className="border-b border-dashed cursor-pointer hover:bg-gray-100"
+                  onClick={() => handleRowClick(row)}
+                >
                   <td className="px-4 py-4 capitalize">{row?.name}</td>
                   <td className="px-4 py-4 capitalize">{row?.phone}</td>
-                  <td className="px-4 py-4 capitalize">5.5</td>
+                  <td className="px-4 py-4 capitalize">5.0</td>
                   <td className="px-4 py-4 capitalize">{row?.total_spent}</td>
                   <td className="px-4 py-4 capitalize">7 June</td>
                 </tr>
@@ -64,6 +82,55 @@ const BusinessDashboardClientList = () => {
           </table>
         )}
       </div>
+
+      {/* Modal */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-[400px] rounded-2xl p-5">
+          <DialogHeader>
+            <DialogTitle className="text-center text-lg font-semibold">
+              Client Summary
+            </DialogTitle>
+          </DialogHeader>
+          {selectedClient && (
+            <div className="grid grid-cols-2 gap-3 mt-4 text-sm">
+              <div className="col-span-2 border rounded-md p-3">
+                <p className="text-gray-500">Balance</p>
+                <p className="font-semibold">
+                  SAR {selectedClient.total_spent}
+                </p>
+              </div>
+
+              <div className="col-span-2 border rounded-md p-3">
+                <p className="text-gray-500">Total Sales</p>
+                <p className="font-semibold">
+                  SAR {selectedClient.total_spent}
+                </p>
+              </div>
+
+              <div className="border rounded-md p-3">
+                <p className="text-gray-500">Appointment</p>
+                <p className="font-semibold">
+                  {selectedClient?.total_appointments}
+                </p>
+              </div>
+              <div className="border rounded-md p-3">
+                <p className="text-gray-500">Rating</p>
+                <p className="font-semibold flex items-center gap-1">5 ⭐</p>
+              </div>
+              <div className="border rounded-md p-3">
+                <p className="text-gray-500">Cancelled</p>
+                <p className="font-semibold">{selectedClient?.total_canceled}</p>
+              </div>
+              <div className="border rounded-md p-3">
+                <p className="text-gray-500">Confirmed</p>
+                <p className="font-semibold">
+                  {selectedClient?.total_confirmed}
+                </p>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
