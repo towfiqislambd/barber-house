@@ -30,6 +30,8 @@ const SearchResultPage = () => {
 
   const { data: stores, isLoading } = useUserSearchStore(queryParams);
 
+  console.log(stores);
+
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAP_API,
   });
@@ -92,6 +94,9 @@ const SearchResultPage = () => {
                   }}
                   title={store.name}
                   icon={{
+                    url: `${import.meta.env.VITE_SITE_URL}/${
+                      store?.store_images[0].images
+                    }`,
                     scaledSize: new window.google.maps.Size(40, 40),
                   }}
                 />

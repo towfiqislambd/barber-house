@@ -26,6 +26,8 @@ import {
 } from "@/hooks/chat.queries";
 import usePostMessage from "@/hooks/chat.mutation";
 import { useSearchParams } from "react-router-dom";
+import echo from "@/hooks/echo";
+import useAuth from "@/hooks/useAuth";
 
 const MessageComponent = ({ isMe }) => {
   const [activeId, setActiveId] = useState(null);
@@ -40,6 +42,8 @@ const MessageComponent = ({ isMe }) => {
   const dispatch = useDispatch();
   const [searchUser, setsearchUser] = useState();
 
+  const { user } = useAuth();
+  const userId = 1;
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && (msg || ImgUrl)) {
       handleMessageSend();
@@ -101,15 +105,10 @@ const MessageComponent = ({ isMe }) => {
   };
 
   useEffect(() => {
-    if (
-      !echo ||
-      !loggedInUser?.data?.id ||
-      !singleConversion?.data?.conversation?.id
-    )
-      return;
+    if (!echo || !user?.id || !singleConversion?.data?.conversation?.id) return;
 
     const participantChannel = echo
-      .private(`chat-channel.${loggedInUser.data.id}`)
+      .private(`chat-channel.${user.id}`)
       .listen("MessageSentEvent", (e) => {
         console.log("NotifyParticipant event:", e);
       });
@@ -132,7 +131,7 @@ const MessageComponent = ({ isMe }) => {
       );
       chatChannel.stopListening(".message.created");
     };
-  }, [echo, singleConversion, loggedInUser]);
+  }, [echo, singleConversion, user?.id]);
 
   return (
     <>
