@@ -54,7 +54,7 @@ const AllCategories = ({ categoryData, isLoading, refetch }) => {
           <div className="py-32 flex justify-center">
             <Loader />
           </div>
-        ) : (
+        ) : categoryData !== undefined ? (
           categoryData?.map(data => (
             <div key={data.id}>
               <div className="flex items-center justify-between mb-5">
@@ -116,6 +116,8 @@ const AllCategories = ({ categoryData, isLoading, refetch }) => {
               </div>
             </div>
           ))
+        ) : (
+          <p className="text-xl font-medium text-red-500">No data found!</p>
         )}
       </div>
 

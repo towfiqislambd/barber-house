@@ -64,7 +64,7 @@ const TeamMembers = () => {
         <div className="py-20 flex justify-center">
           <Loader />
         </div>
-      ) : (
+      ) : allTeamMembers !== undefined ? (
         <div className="overflow-x-auto">
           <table className="w-full border-collapse min-w-[800px]">
             <tr className="text-lg text-gray-700 text-nowrap">
@@ -102,6 +102,8 @@ const TeamMembers = () => {
             </tbody>
           </table>
         </div>
+      ) : (
+        <p className="text-xl font-medium text-red-500">No data found!</p>
       )}
     </div>
   );
