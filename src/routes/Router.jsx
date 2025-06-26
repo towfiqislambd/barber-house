@@ -186,7 +186,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "message",
-        element: <Message />,
+        element: (
+          <PrivateRoute>
+            <Message />
+          </PrivateRoute>
+        ),
       },
 
       // Auth Flow Start
