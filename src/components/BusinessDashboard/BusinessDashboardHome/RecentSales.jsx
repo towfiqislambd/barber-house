@@ -7,9 +7,6 @@ const RecentSales = ({ data }) => {
         Recent Sales
       </h3>
       <p className="text-[#545454] mb-3">Last 7 Days</p>
-      <h3 className="font-medium text-lg lg:text-xl text-[#2C2C2C] mb-2">
-        SAR 11520
-      </h3>
       <p className="mb-1 text-[#2C2C2C] font-medium">
         Appointments: {data?.total_appointments}
       </p>

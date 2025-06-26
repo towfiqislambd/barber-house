@@ -26,11 +26,11 @@ const BusinessDashboardHome = () => {
         <UpcomingAppointments data={analytics} />
       </div>
       <div className="flex gap-5 flex-col 3xl:flex-row">
-        <AppointmentsActivity />
+        <AppointmentsActivity data={analytics} />
         <NextAppointments />
       </div>
       <div className="flex gap-5 flex-col 3xl:flex-row">
-        <TopServices />
+        <TopServices data={analytics} />
       </div>
     </div>
   );
