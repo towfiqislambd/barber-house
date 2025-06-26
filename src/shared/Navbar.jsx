@@ -124,7 +124,7 @@ const Navbar = () => {
             ) : (
               <Link to="/login">
                 <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium text-white">
-                  <span>Sign Up</span>
+                  <span>Sign In</span>
                 </button>
               </Link>
             )}

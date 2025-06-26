@@ -10,6 +10,7 @@ import {
   BusinessHome,
   BusinessPricing,
   Catalogue,
+  ClientList,
   GetStore,
   Highlights,
   HomePageData,
@@ -183,6 +184,15 @@ export const useStoreDetails = id => {
   return useQuery({
     queryKey: ["store-details", id],
     queryFn: () => StoreDetails(id),
+    enabled: !!id,
+  });
+};
+
+// Client List
+export const useClientLists = id => {
+  return useQuery({
+    queryKey: ["client-lists", id],
+    queryFn: () => ClientList(id),
     enabled: !!id,
   });
 };
