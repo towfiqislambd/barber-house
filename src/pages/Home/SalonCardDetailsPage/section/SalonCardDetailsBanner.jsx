@@ -23,6 +23,8 @@ import { useBookmarkGet } from "@/hooks/user.queries";
 import { useBookmarkRemove } from "@/hooks/user.mutation";
 
 const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
+  console.log(data);
+
   const { user } = useAuth();
   const mutateAync = useBookmarkAdd();
   const { data: bookmark } = useBookmarkGet();

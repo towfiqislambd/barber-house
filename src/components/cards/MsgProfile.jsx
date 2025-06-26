@@ -8,12 +8,10 @@ const MsgProfile = ({
   role,
   message,
   isHrLine,
-  isActive, 
+  isActive,
   isUnread,
   onClick,
 }) => {
-  console.log(isUnread);
-
   return (
     <div
       className={`flex w-[360px] cursor-pointer h-[72px] flex-row gap-x-3 rounded-[10px] xl:px-5 py-10 items-center relative 
