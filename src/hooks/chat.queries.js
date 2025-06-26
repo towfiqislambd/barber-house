@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 
-export const useChatConversion = ({ search = "", per_page }) => {
+export const useChatConversion = ({ search = "" }) => {
   const axiosSecure = useAxiosSecure();
 
   const { data: chats, isLoading: chatLoading } = useQuery({
-    queryKey: ["chat-lists", search, per_page],
+    queryKey: ["chat-lists", search],
     queryFn: async () => {
-      let url = `/chats?`;
+      let url = `/api/conversations?`;
 
       if (search) url += `search=${search}&`;
-      if (per_page) url += `per_page=${per_page}&`;
+      // if (per_page) url += `per_page=${per_page}&`;
 
       url = url.endsWith("&") ? url.slice(0, -1) : url;
       url = url.endsWith("?") ? url.slice(0, -1) : url;
@@ -34,10 +34,7 @@ export const useSingleChatConversion = (userId) => {
   } = useQuery({
     queryKey: ["single-chat", userId],
     queryFn: async () => {
-      const params = new URLSearchParams();
-      if (userId) params.append("user_id", userId);
-
-      const response = await axiosSecure.get(`/chat?${params.toString()}`);
+      const response = await axiosSecure.get(`/api/chat/${userId}`);
       return response.data;
     },
     enabled: !!userId,
