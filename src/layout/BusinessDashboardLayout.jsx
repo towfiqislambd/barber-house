@@ -12,7 +12,6 @@ import {
   BusinessDashboardEight,
   BusinessDashboardNine,
   BusinessNotificationSvg,
-  BusinessSearchSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { FaBars } from "react-icons/fa6";
 import { Tooltip } from "antd";
@@ -112,9 +111,6 @@ const BusinessDashboardLayout = () => {
             <img className="w-[50px] h-[50px] " src={logo} alt="Logo" />
           </Link>
           <div className="flex gap-3 md:gap-5 items-center">
-            <button>
-              <BusinessSearchSvg />
-            </button>
             <button>
               <BusinessNotificationSvg />
             </button>

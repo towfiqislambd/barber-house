@@ -233,3 +233,19 @@ export const StoreDetails = async id => {
   );
   return data?.data;
 };
+
+// ClientList
+export const ClientList = async id => {
+  const { data } = await axiosSecure(
+    `/api/business-owner/clients/analytics?online_store_id=${id}`
+  );
+  return data?.data;
+};
+
+// Analytics
+export const Analytics = async id => {
+  const { data } = await axiosSecure(
+    `/api/business-owner/appointments/analytics?online_store_id=${id}`
+  );
+  return data?.data;
+};

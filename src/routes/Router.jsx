@@ -284,7 +284,11 @@ export const router = createBrowserRouter([
   // user profile layout
   {
     path: "/userdashboard/",
-    element: <UserDashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <UserDashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: true,

@@ -3,6 +3,7 @@ import {
   AllServices,
   AllTeamMembers,
   Amenities,
+  Analytics,
   Blog,
   BlogDetails,
   BusinessHelp,
@@ -10,6 +11,7 @@ import {
   BusinessHome,
   BusinessPricing,
   Catalogue,
+  ClientList,
   GetStore,
   Highlights,
   HomePageData,
@@ -183,6 +185,24 @@ export const useStoreDetails = id => {
   return useQuery({
     queryKey: ["store-details", id],
     queryFn: () => StoreDetails(id),
+    enabled: !!id,
+  });
+};
+
+// Client List
+export const useClientLists = id => {
+  return useQuery({
+    queryKey: ["client-lists", id],
+    queryFn: () => ClientList(id),
+    enabled: !!id,
+  });
+};
+
+// Client List
+export const useAnalytics = id => {
+  return useQuery({
+    queryKey: ["analytics", id],
+    queryFn: () => Analytics(id),
     enabled: !!id,
   });
 };
