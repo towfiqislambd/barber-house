@@ -24,10 +24,12 @@ const SalonCardDetailsPage = () => {
     );
   }
 
+  const detailsPage = true;
+
   return (
     <section className="pt-28 lg:pt-36">
       <SalonCardDetailsBanner data={data} />
-      <ServicesGhalibSalon data={data} />
+      <ServicesGhalibSalon detailsPage={detailsPage} data={data} />
       <TeamofGhalib data={data} />
       {data?.data?.products.length > 0 && <ProductOfGalib data={data} />}
       <AboutGhalibSalon data={data} />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import BreadCrumb from "@/components/BusinessHelpCenter/BreadCrumb/BreadCrumb";
 import {
   AppointmentCalendarSvg,
@@ -53,10 +53,20 @@ const appointmentTime = [
 ];
 
 const ProfessionalTimePage = () => {
-  const [date, setDate] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(new Date(2025, 1, 1)); // Default to February 2025
+  const defaultDate = new Date(2025, 5, 30); // June 30, 2025
+  const [selectedDate, setSelectedDate] = useState(defaultDate);
+  const [date, setDate] = useState(defaultDate);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [visibleRange, setVisibleRange] = useState([0, 10]);
+
+  const location = useLocation();
+
+  const formattedDate = format(selectedDate, "yyyy-MM-dd");
+
+  const storeData = location.state?.storeData;
+  const selectedServices = location.state?.selectedServices;
+  const bookingType = location.state?.bookingType;
+  const totalPrice = location.state?.totalPrice;
 
   const handleNext = () => {
     if (visibleRange[1] < getDaysInMonth(selectedDate).length) {
@@ -92,22 +102,16 @@ const ProfessionalTimePage = () => {
       <div className="container">
         {/* Breadcrumb */}
         <div className="flex gap-4 items-center">
-          <Link to={"/booknow"}>
+          <Link>
             <button className="flex border border-[#757575] rounded-[100px] text-[#2C2C2C] lg:text-base font-manrope font-medium gap-1 text-sm lg:gap-[6px] items-center leading-6 px-2 lg:px-3 py-1 lg:py-2">
               <LeftSideArrowSvg />
               Back
             </button>
           </Link>
-          <BreadCrumb
-            items={[
-              { label: "Services", href: "/" },
-              { label: "Time", href: "/docs/components" },
-              { label: "Confirm" },
-            ]}
-          />
         </div>
+
         <h1 className="text-2xl xl:text-3xl mt-5 text-textColor font-medium font-outfit">
-          Select Time for Wax Services
+          Select Time for Services
         </h1>
 
         <div className="grid xl:grid-cols-12 gap-5 2xl:gap-10">
@@ -132,13 +136,13 @@ const ProfessionalTimePage = () => {
                   selected={date}
                   onSelect={(selected) => {
                     setDate(selected);
-                    setSelectedDate(selected); 
+                    setSelectedDate(selected);
                   }}
                 />
               </PopoverContent>
             </Popover>
 
-            {/* Date Selection */}
+            {/* Month and Navigation */}
             <div className="flex mb-5 items-center justify-between">
               <h3 className=" text-[#2C2C2C] font-outfit text-lg md:text-xl font-medium">
                 {format(selectedDate, "MMMM yyyy")}
@@ -162,6 +166,7 @@ const ProfessionalTimePage = () => {
               </div>
             </div>
 
+            {/* Day Selection */}
             <div className="flex flex-wrap gap-y-2 gap-x-1 md:justify-between items-center">
               {getDaysInMonth(selectedDate)
                 .slice(visibleRange[0], visibleRange[1])
@@ -210,8 +215,17 @@ const ProfessionalTimePage = () => {
               ))}
             </div>
           </div>
+
+          {/* Right Sidebar */}
           <div className="xl:col-span-4">
-            <FeatherTwo />
+            <FeatherTwo
+              formattedDate={formattedDate}
+              storeData={storeData}
+              selectedServices={selectedServices}
+              bookingType={bookingType}
+              selectedAppointment={selectedAppointment}
+              totalPrice={totalPrice}
+            />
           </div>
         </div>
       </div>
