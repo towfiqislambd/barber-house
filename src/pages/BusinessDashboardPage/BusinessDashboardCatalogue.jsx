@@ -2,13 +2,17 @@ import ServiceMenu from "@/components/BusinessDashboard/BusinessDashboardCatalog
 import { useState } from "react";
 import { useCatalogue } from "@/hooks/cms.queries";
 import { Link } from "react-router-dom";
+import AddProductCategoryModal from "@/components/BusinessDashboard/Modals/AddProductCategoryModal";
+import AddProductBrandModal from "@/components/BusinessDashboard/Modals/AddProductBrandModal";
 
 const BusinessDashboardCatalogue = () => {
+  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("service_menu");
   const { data: allCategoryData } = useCatalogue();
 
   return (
-    <section className="xl:grid xl:grid-cols-12 gap-10 3xl:gap-20">
+    <section className="xl:grid xl:grid-cols-12 gap-10">
       <div className="xl:col-span-4 2xl:col-span-3 3xl:col-span-2 4xl:col-span-2 mb-5 xl:mb-0 bg-white rounded-xl 4xl:p-6 p-3 self-start">
         <h3 className="mb-3 text-2xl font-semibold">Catalog</h3>
         <div className="border-t pb-5"></div>
@@ -23,11 +27,17 @@ const BusinessDashboardCatalogue = () => {
           >
             Service menu
           </button>
-          <button className="xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg">
-            Add Category
+          <button
+            onClick={() => setOpen(true)}
+            className="xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg"
+          >
+            Add Product Category
           </button>
-          <button className="xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg">
-            Add Brand
+          <button
+            onClick={() => setIsOpen(true)}
+            className="xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg"
+          >
+            Add Product Brand
           </button>
           <Link
             to={"/businessDashboard/addnew-product"}
@@ -45,8 +55,9 @@ const BusinessDashboardCatalogue = () => {
         {activeTab === "service_menu" && (
           <ServiceMenu allCategoryData={allCategoryData} />
         )}
-        {/* {activeTab === "products" && <Product />} */}
       </div>
+      <AddProductCategoryModal open={open} setOpen={setOpen} />
+      <AddProductBrandModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </section>
   );
 };
