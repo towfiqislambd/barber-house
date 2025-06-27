@@ -1,13 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "./useAxiosSecure";
 import { postMessage } from "./chat.api";
+import { toast } from "react-toastify"; // If you're using toast
 
 const usePostMessage = () => {
   const queryClient = useQueryClient();
   const axiosSecure = useAxiosSecure();
 
   return useMutation({
-    mutationFn: (formData) => postMessage(formData, axiosSecure),
+    mutationFn: ({ id, formData }) => postMessage(id, formData, axiosSecure),
     onSuccess: (data) => {
       if (data) {
         // queryClient.invalidateQueries(["messages"]);

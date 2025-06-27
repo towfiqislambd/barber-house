@@ -1,4 +1,4 @@
-export const postMessage = async (formData, axiosSecure) => {
-  const response = await axiosSecure.post(`/api/chat/send`, formData);
+export const postMessage = async (id, formData, axiosSecure) => {
+  const response = await axiosSecure.post(`/api/send-message/${id}`, formData);
   return response.data;
 };
