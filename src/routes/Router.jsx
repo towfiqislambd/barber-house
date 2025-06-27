@@ -1,8 +1,6 @@
 import AddMembership from "@/components/BusinessDashboard/BusinessDashboardCatalog/AddMembership";
 import OnlineProfileContainer from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/OnlineProfileStepForm/OnlineProfileContainer";
 import TellUsAboutYourBusiness from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/TellUsAboutYourBusiness";
-import AutomationDetailsPage from "@/components/BusinessDashboardMarketing/AutomationDetailsPage/AutomationDetailsPage";
-import AppointmentRemainderPage from "@/components/BusinessDashboardMarketing/BusinessDashboardStepForm/AppointmentRemainderPage";
 import BusinessDashboardStepFormContainer from "@/components/BusinessDashboardMarketing/BusinessDashboardStepForm/BusinessDashboardStepFormContainer";
 import SmartPricingStepContainer from "@/components/SmartPricing/SmartPricingStepContainer";
 import BusinessDashboardLayout from "@/layout/BusinessDashboardLayout";
@@ -19,7 +17,6 @@ import BlogDetails from "@/pages/Blog/BlogDetails";
 import AddNewProduct from "@/pages/BusinessDashboardPage/AddNewProduct";
 import AddService from "@/pages/BusinessDashboardPage/AddService";
 import BusinessDashboardCatalogue from "@/pages/BusinessDashboardPage/BusinessDashboardCatalogue";
-import BusinessDashboardClintList from "@/pages/BusinessDashboardPage/BusinessDashboardClintList";
 import BusinessDashboardHome from "@/pages/BusinessDashboardPage/BusinessDashboardHome";
 import BusinessDashboardMarketing from "@/pages/BusinessDashboardPage/BusinessDashboardMarketing";
 import BusinessDashboardMemberList from "@/pages/BusinessDashboardPage/BusinessDashboardMemberList";
@@ -79,8 +76,6 @@ import Tipping from "@/components/SchedulingComponents/Tipping";
 import EditTipping from "@/components/SchedulingComponents/EditTipping";
 import GiftCardSale from "@/components/SchedulingComponents/GiftCardSale";
 import EditGiftCardSale from "@/components/SchedulingComponents/EditGiftCardSale";
-import PresenceDashboard from "@/pages/BusinessDashboardPage/PresenceDashboard";
-import PerformanceDashboard from "@/pages/BusinessDashboardPage/PerformanceDashboard";
 import SalesSummary from "@/pages/BusinessDashboardPage/SalesSummary";
 import SalesList from "@/pages/BusinessDashboardPage/SalesList";
 import PaymentsSummery from "@/pages/BusinessDashboardPage/PaymentsSummery";
@@ -386,10 +381,6 @@ export const router = createBrowserRouter([
         element: <BusinessDashboardSales />,
       },
       {
-        path: "clients-list",
-        element: <BusinessDashboardClintList />,
-      },
-      {
         path: "catalogue",
         element: <BusinessDashboardCatalogue />,
       },
@@ -428,14 +419,6 @@ export const router = createBrowserRouter([
       {
         path: "addService",
         element: <AddService />,
-      },
-      {
-        path: "appointmentremainder",
-        element: <AppointmentRemainderPage />,
-      },
-      {
-        path: "automationdetailspage",
-        element: <AutomationDetailsPage />,
       },
       {
         path: "smartpricingstepcontainer",
@@ -532,14 +515,6 @@ export const router = createBrowserRouter([
       {
         path: "edittipping",
         element: <EditTipping />,
-      },
-      {
-        path: "performance",
-        element: <PerformanceDashboard />,
-      },
-      {
-        path: "presence",
-        element: <PresenceDashboard />,
       },
       {
         path: "sales-summary",

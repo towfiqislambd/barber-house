@@ -4,7 +4,6 @@ import logo from "../assets/images/logo.jpg";
 import {
   BusinessDashboardOne,
   BusinessDashboardThree,
-  BusinessDashboardFour,
   BusinessDashboardFive,
   BusinessDashboardSix,
   BusinessDashboardSeven,
@@ -53,12 +52,6 @@ const routingList = [
     to: "/businessDashboard/sales",
     Icon: BusinessDashboardThree,
     label: "Sales",
-  },
-  {
-    id: "four",
-    to: "/businessDashboard/clients-list",
-    Icon: BusinessDashboardFour,
-    label: "Clients",
   },
   {
     id: "five",
@@ -139,7 +132,7 @@ const BusinessDashboardLayout = () => {
             id="sidebar"
             className="w-[100px] hidden xl:block overflow-y-auto p-6 bg-white border-r h-full"
           >
-            <ul className="space-y-14">
+            <ul className="space-y-20">
               {routingList.map(({ id, to, Icon, label }) => (
                 <li key={id}>
                   <Tooltip placement="right" title={label}>
