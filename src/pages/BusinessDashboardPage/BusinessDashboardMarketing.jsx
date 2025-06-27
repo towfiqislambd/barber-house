@@ -1,5 +1,4 @@
 import { BusinessReviewStar } from "@/components/svgContainer/SvgContainer";
-import reviewImg from "../../assets/images/reviews/reviewHumanPic.png";
 import { Loader } from "@/components/Loader/Loader";
 import useAuth from "@/hooks/useAuth";
 import { useGetReviews } from "@/hooks/cms.queries";
