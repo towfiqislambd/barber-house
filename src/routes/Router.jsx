@@ -65,6 +65,8 @@ import ProfessionalAndTimePage from "@/pages/ProfessionalAndTimePage/Professiona
 import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
 import BS from "@/pages/Auth/BS/BS";
 import PrivateRoute from "./PrivateRoute";
+import ChatLayout from "@/layout/ChatLayout";
+import ChatWindow from "@/pages/chat/ChatWindow";
 
 export const router = createBrowserRouter([
   {
@@ -141,15 +143,6 @@ export const router = createBrowserRouter([
         path: "/confirmOrder",
         element: <ConfirmOrder />,
       },
-      {
-        path: "message",
-        element: (
-          <PrivateRoute>
-            <Message />
-          </PrivateRoute>
-        ),
-      },
-
       // Auth Flow Start
       {
         path: "/bs",
@@ -357,6 +350,25 @@ export const router = createBrowserRouter([
       {
         path: "add-team-member",
         element: <AddTeamMember />,
+      },
+    ],
+  },
+
+  {
+    path: "/",
+    element: (
+      <PrivateRoute>
+        <ChatLayout />
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/chat",
+        element: <ChatWindow />,
+      },
+      {
+        path: "/chat/:id",
+        element: <ChatWindow />,
       },
     ],
   },
