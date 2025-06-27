@@ -21,10 +21,10 @@ import toast from "react-hot-toast";
 import { useBookmarkAdd } from "@/hooks/user.mutation";
 import { useBookmarkGet } from "@/hooks/user.queries";
 import { useBookmarkRemove } from "@/hooks/user.mutation";
+import { useDispatch } from "react-redux";
+import { clearServices } from "@/redux/features/serviceSlice";
 
 const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
-  console.log(data);
-
   const { user } = useAuth();
   const mutateAync = useBookmarkAdd();
   const { data: bookmark } = useBookmarkGet();
@@ -275,7 +275,7 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
           </div>
 
           {/* Book Now Button */}
-          <Link to="/booknow">
+          <Link to="/booknow" state={{ storeData: data }}>
             <button className="text-white font-manrope text-lg 2xl:text-xl font-semibold bg-primary-gradient justify-center py-2 lg:py-3 2xl:py-4 mt-8 3xl:mt-[72px] rounded-[40px] w-full block">
               Book Now
             </button>

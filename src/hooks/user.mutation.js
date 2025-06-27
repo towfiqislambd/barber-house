@@ -96,3 +96,19 @@ export const useBookmarkRemove = () => {
     },
   });
 };
+
+export const useAppointmentBooking = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["appointment-add"],
+    mutationFn: (payload) => AppointmentAdd(payload),
+
+    onSuccess: (data) => {
+      toast.success(data?.message);
+      queryClient.invalidateQueries(["all-appointment"]);
+    },
+    onError: (err) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
