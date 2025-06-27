@@ -1,21 +1,5 @@
-import {
-  AppointmentCsvSvg,
-  AppointmentExcelSvg,
-  AppointmentPdfSvg,
-  AppointmentsSearchSvg,
-  DropdownSvg,
-  ExportSvg,
-} from "@/components/svgContainer/SvgContainer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { AppointmentsSearchSvg } from "@/components/svgContainer/SvgContainer";
 import AppointmentFilterModal from "../Modals/AppointmentFilterModal";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
-import * as XLSX from "xlsx";
-
 const tableData = [
   {
     id: 1,
@@ -137,91 +121,6 @@ const tableData = [
 ];
 
 const Appointments = () => {
-
-  const downloadCSV = () => {
-    const csvHeader = [
-      "ID,Client,Service,Created By,Created Date,Scheduled Date,Duration,Team Member,Price,Status",
-    ];
-    const csvRows = tableData.map(data =>
-      [
-        data.ID,
-        data.client,
-        data.service,
-        data.createdBy,
-        data.createdDate,
-        data.scheduledDate,
-        data.duration,
-        data.teamMember,
-        data.price,
-        data.status,
-      ].join(",")
-    );
-    const csvString = [csvHeader, ...csvRows].join("\n");
-    const blob = new Blob([csvString], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "appointments_list.csv";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
-
-  const downloadExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(
-      tableData.map(data => ({
-        ID: data.ID,
-        Client: data.client,
-        Service: data.service,
-        "Created By": data.createdBy,
-        "Created Date": data.createdDate,
-        "Scheduled Date": data.scheduledDate,
-        Duration: data.duration,
-        "Team Member": data.teamMember,
-        Price: data.price,
-        Status: data.status,
-      }))
-    );
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Appointments");
-    XLSX.writeFile(workbook, "appointments_list.xlsx");
-  };
-
-  const downloadPDF = () => {
-    const doc = new jsPDF();
-    doc.text("Appointments List", 14, 15);
-    autoTable(doc, {
-      startY: 20,
-      head: [
-        [
-          "ID",
-          "Client",
-          "Service",
-          "Created By",
-          "Created Date",
-          "Scheduled Date",
-          "Duration",
-          "Team Member",
-          "Price",
-          "Status",
-        ],
-      ],
-      body: tableData.map(data => [
-        data.ID,
-        data.client,
-        data.service,
-        data.createdBy,
-        data.createdDate,
-        data.scheduledDate,
-        data.duration,
-        data.teamMember,
-        data.price,
-        data.status,
-      ]),
-    });
-    doc.save("appointments_list.pdf");
-  };
-
   return (
     <div className=" relative">
       <h3 className="text-[#2C2C2C] font-outfit text-xl lg:text-2xl font-medium mb-2">
@@ -248,35 +147,6 @@ const Appointments = () => {
           {/* Filter */}
           <AppointmentFilterModal />
         </div>
-        {/* Export */}
-        <Popover>
-          <PopoverTrigger>
-            <button className="px-2 lg:px-4 py-1 lg:py-[10px] flex gap-1 lg:gap-2 items-center outline-none rounded-lg border border-primary">
-              <ExportSvg />
-              <p>Option</p>
-              <DropdownSvg />
-            </button>
-          </PopoverTrigger>
-          <PopoverContent className="w-[150px] p-4">
-            <div className="space-y-4">
-              <button onClick={downloadPDF} className="flex gap-2 items-center">
-                <AppointmentPdfSvg />
-                <p className="text-[#545454] font-medium">PDF</p>
-              </button>
-              <button onClick={downloadCSV} className="flex gap-2 items-center">
-                <AppointmentCsvSvg />
-                <p className="text-[#545454] font-medium">CSV</p>
-              </button>
-              <button
-                onClick={downloadExcel}
-                className="flex gap-2 items-center"
-              >
-                <AppointmentExcelSvg />
-                <p className="text-[#545454] font-medium">Excel</p>
-              </button>
-            </div>
-          </PopoverContent>
-        </Popover>
       </div>
       <div className="border-t border-primary mt-10 pb-5"></div>
       <div className="overflow-x-auto">

@@ -1,10 +1,5 @@
-import AddMembership from "@/components/BusinessDashboard/BusinessDashboardCatalog/AddMembership";
 import OnlineProfileContainer from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/OnlineProfileStepForm/OnlineProfileContainer";
 import TellUsAboutYourBusiness from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/TellUsAboutYourBusiness";
-import AutomationDetailsPage from "@/components/BusinessDashboardMarketing/AutomationDetailsPage/AutomationDetailsPage";
-import AppointmentRemainderPage from "@/components/BusinessDashboardMarketing/BusinessDashboardStepForm/AppointmentRemainderPage";
-import BusinessDashboardStepFormContainer from "@/components/BusinessDashboardMarketing/BusinessDashboardStepForm/BusinessDashboardStepFormContainer";
-import SmartPricingStepContainer from "@/components/SmartPricing/SmartPricingStepContainer";
 import BusinessDashboardLayout from "@/layout/BusinessDashboardLayout";
 import BusinessLayout from "@/layout/BusinessLayout";
 import MainLayout from "@/layout/MainLayout";
@@ -19,7 +14,6 @@ import BlogDetails from "@/pages/Blog/BlogDetails";
 import AddNewProduct from "@/pages/BusinessDashboardPage/AddNewProduct";
 import AddService from "@/pages/BusinessDashboardPage/AddService";
 import BusinessDashboardCatalogue from "@/pages/BusinessDashboardPage/BusinessDashboardCatalogue";
-import BusinessDashboardClintList from "@/pages/BusinessDashboardPage/BusinessDashboardClintList";
 import BusinessDashboardHome from "@/pages/BusinessDashboardPage/BusinessDashboardHome";
 import BusinessDashboardMarketing from "@/pages/BusinessDashboardPage/BusinessDashboardMarketing";
 import BusinessDashboardMemberList from "@/pages/BusinessDashboardPage/BusinessDashboardMemberList";
@@ -27,7 +21,6 @@ import BusinessDashboardMessage from "@/pages/BusinessDashboardPage/BusinessDash
 import BusinessDashboardOnlineProfile from "@/pages/BusinessDashboardPage/BusinessDashboardOnlineProfile";
 import BusinessDashboardSales from "@/pages/BusinessDashboardPage/BusinessDashboardSales";
 import EditService from "@/pages/BusinessDashboardPage/EditService";
-import MembershipCreation from "@/pages/BusinessDashboardPage/MembershipCreation";
 import BusinessHelpCenter from "@/pages/BusinessHelpCenter/BusinessHelpCenter";
 import BusinessHelpCenterDetails from "@/pages/BusinessHelpCenter/BusinessHelpCenterDetails";
 import BusinessHomePage from "@/pages/BusinessHomePage/BusinessHomePage";
@@ -49,55 +42,20 @@ import ConfirmOrder from "@/pages/Product/ConfirmOrder";
 import ProductDetails from "@/pages/Product/ProductDetails";
 import ProductHome from "@/pages/Product/ProductHome";
 import Review from "@/pages/Review/Review";
-import SalesPage from "@/pages/schedulingPage/SalesPage";
-import Scheduling from "@/pages/schedulingPage/Scheduling";
-import ChoosePeopleGiftCard from "@/pages/UserDashboardPage/ChoosePeopleGiftCard";
-import GiftCard from "@/pages/UserDashboardPage/GiftCard";
-import MembershipDone from "@/pages/UserDashboardPage/MembershipDone";
-import SendGiftCard from "@/pages/UserDashboardPage/SendGiftCard";
 import UserAppointments from "@/pages/UserDashboardPage/UserAppointments";
 import UserFavourites from "@/pages/UserDashboardPage/UserFavourites";
-import UserMembership from "@/pages/UserDashboardPage/UserMembership";
-import UserMembershipCheckout from "@/pages/UserDashboardPage/UserMembershipCheckout";
 import UserProductOrder from "@/pages/UserDashboardPage/UserProductOrder";
 import UserProfile from "@/pages/UserDashboardPage/UserProfile";
 import { createBrowserRouter } from "react-router-dom";
-import EditTimeAndCalander from "@/components/SchedulingComponents/EditTimeAndCalander";
-import BlockedTimeEdit from "@/components/SchedulingComponents/BlockedTimeEdit";
-import OnlineAvailability from "@/components/SchedulingComponents/OnlineAvailability";
 import OptimizeOnlineBook from "@/components/SchedulingComponents/OptimizeOnlineBook";
 import Notification from "@/components/SchedulingComponents/Notification";
 import AddPaymentMethod from "@/components/SchedulingComponents/AddPaymentMethod";
 import PaymentMethod from "@/components/SchedulingComponents/PaymentMethod";
-import Taxrates from "@/components/SchedulingComponents/Taxrates";
-import NewTax from "@/components/SchedulingComponents/NewTax";
-import GroupTax from "@/components/SchedulingComponents/GroupTax";
-import Receipts from "@/components/SchedulingComponents/Receipts";
-import EditReceipt from "@/components/SchedulingComponents/EditReceipt";
 import ReceiptNotification from "@/components/SchedulingComponents/ReceiptNotification";
-import Tipping from "@/components/SchedulingComponents/Tipping";
-import EditTipping from "@/components/SchedulingComponents/EditTipping";
-import GiftCardSale from "@/components/SchedulingComponents/GiftCardSale";
-import EditGiftCardSale from "@/components/SchedulingComponents/EditGiftCardSale";
-import PresenceDashboard from "@/pages/BusinessDashboardPage/PresenceDashboard";
-import PerformanceDashboard from "@/pages/BusinessDashboardPage/PerformanceDashboard";
-import SalesSummary from "@/pages/BusinessDashboardPage/SalesSummary";
 import SalesList from "@/pages/BusinessDashboardPage/SalesList";
-import PaymentsSummery from "@/pages/BusinessDashboardPage/PaymentsSummery";
-import PaymentTransactions from "@/pages/BusinessDashboardPage/PaymentTransactions";
 import AppointmentList from "@/pages/BusinessDashboardPage/AppointmentList";
-import ReportingClientList from "@/pages/BusinessDashboardPage/ReportingClientList";
-import WorkingHoursSummery from "@/pages/BusinessDashboardPage/WorkingHoursSummery";
-import Permission from "@/pages/schedulingPage/PermissionPage";
-import PermissionPage from "@/pages/schedulingPage/PermissionPage";
-import TimeOfTypes from "@/components/Permissions/TimeOfTypes";
-import Combinssion from "@/components/Permissions/Combinssion";
-import EditTimeOfType from "@/components/Permissions/EditTimeOfType";
 import AddTeamMember from "@/pages/BusinessDashboardPage/AddTeamMember";
-import Shifts from "@/pages/BusinessDashboardPage/Shifts";
-import RefundSales from "@/components/BusinessDashboard/BusinessDashboardSales/RefundSales";
 import ProfessionalTimePage from "@/pages/Home/ProfessionalTimePage/ProfessionalTimePage";
-import AddBlockedTime from "@/pages/BusinessDashboardPage/AddBlockedTime";
 import UserLogin from "@/pages/Auth/UserLogin/UserLogin";
 import VerifyAccount from "@/pages/Auth/VerifyAccount/VerifyAccount";
 import VerifyOtp from "@/pages/Auth/VerifyOtp/VerifyOtp";
@@ -105,7 +63,6 @@ import CreatePass from "@/pages/Auth/CreatePass/CreatePass";
 import Allsalons from "@/pages/Allsalons/Allsalons";
 import ProfessionalAndTimePage from "@/pages/ProfessionalAndTimePage/ProfessionalAndTimePage";
 import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
-import Inventory from "@/pages/BusinessDashboardPage/Inventory";
 import BS from "@/pages/Auth/BS/BS";
 import PrivateRoute from "./PrivateRoute";
 
@@ -310,62 +267,6 @@ export const router = createBrowserRouter([
         path: "productorder",
         element: <UserProductOrder />,
       },
-      {
-        path: "usermembership",
-        element: <UserMembership />,
-      },
-      {
-        path: "usermembercheckout",
-        element: <UserMembershipCheckout />,
-      },
-      {
-        path: "membershipdone",
-        element: <MembershipDone />,
-      },
-      {
-        path: "giftcard",
-        element: <GiftCard />,
-      },
-      {
-        path: "usermembercheckout",
-        element: <UserMembershipCheckout />,
-      },
-      {
-        path: "membershipdone",
-        element: <MembershipDone />,
-      },
-      {
-        path: "giftcard",
-        element: <GiftCard />,
-      },
-      {
-        path: "usermembercheckout",
-        element: <UserMembershipCheckout />,
-      },
-      {
-        path: "membershipdone",
-        element: <MembershipDone />,
-      },
-      {
-        path: "giftcard",
-        element: <GiftCard />,
-      },
-      {
-        path: "choosepeoplegiftcard",
-        element: <ChoosePeopleGiftCard />,
-      },
-      {
-        path: "sendgiftcard",
-        element: <SendGiftCard />,
-      },
-      {
-        path: "choosepeoplegiftcard",
-        element: <ChoosePeopleGiftCard />,
-      },
-      {
-        path: "sendgiftcard",
-        element: <SendGiftCard />,
-      },
     ],
   },
 
@@ -384,10 +285,6 @@ export const router = createBrowserRouter([
       {
         path: "sales",
         element: <BusinessDashboardSales />,
-      },
-      {
-        path: "clients-list",
-        element: <BusinessDashboardClintList />,
       },
       {
         path: "catalogue",
@@ -418,10 +315,6 @@ export const router = createBrowserRouter([
         element: <OnlineProfileContainer />,
       },
       {
-        path: "businessdashboardeditpage",
-        element: <BusinessDashboardStepFormContainer />,
-      },
-      {
         path: "editService/:id",
         element: <EditService />,
       },
@@ -430,48 +323,8 @@ export const router = createBrowserRouter([
         element: <AddService />,
       },
       {
-        path: "appointmentremainder",
-        element: <AppointmentRemainderPage />,
-      },
-      {
-        path: "automationdetailspage",
-        element: <AutomationDetailsPage />,
-      },
-      {
-        path: "smartpricingstepcontainer",
-        element: <SmartPricingStepContainer />,
-      },
-      {
-        path: "scheduling",
-        element: <Scheduling />,
-      },
-      {
-        path: "settingsales",
-        element: <SalesPage />,
-      },
-      {
-        path: "membership-creation",
-        element: <MembershipCreation />,
-      },
-      {
-        path: "add-membership",
-        element: <AddMembership />,
-      },
-      {
         path: "addnew-product",
         element: <AddNewProduct />,
-      },
-      {
-        path: "edittimeandcalander",
-        element: <EditTimeAndCalander />,
-      },
-      {
-        path: "blockedtimeedit",
-        element: <BlockedTimeEdit />,
-      },
-      {
-        path: "onlineavailability",
-        element: <OnlineAvailability />,
       },
       {
         path: "optimizeonlinebooking",
@@ -490,124 +343,20 @@ export const router = createBrowserRouter([
         element: <AddPaymentMethod />,
       },
       {
-        path: "taxrates",
-        element: <Taxrates />,
-      },
-      {
-        path: "newtax",
-        element: <NewTax />,
-      },
-      {
-        path: "grouptax",
-        element: <GroupTax />,
-      },
-      {
-        path: "receipts",
-        element: <Receipts />,
-      },
-      {
-        path: "editreceipt",
-        element: <EditReceipt />,
-      },
-      {
         path: "receiptNotification",
         element: <ReceiptNotification />,
-      },
-      {
-        path: "tipping",
-        element: <Tipping />,
-      },
-      {
-        path: "edittipping",
-        element: <EditTipping />,
-      },
-      {
-        path: "giftcardsale",
-        element: <GiftCardSale />,
-      },
-      {
-        path: "editgifcardsale",
-        element: <EditGiftCardSale />,
-      },
-      {
-        path: "edittipping",
-        element: <EditTipping />,
-      },
-      {
-        path: "performance",
-        element: <PerformanceDashboard />,
-      },
-      {
-        path: "presence",
-        element: <PresenceDashboard />,
-      },
-      {
-        path: "sales-summary",
-        element: <SalesSummary />,
       },
       {
         path: "sales-list",
         element: <SalesList />,
       },
       {
-        path: "payment-summery",
-        element: <PaymentsSummery />,
-      },
-      {
-        path: "payment-transition",
-        element: <PaymentTransactions />,
-      },
-      {
         path: "appointment-list",
         element: <AppointmentList />,
       },
       {
-        path: "/businessDashboard/reporting-client-list",
-        element: <ReportingClientList />,
-      },
-      {
-        path: "/businessDashboard/inventory",
-        element: <Inventory />,
-      },
-      {
-        path: "/businessDashboard/working-hours-summery",
-        element: <WorkingHoursSummery />,
-      },
-      {
-        path: "permissions",
-        element: <PermissionPage />,
-      },
-      {
-        path: "permissioncomponent",
-        element: <Permission />,
-      },
-      {
-        path: "timeoftype",
-        element: <TimeOfTypes />,
-      },
-      {
-        path: "combinission",
-        element: <Combinssion />,
-      },
-      {
-        path: "edittimeoftype",
-        element: <EditTimeOfType />,
-      },
-      {
         path: "add-team-member",
         element: <AddTeamMember />,
-      },
-      {
-        path: "shifts",
-        element: <Shifts />,
-      },
-      {
-        path: "refundsales",
-        element: <RefundSales />,
-      },
-      {
-        path: "addblocktime",
-        element: <AddBlockedTime />,
       },
     ],
   },

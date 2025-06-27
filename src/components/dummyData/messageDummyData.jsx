@@ -1,4 +1,3 @@
-// import pinkShirtBoy from "../../assets/images/cards/pinkShritboy.png";
 import pinkShirttBoy from "../../assets/images/cards/pinkShritboy.png";
 
 export const MsgDummyProfileData = [

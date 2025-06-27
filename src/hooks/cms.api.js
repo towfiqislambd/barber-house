@@ -243,9 +243,14 @@ export const ClientList = async id => {
 };
 
 // Analytics
-export const Analytics = async id => {
-  const { data } = await axiosSecure(
-    `/api/business-owner/appointments/analytics?online_store_id=${id}`
-  );
+export const Analytics = async (id, filter) => {
+  let url = "/api/business-owner/appointments/analytics?";
+  if (id) url += `online_store_id=${id}&`;
+  if (filter) url += `filter=${filter}&`;
+
+  url = url.endsWith("&") ? url.slice(0, -1) : url;
+  url = url.endsWith("?") ? url.slice(0, -1) : url;
+
+  const { data } = await axiosSecure(url);
   return data?.data;
 };

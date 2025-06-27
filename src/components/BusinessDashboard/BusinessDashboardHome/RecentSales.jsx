@@ -13,7 +13,7 @@ const RecentSales = ({ data }) => {
       <p className="mb-7 text-[#2C2C2C] font-medium">
         Appointments value: SAR {data?.total_price}
       </p>
-      <RecentSalesChart />
+      <RecentSalesChart data={data} />
     </div>
   );
 };
