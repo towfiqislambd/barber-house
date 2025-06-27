@@ -81,7 +81,7 @@ export const stores = async () => {
   return data?.data;
 };
 
-export const AppointmentAdd = async () => {
+export const AppointmentAdd = async (payload) => {
   const { data } = await axiosSecure.post(
     `/api/online-store/appointment/book`,
     payload

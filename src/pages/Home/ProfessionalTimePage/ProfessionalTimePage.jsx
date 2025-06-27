@@ -208,7 +208,7 @@ const ProfessionalTimePage = () => {
                       ? " bg-primaryLight text-primary font-bold border border-borderColor"
                       : "bg-white text-[#545454] font-semibold"
                   }`}
-                  onClick={() => setSelectedAppointment(item)}
+                  onClick={() => setSelectedAppointment(item.split(" ")[0])}
                 >
                   {item}
                 </button>

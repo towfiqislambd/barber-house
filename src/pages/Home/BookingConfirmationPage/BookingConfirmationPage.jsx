@@ -17,24 +17,35 @@ const BookingConfirmationPage = () => {
   const totalPrice = location.state?.totalPrice;
   const formattedDate = location?.state?.formattedDate;
   const selectedAppointment = location?.state?.selectedAppointment;
-  const { mutate, isLoading } = useAppointmentBooking();
-
-  const payload = {
-    online_store_id: storeData?.data?.id,
-    appointment_type: bookingType,
-    is_professional_selected: true,
-    date: formattedDate,
-    time: selectedAppointment || "12:30",
-    booking_notes: notes,
-    store_service_ids: selectedServices?.map((s) => s.catalog_service.id),
-    success_redirect_url: "https://your-site.com/booking-success",
-    cancel_redirect_url: "https://your-site.com/booking-cancel",
-  };
+  const { mutateAsync, isLoading } = useAppointmentBooking();
 
   const handleConfirm = () => {
-    mutate(payload, {
+    const formData = new FormData();
+
+    formData.append("online_store_id", storeData?.data?.id);
+    formData.append("appointment_type", bookingType);
+    formData.append("is_professional_selected", true);
+    formData.append("date", formattedDate);
+    formData.append("time", selectedAppointment || "12:30");
+    formData.append("booking_notes", notes);
+    selectedServices?.forEach((s) => {
+      formData.append("store_service_ids[]", s.catalog_service.id);
+    });
+    formData.append(
+      "success_redirect_url",
+      "https://your-site.com/booking-success"
+    );
+    formData.append(
+      "cancel_redirect_url",
+      "https://your-site.com/booking-cancel"
+    );
+
+    mutateAsync(formData, {
       onSuccess: (data) => {
-        console.log(data);
+        console.log("✅ Success:", data);
+      },
+      onError: (err) => {
+        console.error("❌ Error:", err);
       },
     });
   };

@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   addAddress,
+  AppointmentAdd,
   BookMarkAdd,
   BookMarkRemove,
   deleteAddress,
@@ -108,7 +109,7 @@ export const useAppointmentBooking = () => {
       queryClient.invalidateQueries(["all-appointment"]);
     },
     onError: (err) => {
-      toast.error(err?.response?.data?.message);
+      toast.error(err?.response?.data?.message || "hello");
     },
   });
 };
