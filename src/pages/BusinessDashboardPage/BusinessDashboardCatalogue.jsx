@@ -23,9 +23,14 @@ const BusinessDashboardCatalogue = () => {
           >
             Service menu
           </button>
+          <button className="xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg">
+            Add Category
+          </button>
+          <button className="xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg">
+            Add Brand
+          </button>
           <Link
             to={"/businessDashboard/addnew-product"}
-            // onClick={() => setActiveTab("products")}
             className={`xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
               activeTab === "products"
                 ? "text-white bg-primary"
