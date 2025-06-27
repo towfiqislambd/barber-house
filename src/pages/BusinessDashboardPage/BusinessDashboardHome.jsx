@@ -6,11 +6,14 @@ import UpcomingAppointments from "@/components/BusinessDashboard/BusinessDashboa
 import { Loader } from "@/components/Loader/Loader";
 import { useAnalytics } from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
+import { useState } from "react";
 
 const BusinessDashboardHome = () => {
+  const [filter, setFilter] = useState(null);
   const { user } = useAuth();
   const online_store_id = user?.business_profile?.online_store?.id;
-  const { data: analytics, isLoading } = useAnalytics(1);
+  const { data: analytics, isLoading } = useAnalytics(online_store_id, filter);
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-[80vh]">
@@ -23,7 +26,11 @@ const BusinessDashboardHome = () => {
     <div className="space-y-5">
       <div className="flex gap-5 flex-col 3xl:flex-row">
         <RecentSales data={analytics} />
-        {/* <UpcomingAppointments data={analytics} /> */}
+        <UpcomingAppointments
+          data={analytics}
+          setFilter={setFilter}
+          filter={filter}
+        />
       </div>
       <div className="flex gap-5 flex-col 3xl:flex-row">
         <AppointmentsActivity data={analytics} />

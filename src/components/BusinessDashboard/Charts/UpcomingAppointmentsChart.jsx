@@ -14,7 +14,7 @@ const UpcomingAppointmentsChart = ({ data }) => {
   const transformedData = useMemo(() => {
     const grouped = {};
 
-    data?.next_7_days_appointments?.forEach(appointment => {
+    data?.next_days_appointments?.appointments?.forEach(appointment => {
       const dateKey = dayjs(appointment.date).format("ddd D"); // e.g., "Mon 30"
 
       if (!grouped[dateKey]) {

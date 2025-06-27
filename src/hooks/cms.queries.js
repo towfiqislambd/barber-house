@@ -199,10 +199,10 @@ export const useClientLists = id => {
 };
 
 // Client List
-export const useAnalytics = id => {
+export const useAnalytics = (id, filter) => {
   return useQuery({
-    queryKey: ["analytics", id],
-    queryFn: () => Analytics(id),
+    queryKey: ["analytics", id, filter],
+    queryFn: () => Analytics(id, filter),
     enabled: !!id,
   });
 };
