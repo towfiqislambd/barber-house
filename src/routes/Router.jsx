@@ -90,7 +90,6 @@ import Combinssion from "@/components/Permissions/Combinssion";
 import EditTimeOfType from "@/components/Permissions/EditTimeOfType";
 import AddTeamMember from "@/pages/BusinessDashboardPage/AddTeamMember";
 import Shifts from "@/pages/BusinessDashboardPage/Shifts";
-import RefundSales from "@/components/BusinessDashboard/BusinessDashboardSales/RefundSales";
 import ProfessionalTimePage from "@/pages/Home/ProfessionalTimePage/ProfessionalTimePage";
 import AddBlockedTime from "@/pages/BusinessDashboardPage/AddBlockedTime";
 import UserLogin from "@/pages/Auth/UserLogin/UserLogin";
@@ -575,10 +574,6 @@ export const router = createBrowserRouter([
       {
         path: "shifts",
         element: <Shifts />,
-      },
-      {
-        path: "refundsales",
-        element: <RefundSales />,
       },
       {
         path: "addblocktime",

@@ -1,8 +1,5 @@
-import { useState } from "react";
-import { Drawer } from "antd";
 import { AppointmentsSearchSvg } from "@/components/svgContainer/SvgContainer";
 import SalesFilterModal from "../Modals/SalesFilterModal";
-import SalesDrawer from "./SalesDrawer";
 
 const tableData = [
   {
@@ -71,11 +68,6 @@ const tableData = [
 ];
 
 const Sales = () => {
-  const [open, setOpen] = useState(false);
-  const onClose = () => {
-    setOpen(false);
-  };
-
   return (
     <>
       <div>
@@ -154,20 +146,6 @@ const Sales = () => {
             </tbody>
           </table>
         </div>
-      </div>
-      <div>
-        <Drawer
-          title={null}
-          closable={false}
-          styles={{ body: { paddingTop: 40 } }}
-          width={1300}
-          onClose={onClose}
-          open={open}
-        >
-          <div>
-            <SalesDrawer />
-          </div>
-        </Drawer>
       </div>
     </>
   );
