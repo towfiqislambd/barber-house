@@ -14,7 +14,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import SalesSummaryModal from "@/components/BusinessDashboard/Modals/SalesSummaryModal";
 import { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
@@ -120,8 +119,6 @@ const AppointmentList = () => {
               <Calendar mode="single" selected={date} onSelect={setDate} />
             </PopoverContent>
           </Popover>
-          {/* Filter */}
-          <SalesSummaryModal />
         </div>
         <div className="flex gap-10 items-center">
           <Popover>
