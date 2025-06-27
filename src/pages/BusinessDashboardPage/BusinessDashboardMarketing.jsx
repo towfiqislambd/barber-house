@@ -1,19 +1,9 @@
 import {
   BusinessReviewStar,
-  GreatStarSvg,
-  YellowBorderSvg,
 } from "@/components/svgContainer/SvgContainer";
-import { useState } from "react";
 import reviewImg from "../../assets/images/reviews/reviewHumanPic.png";
 
 const BusinessDashboardMarketing = () => {
-  const ratings = [
-    { stars: 5, rating: 1 },
-    { stars: 4, rating: 2 },
-    { stars: 3, rating: 3 },
-    { stars: 2, rating: 4 },
-    { stars: 1, rating: 5 },
-  ];
 
   const reviews = [
     {
