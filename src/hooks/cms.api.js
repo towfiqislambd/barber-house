@@ -242,6 +242,23 @@ export const ClientList = async id => {
   return data?.data;
 };
 
+// AppointmentLists
+export const AppointmentLists = async id => {
+  const { data } = await axiosSecure(
+    `/api/business-owner/appointments?online_store_id=${id}`
+  );
+  return data?.data;
+};
+
+// Get Reviews
+export const GetReviews = async id => {
+  const { data } = await axiosSecure(
+    `/api/appointment/review/all?online_store_id=${id}`
+  );
+  return data?.data;
+};
+
+
 // Analytics
 export const Analytics = async (id, filter) => {
   let url = "/api/business-owner/appointments/analytics?";

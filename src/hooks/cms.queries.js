@@ -4,6 +4,7 @@ import {
   AllTeamMembers,
   Amenities,
   Analytics,
+  AppointmentLists,
   Blog,
   BlogDetails,
   BusinessHelp,
@@ -12,6 +13,7 @@ import {
   BusinessPricing,
   Catalogue,
   ClientList,
+  GetReviews,
   GetStore,
   Highlights,
   HomePageData,
@@ -198,7 +200,25 @@ export const useClientLists = id => {
   });
 };
 
-// Client List
+// AppointmentLists
+export const useAppointmentLists = id => {
+  return useQuery({
+    queryKey: ["appointment-lists", id],
+    queryFn: () => AppointmentLists(id),
+    enabled: !!id,
+  });
+};
+
+// Get Reviews
+export const useGetReviews = id => {
+  return useQuery({
+    queryKey: ["get-reviews", id],
+    queryFn: () => GetReviews(id),
+    enabled: !!id,
+  });
+};
+
+// Analytics
 export const useAnalytics = (id, filter) => {
   return useQuery({
     queryKey: ["analytics", id, filter],

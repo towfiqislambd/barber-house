@@ -1,10 +1,26 @@
 import Appointments from "@/components/BusinessDashboard/BusinessDashboardSales/Appointments";
 import DailySales from "@/components/BusinessDashboard/BusinessDashboardSales/DailySales";
 import Sales from "@/components/BusinessDashboard/BusinessDashboardSales/Sales";
+import { Loader } from "@/components/Loader/Loader";
+import { useAppointmentLists } from "@/hooks/cms.queries";
+import useAuth from "@/hooks/useAuth";
 import { useState } from "react";
 
 const BusinessDashboardSales = () => {
   const [activeTab, setActiveTab] = useState("daisy-sales");
+  const { user } = useAuth();
+  const online_store_id = user?.business_profile?.online_store?.id;
+  const { data: appointmentsData, isLoading } =
+    useAppointmentLists(online_store_id);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
+  
   return (
     <section className="xl:grid xl:grid-cols-12 xl:gap-7 2xl:gap-10">
       {/* Sidebar */}
@@ -16,7 +32,7 @@ const BusinessDashboardSales = () => {
             { id: "daisy-sales", label: "Daily Sales" },
             { id: "appointments", label: "Appointments" },
             { id: "sales", label: "Sales" },
-          ].map((tab) => (
+          ].map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
@@ -35,7 +51,9 @@ const BusinessDashboardSales = () => {
       {/* Content */}
       <div className="xl:col-span-9 4xl:col-span-10 bg-white p-4 md:p-6 rounded-xl w-full">
         {activeTab === "daisy-sales" && <DailySales />}
-        {activeTab === "appointments" && <Appointments />}
+        {activeTab === "appointments" && (
+          <Appointments data={appointmentsData} />
+        )}
         {activeTab === "sales" && <Sales />}
       </div>
     </section>
