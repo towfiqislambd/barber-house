@@ -2,7 +2,6 @@ import AddMembership from "@/components/BusinessDashboard/BusinessDashboardCatal
 import OnlineProfileContainer from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/OnlineProfileStepForm/OnlineProfileContainer";
 import TellUsAboutYourBusiness from "@/components/BusinessDashboard/BusinessDashboardOnlineProfile/TellUsAboutYourBusiness";
 import BusinessDashboardStepFormContainer from "@/components/BusinessDashboardMarketing/BusinessDashboardStepForm/BusinessDashboardStepFormContainer";
-import SmartPricingStepContainer from "@/components/SmartPricing/SmartPricingStepContainer";
 import BusinessDashboardLayout from "@/layout/BusinessDashboardLayout";
 import BusinessLayout from "@/layout/BusinessLayout";
 import MainLayout from "@/layout/MainLayout";
@@ -83,11 +82,6 @@ import PaymentTransactions from "@/pages/BusinessDashboardPage/PaymentTransactio
 import AppointmentList from "@/pages/BusinessDashboardPage/AppointmentList";
 import ReportingClientList from "@/pages/BusinessDashboardPage/ReportingClientList";
 import WorkingHoursSummery from "@/pages/BusinessDashboardPage/WorkingHoursSummery";
-import Permission from "@/pages/schedulingPage/PermissionPage";
-import PermissionPage from "@/pages/schedulingPage/PermissionPage";
-import TimeOfTypes from "@/components/Permissions/TimeOfTypes";
-import Combinssion from "@/components/Permissions/Combinssion";
-import EditTimeOfType from "@/components/Permissions/EditTimeOfType";
 import AddTeamMember from "@/pages/BusinessDashboardPage/AddTeamMember";
 import Shifts from "@/pages/BusinessDashboardPage/Shifts";
 import ProfessionalTimePage from "@/pages/Home/ProfessionalTimePage/ProfessionalTimePage";
@@ -420,10 +414,6 @@ export const router = createBrowserRouter([
         element: <AddService />,
       },
       {
-        path: "smartpricingstepcontainer",
-        element: <SmartPricingStepContainer />,
-      },
-      {
         path: "scheduling",
         element: <Scheduling />,
       },
@@ -546,26 +536,6 @@ export const router = createBrowserRouter([
       {
         path: "/businessDashboard/working-hours-summery",
         element: <WorkingHoursSummery />,
-      },
-      {
-        path: "permissions",
-        element: <PermissionPage />,
-      },
-      {
-        path: "permissioncomponent",
-        element: <Permission />,
-      },
-      {
-        path: "timeoftype",
-        element: <TimeOfTypes />,
-      },
-      {
-        path: "combinission",
-        element: <Combinssion />,
-      },
-      {
-        path: "edittimeoftype",
-        element: <EditTimeOfType />,
       },
       {
         path: "add-team-member",
