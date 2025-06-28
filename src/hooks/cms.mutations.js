@@ -3,6 +3,7 @@ import {
   AddCategory,
   AddOnlineStore,
   AddProduct,
+  AddProductBrand,
   AddProductCategory,
   AddService,
   AddTeamMember,
@@ -197,6 +198,20 @@ export const useAddProductCategory = () => {
     mutationFn: payload => AddProductCategory(payload),
     onSuccess: () => {
       toast.success("Product category has been added");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Add Product Brand:
+export const useAddProductBrand = () => {
+  return useMutation({
+    mutationKey: ["add-product-brand"],
+    mutationFn: payload => AddProductBrand(payload),
+    onSuccess: () => {
+      toast.success("Product brand has been added");
     },
     onError: err => {
       toast.error(err?.response?.data?.message);

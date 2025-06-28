@@ -17,7 +17,7 @@ const Appointments = ({ data }) => {
               <th className="py-4 px-2 !text-left">Service</th>
               <th className="py-4 px-2 !text-left">Price</th>
               <th className="py-4 px-2 !text-left">Duration</th>
-              <th className="py-4 px-2 ">Date</th>
+              <th className="py-4 px-2 ">Appointment Date</th>
               <th className="py-4 px-2">Status</th>
             </tr>
           </thead>

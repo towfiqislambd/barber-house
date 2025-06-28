@@ -11,7 +11,8 @@ import useAuth from "@/hooks/useAuth";
 import { useForm } from "react-hook-form";
 
 const AddProductCategoryModal = ({ open, setOpen }) => {
-  const { mutateAsync: addProductCategory } = useAddProductCategory();
+  const { mutateAsync: addProductCategory, isPending } =
+    useAddProductCategory();
   const { user } = useAuth();
 
   const {
@@ -27,10 +28,6 @@ const AddProductCategoryModal = ({ open, setOpen }) => {
 
     formData.append("name", data.name);
     formData.append("business_profile_id", business_profile_id);
-    if (data.category_image?.[0]) {
-      formData.append("photo", data.category_image[0]);
-    }
-
     await addProductCategory(formData);
     setOpen(false);
     reset();
@@ -65,24 +62,6 @@ const AddProductCategoryModal = ({ open, setOpen }) => {
                     </p>
                   )}
                 </div>
-
-                <div>
-                  <h3 className="mb-2 text-base font-semibold text-[#2C2C2C]">
-                    Category Image
-                  </h3>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    {...register("category_image", {
-                      required: "Category image is required",
-                    })}
-                  />
-                  {errors.category_image && (
-                    <p className="text-sm text-red-500 mt-1">
-                      {errors.category_image.message}
-                    </p>
-                  )}
-                </div>
               </div>
 
               <div className="flex gap-3 justify-end mt-7">
@@ -100,7 +79,7 @@ const AddProductCategoryModal = ({ open, setOpen }) => {
                   type="submit"
                   className="px-4 py-2 bg-primary text-white rounded-lg border border-borderColorLight font-medium"
                 >
-                  Add
+                  {isPending ? "Adding..." : "Add"}
                 </button>
               </div>
             </form>
