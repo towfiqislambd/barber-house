@@ -194,6 +194,12 @@ export const BusinessHelpDetails = async id => {
   return data?.data;
 };
 
+// Article Details
+export const ArticleDetails = async id => {
+  const { data } = await axiosPublic(`/api/cms/popular-article/${id}`);
+  return data?.data;
+};
+
 // Blog
 export const Blog = async () => {
   const { data } = await axiosPublic(`/api/cms/blog`);

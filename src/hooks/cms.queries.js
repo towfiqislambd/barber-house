@@ -5,6 +5,7 @@ import {
   Amenities,
   Analytics,
   AppointmentLists,
+  ArticleDetails,
   Blog,
   BlogDetails,
   BusinessHelp,
@@ -137,6 +138,15 @@ export const useBusinessHelpDetails = id => {
   return useQuery({
     queryKey: ["business-help", id],
     queryFn: () => BusinessHelpDetails(id),
+    enabled: !!id,
+  });
+};
+
+// Article Details
+export const useArticleDetails = id => {
+  return useQuery({
+    queryKey: ["article-details", id],
+    queryFn: () => ArticleDetails(id),
     enabled: !!id,
   });
 };

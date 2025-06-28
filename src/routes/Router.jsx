@@ -67,6 +67,7 @@ import BS from "@/pages/Auth/BS/BS";
 import PrivateRoute from "./PrivateRoute";
 import ChatLayout from "@/layout/ChatLayout";
 import ChatWindow from "@/pages/chat/ChatWindow";
+import ArticleDetails from "@/pages/BusinessHelpCenter/ArticleDetails";
 
 export const router = createBrowserRouter([
   {
@@ -204,6 +205,10 @@ export const router = createBrowserRouter([
       {
         path: "businessdetails/:id",
         element: <BusinessHelpCenterDetails />,
+      },
+      {
+        path: "article-details/:id",
+        element: <ArticleDetails />,
       },
       {
         path: "blog",

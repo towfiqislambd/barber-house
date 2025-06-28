@@ -1,12 +1,12 @@
-import { useBusinessHelpDetails } from "@/hooks/cms.queries";
+import { useArticleDetails } from "@/hooks/cms.queries";
 import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import { Loader } from "@/components/Loader/Loader";
 import { useEffect } from "react";
 
-export default function BusinessHelpCenterDetails() {
+export default function ArticleDetails() {
   const { id } = useParams();
-  const { data: businessHelpDetails, isLoading } = useBusinessHelpDetails(id);
+  const { data: articleDetails, isLoading } = useArticleDetails(id);
 
   useEffect(() => {
     if (isLoading) {
@@ -36,21 +36,21 @@ export default function BusinessHelpCenterDetails() {
             <img
               className="w-full h-full object-cover"
               src={`${import.meta.env.VITE_SITE_URL}/${
-                businessHelpDetails?.knowledge_base_item?.icon
+                articleDetails?.knowledge_base_item?.icon
               }`}
             />
           </div>
           <div className="text-center xl:text-start">
             <h4 className="mb-[14px] text-[#1E1E1E] font-outfit text-[24px] font-semibold leading-[28px]">
-              {businessHelpDetails?.knowledge_base_item?.title}
+              {articleDetails?.knowledge_base_item?.title}
             </h4>
             <p className="text-[#545454] font-manrope leading-[24px]">
-              {businessHelpDetails?.knowledge_base_item?.sub_title}
+              {articleDetails?.knowledge_base_item?.sub_title}
             </p>
-            {typeof businessHelpDetails?.knowledge_base_item?.description ===
+            {typeof articleDetails?.knowledge_base_item?.description ===
             "string"
-              ? parse(businessHelpDetails?.knowledge_base_item?.description)
-              : businessHelpDetails?.knowledge_base_item?.description}
+              ? parse(articleDetails?.knowledge_base_item?.description)
+              : articleDetails?.knowledge_base_item?.description}
           </div>
         </div>
       </div>

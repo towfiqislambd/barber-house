@@ -1,5 +1,6 @@
 import React from "react";
 import CommonTitle from "./CommonTitle";
+import { Link } from "react-router-dom";
 
 export default function PopularArticals({ data, data2 }) {
   return (
@@ -10,7 +11,8 @@ export default function PopularArticals({ data, data2 }) {
         </div>
         <div className="flex w-full gap-[24px] flex-wrap">
           {data2?.map(article => (
-            <div
+            <Link
+              to={`/business/article-details/${article?.id}`}
               className="w-full xl:w-[48%] flex flex-col xl:flex-row gap-[16px] border rounded-[8px] p-[15px] items-center"
               key={article.id}
             >
@@ -31,7 +33,7 @@ export default function PopularArticals({ data, data2 }) {
                   {article?.description}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
