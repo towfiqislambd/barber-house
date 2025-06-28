@@ -6,13 +6,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useAddCategory } from "@/hooks/cms.mutations";
+import { useAddProductCategory } from "@/hooks/cms.mutations";
 import useAuth from "@/hooks/useAuth";
 import { useForm } from "react-hook-form";
 
 const AddProductCategoryModal = ({ open, setOpen }) => {
-  const { mutateAsync: addCategory } = useAddCategory();
+  const { mutateAsync: addProductCategory } = useAddProductCategory();
   const { user } = useAuth();
 
   const {
@@ -24,8 +23,15 @@ const AddProductCategoryModal = ({ open, setOpen }) => {
 
   const onSubmit = async data => {
     const business_profile_id = user?.business_profile?.id;
-    const formData = { ...data, business_profile_id };
-    await addCategory(formData);
+    const formData = new FormData();
+
+    formData.append("name", data.name);
+    formData.append("business_profile_id", business_profile_id);
+    if (data.category_image?.[0]) {
+      formData.append("photo", data.category_image[0]);
+    }
+
+    await addProductCategory(formData);
     setOpen(false);
     reset();
   };
@@ -34,16 +40,21 @@ const AddProductCategoryModal = ({ open, setOpen }) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="mb-3 text-xl">Add Product Category</DialogTitle>
+          <DialogTitle className="mb-3 text-xl">
+            Add Product Category
+          </DialogTitle>
           <DialogDescription asChild>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              encType="multipart/form-data"
+            >
               <div className="space-y-6">
                 <div>
                   <h3 className="mb-2 text-base font-semibold text-[#2C2C2C]">
                     Category name
                   </h3>
                   <Input
-                    placeholder="e.g. Hair services"
+                    placeholder="Hair services"
                     {...register("name", {
                       required: "Category name is required",
                     })}
@@ -54,23 +65,21 @@ const AddProductCategoryModal = ({ open, setOpen }) => {
                     </p>
                   )}
                 </div>
+
                 <div>
-                  <div className="flex justify-between items-center">
-                    <h3 className="mb-2 text-base font-semibold text-[#2C2C2C]">
-                      Description
-                    </h3>
-                    <p>0/320</p>
-                  </div>
-                  <Textarea
-                    rows={6}
-                    placeholder="Write anything..."
-                    {...register("description", {
-                      required: "Description is required",
+                  <h3 className="mb-2 text-base font-semibold text-[#2C2C2C]">
+                    Category Image
+                  </h3>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    {...register("category_image", {
+                      required: "Category image is required",
                     })}
                   />
-                  {errors.description && (
+                  {errors.category_image && (
                     <p className="text-sm text-red-500 mt-1">
-                      {errors.description.message}
+                      {errors.category_image.message}
                     </p>
                   )}
                 </div>

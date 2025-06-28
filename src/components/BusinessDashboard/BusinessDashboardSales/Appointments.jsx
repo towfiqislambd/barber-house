@@ -17,7 +17,7 @@ const Appointments = ({ data }) => {
               <th className="py-4 px-2 !text-left">Service</th>
               <th className="py-4 px-2 !text-left">Price</th>
               <th className="py-4 px-2 !text-left">Duration</th>
-              <th className="py-4 px-2">Team member</th>
+              <th className="py-4 px-2 ">Date</th>
               <th className="py-4 px-2">Status</th>
             </tr>
           </thead>
@@ -41,12 +41,12 @@ const Appointments = ({ data }) => {
                   </td>
                   <td className="px-3 text-sm md:px-4 py-3 md:py-5 ">
                     {data?.services?.map(service => (
-                      <p key={service?.price}>{service?.price}</p>
+                      <p key={service?.price}>SAR: {service?.price}</p>
                     ))}
                   </td>
                   <td className="px-3 text-sm md:px-4 py-3 md:py-5 ">
                     {data?.services?.map(service => (
-                      <p key={service?.price}>{service?.duration}</p>
+                      <p key={service?.price}>{service?.duration} min</p>
                     ))}
                   </td>
                   <td className="px-3 text-sm md:px-4 py-3 md:py-5 md:text-base text-center">
