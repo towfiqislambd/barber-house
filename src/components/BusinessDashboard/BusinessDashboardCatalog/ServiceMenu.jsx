@@ -58,7 +58,7 @@ const ServiceMenu = ({ allCategoryData }) => {
           </div>
 
           {/* Filter */}
-          <Select
+          {/* <Select
             value={selectedTeamMember}
             onValueChange={setSelectedTeamMember}
           >
@@ -80,7 +80,7 @@ const ServiceMenu = ({ allCategoryData }) => {
                 </SelectItem>
               ))}
             </SelectContent>
-          </Select>
+          </Select> */}
 
           {/* reset */}
           <button

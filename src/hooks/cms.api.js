@@ -288,3 +288,19 @@ export const ServicesDetails = async id => {
   const { data } = await axiosSecure(`/api/catalog-services/show/${id}`);
   return data?.data;
 };
+
+// Category Details
+export const CategoryDetails = async id => {
+  const { data } = await axiosSecure(
+    `/api/catalog/show-service-categories/${id}`
+  );
+  return data?.data;
+};
+
+// Delete Category
+export const CategoryDelete = async id => {
+  const { data } = await axiosSecure.delete(
+    `/api/catalog/delete-service-categories/${id}`
+  );
+  return data?.data;
+};

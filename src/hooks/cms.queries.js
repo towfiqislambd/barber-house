@@ -12,6 +12,7 @@ import {
   BusinessHome,
   BusinessPricing,
   Catalogue,
+  CategoryDetails,
   ClientList,
   GetReviews,
   GetStore,
@@ -233,6 +234,15 @@ export const useServiceDetails = id => {
   return useQuery({
     queryKey: ["service-details", id],
     queryFn: () => ServicesDetails(id),
+    enabled: !!id,
+  });
+};
+
+// Category Details
+export const useCategoryDetails = id => {
+  return useQuery({
+    queryKey: ["category-details", id],
+    queryFn: () => CategoryDetails(id),
     enabled: !!id,
   });
 };

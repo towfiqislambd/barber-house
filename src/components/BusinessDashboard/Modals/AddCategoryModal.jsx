@@ -14,7 +14,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const AddCategoryModal = ({ refetch }) => {
-  const { mutateAsync: addCategory } = useAddCategory();
+  const { mutateAsync: addCategory, isPending } = useAddCategory();
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
 
@@ -100,7 +100,7 @@ const AddCategoryModal = ({ refetch }) => {
                   type="submit"
                   className="px-4 py-2 bg-primary text-white rounded-lg border border-borderColorLight font-medium"
                 >
-                  Add
+                  {isPending ? "Adding..." : "Add"}
                 </button>
               </div>
             </form>
