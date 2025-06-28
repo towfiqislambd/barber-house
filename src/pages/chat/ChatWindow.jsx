@@ -16,8 +16,6 @@ export default function ChatWindow() {
   const containerRef = useRef(null);
   const queryClient = useQueryClient();
 
-  console.log(singleConversion);
-
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
@@ -28,13 +26,17 @@ export default function ChatWindow() {
     if (!echo || !user?.id) return;
 
     echo.private(`chat-channel.${user?.id}`).listen("MessageSentEvent", (e) => {
-      console.log("NotifyParticipant event:", e);
+      console.log("chat:", e);
+      if (e.data.sender_id === +id) {
+        queryClient.invalidateQueries(["chat-lists"]);
+        refetch();
+      }
     });
-
     echo
       .private(`latest-message-channel.${user?.id}`)
       .listen("LatestMassageEvent", (e) => {
-        if (e.message.conversation_id === +user?.id) {
+        console.log("side", e);
+        if (e.senderId === +id) {
           queryClient.invalidateQueries(["chat-lists"]);
           refetch();
         }
@@ -52,7 +54,7 @@ export default function ChatWindow() {
       {/* Header */}
       <div className="border-b px-6 py-3 bg-white flex items-center justify-between">
         <div className="font-semibold text-sm">
-          {singleConversion?.data?.receiver?.first_name}
+          {singleConversion?.data?.user?.first_name}
           <span className="text-xs text-red-500 ml-2">• Offline</span>
         </div>
       </div>
@@ -63,7 +65,7 @@ export default function ChatWindow() {
         ref={containerRef}
       >
         <div className="space-y-4">
-          {singleConversion?.data?.map((msg, index) => (
+          {singleConversion?.data?.messages?.map((msg, index) => (
             <div
               key={index}
               className={`flex ${
