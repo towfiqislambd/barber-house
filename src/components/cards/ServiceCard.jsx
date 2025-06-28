@@ -18,7 +18,7 @@ const ServiceCard = ({ service, bookingType, detailsPage }) => {
 
   return (
     <div
-      onClick={() => dispatch(toggleService({ service, bookingType }))}
+      onClick={() => dispatch(toggleService({ service }))}
       className={`border-borderColorLight bg-white border-[0.4px] ease-in-out duration-500 w-full  h-auto max-h-[146px] p-5 lg:py-6 lg:px-7 rounded-2xl flex cursor-pointer items-center justify-between ${
         isActive ? "border-primary" : ""
       }`}
@@ -28,7 +28,7 @@ const ServiceCard = ({ service, bookingType, detailsPage }) => {
           {service?.catalog_service?.name}
         </h1>
         <p className="text-textLight font-manrope text-base font-semibold">
-          Duration: {service?.catalog_service?.duration}
+          Duration: {service?.catalog_service?.duration} min
         </p>
         <div className="flex gap-1 mt-3 items-center">
           <h1 className="text-primary font-manrope text-xl font-medium">

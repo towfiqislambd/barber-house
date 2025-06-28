@@ -23,33 +23,33 @@ const appointmentTime = [
   "12:30 PM",
   "12:40 PM",
   "12:50 PM",
-  "1:00 PM",
-  "1:10 PM",
-  "1:20 PM",
-  "1:30 PM",
-  "1:40 PM",
-  "1:50 PM",
-  "2:00 PM",
-  "2:10 PM",
-  "2:20 PM",
-  "2:30 PM",
-  "2:40 PM",
-  "2:50 PM",
-  "3:00 PM",
-  "3:10 PM",
-  "3:20 PM",
-  "3:30 PM",
-  "3:40 PM",
-  "3:50 PM",
-  "4:00 PM",
-  "4:10 PM",
-  "4:20 PM",
-  "4:30 PM",
-  "4:40 PM",
-  "4:50 PM",
-  "5:00 PM",
-  "5:10 PM",
-  "5:20 PM",
+  "01:00 PM",
+  "01:10 PM",
+  "01:20 PM",
+  "01:30 PM",
+  "01:40 PM",
+  "01:50 PM",
+  "02:00 PM",
+  "02:10 PM",
+  "02:20 PM",
+  "02:30 PM",
+  "02:40 PM",
+  "02:50 PM",
+  "03:00 PM",
+  "03:10 PM",
+  "03:20 PM",
+  "03:30 PM",
+  "03:40 PM",
+  "03:50 PM",
+  "04:00 PM",
+  "04:10 PM",
+  "04:20 PM",
+  "04:30 PM",
+  "04:40 PM",
+  "04:50 PM",
+  "05:00 PM",
+  "05:10 PM",
+  "05:20 PM",
 ];
 
 const ProfessionalTimePage = () => {
@@ -97,6 +97,9 @@ const ProfessionalTimePage = () => {
     setVisibleRange([0, 10]);
   }, [selectedDate]);
 
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // for exact date comparison
+
   return (
     <section className="bg-[#FCFCFC] pb-10 xl:pb-20 pt-28 2xl:py-36 lg:px-5 xl:px-7 2xl:px-10 3xl:px-12 4xl:px-0">
       <div className="container">
@@ -135,9 +138,12 @@ const ProfessionalTimePage = () => {
                   mode="single"
                   selected={date}
                   onSelect={(selected) => {
-                    setDate(selected);
-                    setSelectedDate(selected);
+                    if (selected >= today) {
+                      setDate(selected);
+                      setSelectedDate(selected);
+                    }
                   }}
+                  disabled={(date) => date < today}
                 />
               </PopoverContent>
             </Popover>
@@ -176,19 +182,23 @@ const ProfessionalTimePage = () => {
                     selectedDate.getMonth(),
                     item.date
                   );
+
                   const isSelected =
                     selectedDate &&
                     itemDate.toDateString() === selectedDate.toDateString();
 
+                  const isPast = itemDate < today;
+
                   return (
                     <div className="text-center" key={item.date}>
                       <button
-                        onClick={() => setSelectedDate(itemDate)}
+                        onClick={() => !isPast && setSelectedDate(itemDate)}
+                        disabled={isPast}
                         className={`w-12 h-[44px] 2xl:w-[60px] 2xl:h-[52px] font-bold text-lg md:text-xl rounded-xl border transition-all ${
                           isSelected
                             ? "bg-primary text-white"
                             : "bg-white text-black"
-                        }`}
+                        } ${isPast ? "opacity-50 cursor-not-allowed" : ""}`}
                       >
                         <p>{item.date}</p>
                       </button>
@@ -204,11 +214,11 @@ const ProfessionalTimePage = () => {
                 <button
                   key={idx}
                   className={`md:text-lg py-2 md:py-3 rounded-lg border transition-all ${
-                    selectedAppointment === item
+                    selectedAppointment === item.split(" ")[0]
                       ? " bg-primaryLight text-primary font-bold border border-borderColor"
                       : "bg-white text-[#545454] font-semibold"
                   }`}
-                  onClick={() => setSelectedAppointment(item)}
+                  onClick={() => setSelectedAppointment(item.split(" ")[0])}
                 >
                   {item}
                 </button>

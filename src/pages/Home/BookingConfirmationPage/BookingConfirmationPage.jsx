@@ -5,10 +5,11 @@ import chooseImg from "../../../assets/images/chooseProfessionalImg/chooseProfes
 import currencyImg from "../../../assets/images/searchResultPage/currentcy.png";
 import { useAppointmentBooking } from "@/hooks/user.mutation";
 import { useState } from "react";
+import { clearServices } from "@/redux/features/serviceSlice";
+import { currencyFormatter } from "@/lib/currencyFormatter";
 
 const BookingConfirmationPage = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const [notes, setNotes] = useState("");
 
   const storeData = location.state?.storeData;
@@ -17,26 +18,34 @@ const BookingConfirmationPage = () => {
   const totalPrice = location.state?.totalPrice;
   const formattedDate = location?.state?.formattedDate;
   const selectedAppointment = location?.state?.selectedAppointment;
-  const { mutate, isLoading } = useAppointmentBooking();
+  const [loading, setLoading] = useState(false);
+  const { mutateAsync } = useAppointmentBooking(setLoading);
 
-  const payload = {
-    online_store_id: storeData?.data?.id,
-    appointment_type: bookingType,
-    is_professional_selected: true,
-    date: formattedDate,
-    time: selectedAppointment || "12:30",
-    booking_notes: notes,
-    store_service_ids: selectedServices?.map((s) => s.catalog_service.id),
-    success_redirect_url: "https://your-site.com/booking-success",
-    cancel_redirect_url: "https://your-site.com/booking-cancel",
-  };
+  const handleConfirm = async () => {
+    const formData = new FormData();
 
-  const handleConfirm = () => {
-    mutate(payload, {
-      onSuccess: (data) => {
-        console.log(data);
-      },
+    formData.append("online_store_id", storeData?.data?.id);
+    formData.append("appointment_type", bookingType);
+    formData.append("is_professional_selected", true);
+    formData.append("date", formattedDate);
+    formData.append("time", selectedAppointment || "12:30");
+    formData.append("booking_notes", notes);
+    selectedServices?.forEach((s) => {
+      formData.append("store_service_ids[]", s.catalog_service.id);
     });
+    formData.append(
+      "success_redirect_url",
+      `${window.location.origin}/appointment-completed`
+    );
+    formData.append("cancel_redirect_url", `${window.location.origin}`);
+
+    try {
+      await mutateAsync(formData);
+
+      dispatch(clearServices());
+    } catch (err) {
+      console.error("Booking failed:", err);
+    }
   };
 
   return (
@@ -109,13 +118,8 @@ const BookingConfirmationPage = () => {
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
-                  <img
-                    className="w-[13px] h-4 object-cover"
-                    src={currencyImg}
-                    alt="currency"
-                  />
                   <h1 className="text-[#3E3E3E] font-manrope text-lg font-medium leading-[27px]">
-                    {service?.catalog_service?.price || 0}
+                    {currencyFormatter(+service?.catalog_service?.price)}
                   </h1>
                 </div>
               </div>
@@ -127,24 +131,19 @@ const BookingConfirmationPage = () => {
               Total
             </h1>
             <div className="flex items-center gap-1">
-              <img
-                className="w-[19px] h-6 object-cover"
-                src={currencyImg}
-                alt="currency"
-              />
               <h1 className="text-[#3E3E3E] font-manrope text-2xl font-medium leading-[27px]">
-                {totalPrice}
+                {currencyFormatter(totalPrice)}
               </h1>
             </div>
           </div>
 
           <div className="flex justify-center mt-5 2xl:mt-10 3xl:mt-20 bg-primary-gradient py-2 2xl:py-[14px] px-6 rounded-[40px]">
             <button
-              disabled={isLoading}
+              disabled={loading}
               onClick={handleConfirm}
               className="text-[#FFF] font-manrope text-lg font-semibold"
             >
-              {isLoading ? "Confirming..." : "Continue"}
+              {loading ? "Confirming..." : "Confirm"}
             </button>
           </div>
         </div>

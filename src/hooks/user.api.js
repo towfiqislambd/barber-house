@@ -81,10 +81,15 @@ export const stores = async () => {
   return data?.data;
 };
 
-export const AppointmentAdd = async () => {
+export const AppointmentAdd = async (payload) => {
   const { data } = await axiosSecure.post(
     `/api/online-store/appointment/book`,
     payload
   );
   return data;
+};
+
+export const AppointmentList = async () => {
+  const { data } = await axiosSecure("/api/online-store/appointments");
+  return data?.data;
 };

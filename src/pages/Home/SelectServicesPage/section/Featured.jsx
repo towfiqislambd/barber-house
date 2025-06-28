@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import currencyImg from "../../../../assets/images/searchResultPage/currentcy.png";
 import { useSelector } from "react-redux";
+import { currencyFormatter } from "@/lib/currencyFormatter";
 
 const Featured = ({ storeData, bookingType }) => {
   const selectedServices = useSelector(
@@ -44,9 +45,8 @@ const Featured = ({ storeData, bookingType }) => {
                   </p>
                 </div>
                 <div className="flex items-center gap-1">
-                  <img src={currencyImg} className="w-[13px] h-4" />
                   <h1 className="text-[#3E3E3E] font-manrope text-lg font-medium leading-[27px]">
-                    {service?.catalog_service?.price}
+                    {currencyFormatter(+service?.catalog_service?.price)}
                   </h1>
                 </div>
               </div>
@@ -58,9 +58,8 @@ const Featured = ({ storeData, bookingType }) => {
               Total
             </h1>
             <div className="flex items-center gap-1">
-              <img src={currencyImg} className="w-[19px] h-6" />
               <h1 className="text-[#3E3E3E] font-manrope text-2xl font-medium leading-[27px]">
-                {totalPrice}
+                {currencyFormatter(totalPrice)}
               </h1>
             </div>
           </div>
