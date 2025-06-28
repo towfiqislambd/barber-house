@@ -51,7 +51,7 @@ export const AddCategory = async payload => {
 
 // Edit Service:
 export const EditService = async (id, payload) => {
-  const { data } = await axiosPublic.put(
+  const { data } = await axiosSecure.post(
     `api/catalog-services/update/${id}`,
     payload
   );
