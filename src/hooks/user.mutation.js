@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   addAddress,
   AppointmentAdd,
+  AppointmentReschedule,
   BookMarkAdd,
   BookMarkRemove,
   deleteAddress,
@@ -117,6 +118,29 @@ export const useAppointmentBooking = (setLoading) => {
     onError: (err) => {
       setLoading(false);
       toast.error(err?.response?.data?.message || "Booking Failed");
+    },
+  });
+};
+
+
+
+export const useRescheduleAppointment = (setLoading) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["appointment-reschedule"],
+    mutationFn: ({ id, payload }) => AppointmentReschedule(id, payload),
+    onMutate: () => {
+      setLoading(true);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+
+      queryClient.invalidateQueries(["appointment-lists"]);
+      setLoading(false);
+    },
+    onError: (err) => {
+      setLoading(false);
+      toast.error(err?.response?.data?.message || "Res Booking Failed");
     },
   });
 };

@@ -93,3 +93,11 @@ export const AppointmentList = async () => {
   const { data } = await axiosSecure("/api/online-store/appointments");
   return data?.data;
 };
+
+export const AppointmentReschedule = async (id, payload) => {
+  const { data } = await axiosSecure.post(
+    `/api/online-store/appointment/reschedule/${id}`,
+    payload
+  );
+  return data;
+};

@@ -49,7 +49,7 @@ export const useStores = () => {
   });
 };
 
-export const useAppointmentLists = () => {
+export const useUserAppointmentLists = () => {
   return useQuery({
     queryKey: ["appointment-lists"],
     queryFn: () => AppointmentList(),
