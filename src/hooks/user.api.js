@@ -101,3 +101,11 @@ export const AppointmentReschedule = async (id, payload) => {
   );
   return data;
 };
+
+export const AppointmentCancel = async (id) => {
+  const { data } = await axiosSecure.post(
+    `/api/online-store/appointment/cancel/${id}`
+  );
+
+  return data;
+};
