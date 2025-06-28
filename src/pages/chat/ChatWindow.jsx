@@ -1,18 +1,6 @@
-// // ChatWindow.jsx
-// import { useSingleChatConversion } from "@/hooks/useChatConversion";
-// import usePostMessage from "@/hooks/usePostMessage";
-// import { useEffect, useState } from "react";
-// import { useQueryClient } from "@tanstack/react-query";
-// import { useAuth } from "@/hooks/useAuth"; // your auth context/hook
-// import { useEcho } from "@/hooks/useEcho"; // hook that returns Echo instance
-
 import usePostMessage from "@/hooks/chat.mutation";
-import {
-  useChatConversion,
-  useSingleChatConversion,
-} from "@/hooks/chat.queries";
+import { useSingleChatConversion } from "@/hooks/chat.queries";
 import echo from "@/hooks/echo";
-
 import useAuth from "@/hooks/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
@@ -25,8 +13,10 @@ export default function ChatWindow() {
   const { mutate: sendMessage } = usePostMessage();
   const [message, setMessage] = useState("");
   const { user } = useAuth();
-
   const containerRef = useRef(null);
+  const queryClient = useQueryClient();
+
+  console.log(singleConversion);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -34,25 +24,17 @@ export default function ChatWindow() {
     }
   }, [singleConversion?.data?.messages?.data?.length]);
 
-  const queryClient = useQueryClient();
-
   useEffect(() => {
     if (!echo || !user?.id) return;
 
-    echo
-      .private(`chat-channel.${+user?.id}`)
-      .listen("MessageSentEvent", (e) => {
-        console.log("NotifyParticipant event:", e);
-      });
+    echo.private(`chat-channel.${user?.id}`).listen("MessageSentEvent", (e) => {
+      console.log("NotifyParticipant event:", e);
+    });
 
     echo
-      .private(`latest-message-channel.${+user?.id}`)
+      .private(`latest-message-channel.${user?.id}`)
       .listen("LatestMassageEvent", (e) => {
-        console.log("LatestMassageEvent", e);
         if (e.message.conversation_id === +user?.id) {
-          console.log("New message received:", e);
-          console.log("shahed");
-
           queryClient.invalidateQueries(["chat-lists"]);
           refetch();
         }
@@ -61,88 +43,80 @@ export default function ChatWindow() {
 
   const handleSend = () => {
     if (!message.trim()) return;
-
-    sendMessage({
-      id: id,
-      formData: {
-        message: message,
-      },
-    });
-
+    sendMessage({ id, formData: { message } });
     setMessage("");
   };
 
   return (
-    <div className="flex-1 flex flex-col">
-      <div className="p-4 border-b bg-white font-semibold">
-        Chat with {singleConversion?.data?.receiver?.name}
+    <div className="flex flex-col h-full w-full">
+      {/* Header */}
+      <div className="border-b px-6 py-3 bg-white flex items-center justify-between">
+        <div className="font-semibold text-sm">
+          {singleConversion?.data?.receiver?.first_name}
+          <span className="text-xs text-red-500 ml-2">• Offline</span>
+        </div>
       </div>
 
+      {/* Messages */}
       <div
+        className="flex-1 overflow-y-auto p-6 bg-[#FAFAFC]"
         ref={containerRef}
-        className="flex-1 p-4 space-y-2 overflow-y-auto bg-gray-50 "
       >
-        {singleConversion?.data.map((msg) => {
-          return (
+        <div className="space-y-4">
+          {singleConversion?.data?.map((msg, index) => (
             <div
+              key={index}
               className={`flex ${
                 msg.sender_id === user?.id ? "justify-end" : "justify-start"
-              } mb-4`}
+              }`}
             >
-              {msg?.sender?.avatar && msg.sender_id !== user?.id && (
+              {msg.sender_id !== user?.id && (
                 <img
                   src={`${import.meta.env.VITE_SERVER_URL}/${
                     msg?.sender?.avatar
                   }`}
                   className="w-8 h-8 rounded-full mr-2 self-end"
+                  alt="sender avatar"
                 />
               )}
-              {!msg?.sender?.avatar && (
-                <img
-                  // src={defaultUser}
-                  className="w-8 h-8 rounded-full mr-2 self-end"
-                />
-              )}
-
               <div
-                className={`max-w-[80%] md:max-w-[60%] lg:max-w-[50%] break-words rounded-xl px-4 py-2 text-sm
-   ${
-     +msg.sender_id === +user?.id
-       ? "bg-primary text-white self-end"
-       : "bg-gray-100 text-gray-800 self-start"
-   }`}
+                className={`rounded-xl px-4 py-2 text-sm max-w-[70%] break-words ${
+                  msg.sender_id === user?.id
+                    ? "bg-[#1C1F4A] text-white"
+                    : "bg-gray-200 text-black"
+                }`}
               >
                 <p>{msg.message}</p>
-                <span className="block text-[10px] text-right mt-1 opacity-60">
-                  {moment(msg?.created_at).format("LT")}
+                <span className="text-[10px] block mt-1 opacity-60 text-right">
+                  {moment(msg.created_at).format("LT")}
                 </span>
               </div>
-
-              {+msg.sender_id === user?.id && (
+              {msg.sender_id === user?.id && (
                 <img
                   src={`${import.meta.env.VITE_SITE_URL}/${
                     msg?.sender?.avatar
                   }`}
-                  alt="avatar"
-                  className="w-8 h-8 rounded-full ml-2"
+                  className="w-8 h-8 rounded-full ml-2 self-end"
+                  alt="user avatar"
                 />
               )}
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
 
-      <div className="p-4 border-t bg-white flex gap-2">
+      {/* Message Input */}
+      <div className="px-6 py-4 bg-white border-t flex items-center">
         <input
           type="text"
-          placeholder="Type your message..."
-          className="flex-1 border px-4 py-2 rounded-full"
+          placeholder="Type your message"
+          className="flex-1 px-4 py-2 rounded-full border"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
         <button
           onClick={handleSend}
-          className="bg-blue-500 text-white px-6 py-2 rounded-full"
+          className="ml-3 bg-blue-600 text-white px-5 py-2 rounded-full"
         >
           Send
         </button>

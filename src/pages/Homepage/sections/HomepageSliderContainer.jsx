@@ -17,7 +17,6 @@ import VenuesNearbyCard from "@/components/VenuesNearbyCard/VenuesNearbyCard";
 
 const HomepageSliderContainer = ({ data, isLastItem }) => {
   const [swiperRef, setSwiperRef] = useState(null);
-  console.log(data);
 
   return (
     <section
