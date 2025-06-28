@@ -73,7 +73,7 @@ const routingList = [
   },
   {
     id: "eight",
-    to: "/businessDashboard/message",
+    to: "/chat",
     Icon: BusinessDashboardEight,
     label: "Messaging",
   },
