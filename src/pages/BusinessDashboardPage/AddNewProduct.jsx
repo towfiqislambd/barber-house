@@ -47,7 +47,9 @@ const AddNewProduct = () => {
 
     try {
       await addProductMutation(formData);
-      navigate("/businessDashboard/catalogue");
+      navigate("/businessDashboard/catalogue", {
+        state: { tab: "services_list" },
+      });
     } catch (error) {
       console.error(error);
     }

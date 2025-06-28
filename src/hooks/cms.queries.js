@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  AllProductsList,
   AllServices,
   AllTeamMembers,
   Amenities,
@@ -253,6 +254,15 @@ export const useCategoryDetails = id => {
   return useQuery({
     queryKey: ["category-details", id],
     queryFn: () => CategoryDetails(id),
+    enabled: !!id,
+  });
+};
+
+// All Products List
+export const useAllProductsList = id => {
+  return useQuery({
+    queryKey: ["all-products-list", id],
+    queryFn: () => AllProductsList(id),
     enabled: !!id,
   });
 };

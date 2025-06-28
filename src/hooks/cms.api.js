@@ -310,3 +310,11 @@ export const CategoryDelete = async id => {
   );
   return data?.data;
 };
+
+// All Products List
+export const AllProductsList = async id => {
+  const { data } = await axiosSecure(
+    `/api/business-owner/products?online_store_id=${id}`
+  );
+  return data?.data;
+};
