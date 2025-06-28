@@ -10,6 +10,7 @@ const BusinessDashboardCatalogue = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("service_menu");
   const { data: allCategoryData } = useCatalogue();
+  console.log(allCategoryData);
 
   return (
     <section className="xl:grid xl:grid-cols-12 gap-10">

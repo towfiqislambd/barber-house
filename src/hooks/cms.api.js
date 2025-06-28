@@ -271,3 +271,15 @@ export const Analytics = async (id, filter) => {
   const { data } = await axiosSecure(url);
   return data?.data;
 };
+
+// Add Product Category:
+export const AddProductCategory = async payload => {
+  const { data } = await axiosSecure.post(`api/product-categories`, payload);
+  return data?.data;
+};
+
+// Add Product Brand:
+export const AddProductBrand = async payload => {
+  const { data } = await axiosSecure.post(`api/product-brands`, payload);
+  return data?.data;
+};
