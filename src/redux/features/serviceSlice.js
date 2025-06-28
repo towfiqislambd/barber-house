@@ -1,4 +1,3 @@
-// redux/features/serviceSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const serviceSlice = createSlice({
@@ -8,21 +7,15 @@ const serviceSlice = createSlice({
   },
   reducers: {
     toggleService: (state, action) => {
-      const { service, bookingType } = action.payload;
+      const { service } = action.payload;
 
-      if (bookingType === "single") {
-        // If already selected, unselect it
-        const isSame = state.selectedServices[0]?.id === service.id;
-        state.selectedServices = isSame ? [] : [service];
+      const exists = state.selectedServices.find((s) => s.id === service.id);
+      if (exists) {
+        state.selectedServices = state.selectedServices.filter(
+          (s) => s.id !== service.id
+        );
       } else {
-        const exists = state.selectedServices.find((s) => s.id === service.id);
-        if (exists) {
-          state.selectedServices = state.selectedServices.filter(
-            (s) => s.id !== service.id
-          );
-        } else {
-          state.selectedServices.push(service);
-        }
+        state.selectedServices.push(service);
       }
     },
     clearServices: (state) => {

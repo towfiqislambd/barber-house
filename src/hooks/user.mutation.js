@@ -98,18 +98,25 @@ export const useBookmarkRemove = () => {
   });
 };
 
-export const useAppointmentBooking = () => {
+export const useAppointmentBooking = (setLoading) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["appointment-add"],
     mutationFn: (payload) => AppointmentAdd(payload),
-
+    onMutate: () => {
+      setLoading(true);
+    },
     onSuccess: (data) => {
       toast.success(data?.message);
-      queryClient.invalidateQueries(["all-appointment"]);
+      if (data?.data?.redirect_url) {
+        window.location.href = data?.data?.redirect_url;
+      }
+      queryClient.invalidateQueries(["appointment-lists"]);
+      setLoading(false);
     },
     onError: (err) => {
-      toast.error(err?.response?.data?.message || "hello");
+      setLoading(false);
+      toast.error(err?.response?.data?.message || "Booking Failed");
     },
   });
 };

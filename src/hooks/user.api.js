@@ -88,3 +88,8 @@ export const AppointmentAdd = async (payload) => {
   );
   return data;
 };
+
+export const AppointmentList = async () => {
+  const { data } = await axiosSecure("/api/online-store/appointments");
+  return data?.data;
+};

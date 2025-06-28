@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  AppointmentList,
   BookmarkGet,
   BookMarkRemove,
   StoreDetails,
@@ -45,5 +46,12 @@ export const useStores = () => {
   return useQuery({
     queryKey: ["store"],
     queryFn: () => stores(),
+  });
+};
+
+export const useAppointmentLists = () => {
+  return useQuery({
+    queryKey: ["appointment-lists"],
+    queryFn: () => AppointmentList(),
   });
 };

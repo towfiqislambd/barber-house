@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import chooseImg from "../../../assets/images/chooseProfessionalImg/chooseProfessionalImg.png";
 import currencyImg from "../../../assets/images/searchResultPage/currentcy.png";
+import { currencyFormatter } from "@/lib/currencyFormatter";
 
 const FeatherTwo = ({
   formattedDate,
@@ -42,13 +43,8 @@ const FeatherTwo = ({
               </p>
             </div>
             <div className="flex items-center gap-1">
-              <img
-                className="w-[13px] h-4 object-cover"
-                src={currencyImg}
-                alt="currency"
-              />
               <h1 className="text-[#3E3E3E] font-manrope text-lg font-medium leading-[27px]">
-                {service?.catalog_service?.price || 0}
+                {currencyFormatter(+service?.catalog_service?.price)}
               </h1>
             </div>
           </div>
@@ -61,9 +57,8 @@ const FeatherTwo = ({
           Total
         </h1>
         <div className="flex items-center gap-1">
-          <img className="w-[19px] h-6 object-cover" src={currencyImg} alt="" />
           <h1 className="text-[#3E3E3E] font-manrope text-2xl font-medium leading-[27px]">
-            {totalPrice}
+            {currencyFormatter(totalPrice)}
           </h1>
         </div>
       </div>
