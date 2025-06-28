@@ -2,7 +2,7 @@ import { useState } from "react";
 import { PiDotsThreeOutlineVerticalFill } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import EditCategoryModal from "../Modals/EditCategoryModal";
-import { MdOutlineEdit } from "react-icons/md";
+
 import {
   Popover,
   PopoverContent,
@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useDeleteService } from "@/hooks/cms.mutations";
+import { useDeleteCategory, useDeleteService } from "@/hooks/cms.mutations";
 import { Loader } from "@/components/Loader/Loader";
 
 const AllCategories = ({ categoryData, isLoading, refetch }) => {
@@ -25,6 +25,7 @@ const AllCategories = ({ categoryData, isLoading, refetch }) => {
   const [selectedService, setSelectedService] = useState(null);
 
   const { mutateAsync: deleteService } = useDeleteService();
+  const { mutateAsync: deleteCategory } = useDeleteCategory();
 
   const handleEditClick = id => {
     setSelectedId(id);
@@ -34,6 +35,10 @@ const AllCategories = ({ categoryData, isLoading, refetch }) => {
   const handleDeleteClick = id => {
     setSelectedService(id);
     setDeleteDialogOpen(true);
+  };
+
+  const handleDelete = async id => {
+    await deleteCategory(id);
   };
 
   const confirmDelete = async () => {
@@ -61,9 +66,18 @@ const AllCategories = ({ categoryData, isLoading, refetch }) => {
                 <h3 className="font-outfit text-xl font-medium text-[#2C2C2C] mb-3">
                   {data?.name}
                 </h3>
-                <button onClick={() => handleEditClick(data.id)}>
-                  <MdOutlineEdit className="text-xl" />
-                </button>
+                <select
+                  className="border outline-none border-gray-300 rounded-2xl px-2 py-1 text-sm"
+                  onChange={e => {
+                    if (e.target.value === "edit") handleEditClick(data.id);
+                    if (e.target.value === "delete") handleDelete(data.id);
+                  }}
+                  defaultValue=""
+                >
+                  <option className="action">Action</option>
+                  <option value="edit">Edit</option>
+                  <option value="delete">Delete</option>
+                </select>
               </div>
               <div className="space-y-4">
                 {data?.filtered_services_count === 0 ? (

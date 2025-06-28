@@ -58,7 +58,7 @@ const ServiceMenu = ({ allCategoryData }) => {
           </div>
 
           {/* Filter */}
-          <Select
+          {/* <Select
             value={selectedTeamMember}
             onValueChange={setSelectedTeamMember}
           >
@@ -80,7 +80,7 @@ const ServiceMenu = ({ allCategoryData }) => {
                 </SelectItem>
               ))}
             </SelectContent>
-          </Select>
+          </Select> */}
 
           {/* reset */}
           <button
@@ -103,84 +103,6 @@ const ServiceMenu = ({ allCategoryData }) => {
       <section className="flex flex-col 2xl:flex-row gap-7 3xl:gap-10 mt-10">
         <div className="p-5 3xl:p-8 bg-white rounded-lg shadow h-full">
           <h3 className="mb-3 text-xl font-semibold">Categories</h3>
-          {/* <div className="2xl:hidden">
-            <Select>
-              <SelectTrigger className="w-full text-base border !py-5 border-[#B3BAC5]">
-                <SelectValue placeholder="All Categories" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem>
-                  <button
-                    onClick={() => setActiveTab("all-categories")}
-                    className="flex gap-2 items-center"
-                  >
-                    <p className="text-base">All categories</p>
-                    <p
-                      className={`w-5 h-5 rounded-full font-bold grid place-items-center text-sm ${
-                        activeTab === "all-categories"
-                          ? "text-white bg-primary"
-                          : " "
-                      }`}
-                    >
-                      5
-                    </p>
-                  </button>
-                </SelectItem>
-                <SelectItem>
-                  <button
-                    onClick={() => setActiveTab("hairAndStyling")}
-                    className="flex gap-2 items-center"
-                  >
-                    <p className="text-base">Hair And Styling</p>
-                    <p
-                      className={`w-5 h-5 rounded-full font-bold grid place-items-center text-sm ${
-                        activeTab === "hairAndStyling"
-                          ? "text-white bg-primary"
-                          : " "
-                      }`}
-                    >
-                      5
-                    </p>
-                  </button>
-                </SelectItem>
-                <SelectItem>
-                  <button
-                    onClick={() => setActiveTab("nailCare")}
-                    className="flex gap-2 items-center"
-                  >
-                    <p className="text-base">Nail care</p>
-                    <p
-                      className={`w-5 h-5 rounded-full font-bold grid place-items-center text-sm ${
-                        activeTab === "nailCare" ? "text-white bg-primary" : " "
-                      }`}
-                    >
-                      5
-                    </p>
-                  </button>
-                </SelectItem>
-                <SelectItem>
-                  <button
-                    onClick={() => setActiveTab("messaging")}
-                    className="flex gap-2 items-center"
-                  >
-                    <p className="text-base">Messaging</p>
-                    <p
-                      className={`w-5 h-5 rounded-full font-bold grid place-items-center text-sm ${
-                        activeTab === "messaging"
-                          ? "text-white bg-primary"
-                          : " "
-                      }`}
-                    >
-                      5
-                    </p>
-                  </button>
-                </SelectItem>
-                <SelectItem value="5">
-                  <AddCategoryModal />
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div> */}
           <div className="hidden 2xl:block bg-white rounded-lg border-gray-300 p-4 3xl:p-6 h-full w-[300px] border">
             <ul className="space-y-5 text-lg font-medium">
               {/* All Categories Button */}
@@ -236,6 +158,8 @@ const ServiceMenu = ({ allCategoryData }) => {
             </ul>
           </div>
         </div>
+
+
         <div className="flex-grow">
           <AllCategories
             categoryData={categoryData}

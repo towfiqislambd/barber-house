@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  AllProductsList,
   AllServices,
   AllTeamMembers,
   Amenities,
   Analytics,
   AppointmentLists,
+  ArticleDetails,
   Blog,
   BlogDetails,
   BusinessHelp,
@@ -12,6 +14,7 @@ import {
   BusinessHome,
   BusinessPricing,
   Catalogue,
+  CategoryDetails,
   ClientList,
   GetReviews,
   GetStore,
@@ -19,6 +22,7 @@ import {
   HomePageData,
   ProductsBrand,
   ProductsCategory,
+  ServicesDetails,
   ServicesType,
   SocialLinks,
   StoreDetails,
@@ -139,6 +143,15 @@ export const useBusinessHelpDetails = id => {
   });
 };
 
+// Article Details
+export const useArticleDetails = id => {
+  return useQuery({
+    queryKey: ["article-details", id],
+    queryFn: () => ArticleDetails(id),
+    enabled: !!id,
+  });
+};
+
 // Blog
 export const useBlog = () => {
   return useQuery({
@@ -223,6 +236,33 @@ export const useAnalytics = (id, filter) => {
   return useQuery({
     queryKey: ["analytics", id, filter],
     queryFn: () => Analytics(id, filter),
+    enabled: !!id,
+  });
+};
+
+// Services Details
+export const useServiceDetails = id => {
+  return useQuery({
+    queryKey: ["service-details", id],
+    queryFn: () => ServicesDetails(id),
+    enabled: !!id,
+  });
+};
+
+// Category Details
+export const useCategoryDetails = id => {
+  return useQuery({
+    queryKey: ["category-details", id],
+    queryFn: () => CategoryDetails(id),
+    enabled: !!id,
+  });
+};
+
+// All Products List
+export const useAllProductsList = id => {
+  return useQuery({
+    queryKey: ["all-products-list", id],
+    queryFn: () => AllProductsList(id),
     enabled: !!id,
   });
 };

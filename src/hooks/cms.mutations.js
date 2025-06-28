@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   AddCategory,
   AddOnlineStore,
@@ -8,6 +8,7 @@ import {
   AddService,
   AddTeamMember,
   addTeamMembers,
+  CategoryDelete,
   DeleteService,
   DeleteTeamMember,
   EditCategory,
@@ -212,6 +213,23 @@ export const useAddProductBrand = () => {
     mutationFn: payload => AddProductBrand(payload),
     onSuccess: () => {
       toast.success("Product brand has been added");
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Delete Category
+export const useDeleteCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["delete-category"],
+    mutationFn: id => CategoryDelete(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["get-catalogue"]);
+      queryClient.invalidateQueries(["appointment-lists"]);
+      toast.success("Category has been deleted");
     },
     onError: err => {
       toast.error(err?.response?.data?.message);

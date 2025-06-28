@@ -51,7 +51,7 @@ export const AddCategory = async payload => {
 
 // Edit Service:
 export const EditService = async (id, payload) => {
-  const { data } = await axiosPublic.put(
+  const { data } = await axiosSecure.post(
     `api/catalog-services/update/${id}`,
     payload
   );
@@ -103,7 +103,7 @@ export const Catalogue = async (category_id, search, selectedTeamMember) => {
 
 // Add Team Members:
 export const addTeamMembers = async (id, payload) => {
-  const { data } = await axiosSecure.put(
+  const { data } = await axiosSecure.post(
     `api/catalog-services/${id}/update-team-members`,
     payload
   );
@@ -194,6 +194,12 @@ export const BusinessHelpDetails = async id => {
   return data?.data;
 };
 
+// Article Details
+export const ArticleDetails = async id => {
+  const { data } = await axiosPublic(`/api/cms/popular-article/${id}`);
+  return data?.data;
+};
+
 // Blog
 export const Blog = async () => {
   const { data } = await axiosPublic(`/api/cms/blog`);
@@ -258,7 +264,6 @@ export const GetReviews = async id => {
   return data?.data;
 };
 
-
 // Analytics
 export const Analytics = async (id, filter) => {
   let url = "/api/business-owner/appointments/analytics?";
@@ -281,5 +286,35 @@ export const AddProductCategory = async payload => {
 // Add Product Brand:
 export const AddProductBrand = async payload => {
   const { data } = await axiosSecure.post(`api/product-brands`, payload);
+  return data?.data;
+};
+
+// Services Details
+export const ServicesDetails = async id => {
+  const { data } = await axiosSecure(`/api/catalog-services/show/${id}`);
+  return data?.data;
+};
+
+// Category Details
+export const CategoryDetails = async id => {
+  const { data } = await axiosSecure(
+    `/api/catalog/show-service-categories/${id}`
+  );
+  return data?.data;
+};
+
+// Delete Category
+export const CategoryDelete = async id => {
+  const { data } = await axiosSecure.delete(
+    `/api/catalog/delete-service-categories/${id}`
+  );
+  return data?.data;
+};
+
+// All Products List
+export const AllProductsList = async id => {
+  const { data } = await axiosSecure(
+    `/api/business-owner/products?online_store_id=${id}`
+  );
   return data?.data;
 };

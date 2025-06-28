@@ -7,11 +7,17 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useEditService } from "@/hooks/cms.mutations";
-import { useCatalogue, useServicesType } from "@/hooks/cms.queries";
+import {
+  useCatalogue,
+  useServiceDetails,
+  useServicesType,
+} from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
 import Input from "antd/es/input/Input";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Loader } from "@/components/Loader/Loader";
 
 const BasicDetailsForEditService = () => {
   const navigate = useNavigate();
@@ -21,15 +27,32 @@ const BasicDetailsForEditService = () => {
   const business_profile_id = user?.business_profile?.id;
   const { mutateAsync: editService, isPending } = useEditService();
   const { data: servicesTypes } = useServicesType();
+  const { data: serviceDetails, isLoading } = useServiceDetails(id);
 
   const {
     handleSubmit,
     control,
     formState: { errors },
+    reset,
   } = useForm();
 
+  useEffect(() => {
+    if (serviceDetails) {
+      reset({
+        name: serviceDetails.name || "",
+        service_id: serviceDetails.service_id?.toString() || "",
+        catalog_service_category_id:
+          serviceDetails.catalog_service_category_id?.toString() || "",
+        description: serviceDetails.description || "",
+        duration: serviceDetails.duration || "",
+        price_type: serviceDetails.price_type || "Fixed",
+        price: serviceDetails.price || "",
+      });
+    }
+  }, [serviceDetails, reset]);
+
   const onSubmit = async data => {
-    if (!id) return; // safeguard
+    if (!id) return;
     const {
       duration,
       price,
@@ -55,6 +78,14 @@ const BasicDetailsForEditService = () => {
     });
     navigate("/businessDashboard/catalogue");
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -99,11 +130,7 @@ const BasicDetailsForEditService = () => {
             control={control}
             rules={{ required: "Service type is required" }}
             render={({ field }) => (
-              <Select
-                onValueChange={field.onChange}
-                value={field.value?.toString()} // Ensure it's a string
-                defaultValue={field.value?.toString()}
-              >
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="w-full text-base border sm:!py-6 !py-5 bg-white">
                   <SelectValue placeholder="Select a service type" />
                 </SelectTrigger>
@@ -111,7 +138,7 @@ const BasicDetailsForEditService = () => {
                   {servicesTypes?.map(item => (
                     <SelectItem
                       key={item.id}
-                      value={item.id.toString()} // Convert to string if necessary
+                      value={item.id.toString()}
                       className="!text-black"
                     >
                       {item.service_name}
@@ -121,7 +148,6 @@ const BasicDetailsForEditService = () => {
               </Select>
             )}
           />
-
           {errors.service_id && (
             <p className="text-red-500 text-sm">{errors.service_id.message}</p>
           )}
@@ -140,19 +166,13 @@ const BasicDetailsForEditService = () => {
             control={control}
             rules={{ required: "Menu category is required" }}
             render={({ field }) => (
-              <Select
-                onValueChange={field.onChange}
-                value={field.value?.toString()} // Ensure it's a string
-              >
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="w-full text-base border sm:!py-6 !py-5 bg-white">
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
                 <SelectContent>
                   {categoryData?.map(item => (
-                    <SelectItem
-                      key={item.id}
-                      value={item.id.toString()} // Convert to string if needed
-                    >
+                    <SelectItem key={item.id} value={item.id.toString()}>
                       {item.name}
                     </SelectItem>
                   ))}
@@ -160,7 +180,6 @@ const BasicDetailsForEditService = () => {
               </Select>
             )}
           />
-
           {errors.catalog_service_category_id && (
             <p className="text-red-500 text-sm">
               {errors.catalog_service_category_id.message}
@@ -178,7 +197,7 @@ const BasicDetailsForEditService = () => {
           htmlFor="description"
           className="text-[#2C2C2C] mb-2 text-base md:text-lg block font-medium"
         >
-          Description <span className="text-[#757575]"></span>
+          Description
         </label>
         <Controller
           name="description"
@@ -237,7 +256,7 @@ const BasicDetailsForEditService = () => {
             control={control}
             rules={{ required: "Price type is required" }}
             render={({ field }) => (
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="w-full text-base border sm:!py-6 !py-5 bg-white">
                   <SelectValue placeholder="Fixed" />
                 </SelectTrigger>
@@ -281,7 +300,7 @@ const BasicDetailsForEditService = () => {
         type="submit"
         className="mt-5 bg-black text-white px-6 py-2 rounded-lg"
       >
-        {isPending ? "Submitting...." : "Submit"}
+        {isPending ? "Updating...." : "Update"}
       </button>
     </form>
   );
