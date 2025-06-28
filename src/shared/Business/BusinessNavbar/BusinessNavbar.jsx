@@ -4,6 +4,7 @@ import { ForCustomerSvg } from "@/components/svgContainer/SvgContainer";
 import { useEffect, useState } from "react";
 import { HiMiniBars3 } from "react-icons/hi2";
 import { LiaTimesCircle } from "react-icons/lia";
+import useAuth from "@/hooks/useAuth";
 
 const BusinessNavbar = () => {
   const [scrolling, setScrolling] = useState(false);
@@ -21,6 +22,7 @@ const BusinessNavbar = () => {
     setSalesetting(!salesetting);
   };
 
+  const { user } = useAuth();
   return (
     <section
       className={`py-[14px] border-b shadow-businessNavShadow bg-[#FFF] fixed w-full z-50 top-0 left-0 transition-all duration-300 ${
@@ -110,7 +112,16 @@ const BusinessNavbar = () => {
               >
                 Blog
               </NavLink>
-              <NavLink
+              {user?.role === "business" && (
+                <Link
+                  className="text-black font-medium hover:text-primary "
+                  to={"/businessDashboard"}
+                >
+                  Business Dashboard
+                </Link>
+              )}
+
+              {/* <NavLink
                 onClick={() => saleMobileMenuActive(false)}
                 className={({ isActive }) =>
                   isActive
@@ -131,7 +142,7 @@ const BusinessNavbar = () => {
                 to={"/business/login"}
               >
                 Login
-              </NavLink>
+              </NavLink> */}
               {/* <NavLink
                 onClick={() => saleMobileMenuActive(false)}
                 className={({ isActive }) =>

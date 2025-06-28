@@ -39,6 +39,8 @@ const Navbar = () => {
     logOutMutate();
   };
 
+  console.log(user?.role);
+
   return (
     <header
       className={`fixed w-full z-[999] top-0 left-0 transition-all duration-300 ${
@@ -65,62 +67,71 @@ const Navbar = () => {
               For Business
             </Link>
             {user ? (
-              <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                <PopoverTrigger>
-                  <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium flex items-center gap-2 text-white">
-                    <span>Get Started</span>
-                    <DownArrowSvg />
-                  </button>
-                </PopoverTrigger>
-                <PopoverContent className="w-72 mt-5">
-                  <div className="!bg-white rounded-lg px-7 py-10">
-                    <ul className="font-medium text-[#2C2C2C] text-lg space-y-4">
-                      {[
-                        {
-                          icon: <HeaderSVGOne />,
-                          label: "Profile",
-                          path: "/userdashboard",
-                        },
-                        {
-                          icon: <HeaderSVGTwo />,
-                          label: "Appointments",
-                          path: "/userdashboard/appointments",
-                        },
-                        {
-                          icon: <HeaderSVGFour />,
-                          label: "Favourites",
-                          path: "/userdashboard/favourites",
-                        },
-                        {
-                          icon: <HeaderSVGSix />,
-                          label: "Product orders",
-                          path: "/userdashboard/productorder",
-                        },
-                      ].map(({ icon, label, path }) => (
-                        <Link
-                          to={path}
-                          key={label}
+              user?.role === "customer" ? (
+                <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+                  <PopoverTrigger>
+                    <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium flex items-center gap-2 text-white">
+                      <span>Get Started</span>
+                      <DownArrowSvg />
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-72 mt-5">
+                    <div className="!bg-white rounded-lg px-7 py-10">
+                      <ul className="font-medium text-[#2C2C2C] text-lg space-y-4">
+                        {[
+                          {
+                            icon: <HeaderSVGOne />,
+                            label: "Profile",
+                            path: "/userdashboard",
+                          },
+                          {
+                            icon: <HeaderSVGTwo />,
+                            label: "Appointments",
+                            path: "/userdashboard/appointments",
+                          },
+                          {
+                            icon: <HeaderSVGFour />,
+                            label: "Favourites",
+                            path: "/userdashboard/favourites",
+                          },
+                          {
+                            icon: <HeaderSVGSix />,
+                            label: "Product orders",
+                            path: "/userdashboard/productorder",
+                          },
+                        ].map(({ icon, label, path }) => (
+                          <Link
+                            to={path}
+                            key={label}
+                            className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
+                            onClick={() => setIsPopoverOpen(false)}
+                          >
+                            {icon}
+                            <p className="font-manrope text-lg font-medium">
+                              {label}
+                            </p>
+                          </Link>
+                        ))}
+                        <li
                           className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
-                          onClick={() => setIsPopoverOpen(false)}
+                          onClick={handleLogOut}
                         >
-                          {icon}
                           <p className="font-manrope text-lg font-medium">
-                            {label}
+                            Log Out
                           </p>
-                        </Link>
-                      ))}
-                      <li
-                        className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
-                        onClick={handleLogOut}
-                      >
-                        <p className="font-manrope text-lg font-medium">
-                          Log Out
-                        </p>
-                      </li>
-                    </ul>
-                  </div>
-                </PopoverContent>
-              </Popover>
+                        </li>
+                      </ul>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              ) : (
+                <Link
+                  className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium text-white"
+                  to={"/businessDashboard"}
+                >
+                  Go to Dashboard
+                </Link>
+              )
             ) : (
               <Link to="/login">
                 <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium text-white">
@@ -164,7 +175,7 @@ const Navbar = () => {
         <div className="flex flex-col mt-5 items-center gap-6">
           {/* tabs */}
           <div className="flex flex-col items-center gap-3">
-            {["Male", "Female"].map(option => (
+            {["Male", "Female"].map((option) => (
               <button
                 key={option}
                 onClick={() => setGender(option)}
