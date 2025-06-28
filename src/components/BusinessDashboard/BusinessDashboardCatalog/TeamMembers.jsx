@@ -3,7 +3,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useAddTeamMembers } from "@/hooks/cms.mutations";
 
 const TeamMembers = ({ allTeamMembers, serviceId }) => {
-  console.log(allTeamMembers);
   const { mutateAsync: addTeamMembers, isPending } = useAddTeamMembers();
   const [selectedMembers, setSelectedMembers] = useState([]);
 

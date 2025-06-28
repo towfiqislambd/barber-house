@@ -228,6 +228,7 @@ export const useDeleteCategory = () => {
     mutationFn: id => CategoryDelete(id),
     onSuccess: () => {
       queryClient.invalidateQueries(["get-catalogue"]);
+      queryClient.invalidateQueries(["appointment-lists"]);
       toast.success("Category has been deleted");
     },
     onError: err => {

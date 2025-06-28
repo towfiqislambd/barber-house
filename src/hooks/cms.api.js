@@ -103,7 +103,7 @@ export const Catalogue = async (category_id, search, selectedTeamMember) => {
 
 // Add Team Members:
 export const addTeamMembers = async (id, payload) => {
-  const { data } = await axiosSecure.put(
+  const { data } = await axiosSecure.post(
     `api/catalog-services/${id}/update-team-members`,
     payload
   );
