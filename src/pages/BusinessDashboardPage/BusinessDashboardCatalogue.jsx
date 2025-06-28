@@ -46,7 +46,7 @@ const BusinessDashboardCatalogue = () => {
                 : "text-[#2C2C2C]"
             }`}
           >
-            All Services
+            All Products
           </button>
           <button
             onClick={() => setOpen(true)}
