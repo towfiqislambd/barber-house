@@ -30,7 +30,6 @@ export const useOnboard = () => {
 
 // Stripe:
 export const useStripe = () => {
-  const navigate = useNavigate();
   return useMutation({
     mutationKey: ["stripe"],
     mutationFn: payload => OnStripe(payload),
