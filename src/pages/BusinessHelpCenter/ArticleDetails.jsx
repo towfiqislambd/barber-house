@@ -32,25 +32,21 @@ export default function ArticleDetails() {
       <div className="container">
         {/* Single item */}
         <div className="flex h-[100%] flex-col gap-[18px] w-full rounded-[16px] shadow-[0px_2px_16px_0px_rgba(0,0,0,0.08)] border border-[#dfe1e6] py-[18px] px-[24px]">
-          <div className="w-[60px] h-[60px] m-auto xl:m-0">
+          <div className="w-[100px] h-[100px] m-auto xl:m-0">
             <img
               className="w-full h-full object-cover"
               src={`${import.meta.env.VITE_SITE_URL}/${
-                articleDetails?.knowledge_base_item?.icon
+                articleDetails?.article?.image
               }`}
             />
           </div>
           <div className="text-center xl:text-start">
             <h4 className="mb-[14px] text-[#1E1E1E] font-outfit text-[24px] font-semibold leading-[28px]">
-              {articleDetails?.knowledge_base_item?.title}
+              {articleDetails?.article?.title}
             </h4>
-            <p className="text-[#545454] font-manrope leading-[24px]">
-              {articleDetails?.knowledge_base_item?.sub_title}
-            </p>
-            {typeof articleDetails?.knowledge_base_item?.description ===
-            "string"
-              ? parse(articleDetails?.knowledge_base_item?.description)
-              : articleDetails?.knowledge_base_item?.description}
+            {typeof articleDetails?.article?.description === "string"
+              ? parse(articleDetails?.article?.description)
+              : articleDetails?.article?.description}
           </div>
         </div>
       </div>
