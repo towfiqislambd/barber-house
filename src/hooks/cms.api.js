@@ -258,7 +258,6 @@ export const GetReviews = async id => {
   return data?.data;
 };
 
-
 // Analytics
 export const Analytics = async (id, filter) => {
   let url = "/api/business-owner/appointments/analytics?";
@@ -281,5 +280,11 @@ export const AddProductCategory = async payload => {
 // Add Product Brand:
 export const AddProductBrand = async payload => {
   const { data } = await axiosSecure.post(`api/product-brands`, payload);
+  return data?.data;
+};
+
+// Services Details
+export const ServicesDetails = async id => {
+  const { data } = await axiosSecure(`/api/catalog-services/show/${id}`);
   return data?.data;
 };

@@ -19,6 +19,7 @@ import {
   HomePageData,
   ProductsBrand,
   ProductsCategory,
+  ServicesDetails,
   ServicesType,
   SocialLinks,
   StoreDetails,
@@ -223,6 +224,15 @@ export const useAnalytics = (id, filter) => {
   return useQuery({
     queryKey: ["analytics", id, filter],
     queryFn: () => Analytics(id, filter),
+    enabled: !!id,
+  });
+};
+
+// Services Details
+export const useServiceDetails = id => {
+  return useQuery({
+    queryKey: ["service-details", id],
+    queryFn: () => ServicesDetails(id),
     enabled: !!id,
   });
 };
