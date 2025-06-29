@@ -267,9 +267,9 @@ export const router = createBrowserRouter([
   {
     path: "/businessDashboard",
     element: (
-      <BusinessPrivateRoute>
+      <PrivateRoute>
         <BusinessDashboardLayout />
-      </BusinessPrivateRoute>
+      </PrivateRoute>
     ),
     children: [
       {
@@ -364,12 +364,17 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/chat",
-        element: <ChatWindow />,
-      },
-      {
-        path: "/chat/:id",
-        element: <ChatWindow />,
+        path: "chat",
+        children: [
+          {
+            index: true,
+            element: <ChatWindow />,
+          },
+          {
+            path: ":id",
+            element: <ChatWindow />,
+          },
+        ],
       },
     ],
   },

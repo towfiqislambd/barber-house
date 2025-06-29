@@ -16,6 +16,8 @@ export default function ChatWindow() {
   const containerRef = useRef(null);
   const queryClient = useQueryClient();
 
+  console.log(user);
+
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
