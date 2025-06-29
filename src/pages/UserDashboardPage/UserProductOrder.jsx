@@ -3,6 +3,7 @@ import { useShowProducts } from "@/hooks/user.queries";
 
 export default function UserProductOrder() {
   const { data: showProducts, isLoading } = useShowProducts();
+  console.log(showProducts);
 
   if (isLoading) {
     return (
@@ -28,7 +29,7 @@ export default function UserProductOrder() {
                 Price
               </th>
               <th className="text-[#333] font-semibold font-manrope py-[20px] text-start">
-                Created Date
+                Description
               </th>
               <th className="text-[#333] font-semibold font-manrope py-[20px] text-start">
                 Quantity
@@ -39,24 +40,27 @@ export default function UserProductOrder() {
             </tr>
           </thead>
           <tbody className="">
-            {showProducts?.map}
-            <tr className="border-b text-start">
-              <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
-                Malcolm Lockyer
-              </td>
-              <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
-                12/16/2024
-              </td>
-              <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
-                12/29/2024
-              </td>
-              <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
-                08
-              </td>
-              <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
-                02
-              </td>
-            </tr>
+            {showProducts?.orders?.flatMap(singleProduct =>
+              singleProduct?.products?.map(item => (
+                <tr key={item?.product_id} className="border-b text-start">
+                  <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
+                    {item?.product_name}
+                  </td>
+                  <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
+                    {item?.product_price}
+                  </td>
+                  <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
+                    {item?.product_description}
+                  </td>
+                  <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
+                    {item?.ordered_quantity}
+                  </td>
+                  <td className="py-[10px] text-[#5C5C5C] text-[16px] font-medium">
+                    {item?.subtotal}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
