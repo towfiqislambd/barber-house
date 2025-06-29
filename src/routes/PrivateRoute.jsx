@@ -13,7 +13,7 @@ const PrivateRoute = ({ children }) => {
       </div>
     );
   }
-  if (token || user?.role === "customer") return children;
+  if (token && user?.role === "customer") return children;
 
   return <Navigate to="/login" state={location?.pathname} replace />;
 };

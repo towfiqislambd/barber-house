@@ -13,7 +13,7 @@ const BusinessPrivateRoute = ({ children }) => {
       </div>
     );
   }
-  if (token || user?.role === "business") return children;
+  if (token && user?.role === "business") return children;
 
   return <Navigate to="/login" state={location?.pathname} replace />;
 };
