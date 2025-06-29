@@ -6,6 +6,7 @@ import {
   AppointmentReschedule,
   BookMarkAdd,
   BookMarkRemove,
+  Checkout,
   deleteAddress,
   updateAddress,
   updateProfile,
@@ -26,11 +27,13 @@ export const useUpdateProfileData = () => {
 };
 
 export const useAddAddress = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["add-address"],
     mutationFn: (payload) => addAddress(payload),
     onSuccess: (data) => {
       toast.success(data?.message);
+      queryClient.invalidateQueries(["user"]);
     },
     onError: (err) => {
       toast.error(err?.response?.data?.message);
@@ -160,6 +163,27 @@ export const useCancleAppointment = (setLoading) => {
     onError: (err) => {
       setLoading(false);
       toast.error(err?.response?.data?.message || "Booking Cancel Failed");
+    },
+  });
+};
+
+export const useCheckout = (setLoading) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ["checkout"],
+    mutationFn: (payload) => Checkout(payload),
+    onMutate: () => {
+      setLoading?.(true);
+    },
+    onSuccess: (data) => {
+      toast.success(data?.message);
+      queryClient.invalidateQueries(["product-order"]);
+      queryClient.invalidateQueries(["daily-sales"]);
+      queryClient.invalidateQueries(["all-sales"]);
+    },
+    onError: (err) => {
+      setLoading?.(false);
+      toast.error(err?.response?.data?.message);
     },
   });
 };

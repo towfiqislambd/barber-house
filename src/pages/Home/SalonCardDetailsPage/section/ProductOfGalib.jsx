@@ -46,6 +46,7 @@ const ProductOfGalib = ({ data }) => {
                 <ProductOfGalibCard
                   currencyImgSrc={currencyImg}
                   product={product}
+                  data={data}
                 />
               </SwiperSlide>
             ))}

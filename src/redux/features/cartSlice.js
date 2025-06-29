@@ -144,7 +144,8 @@ const cartSlice = createSlice({
       );
 
       if (item) {
-        item.cartQuantity += action.payload.cartQuantity;
+        // Increase quantity
+        item.cartQuantity += action.payload.cartQuantity || 1;
       } else {
         toast.success("Product added", {
           position: "bottom-left",
@@ -156,9 +157,13 @@ const cartSlice = createSlice({
           progress: undefined,
           theme: "light",
         });
-        state.cartItems.push(action.payload);
+        // Add new product with default cartQuantity 1 if not provided
+        state.cartItems.push({
+          ...action.payload,
+          cartQuantity: action.payload.cartQuantity || 1,
+        });
       }
-      //updated local storage
+      // Update local storage
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
   },

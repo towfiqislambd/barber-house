@@ -109,3 +109,8 @@ export const AppointmentCancel = async (id) => {
 
   return data;
 };
+
+export const Checkout = async (payload) => {
+  const { data } = await axiosSecure.post("/api/product/purchase", payload);
+  return data;
+};

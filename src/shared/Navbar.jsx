@@ -25,6 +25,7 @@ import {
   removeFromCart,
 } from "@/redux/features/cartSlice";
 import toast from "react-hot-toast";
+import { currencyFormatter } from "@/lib/currencyFormatter";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -170,7 +171,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div
+          {/* <div
             className="relative cart w-8 h-8 rounded-full text-primary bg-white cursor-pointer flex items-center justify-center ml-2"
             onClick={() => setIsCartOpen(true)}
           >
@@ -178,7 +179,7 @@ const Navbar = () => {
             <span className="w-4 h-4 bg-primary text-[12px] text-white rounded-full flex items-center justify-center absolute -top-1 -right-2">
               {cartItems?.length}
             </span>
-          </div>
+          </div> */}
         </div>
         {/* Hamburger btn */}
         <button
@@ -306,7 +307,7 @@ const Navbar = () => {
           <RxCross2 className="text-xl" />
         </button>
       </div>
-      <Drawer
+      {/* <Drawer
         closable
         title="Your Cart"
         placement="right"
@@ -329,7 +330,7 @@ const Navbar = () => {
                     <div className="flex-1">
                       <p className="font-semibold text-base">{item.name}</p>
                       <p className="text-sm text-gray-500">
-                        Price: {item.price}
+                        Price: {currencyFormatter(item.price)}
                       </p>
                       <div className="flex items-center gap-2 mt-1">
                         <Button
@@ -367,13 +368,15 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Subtotal & Checkout Button */}
+            Subtotal & Checkout Button
             <div className="border-t pt-4 mt-4">
               <p className="text-lg font-semibold mb-3">
-                Subtotal: $
-                {cartItems.reduce(
-                  (acc, item) => acc + item.price * item.cartQuantity,
-                  0
+                Subtotal:
+                {currencyFormatter(
+                  cartItems.reduce(
+                    (acc, item) => acc + item.price * item.cartQuantity,
+                    0
+                  )
                 )}
               </p>
               <Button
@@ -388,7 +391,7 @@ const Navbar = () => {
             </div>
           </div>
         )}
-      </Drawer>
+      </Drawer> */}
     </header>
   );
 };
