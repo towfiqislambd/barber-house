@@ -38,7 +38,11 @@ const ProductOfGalibCard = ({ currencyImgSrc, product }) => {
 
   const handleCheckout = () => {
     setOpen(false);
-    navigate("/checkout");
+    if (user) {
+      navigate("/checkout");
+    } else {
+      toast.error("You need to login first");
+    }
   };
 
   return (
@@ -111,7 +115,7 @@ const ProductOfGalibCard = ({ currencyImgSrc, product }) => {
                     <div className="flex-1">
                       <p className="font-semibold text-base">{item.name}</p>
                       <p className="text-sm text-gray-500">
-                        Price: {item.price}
+                        Price: {currencyFormatter(item.price)}
                       </p>
                       <div className="flex items-center gap-2 mt-1">
                         <Button
@@ -152,10 +156,12 @@ const ProductOfGalibCard = ({ currencyImgSrc, product }) => {
             {/* Subtotal & Checkout Button */}
             <div className="border-t pt-4 mt-4">
               <p className="text-lg font-semibold mb-3">
-                Subtotal: $
-                {cartItems.reduce(
-                  (acc, item) => acc + item.price * item.cartQuantity,
-                  0
+                Subtotal:
+                {currencyFormatter(
+                  cartItems.reduce(
+                    (acc, item) => acc + item.price * item.cartQuantity,
+                    0
+                  )
                 )}
               </p>
               <Button
