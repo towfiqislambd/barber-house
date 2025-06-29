@@ -7,22 +7,22 @@ import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import defaultUser from "../../assets/images/chat/default-user-avatar.jpg";
+
 export default function ChatWindow() {
   const { id } = useParams();
   const { singleConversion, refetch } = useSingleChatConversion(id);
   const { mutate: sendMessage } = usePostMessage();
   const [message, setMessage] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const { user } = useAuth();
   const containerRef = useRef(null);
   const queryClient = useQueryClient();
-
-  console.log(user);
 
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTop = containerRef.current.scrollHeight;
     }
-  }, [singleConversion?.data?.messages?.data?.length]);
+  }, [singleConversion?.data?.messages?.length]);
 
   useEffect(() => {
     if (!echo || !user?.id) return;
@@ -37,10 +37,18 @@ export default function ChatWindow() {
 
   const handleSend = (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
-    sendMessage({ id, formData: { message } });
+    if (!message.trim() && !imageFile) return;
+
+    const formData = new FormData();
+    if (message.trim()) formData.append("message", message);
+    if (imageFile) formData.append("image", imageFile);
+
+    sendMessage({ id, formData });
     setMessage("");
+    setImageFile(null);
   };
+
+  
 
   return (
     <div className="flex flex-col h-full w-full">
@@ -48,7 +56,6 @@ export default function ChatWindow() {
       <div className="border-b px-6 py-3 bg-white flex items-center justify-between">
         <div className="font-semibold text-sm">
           {singleConversion?.data?.user?.first_name}
-          {/* <span className="text-xs text-red-500 ml-2">• Offline</span> */}
         </div>
       </div>
 
@@ -78,6 +85,7 @@ export default function ChatWindow() {
                   <img
                     src={defaultUser}
                     className="w-8 h-8 rounded-full mr-2 self-end"
+                    alt="default"
                   />
                 ))}
               <div
@@ -87,7 +95,19 @@ export default function ChatWindow() {
                     : "bg-gray-200 text-black"
                 }`}
               >
-                <p>{msg.message}</p>
+                {/* Message Text */}
+                {msg.message && <p>{msg.message}</p>}
+
+                {/* Image if exists */}
+                {msg.image && (
+                  <img
+                    src={`${import.meta.env.VITE_SITE_URL}/${msg.image}`}
+                    alt="sent"
+                    className="mt-2 max-w-[200px] rounded-lg"
+                  />
+                )}
+
+                {/* Timestamp */}
                 <span className="text-[10px] block mt-1 opacity-60 text-right">
                   {moment(msg.created_at).format("LT")}
                 </span>
@@ -104,7 +124,8 @@ export default function ChatWindow() {
                 ) : (
                   <img
                     src={defaultUser}
-                    className="w-8 h-8 rounded-full mr-2 self-end"
+                    className="w-8 h-8 rounded-full ml-2 self-end"
+                    alt="default"
                   />
                 ))}
             </div>
@@ -115,8 +136,15 @@ export default function ChatWindow() {
       {/* Message Input */}
       <form
         onSubmit={handleSend}
-        className="px-6 py-4 bg-white border-t flex items-center"
+        className="px-6 py-4 bg-white border-t flex items-center gap-3"
+        encType="multipart/form-data"
       >
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImageFile(e.target.files[0])}
+          className="text-sm"
+        />
         <input
           type="text"
           placeholder="Type your message"
