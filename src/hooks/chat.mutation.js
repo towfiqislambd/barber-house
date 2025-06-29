@@ -11,7 +11,7 @@ const usePostMessage = () => {
     mutationFn: ({ id, formData }) => postMessage(id, formData, axiosSecure),
     onSuccess: (data) => {
       if (data) {
-        // queryClient.invalidateQueries(["messages"]);
+        queryClient.invalidateQueries(["single-chat"]);
       }
     },
     onError: (error) => {

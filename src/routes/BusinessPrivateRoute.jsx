@@ -2,7 +2,7 @@ import { Loader } from "@/components/Loader/Loader";
 import useAuth from "@/hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
 
-const PrivateRoute = ({ children }) => {
+const BusinessPrivateRoute = ({ children }) => {
   const location = useLocation();
   const { user, token, loading } = useAuth();
 
@@ -13,9 +13,9 @@ const PrivateRoute = ({ children }) => {
       </div>
     );
   }
-  if (token && user?.role === "customer") return children;
+  if (token && user?.role === "business") return children;
 
   return <Navigate to="/login" state={location?.pathname} replace />;
 };
 
-export default PrivateRoute;
+export default BusinessPrivateRoute;

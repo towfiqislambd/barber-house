@@ -1,15 +1,16 @@
 import { useChatConversion } from "@/hooks/chat.queries";
+import echo from "@/hooks/echo";
+import useAuth from "@/hooks/useAuth";
 import moment from "moment";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function ChatSidebar() {
   const navigate = useNavigate();
-  const { chats, chatLoading } = useChatConversion({});
+  const { chats, chatLoading, refetch } = useChatConversion({});
   const { id } = useParams();
-
+  const { user } = useAuth();
   if (chatLoading) return <div>Loading...</div>;
-
-  console.log(chats);
 
   return (
     <div className="w-[340px] border-r bg-white h-full flex flex-col">
