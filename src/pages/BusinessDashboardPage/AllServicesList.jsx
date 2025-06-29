@@ -48,8 +48,8 @@ const AllServicesList = ({ allProductsList }) => {
                 </tr>
               ))
             ) : (
-              <p className="font-medium pt-5 text-red-500 text-xl">
-                No product found!
+              <p className="font-medium pt-10 text-red-500 text-xl">
+                No products found!
               </p>
             )}
           </tbody>

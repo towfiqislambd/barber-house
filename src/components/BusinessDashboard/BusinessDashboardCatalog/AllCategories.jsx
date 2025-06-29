@@ -24,7 +24,7 @@ const AllCategories = ({ categoryData, isLoading, refetch }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
 
-  const { mutateAsync: deleteService } = useDeleteService();
+  const { mutateAsync: deleteService, isPending } = useDeleteService();
   const { mutateAsync: deleteCategory } = useDeleteCategory();
 
   const handleEditClick = id => {
@@ -165,7 +165,7 @@ const AllCategories = ({ categoryData, isLoading, refetch }) => {
                   onClick={confirmDelete}
                   className="px-4 py-2 bg-[#D21837] text-white rounded-lg border border-[#D21837] font-medium"
                 >
-                  Delete
+                  {isPending ? "Deleting..." : "Delete"}
                 </button>
               </div>
             </DialogDescription>

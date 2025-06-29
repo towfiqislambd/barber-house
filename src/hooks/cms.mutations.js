@@ -50,10 +50,12 @@ export const useStripe = () => {
 
 // Edit Category:
 export const useEditCategory = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["edit-category"],
     mutationFn: ({ id, payload }) => EditCategory(id, payload),
     onSuccess: () => {
+      queryClient.invalidateQueries(["get-catalogue"]);
       toast.success("Category has been updated");
     },
     onError: err => {
@@ -106,11 +108,13 @@ export const useAddService = () => {
 
 // Delete Service:
 export const useDeleteService = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationKey: ["delete-service"],
     mutationFn: id => DeleteService(id),
     onSuccess: () => {
       toast.success("Service has been deleted");
+      queryClient.invalidateQueries(["get-catalogue"]);
     },
     onError: err => {
       toast.error(err?.response?.data?.message || "Failed to delete service");
