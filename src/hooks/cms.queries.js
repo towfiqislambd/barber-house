@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   AllProductsList,
+  AllSales,
   AllServices,
   AllTeamMembers,
   Amenities,
@@ -16,6 +17,7 @@ import {
   Catalogue,
   CategoryDetails,
   ClientList,
+  DailySales,
   GetReviews,
   GetStore,
   Highlights,
@@ -263,6 +265,24 @@ export const useAllProductsList = id => {
   return useQuery({
     queryKey: ["all-products-list", id],
     queryFn: () => AllProductsList(id),
+    enabled: !!id,
+  });
+};
+
+// Daily Sales
+export const useDailySales = id => {
+  return useQuery({
+    queryKey: ["daily-sales", id],
+    queryFn: () => DailySales(id),
+    enabled: !!id,
+  });
+};
+
+// Sales
+export const useAllSales = (id, filter) => {
+  return useQuery({
+    queryKey: ["all-sales", id, filter],
+    queryFn: () => AllSales(id, filter),
     enabled: !!id,
   });
 };
