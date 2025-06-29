@@ -1,23 +1,42 @@
 import { useChatConversion } from "@/hooks/chat.queries";
 import echo from "@/hooks/echo";
 import useAuth from "@/hooks/useAuth";
+import { useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
+import { useNavigate, useParams } from "react-router-dom";
+import defaultUser from "../../assets/images/chat/default-user-avatar.jpg";
 export default function ChatSidebar() {
   const navigate = useNavigate();
-  const { chats, chatLoading, refetch } = useChatConversion({});
+  const { chats } = useChatConversion({});
   const { id } = useParams();
   const { user } = useAuth();
-  if (chatLoading) return <div>Loading...</div>;
+  const queryClient = useQueryClient();
+  const [unread, setUnread] = useState(null);
 
+  console.log(unread);
+
+  useEffect(() => {
+    if (!echo || !user?.id) return;
+
+    echo
+      .private(`latest-message-channel.${user?.id}`)
+      .listen("LatestMassageEvent", (e) => {
+        console.log("side", e);
+        if (+e.receiverId === +user?.id) {
+          queryClient.invalidateQueries(["chat-lists"]);
+          setUnread(e.unreadMessageCount);
+          console.log("side inside", e);
+        }
+      });
+  }, [echo, user?.id]);
   return (
     <div className="w-[340px] border-r bg-white h-full flex flex-col">
       <div className="p-4 font-bold text-lg border-b">
         Messaging
         <span className="bg-red-500 text-white ml-2 text-xs px-2 py-1 rounded-full">
-          137
+          0
         </span>
       </div>
       <input
@@ -26,8 +45,6 @@ export default function ChatSidebar() {
       />
       <div className="overflow-y-auto flex-1">
         {chats?.data?.map((chat) => {
-          console.log(chat);
-
           return chat?.participants?.map((conversation) => (
             <div
               key={chat?.id}
@@ -36,13 +53,22 @@ export default function ChatSidebar() {
                 +id === +conversation?.user?.id ? "bg-gray-100" : ""
               }`}
             >
-              <img
-                src={`${import.meta.env.VITE_SITE_URL}/${
-                  conversation?.user?.avatar
-                }`}
-                className="w-10 h-10 rounded-full mr-3"
-                alt="avatar"
-              />
+              {conversation?.user?.avatar && (
+                <img
+                  src={`${import.meta.env.VITE_SITE_URL}/${
+                    conversation?.user?.avatar
+                  }`}
+                  className="w-10 h-10 rounded-full mr-3"
+                  alt="avatar"
+                />
+              )}
+
+              {!conversation?.user?.avatar && (
+                <img
+                  src={defaultUser}
+                  className="w-10 h-10 rounded-full mr-2 self-end"
+                />
+              )}
               <div className="flex-1">
                 <div className="font-medium text-sm">
                   {conversation?.user?.first_name}{" "}
@@ -50,6 +76,8 @@ export default function ChatSidebar() {
                 </div>
                 <div className="text-xs text-gray-500 truncate">
                   {chat?.last_message?.message}
+
+                  {unread}
                 </div>
               </div>
               <div className="text-xs text-gray-400 ml-2 whitespace-nowrap">

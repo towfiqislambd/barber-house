@@ -12,9 +12,9 @@ const VenuesNearbyCard = ({ venue }) => {
   const addBookmark = useBookmarkAdd();
   const removeBookmark = useBookmarkRemove();
 
-  const isBookmarked = bookmark?.some(item => item.id === venue?.id);
+  const isBookmarked = bookmark?.some((item) => item.id === venue?.id);
 
-  const handleBookmark = async e => {
+  const handleBookmark = async (e) => {
     e.stopPropagation();
     e.preventDefault();
 
@@ -89,7 +89,10 @@ const VenuesNearbyCard = ({ venue }) => {
           </div>
 
           {/* shop now button */}
-          <Link className="bg-primary-gradient px-6 py-2.5 rounded-full inline-block w-fit cursor-pointer text-white hover:scale-95 transition-transform duration-500">
+          <Link
+            to={`/shop-info/${venue?.id}`}
+            className="bg-primary-gradient px-6 py-2.5 rounded-full inline-block w-fit cursor-pointer text-white hover:scale-95 transition-transform duration-500"
+          >
             View Details
           </Link>
         </div>
@@ -101,7 +104,7 @@ const VenuesNearbyCard = ({ venue }) => {
 
         {/* wishlist button */}
         <div
-          onClick={e => handleBookmark(e)}
+          onClick={(e) => handleBookmark(e)}
           className={`size-8 cursor-pointer flex items-center justify-center rounded-full absolute top-3 right-3 transition-colors duration-300 ${
             isBookmarked ? "bg-primary" : "bg-white/50 hover:bg-primary"
           }`}

@@ -6,7 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import defaultUser from "../../assets/images/chat/default-user-avatar.jpg";
 export default function ChatWindow() {
   const { id } = useParams();
   const { singleConversion, refetch } = useSingleChatConversion(id);
@@ -29,20 +29,21 @@ export default function ChatWindow() {
 
     echo.private(`chat-channel.${user?.id}`).listen("MessageSentEvent", (e) => {
       console.log("chat:", e);
-      if (e.data.sender_id === +id) {
+      if (e.data.conversation_id === +id) {
         queryClient.invalidateQueries(["chat-lists"]);
         refetch();
       }
     });
-    echo
-      .private(`latest-message-channel.${user?.id}`)
-      .listen("LatestMassageEvent", (e) => {
-        console.log("side", e);
-        if (e.senderId === +id) {
-          queryClient.invalidateQueries(["chat-lists"]);
-          refetch();
-        }
-      });
+    // echo
+    //   .private(`latest-message-channel.${user?.id}`)
+    //   .listen("LatestMassageEvent", (e) => {
+    //     console.log("side", e);
+    //     if (+e.receiverId === +user?.id) {
+    //       queryClient.invalidateQueries(["chat-lists"]);
+    //       refetch();
+    //       console.log("side inside", e);
+    //     }
+    //   });
   }, [echo, user?.id]);
 
   const handleSend = () => {
@@ -71,21 +72,27 @@ export default function ChatWindow() {
             <div
               key={index}
               className={`flex ${
-                msg.sender_id === user?.id ? "justify-end" : "justify-start"
+                +msg.sender_id === +user?.id ? "justify-end" : "justify-start"
               }`}
             >
-              {msg.sender_id !== user?.id && (
-                <img
-                  src={`${import.meta.env.VITE_SERVER_URL}/${
-                    msg?.sender?.avatar
-                  }`}
-                  className="w-8 h-8 rounded-full mr-2 self-end"
-                  alt="sender avatar"
-                />
-              )}
+              {msg.sender_id !== user?.id &&
+                (msg?.sender?.avatar ? (
+                  <img
+                    src={`${import.meta.env.VITE_SITE_URL}/${
+                      msg?.sender?.avatar
+                    }`}
+                    className="w-8 h-8 rounded-full mr-2 self-end"
+                    alt="sender avatar"
+                  />
+                ) : (
+                  <img
+                    src={defaultUser}
+                    className="w-8 h-8 rounded-full mr-2 self-end"
+                  />
+                ))}
               <div
                 className={`rounded-xl px-4 py-2 text-sm max-w-[70%] break-words ${
-                  msg.sender_id === user?.id
+                  +msg.sender_id === +user?.id
                     ? "bg-[#1C1F4A] text-white"
                     : "bg-gray-200 text-black"
                 }`}
@@ -95,15 +102,21 @@ export default function ChatWindow() {
                   {moment(msg.created_at).format("LT")}
                 </span>
               </div>
-              {msg.sender_id === user?.id && (
-                <img
-                  src={`${import.meta.env.VITE_SITE_URL}/${
-                    msg?.sender?.avatar
-                  }`}
-                  className="w-8 h-8 rounded-full ml-2 self-end"
-                  alt="user avatar"
-                />
-              )}
+              {msg.sender_id === user?.id &&
+                (msg?.sender?.avatar ? (
+                  <img
+                    src={`${import.meta.env.VITE_SITE_URL}/${
+                      msg?.sender?.avatar
+                    }`}
+                    className="w-8 h-8 rounded-full ml-2 self-end"
+                    alt="user avatar"
+                  />
+                ) : (
+                  <img
+                    src={defaultUser}
+                    className="w-8 h-8 rounded-full mr-2 self-end"
+                  />
+                ))}
             </div>
           ))}
         </div>

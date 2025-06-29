@@ -13,11 +13,6 @@ const Homepage = () => {
 
   const containerItems = [
     {
-      id: 1,
-      title: "Appointments",
-      data: stores,
-    },
-    {
       id: 2,
       title: "Recently Viewed",
       data: stores,

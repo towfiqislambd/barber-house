@@ -13,11 +13,16 @@ import {
   decreaseCart,
   removeFromCart,
 } from "@/redux/features/cartSlice";
+import useAuth from "@/hooks/useAuth";
 
 const Checkout = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { user } = useAuth();
+
+  console.log(user);
 
   useEffect(() => {
     if (cartItems.length === 0) {
@@ -104,7 +109,7 @@ const Checkout = () => {
                     className="accent-primary"
                     defaultChecked
                   />
-                  <span className="text-gray-700">Credit/Debit Card</span>
+                  <span className="text-gray-700">Stripe</span>
                 </label>
               </div>
             </div>
