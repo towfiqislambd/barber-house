@@ -14,6 +14,7 @@ export default function ChatWindow() {
   const { mutate: sendMessage } = usePostMessage();
   const [message, setMessage] = useState("");
   const [imageFile, setImageFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
   const { user } = useAuth();
   const containerRef = useRef(null);
   const queryClient = useQueryClient();
@@ -35,20 +36,39 @@ export default function ChatWindow() {
     });
   }, [echo, user?.id]);
 
+  useEffect(() => {
+    if (imageFile) {
+      const objectUrl = URL.createObjectURL(imageFile);
+      setPreviewUrl(objectUrl);
+      return () => URL.revokeObjectURL(objectUrl);
+    } else {
+      setPreviewUrl(null);
+    }
+  }, [imageFile]);
+
   const handleSend = (e) => {
     e.preventDefault();
     if (!message.trim() && !imageFile) return;
 
     const formData = new FormData();
     if (message.trim()) formData.append("message", message);
-    if (imageFile) formData.append("image", imageFile);
+    if (imageFile) formData.append("file", imageFile);
 
     sendMessage({ id, formData });
     setMessage("");
     setImageFile(null);
   };
 
-  
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/") && file.size > 0) {
+      setImageFile(file);
+    }
+  };
+
+  const removeSelectedImage = () => {
+    setImageFile(null);
+  };
 
   return (
     <div className="flex flex-col h-full w-full">
@@ -65,99 +85,119 @@ export default function ChatWindow() {
         ref={containerRef}
       >
         <div className="space-y-4">
-          {singleConversion?.data?.messages?.map((msg, index) => (
-            <div
-              key={index}
-              className={`flex ${
-                +msg.sender_id === +user?.id ? "justify-end" : "justify-start"
-              }`}
-            >
-              {msg.sender_id !== user?.id &&
-                (msg?.sender?.avatar ? (
-                  <img
-                    src={`${import.meta.env.VITE_SITE_URL}/${
-                      msg?.sender?.avatar
-                    }`}
-                    className="w-8 h-8 rounded-full mr-2 self-end"
-                    alt="sender avatar"
-                  />
-                ) : (
-                  <img
-                    src={defaultUser}
-                    className="w-8 h-8 rounded-full mr-2 self-end"
-                    alt="default"
-                  />
-                ))}
+          {singleConversion?.data?.messages?.map((msg, index) => {
+            return (
               <div
-                className={`rounded-xl px-4 py-2 text-sm max-w-[70%] break-words ${
-                  +msg.sender_id === +user?.id
-                    ? "bg-[#1C1F4A] text-white"
-                    : "bg-gray-200 text-black"
+                key={index}
+                className={`flex ${
+                  +msg.sender_id === +user?.id ? "justify-end" : "justify-start"
                 }`}
               >
-                {/* Message Text */}
-                {msg.message && <p>{msg.message}</p>}
-
-                {/* Image if exists */}
-                {msg.image && (
+                {msg.sender_id !== user?.id && (
                   <img
-                    src={`${import.meta.env.VITE_SITE_URL}/${msg.image}`}
-                    alt="sent"
-                    className="mt-2 max-w-[200px] rounded-lg"
+                    src={
+                      msg?.sender?.avatar
+                        ? `${import.meta.env.VITE_SITE_URL}/${
+                            msg?.sender?.avatar
+                          }`
+                        : defaultUser
+                    }
+                    className="w-8 h-8 rounded-full mr-2 self-end"
+                    alt="avatar"
                   />
                 )}
 
-                {/* Timestamp */}
-                <span className="text-[10px] block mt-1 opacity-60 text-right">
-                  {moment(msg.created_at).format("LT")}
-                </span>
-              </div>
-              {msg.sender_id === user?.id &&
-                (msg?.sender?.avatar ? (
+                <div
+                  className={`rounded-xl px-4 py-2 text-sm max-w-[70%] break-words ${
+                    +msg.sender_id === +user?.id
+                      ? "bg-[#1C1F4A] text-white"
+                      : "bg-gray-200 text-black"
+                  }`}
+                >
+                  {msg.type === "text" && <p>{msg?.message}</p>}
+                  {msg.type === "file" && (
+                    <img
+                      src={`${import.meta.env.VITE_SITE_URL}/storage/${
+                        msg?.file_path
+                      }`}
+                      alt="sent"
+                      className="mt-2 max-w-[220px] rounded-lg"
+                    />
+                  )}
+                  <span className="text-[10px] block mt-1 opacity-60 text-right">
+                    {moment(msg.created_at).format("LT")}
+                  </span>
+                </div>
+
+                {msg.sender_id === user?.id && (
                   <img
-                    src={`${import.meta.env.VITE_SITE_URL}/${
+                    src={
                       msg?.sender?.avatar
-                    }`}
+                        ? `${import.meta.env.VITE_SITE_URL}/${
+                            msg?.sender?.avatar
+                          }`
+                        : defaultUser
+                    }
                     className="w-8 h-8 rounded-full ml-2 self-end"
-                    alt="user avatar"
+                    alt="avatar"
                   />
-                ) : (
-                  <img
-                    src={defaultUser}
-                    className="w-8 h-8 rounded-full ml-2 self-end"
-                    alt="default"
-                  />
-                ))}
-            </div>
-          ))}
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Message Input */}
+      {/* Input Area */}
       <form
         onSubmit={handleSend}
-        className="px-6 py-4 bg-white border-t flex items-center gap-3"
+        className="px-4 py-3 bg-white border-t flex flex-col gap-2"
         encType="multipart/form-data"
       >
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImageFile(e.target.files[0])}
-          className="text-sm"
-        />
-        <input
-          type="text"
-          placeholder="Type your message"
-          className="flex-1 px-4 py-2 rounded-full border"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="ml-3 bg-blue-600 text-white px-5 py-2 rounded-full"
-        >
-          Send
-        </button>
+        {/* Image Preview (if selected) */}
+        {imageFile && previewUrl && (
+          <div className="flex items-center gap-2">
+            <img src={previewUrl} alt="preview" className="h-20 rounded-md" />
+            <button
+              type="button"
+              onClick={removeSelectedImage}
+              className="text-sm text-red-500 underline"
+            >
+              Remove
+            </button>
+          </div>
+        )}
+
+        <div className="flex items-center gap-3">
+          <label
+            htmlFor="image"
+            className="cursor-pointer px-3 py-2 bg-gray-200 rounded-full text-sm"
+          >
+            📷
+          </label>
+          <input
+            id="image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+          />
+
+          <input
+            type="text"
+            placeholder="Type your message"
+            className="flex-1 px-4 py-2 rounded-full border"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-5 py-2 rounded-full"
+          >
+            Send
+          </button>
+        </div>
       </form>
     </div>
   );
