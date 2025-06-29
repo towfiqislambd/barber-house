@@ -77,7 +77,6 @@ export const BookMarkRemove = async (payload) => {
 
 export const stores = async () => {
   const { data } = await axiosPublic.get("/api/online-store/show-all");
-
   return data?.data;
 };
 
@@ -113,4 +112,9 @@ export const AppointmentCancel = async (id) => {
 export const Checkout = async (payload) => {
   const { data } = await axiosSecure.post("/api/product/purchase", payload);
   return data;
+};
+
+export const ShowProducts = async () => {
+  const { data } = await axiosSecure.get("/api/customer-dashboard/my-products");
+  return data?.data;
 };
