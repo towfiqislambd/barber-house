@@ -318,3 +318,19 @@ export const AllProductsList = async id => {
   );
   return data?.data;
 };
+
+// Daily Sales
+export const DailySales = async id => {
+  const { data } = await axiosSecure(
+    `/api/business-owner/daily-sales?online_store_id=${id}`
+  );
+  return data?.data;
+};
+
+// All Sales
+export const AllSales = async (id, filter) => {
+  const { data } = await axiosSecure(
+    `/api/business-owner/sales?online_store_id=${id}&filter=${filter}`
+  );
+  return data?.data;
+};

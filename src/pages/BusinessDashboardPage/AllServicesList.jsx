@@ -1,4 +1,5 @@
 const AllServicesList = ({ allProductsList }) => {
+  console.log(allProductsList);
   return (
     <div className=" relative">
       <h3 className="text-[#2C2C2C] font-outfit text-xl lg:text-2xl font-medium mb-2">
@@ -21,7 +22,7 @@ const AllServicesList = ({ allProductsList }) => {
             </tr>
           </thead>
           <tbody>
-            {allProductsList.length > 0 ? (
+            {allProductsList ? (
               allProductsList?.map((data, idx) => (
                 <tr
                   key={data.id}

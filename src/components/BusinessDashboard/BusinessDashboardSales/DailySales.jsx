@@ -1,56 +1,11 @@
-import { useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-const servicesData = [
-  {
-    id: 1,
-    service: "Services",
-    thisMonth: 6,
-    lastMonth: 0,
-    PaymentType: "Cash",
-    grossTotal: "SAR 0.00",
-  },
-  {
-    id: 2,
-    service: "Services",
-    thisMonth: 4,
-    PaymentType: "Products",
-    grossTotal: "SAR 0.00",
-  },
-  {
-    id: 3,
-    service: "Shipping",
-    thisMonth: 3,
-    lastMonth: 0,
-    PaymentType: "Shipping",
-    grossTotal: "SAR 0.00",
-  },
-  {
-    id: 4,
-    service: "Gift cards",
-    thisMonth: 5,
-    lastMonth: 0,
-    grossTotal: "SAR 0.00",
-  },
-  {
-    id: 5,
-    service: "Memberships",
-    thisMonth: 7,
-    lastMonth: 0,
-    grossTotal: "SAR 0.00",
-  },
-  {
-    id: 6,
-    service: "Late cancellation fees",
-    thisMonth: 7,
-    lastMonth: 0,
-    grossTotal: "SAR 0.00",
-  },
-];
+import { Loader } from "@/components/Loader/Loader";
+import { useDailySales } from "@/hooks/cms.queries";
+import useAuth from "@/hooks/useAuth";
 
 const DailySales = () => {
-  const [startDate, setStartDate] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const { user } = useAuth();
+  const online_store_id = user?.business_profile?.online_store?.id;
+  const { data: allSales, isLoading } = useDailySales(online_store_id);
 
   return (
     <div>
@@ -60,115 +15,54 @@ const DailySales = () => {
       <p className="text-[#2C2C2C] lg:text-lg font-medium mb-4 lg:mb-7">
         Track, analyze & grow your salon business daily
       </p>
-      <div className="flex justify-between items-center mb-5 md:mb-8 relative flex-wrap gap-3 md:gap-5">
-        {/* Button to toggle DatePicker */}
-        <button
-          className="bg-[#F2F2F2] px-4 lg:px-7 py-2 lg:py-3 text-[#474747] rounded-lg "
-          onClick={() => setShowDatePicker(!showDatePicker)}
-        >
-          {startDate.toLocaleDateString("en-GB", {
-            weekday: "long",
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          })}
-        </button>
 
-        {/* Show DatePicker when button is clicked */}
-        {showDatePicker && (
-          <div className="absolute top-full left-0 z-50 bg-white">
-            <DatePicker
-              selected={startDate}
-              onChange={date => {
-                setStartDate(date);
-                setShowDatePicker(false);
-              }}
-              inline
-            />
-          </div>
-        )}
-      </div>
+      <div className="border-t border-primary mt-10 pb-5"></div>
 
-      <div className="flex flex-col 4xl:flex-row gap-5">
-        <div className="overflow-x-auto 4xl:w-[800px] border p-3 2xl:p-6 border-primary rounded-xl bg-white shadow-md">
-          <h3 className="font-semibold text-xl md:text-[22px] text-center text-[#2C2C2C] mb-4 md:mb-6">
-            Cash movement summary
-          </h3>
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="2xl:text-lg text-gray-700 text-nowrap">
-                <th className="text-left px-2 md:px-4 py-1 md:py-2">
-                  Type of item
-                </th>
-                <th className="text-left px-2 md:px-4 py-1 md:py-2">
-                  Sales quantity
-                </th>
-                <th className="text-left px-2 md:px-4 py-1 md:py-2">
-                  Refund quantity
-                </th>
-                <th className="text-left px-2 md:px-4 py-1 md:py-2">
-                  Gross total
-                </th>
-              </tr>
-            </thead>
-            <tbody className="">
-              {servicesData.map(data => (
+      {isLoading ? (
+        <div className="flex justify-center items-center py-12">
+          <Loader />
+        </div>
+      ) : allSales?.sales?.length > 0 ? (
+        <div className="overflow-x-auto">
+          {/* Table */}
+          <table className="w-full border-collapse lg:min-w-[800px]">
+            <tr className="lg:text-lg text-gray-700 text-nowrap">
+              <th className="lg:px-4 py-2 lg:py-6 !text-left">Product Name</th>
+              <th className="lg:px-4 py-2 lg:py-6">Product Price</th>
+              <th className="lg:px-4 py-2 lg:py-6">Quantity</th>
+              <th className="lg:px-4 py-2 lg:py-6">Client Name</th>
+              <th className="lg:px-4 py-2 lg:py-6">Total</th>
+            </tr>
+            <tbody>
+              {allSales?.sales?.map(data => (
                 <tr
                   key={data.id}
-                  className="hover:bg-gray-100 text-nowrap border-t first:border-none border-dashed text-[#545454]"
+                  className="hover:bg-gray-200 border-t 
+                    first:border-none text-sm lg:text-base text-nowrap border-dashed text-[#545454]"
                 >
-                  <td className="px-2 md:px-4 py-3 md:py-5">{data.service}</td>
-                  <td className="px-2 md:px-4 py-3 md:py-5 text-center">
-                    {data.thisMonth}
+                  <td className="px-4 text-[#545454] font-medium py-5">
+                    {data?.product_name}
                   </td>
-                  <td className="px-2 md:px-4 py-3 md:py-5 text-center">
-                    {data.lastMonth}
+                  <td className="px-4 text-[#545454] font-medium py-5 text-center">
+                    SAR{data?.price}
                   </td>
-                  <td className="px-2 md:px-4 py-3 md:py-5 text-center">
-                    {data.grossTotal}
+                  <td className="px-4 text-[#545454] font-medium py-5 text-center">
+                    {data?.quantity}
+                  </td>
+                  <td className="px-4 text-[#545454] font-medium py-5 text-center">
+                    {data?.client_name}
+                  </td>
+                  <td className="px-4 text-[#545454] font-medium py-5 text-center">
+                    {data?.total}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <div className="flex-grow overflow-x-auto border p-3 2xl:p-6 border-borderColor rounded-xl bg-white shadow-md">
-          <h3 className="font-semibold text-xl md:text-[22px] text-center text-[#2C2C2C] md:mb-6 mb-4">
-            Transaction summary
-          </h3>
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="md:text-lg text-gray-700 text-nowrap">
-                <th className="text-left px-2 md:px-4 py-1 md:py-2">
-                  Payment type
-                </th>
-                <th className="text-left px-2 md:px-4 py-1 md:py-2">
-                  Payments collection
-                </th>
-                <th className="px-2 md:px-4 text-right py-1 md:py-2">
-                  Refund paid
-                </th>
-              </tr>
-            </thead>
-            <tbody className="">
-              {servicesData.map(data => (
-                <tr
-                  key={data.id}
-                  className="hover:bg-gray-100 border-t first:border-none border-dashed text-nowrap text-[#545454]"
-                >
-                  <td className="px-2 md:px-4 py-3 md:py-5">{data.service}</td>
-                  <td className="px-2 md:px-4 py-3 md:py-5 text-center">
-                    {data.thisMonth}
-                  </td>
-                  <td className="px-2 md:px-4 py-3 md:py-5 text-center">
-                    {data.lastMonth}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+      ) : (
+        <p className="font-medium text-red-500 text-xl">No data found!</p>
+      )}
     </div>
   );
 };
