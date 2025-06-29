@@ -10,16 +10,14 @@ import {
 import { useState } from "react";
 import ReviewCard from "@/components/cards/ReviewCard";
 
-const HomepageReview = ({ review }) => {
+const HomepageReview = ({ data }) => {
+  console.log(data);
   const [swiperRef, setSwiperRef] = useState(null);
-  const reviews = Array(7).fill(null);
 
   return (
     <section className="container px-8 xl:px-10 2xl:px-14 4xl:px-0">
       <div>
-        <h3 className="text-3xl font-medium text-black font-outfit">
-          {review || "Reviews"}
-        </h3>
+        <h3 className="text-3xl font-medium text-black font-outfit">Reviews</h3>
       </div>
       {/* Cards */}
       <div className="relative">
@@ -48,9 +46,9 @@ const HomepageReview = ({ review }) => {
             1650: { slidesPerView: 4 },
           }}
         >
-          {reviews.map((_, index) => (
+          {data?.map((item, index) => (
             <SwiperSlide key={index} className="flex justify-center">
-              <ReviewCard />
+              <ReviewCard item={item} />
             </SwiperSlide>
           ))}
         </Swiper>

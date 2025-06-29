@@ -1,16 +1,30 @@
-import { GoogleIcon } from "@/components/svgContainer/SvgContainer";
+import {
+  GoogleIcon,
+  GoogleSvg,
+  LeftSideArrowSvg,
+} from "@/components/svgContainer/SvgContainer";
 import loginImg from "../../../assets/images/loginImage.png";
-import orImg from "../../../assets/images/login/or.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { message } from "antd";
 import toast from "react-hot-toast";
+import { useLogin, useSocialLogin } from "@/hooks/auth.hook.";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { CgSpinnerTwoAlt } from "react-icons/cg";
 
 const UserLogin = () => {
+  const navigate = useNavigate();
   const [isShowPass, setisShowPass] = useState(false);
+  const { mutateAsync: loginMutation, isPending } = useLogin();
+  const { mutateAsync: socialLoginMutation } = useSocialLogin();
+
+  const handlePrev = () => {
+    navigate(-1);
+  };
+
   const {
     reset,
     register,
@@ -18,17 +32,49 @@ const UserLogin = () => {
     formState: { errors },
   } = useForm();
 
-  const onsubmit = data => {
-    if (data.email && data.password) {
-      toast.success("ok ")
-      reset()
-    }
+  const onSubmit = async data => {
+    await loginMutation(data);
   };
+
+  // login with google:
+  const handleLoginWithGoogle = useGoogleLogin({
+    onSuccess: async tokenResponse => {
+      const token = tokenResponse.access_token;
+      try {
+        const { data } = await axios(
+          `${import.meta.env.VITE_GOOGLE_URL}/oauth2/v2/userinfo`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const updatedData = {
+          token,
+          provider: "google",
+          username: data?.name,
+          email: data?.email,
+          avatar: data?.picture,
+          // avatar: null,
+        };
+        await socialLoginMutation(updatedData);
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
+    },
+    onError: error => {
+      console.error("Google Login Failed:", error);
+    },
+  });
 
   return (
     <section className="container  h-[100vh] flex gap-[174px] justify-center items-center">
       {/* This is the left side div */}
       <div className="mt-3 2xl:block hidden ">
+        <button onClick={handlePrev}>
+          <LeftSideArrowSvg />
+        </button>
         <img
           className="mt-3 w-[750px] h-[840px] rounded-[32px] object-cover"
           src={loginImg}
@@ -38,7 +84,7 @@ const UserLogin = () => {
       {/* This is the right side div */}
       <div className=" h-auto p-6 2xl:p-8 bg-[#FCFCFC] shadow-lg  w-[524px] flex flex-col items-center gap-y-6 2xl:gap-y-12 ">
         <form
-          onSubmit={handleSubmit(onsubmit)}
+          onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-y-6 2xl:gap-y-8 items-center w-full relative "
         >
           <div className="flex flex-col gap-y-6 2xl:gap-y-8  items-center w-full relative ">
@@ -80,20 +126,6 @@ const UserLogin = () => {
                       name="password"
                       {...register("password", {
                         required: "Password is required",
-                        minLength: {
-                          value: 8,
-                          message: "Password must be greater than 8 characters",
-                        },
-                        maxLength: {
-                          value: 32,
-                          message: "password must be less than 32 characters",
-                        },
-                        pattern: {
-                          value:
-                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,32}$/,
-                          message:
-                            "Password must contain at least one uppercase, one lowercase, one number, and one special character (@$!%*?&)",
-                        },
                       })}
                       type={isShowPass ? "text" : "password"}
                       className="w-full px-5 py-2  bg-transparent border-[1px] border-solid rounded-[8px]  "
@@ -118,7 +150,7 @@ const UserLogin = () => {
                       )}
                     </div>
                   </div>
-                  <div className="my-2" >
+                  <div className="my-2">
                     {errors.password && (
                       <span className="text-red-500 text-sm py-4 font-semibold ">
                         {errors.password.message}
@@ -135,23 +167,32 @@ const UserLogin = () => {
             </div>
           </div>
           <div className="flex flex-col gap-y-2 2xl:gap-y-4 w-full relative  items-center ">
-            <button className="w-full 2xl:px-6 px-3 py-2 2xl:py-4 h-auto bg-primary font-manrope text-base 2xl:text-2xl font-semibold text-white rounded-[16px] ">
-              Log in{" "}
+            <button className="w-full 2xl:px-6 px-3 py-2 2xl:py-4 h-auto bg-primary font-manrope text-base 2xl:text-2xl font-semibold text-white rounded-[16px] flex justify-center items-center">
+              {isPending ? (
+                <CgSpinnerTwoAlt className="!text-3xl animate-spin cursor-not-allowed" />
+              ) : (
+                "Log in"
+              )}
             </button>
             <span className="font-manrope text-base 2xl:text-2xl font-semibold text-[#2C2C2C] rounded-[16px]">
               Or
             </span>
-            <div className="w-full cursor-pointer border text-base 2xl:text-2xl border-solid py-[8px] 2xl:py-[14px] px-2 2xl:px-4 rounded-[10px] border-[#1E1E1E] flex items-center justify-center gap-x-3  ">
-              <GoogleIcon />
-              <span>Continue with Google</span>
+            <div
+              onClick={() => handleLoginWithGoogle()}
+              className="flex gap-3 cursor-pointer justify-center border w-full border-[#1E1E1E] py-[14px] px-[16px] rounded-[10px] items-center"
+            >
+              <GoogleSvg />
+              <p className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
+                Continue with Google
+              </p>
             </div>
           </div>
         </form>
         <span className="flex flex-col items-center md:flex-row  gap-x-1 ">
           Don’t have an account?{" "}
-          <p className="underline font-bold cursor-pointer ">
+          <Link to="/bs" className="underline font-bold cursor-pointer ">
             Create an account
-          </p>{" "}
+          </Link>{" "}
         </span>
       </div>
     </section>

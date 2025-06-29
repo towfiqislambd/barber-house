@@ -3,52 +3,129 @@ import OnlineProfileStepOne from "./OnlineProfileStepOne";
 import OnlineProfileStepTwo from "./OnlineProfileStepTwo";
 import OnlineProfileStepThree from "./OnlineProfileStepThree";
 import OnlineProfileStepSix from "./OnlineProfileStepSix";
-import OnlineProfileStepSeven from "./OnlineProfileStepSeven";
 import OnlineProfileStepFive from "./OnlineProfileStepFive";
 import OnlineProfileStepTen from "./OnlineProfileStepTen";
 import OnlineProfileStepEleven from "./OnlineProfileStepEleven";
-import OnlineProfileStepTwelve from "./OnlineProfileStepTwelve";
 import OnlineProfileStepFour from "./OnlineProfileStepFour";
 import OnlineProfileStepEight from "./OnlineProfileStepEight";
+import OnlineProfileStepNine from "./OnlineProfileStepNine";
+import useAuth from "@/hooks/useAuth";
 
 const OnlineProfileContainer = () => {
+  const { user } = useAuth();
   const [step, setStep] = useState(1);
-  console.log(step);
+  const [formData, setFormData] = useState(null);
+  console.log(formData);
 
   // For step form
   const renderStep = () => {
     if (step === 1) {
-      return <OnlineProfileStepOne step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepOne
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
     if (step === 2) {
-      return <OnlineProfileStepTwo step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepTwo
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+          details={user?.business_profile?.online_store}
+        />
+      );
     }
     if (step === 3) {
-      return <OnlineProfileStepThree step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepThree
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+          details={user?.business_profile?.online_store}
+        />
+      );
     }
     if (step === 4) {
-      return <OnlineProfileStepFour step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepFour
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+          details={user?.business_profile?.online_store}
+        />
+      );
     }
     if (step === 5) {
-      return <OnlineProfileStepFive step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepFive
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+          details={user?.business_profile?.online_store}
+        />
+      );
     }
     if (step === 6) {
-      return <OnlineProfileStepSix step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepSix
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
+
     if (step === 7) {
-      return <OnlineProfileStepSeven step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepEight
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+          details={user?.business_profile?.online_store}
+        />
+      );
     }
     if (step === 8) {
-      return <OnlineProfileStepEight step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepNine
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+          details={user?.business_profile?.online_store}
+        />
+      );
     }
     if (step === 9) {
-      return <OnlineProfileStepTen step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepTen
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+          details={user?.business_profile?.online_store}
+        />
+      );
     }
     if (step === 10) {
-      return <OnlineProfileStepEleven step={step} setStep={setStep} />;
-    }
-    if (step === 11) {
-      return <OnlineProfileStepTwelve step={step} setStep={setStep} />;
+      return (
+        <OnlineProfileStepEleven
+          step={step}
+          setStep={setStep}
+          formData={formData}
+          setFormData={setFormData}
+        />
+      );
     }
   };
   return (
@@ -100,16 +177,6 @@ const OnlineProfileContainer = () => {
         <div
           className={`w-40 h-2 rounded ${
             step === 9 ? "bg-primary" : "bg-[#DFE1E6]"
-          }`}
-        ></div>
-        <div
-          className={`w-40 h-2 rounded ${
-            step === 10 ? "bg-primary" : "bg-[#DFE1E6]"
-          }`}
-        ></div>
-        <div
-          className={`w-40 h-2 rounded ${
-            step === 11 ? "bg-primary" : "bg-[#DFE1E6]"
           }`}
         ></div>
       </div>

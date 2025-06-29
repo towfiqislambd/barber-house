@@ -4,31 +4,20 @@ import {
 } from "@/components/svgContainer/SvgContainer";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-
-const stepTwoData = [
-  { id: 1, icon: <StepTwoSvg />, desc: "Haircuts & styling" },
-  { id: 2, icon: <StepTwoSvg />, desc: "Hair coloring" },
-  { id: 3, icon: <StepTwoSvg />, desc: "Blowouts" },
-  { id: 4, icon: <StepTwoSvg />, desc: "Braiding" },
-  { id: 5, icon: <StepTwoSvg />, desc: "Extensions" },
-  { id: 6, icon: <StepTwoSvg />, desc: "Perms" },
-  { id: 7, icon: <StepTwoSvg />, desc: "Scalp treatments" },
-  { id: 8, icon: <StepTwoSvg />, desc: "Shaving" },
-  { id: 9, icon: <StepTwoSvg />, desc: "Beard grooming" },
-];
+import { useServicesType } from "@/hooks/cms.queries";
 
 const StepTwo = ({ step, setStep, setFormData }) => {
+  const { data: servicesData } = useServicesType();
   const { handleSubmit } = useForm();
-  const [selectedServices, setSelectedServices] = useState([]);
+  const [service_id, setServiceId] = useState([]);
 
   const onSubmit = () => {
-    if (selectedServices.length > 0) {
-      const selectedServiceDescriptions = stepTwoData
-        .filter(service => selectedServices.includes(service.id))
-        .map(service => service.desc);
-
+    if (service_id.length > 0) {
       setStep(step + 1);
-      setFormData(prevData => ({ ...prevData, selectedServiceDescriptions }));
+      setFormData(prevData => ({
+        ...prevData,
+        service_id,
+      }));
     }
   };
 
@@ -38,7 +27,7 @@ const StepTwo = ({ step, setStep, setFormData }) => {
   };
 
   const handleSelection = id => {
-    setSelectedServices(prev => {
+    setServiceId(prev => {
       if (prev.includes(id)) {
         return prev.filter(item => item !== id);
       }
@@ -51,7 +40,7 @@ const StepTwo = ({ step, setStep, setFormData }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* Next, Prev btns */}
+      {/* Next, Prev buttons */}
       <div className="flex justify-between items-center mb-5">
         <button onClick={handlePrevStep} className="cursor-pointer">
           <LeftSideArrowSvg />
@@ -71,11 +60,11 @@ const StepTwo = ({ step, setStep, setFormData }) => {
           Choose your primary and up to 3 related service types
         </p>
 
-        <div className="grid grid-cols-2 xl:grid-cols-4  gap-5">
-          {stepTwoData.map(data => {
-            const isSelected = selectedServices.includes(data.id);
-            const isDisabled = !isSelected && selectedServices.length >= 3;
-            const selectionIndex = selectedServices.indexOf(data.id) + 1;
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-5">
+          {servicesData?.map(data => {
+            const isSelected = service_id.includes(data.id);
+            const isDisabled = !isSelected && service_id.length >= 3;
+            const selectionIndex = service_id.indexOf(data.id) + 1;
 
             return (
               <label
@@ -93,16 +82,8 @@ const StepTwo = ({ step, setStep, setFormData }) => {
                 />
                 <div
                   className={`space-y-4 border rounded-lg p-4 shadow border-[#B3BAC5] 
-                                    ${
-                                      isSelected
-                                        ? "border-primary bg-blue-50"
-                                        : ""
-                                    } 
-                                    ${
-                                      isDisabled
-                                        ? "opacity-50 cursor-not-allowed"
-                                        : ""
-                                    }`}
+                    ${isSelected ? "border-primary bg-blue-50" : ""} 
+                    ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`}
                 >
                   <span
                     className={`absolute top-2 right-2 bg-primary text-white w-6 h-6 flex items-center justify-center rounded-full text-sm font-semibold ${
@@ -112,9 +93,15 @@ const StepTwo = ({ step, setStep, setFormData }) => {
                     {selectionIndex}
                   </span>
 
-                  <div>{data.icon}</div>
+                  <div className="w-12">
+                    <img
+                      src={`${import.meta.env.VITE_SITE_URL}/${data?.icon}`}
+                      className="w-full object-cover"
+                      alt={data.service_name}
+                    />
+                  </div>
                   <p className="text-lg font-outfit text-[#1E1E1E]">
-                    {data.desc}
+                    {data.service_name}
                   </p>
                 </div>
               </label>

@@ -18,87 +18,8 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { addMessage } from "@/redux/features/msgSlice";
 
 const MessageComponent = ({ isMe }) => {
-  const [activeId, setActiveId] = useState(null);
-  const [ImgUrl, setImgUrl] = useState();
-  const [ImgFile, setImgFile] = useState();
-  const [open, setOpen] = useState(false);
-  const [msg, setmsg] = useState();
-  const messages = useSelector(state => state.msgReducer.messages);
-  const users = useSelector(state => state.msgReducer.users);
-  const [activeUser, setActiveUser] = useState();
-  const [userMsg, setUserMsg] = useState([]);
-  const dispatch = useDispatch();
-  const [searchUser, setsearchUser] = useState();
-
-  // Update active user based on activeId
-  useEffect(() => {
-    const user = users.find(user => user.id === activeId);
-    if (user) {
-      setActiveUser(user);
-    }
-  }, [activeId, users]);
-
-  useEffect(() => {
-    const userMessages = messages.filter(
-      message => message.userId === activeUser?.id
-    );
-    setUserMsg(userMessages);
-  }, [messages, activeUser]);
-
-  const handleMessageSend = e => {
-    const data = {
-      sender: "Sender",
-      id: messages.length + 1,
-      time: moment().add(23, "minutes").format("h:mm A"),
-      profilePic: profilePic,
-      userId: activeUser.id,
-    };
-
-    if (ImgUrl) {
-      data.imgurl = ImgUrl;
-    } else {
-      data.message = msg;
-    }
-
-    dispatch(addMessage(data));
-
-    setImgUrl("");
-    setmsg("");
-  };
-
-  const handleKeyPress = e => {
-    if (e.key === "Enter" && (msg || ImgUrl)) {
-      handleMessageSend();
-    } else if (e.key === "Enter" && !msg && !ImgUrl) {
-      toast.error("Please Enter a message or input a file ");
-    }
-  };
-
-  const handleImgUpload = e => {
-    const file = e.target.files[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setImgFile(file);
-      setImgUrl(url);
-      setOpen(true);
-      toast.success(`${file?.name} added`);
-    }
-  };
-
-  const sanitizedSearchUser = searchUser?.trim().toLowerCase();
-
-  const filteredSearchData = users.filter(user => {
-    if (!sanitizedSearchUser) {
-      return true;
-    }
-
-    return user?.name?.toLowerCase().includes(sanitizedSearchUser);
-  });
-
   return (
     <>
       <div
@@ -127,7 +48,7 @@ const MessageComponent = ({ isMe }) => {
                 <FansySearchIcon />
               </div>
               <input
-                onChange={e => {
+                onChange={(e) => {
                   setsearchUser(e.target.value);
                 }}
                 value={searchUser}
@@ -205,7 +126,7 @@ const MessageComponent = ({ isMe }) => {
               </div>
               <ScrollToBottom>
                 <div className="flex flex-col h-[620px] xl:h-[700px] xl:p-5 p-2 gap-2 xl:gap-5 py-16 overflow-y-auto">
-                  {userMsg.map(msg => (
+                  {userMsg.map((msg) => (
                     <div
                       key={msg.id}
                       className={`flex flex-col gap-2 ${
@@ -258,7 +179,9 @@ const MessageComponent = ({ isMe }) => {
                                 className="rounded-lg max-w-[200px]"
                               />
                             ) : (
-                              <span className=" text-sm xl:text-base">{msg.message}</span>
+                              <span className=" text-sm xl:text-base">
+                                {msg.message}
+                              </span>
                             )}
                           </div>
                           <span
@@ -287,10 +210,10 @@ const MessageComponent = ({ isMe }) => {
                   placeholder="Type your message"
                   className=" rounded-[20px] bg-[#F7F7FD] w-full absolute top-0 left-0 h-full   outline-none pl-[27.5px] "
                   type="text"
-                  onChange={e => {
+                  onChange={(e) => {
                     setmsg(e.target.value);
                   }}
-                  onKeyDown={e => {
+                  onKeyDown={(e) => {
                     handleKeyPress(e);
                   }}
                   value={msg}
@@ -344,9 +267,9 @@ const MessageComponent = ({ isMe }) => {
         )}
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent onClick={e => e.stopPropagation()}>
+        <DialogContent onClick={(e) => e.stopPropagation()}>
           <DialogHeader>
-            <DialogDescription onClick={e => e.stopPropagation()}>
+            <DialogDescription onClick={(e) => e.stopPropagation()}>
               <div className="flex flex-col bg-white h-auto p-5 rounded-[12px] w-full gap-y-5 items-center z-[999]">
                 {/* Image Preview */}
                 {ImgUrl && (

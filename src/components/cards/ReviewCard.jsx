@@ -1,20 +1,18 @@
 import { QuotationSvg, StarSvg } from "../svgContainer/SvgContainer";
-import profile from "../../assets/images/review/profile-1.jpg";
 
-const ReviewCard = () => {
+const ReviewCard = ({ item }) => {
   return (
     <div className="bg-[#F6F6F6] 4xl:h-[300px] 4xl:px-6 px-3 4xl:py-8 py-4 rounded-lg transition-all w-full hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer">
       {/* description */}
       <div>
         <p className="text-textColor 4xl:text-xl">
-          Absolute top-tier service! The attention to detail and precision in my
-          haircut was next level...
+         {item?.review}
         </p>
       </div>
       {/* review */}
       <div className="mt-2">
         <p className="flex items-center gap-2 text-xl font-medium">
-          4.8
+          {item?.rating}
           <span>
             <StarSvg />
           </span>
@@ -30,14 +28,16 @@ const ReviewCard = () => {
         <div className="size-[60px]">
           <img
             className="h-full w-full object-cover rounded-full"
-            src={profile}
+            src={`${import.meta.env.VITE_SITE_URL}/${item?.client_avatar}`}
             alt=""
           />
         </div>
         {/* info */}
         <div>
-          <h4 className="text-lg font-medium">John Doe</h4>
-          <p className="text-sm font-medium text-textLight">AI Engineer</p>
+          <h4 className="text-lg font-medium">{item?.shop_name}</h4>
+          <p className="text-sm font-medium text-textLight">
+            {item?.shop_location}
+          </p>
         </div>
       </div>
     </div>

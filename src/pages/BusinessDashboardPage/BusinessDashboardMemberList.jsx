@@ -1,4 +1,3 @@
-import ScheduledShifts from "@/components/BusinessDashboard/BusinessDashboardMemberList/ScheduledShifts";
 import TeamMembers from "@/components/BusinessDashboard/BusinessDashboardMemberList/TeamMembers";
 import { useState } from "react";
 
@@ -20,21 +19,10 @@ const BusinessDashboardMemberList = () => {
           >
             Team members
           </button>
-          <button
-            onClick={() => setActiveTab("scheduled_shifts")}
-            className={`sm:px-5 px-2 py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
-              activeTab === "scheduled_shifts"
-                ? "text-white bg-primary sm:text-lg text-sm"
-                : "text-[#2C2C2C] sm:text-lg text-sm"
-            }`}
-          >
-            Scheduled shifts
-          </button>
         </ul>
       </div>
       <div className="xl:col-span-8 2xl:col-span-9 4xl:col-span-10 bg-white p-4 md:p-6 rounded-xl w-full">
         {activeTab === "team-members" && <TeamMembers />}
-        {activeTab === "scheduled_shifts" && <ScheduledShifts />}
       </div>
     </section>
   );

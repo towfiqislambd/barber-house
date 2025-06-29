@@ -3,34 +3,64 @@ import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import StepFour from "./StepFour";
 import StepFive from "./StepFive";
-import StepSix from "./StepSix";
 import { useState } from "react";
 
 const StepContainer = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(null);
-  // All step form data is here......
-  console.log(formData)
+  console.log(formData);
 
   // For step form
   const renderStep = () => {
     if (step === 1) {
-      return <StepOne formData={formData} setFormData={setFormData} step={step} setStep={setStep} />;
+      return (
+        <StepOne
+          formData={formData}
+          setFormData={setFormData}
+          step={step}
+          setStep={setStep}
+        />
+      );
     }
     if (step === 2) {
-      return <StepTwo formData={formData} setFormData={setFormData} step={step} setStep={setStep} />;
+      return (
+        <StepTwo
+          formData={formData}
+          setFormData={setFormData}
+          step={step}
+          setStep={setStep}
+        />
+      );
     }
     if (step === 3) {
-      return <StepThree formData={formData} setFormData={setFormData} step={step} setStep={setStep} />;
+      return (
+        <StepThree
+          formData={formData}
+          setFormData={setFormData}
+          step={step}
+          setStep={setStep}
+        />
+      );
     }
     if (step === 4) {
-      return <StepFour formData={formData} setFormData={setFormData} step={step} setStep={setStep} />;
+      return (
+        <StepFour
+          formData={formData}
+          setFormData={setFormData}
+          step={step}
+          setStep={setStep}
+        />
+      );
     }
     if (step === 5) {
-      return <StepFive formData={formData} setFormData={setFormData} step={step} setStep={setStep} />;
-    }
-    if (step === 6) {
-      return <StepSix formData={formData} setFormData={setFormData} step={step} setStep={setStep} />;
+      return (
+        <StepFive
+          formData={formData}
+          setFormData={setFormData}
+          step={step}
+          setStep={setStep}
+        />
+      );
     }
   };
   return (
@@ -103,20 +133,6 @@ const StepContainer = () => {
           <path
             d="M2 2H162"
             stroke={step === 5 ? "#EE6C9C" : "#DFE1E6"}
-            strokeWidth="4"
-            strokeLinecap="round"
-          />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="164"
-          height="4"
-          viewBox="0 0 164 4"
-          fill="none"
-        >
-          <path
-            d="M2 2H162"
-            stroke={step === 6 ? "#EE6C9C" : "#DFE1E6"}
             strokeWidth="4"
             strokeLinecap="round"
           />

@@ -1,26 +1,22 @@
 import BasicDetails from "@/components/BusinessDashboard/BusinessDashboardCatalog/BasicDetails";
-import OnlineBooking from "@/components/BusinessDashboard/BusinessDashboardCatalog/OnlineBooking";
-import Settings from "@/components/BusinessDashboard/BusinessDashboardCatalog/Settings";
 import TeamMembers from "@/components/BusinessDashboard/BusinessDashboardCatalog/TeamMembers";
+import { useAllTeamMembers } from "@/hooks/cms.queries";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const AddService = () => {
   const [activeTab, setActiveTab] = useState("basic_details");
+  const [serviceId, setServiceId] = useState(null);
+  const { data: allTeamMembers = [] } = useAllTeamMembers();
+
+  const handleNext = createdServiceId => {
+    setServiceId(createdServiceId);
+    setActiveTab("team_members");
+  };
+
   return (
     <div className="4xl:px-40 px-5 lg:px-5 xl:py-10 py-5">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-5 sm:gap-0">
         <h3 className="font-outfit text-3xl font-semibold">Add service</h3>
-        <div className="flex gap-3 items-center">
-          <Link to="/businessDashboard/catalogue">
-            <button className="text-[#545454] border font-medium border-[#00C2CB] rounded-lg sm:px-8 px-4 sm:py-2 py-1">
-              Close
-            </button>
-          </Link>
-          <button className="text-[#fff] bg-[#008A90] font-medium rounded-lg sm:px-8 px-4 sm:py-2 py-1">
-            Save
-          </button>
-        </div>
       </div>
 
       {/* Lower part */}
@@ -55,39 +51,22 @@ const AddService = () => {
                       : "text-[#2C2C2C] bg-gray-200 shadow-sm"
                   }`}
                 >
-                  3
+                  {allTeamMembers?.length}
                 </p>
-              </button>
-              <div className="border-t border-[#00C2CB]"></div>
-              <h3>Settings</h3>
-              <button
-                onClick={() => setActiveTab("online_booking")}
-                className={`px-3 py-2 w-full rounded-lg ${
-                  activeTab === "online_booking"
-                    ? "text-[#008A90] shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                Online booking
-              </button>
-              <button
-                onClick={() => setActiveTab("settings")}
-                className={`px-3 py-2 w-full rounded-lg ${
-                  activeTab === "settings"
-                    ? "text-[#008A90] shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                Settings
               </button>
             </ul>
           </div>
         </div>
         <div className="flex-grow">
-          {activeTab === "basic_details" && <BasicDetails />}
-          {activeTab === "team_members" && <TeamMembers />}
-          {activeTab === "online_booking" && <OnlineBooking />}
-          {activeTab === "settings" && <Settings />}
+          {activeTab === "basic_details" && (
+            <BasicDetails onNext={handleNext} />
+          )}
+          {activeTab === "team_members" && (
+            <TeamMembers
+              allTeamMembers={allTeamMembers}
+              serviceId={serviceId}
+            />
+          )}
         </div>
       </section>
     </div>

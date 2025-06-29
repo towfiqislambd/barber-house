@@ -1,24 +1,19 @@
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
 import logo from "../assets/images/logo.jpg";
-import profile from "../assets/images/profile.png";
 import {
   BusinessDashboardOne,
-  BusinessDashboardTwo,
   BusinessDashboardThree,
-  BusinessDashboardFour,
   BusinessDashboardFive,
   BusinessDashboardSix,
   BusinessDashboardSeven,
   BusinessDashboardEight,
   BusinessDashboardNine,
-  BusinessDashboardTen,
-  BusinessDashboardEleven,
   BusinessNotificationSvg,
-  BusinessSearchSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { FaBars } from "react-icons/fa6";
 import { Tooltip } from "antd";
+import useAuth from "@/hooks/useAuth";
 
 const excludedPaths = [
   "/businessDashboard/editgifcardsale",
@@ -46,63 +41,60 @@ const excludedPaths = [
 ];
 
 const routingList = [
-  { id: "one", to: "/businessDashboard", Icon: BusinessDashboardOne, label: 'Home' },
-  { id: "two", to: "/businessDashboard/calendar", Icon: BusinessDashboardTwo, label: 'Calender' },
-  { id: "three", to: "/businessDashboard/sales", Icon: BusinessDashboardThree, label: 'Sales' },
   {
-    id: "four",
-    to: "/businessDashboard/clients-list",
-    Icon: BusinessDashboardFour,
-    label: 'Clients'
+    id: "one",
+    to: "/businessDashboard",
+    Icon: BusinessDashboardOne,
+    label: "Home",
+  },
+  {
+    id: "three",
+    to: "/businessDashboard/sales",
+    Icon: BusinessDashboardThree,
+    label: "Sales",
   },
   {
     id: "five",
     to: "/businessDashboard/catalogue",
     Icon: BusinessDashboardFive,
-    label: 'Catalogue'
+    label: "Catalogue",
   },
   {
     id: "six",
     to: "/businessDashboard/online-profile",
     Icon: BusinessDashboardSix,
-    label: 'Online Booking'
+    label: "Online Booking",
   },
   {
     id: "seven",
     to: "/businessDashboard/marketing",
     Icon: BusinessDashboardSeven,
-    label: 'Marketing'
+    label: "Reviews",
   },
   {
     id: "eight",
-    to: "/businessDashboard/message",
+    to: "/chat",
     Icon: BusinessDashboardEight,
-    label: 'Messaging'
+    label: "Messaging",
   },
   {
     id: "nine",
     to: "/businessDashboard/members-list",
     Icon: BusinessDashboardNine,
-    label: 'Team'
-  },
-  { id: "ten", to: "/businessDashboard/reporting", Icon: BusinessDashboardTen, label: 'Reports' },
-  {
-    id: "eleven",
-    to: "/businessDashboard/settings",
-    Icon: BusinessDashboardEleven,
-    label: 'Settings'
+    label: "Teams",
   },
 ];
 
 const BusinessDashboardLayout = () => {
-  const [isOpen, setOpen] = useState(false)
+  const { user } = useAuth();
+  const [isOpen, setOpen] = useState(false);
   const [active, setActive] = useState("one");
   const location = useLocation();
   const isExcluded = excludedPaths.includes(location.pathname);
-  const handleActive = (id) => {
-    setActive(id)
-    setOpen(false)
-  }
+  const handleActive = id => {
+    setActive(id);
+    setOpen(false);
+  };
 
   return (
     <section className="min-h-screen max-h-screen flex flex-col">
@@ -114,14 +106,11 @@ const BusinessDashboardLayout = () => {
           </Link>
           <div className="flex gap-3 md:gap-5 items-center">
             <button>
-              <BusinessSearchSvg />
-            </button>
-            <button>
               <BusinessNotificationSvg />
             </button>
             <img
-              src={profile}
-              className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover"
+              src={`${import.meta.env.VITE_SITE_URL}/${user?.avatar}`}
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-primary"
               alt="Profile"
             />
             {/* Hamburger btn */}
@@ -143,7 +132,7 @@ const BusinessDashboardLayout = () => {
             id="sidebar"
             className="w-[100px] hidden xl:block overflow-y-auto p-6 bg-white border-r h-full"
           >
-            <ul className="space-y-9">
+            <ul className="space-y-20">
               {routingList.map(({ id, to, Icon, label }) => (
                 <li key={id}>
                   <Tooltip placement="right" title={label}>

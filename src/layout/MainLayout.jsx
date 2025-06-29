@@ -13,9 +13,13 @@ const MainLayout = () => {
   const isAllSalon = location.pathname === "/all-salon";
   const isAuthPages =
     location.pathname === "/login" ||
+    location.pathname === "/bs" ||
+    location.pathname === "/registration/business" ||
+    location.pathname === "/registration/customer" ||
     location.pathname === "/verify-account" ||
     location.pathname === "/verify-otp" ||
-    location.pathname === "/create-pass";
+    location.pathname === "/create-pass" ||
+    location.pathname === "/stepContainer";
 
   return (
     <>

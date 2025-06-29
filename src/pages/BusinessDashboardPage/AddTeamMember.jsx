@@ -1,7 +1,5 @@
-import AddressInfo from "@/components/BusinessDashboard/BusinessDashboardMemberList/AddressInfo";
 import ProfileInfo from "@/components/BusinessDashboard/BusinessDashboardMemberList/ProfileInfo";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 
 const AddTeamMember = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -9,16 +7,6 @@ const AddTeamMember = () => {
     <div className="4xl:px-40 4xl:py-10 px-6">
       <div className="flex flex-col sm:flex-row sm:justify-between justify-start sm:items-center gap-5 sm:gap-0 mt-5 md:mt-0">
         <h3 className="font-outfit text-3xl font-semibold">Add team member</h3>
-        <div className="flex flex-col md:flex-row gap-3 sm:items-center">
-          <Link to="/businessDashboard/members-list">
-            <button className="text-[#545454] border font-medium border-borderColorLight rounded-lg px-8 py-2 w-full">
-              Close
-            </button>
-          </Link>
-          <button className="text-[#fff] bg-primary font-medium rounded-lg px-8 py-2">
-            Save
-          </button>
-        </div>
       </div>
 
       {/* Lower part */}
@@ -37,55 +25,11 @@ const AddTeamMember = () => {
               >
                 Profile
               </button>
-              <button
-                onClick={() => setActiveTab("address")}
-                className={` px-3 py-2 w-full rounded-lg ${
-                  activeTab === "address"
-                    ? "text-primary shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                Addresses
-              </button>
-              <div className="border-t border-borderColorLight"></div>
-              <h3 className="text-lg font-semibold">Workspace</h3>
-              <button
-                onClick={() => setActiveTab("services")}
-                className={`px-3 py-2 w-full rounded-lg ${
-                  activeTab === "services"
-                    ? "text-primary shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                Services
-              </button>
-              <button
-                onClick={() => setActiveTab("settings")}
-                className={`px-3 py-2 w-full rounded-lg ${
-                  activeTab === "settings"
-                    ? "text-primary shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                Settings
-              </button>
-              <h3 className="text-lg font-semibold">Pay</h3>
-              <button
-                onClick={() => setActiveTab("commission")}
-                className={`px-3 py-2 w-full rounded-lg ${
-                  activeTab === "commission"
-                    ? "text-primary shadow border"
-                    : "text-[#2C2C2C] border-transparent"
-                } flex justify-between items-center`}
-              >
-                Commission
-              </button>
             </ul>
           </div>
         </div>
         <div className="flex-grow">
           {activeTab === "profile" && <ProfileInfo />}
-          {activeTab === "address" && <AddressInfo />}
         </div>
       </section>
     </div>

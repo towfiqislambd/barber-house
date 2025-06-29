@@ -1,6 +1,6 @@
 import BusinessAccordion from "./BusinessAccordion";
 
-const FAQ = () => {
+const FAQ = ({ data }) => {
   return (
     <section className="xl:py-[68px] py-[40px] px-[15px]">
       <div>
@@ -9,7 +9,7 @@ const FAQ = () => {
         </h1>
         {/* Accordion Section */}
         <div className="xl:max-w-[1062px] mx-auto mt-[20px] xl:mt-16">
-          <BusinessAccordion />
+          <BusinessAccordion data={data} />
         </div>
       </div>
     </section>

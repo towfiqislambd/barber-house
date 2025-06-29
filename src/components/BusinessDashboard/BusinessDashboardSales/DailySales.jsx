@@ -1,8 +1,3 @@
-import {
-  AddNowSvg,
-  DropdownSvg,
-  ExportSvg,
-} from "@/components/svgContainer/SvgContainer";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -92,18 +87,6 @@ const DailySales = () => {
             />
           </div>
         )}
-
-        <div className="flex gap-3 items-center">
-          <button className="px-2 text-sm md:text-base md:px-4 py-[5px] lg:py-[10px] flex gap-2 items-center outline-none rounded-lg border border-borderColor">
-            <ExportSvg />
-            <p>Export</p>
-            <DropdownSvg />
-          </button>
-          <button className="px-2 text-sm md:text-base md:px-4 py-[5px] lg:py-[10px] bg-primary flex gap-2 items-center outline-none rounded-lg text-white">
-            <AddNowSvg />
-            <p>Add new</p>
-          </button>
-        </div>
       </div>
 
       <div className="flex flex-col 4xl:flex-row gap-5">

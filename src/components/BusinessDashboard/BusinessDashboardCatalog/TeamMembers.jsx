@@ -1,33 +1,34 @@
 import { useState } from "react";
-import { ProfileImgSvg } from "@/components/svgContainer/SvgContainer";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useAddTeamMembers } from "@/hooks/cms.mutations";
 
-const teamData = [
-  { id: 1, name: "M. R. Shihab", image: <ProfileImgSvg /> },
-  { id: 2, name: "John Doe", image: <ProfileImgSvg /> },
-  { id: 3, name: "Jane Smith", image: <ProfileImgSvg /> },
-];
-
-const TeamMembers = () => {
+const TeamMembers = ({ allTeamMembers, serviceId }) => {
+  const { mutateAsync: addTeamMembers, isPending } = useAddTeamMembers();
   const [selectedMembers, setSelectedMembers] = useState([]);
 
-  // Check if all team members are selected
-  const allSelected = selectedMembers.length === teamData.length;
+  const allSelected = selectedMembers.length === allTeamMembers.length;
 
   const toggleAll = () => {
     if (allSelected) {
-      setSelectedMembers([]); // Uncheck all
+      setSelectedMembers([]);
     } else {
-      setSelectedMembers(teamData.map((member) => member.id));
+      setSelectedMembers(allTeamMembers.map(member => member.id));
     }
   };
 
-  const toggleMember = (id) => {
-    setSelectedMembers((prev) =>
-      prev.includes(id)
-        ? prev.filter((memberId) => memberId !== id)
-        : [...prev, id]
+  const toggleMember = id => {
+    setSelectedMembers(prev =>
+      prev.includes(id) ? prev.filter(mid => mid !== id) : [...prev, id]
     );
+  };
+
+  const handleSubmit = () => {
+    if (selectedMembers.length > 0) {
+      addTeamMembers({
+        id: serviceId,
+        payload: { team_ids: selectedMembers },
+      });
+    }
   };
 
   return (
@@ -39,6 +40,7 @@ const TeamMembers = () => {
         Choose which team members will perform this service
       </p>
 
+      {/* Select All */}
       <h3 className="flex gap-3 items-center">
         <Checkbox
           id="all_team_members"
@@ -53,33 +55,52 @@ const TeamMembers = () => {
           All team members
         </label>
         <p className="font-bold text-[#545454] w-6 h-6 rounded-full border border-[#008A90] grid place-items-center text-sm">
-          {teamData.length}
+          {allTeamMembers.length}
         </p>
       </h3>
 
       {/* Individual Members */}
-      <div className="space-y- mt-5">
-        {teamData.map((data) => (
+      <div className="space-y-5 mt-5">
+        {allTeamMembers.map(member => (
           <div
-            key={data.id}
+            key={member.id}
             className="flex gap-5 items-center py-7 border-t border-[#00c1cb5e]"
           >
             <Checkbox
-              id={`team_member_${data.id}`}
+              id={`team_member_${member.id}`}
               className="scale-150"
-              checked={selectedMembers.includes(data.id)}
-              onCheckedChange={() => toggleMember(data.id)}
+              checked={selectedMembers.includes(member.id)}
+              onCheckedChange={() => toggleMember(member.id)}
             />
-            <div>{data.image}</div>
+            <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100">
+              {member?.photo ? (
+                <img
+                  src={`${import.meta.env.VITE_SITE_URL}/${member?.photo}`}
+                  alt="img"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-xs text-gray-400">
+                  No Image
+                </div>
+              )}
+            </div>
             <label
-              htmlFor={`team_member_${data.id}`}
+              htmlFor={`team_member_${member.id}`}
               className="font-medium text-[#1E1E1E]"
             >
-              {data.name}
+              {member.first_name} {member.last_name}
             </label>
           </div>
         ))}
       </div>
+      <button
+        onClick={handleSubmit}
+        type="submit"
+        className="mt-5 bg-black text-white px-6 py-2 rounded-lg"
+      >
+        {isPending ? "Submitting...." : "Submit"}
+      </button>
     </div>
   );
 };

@@ -19,7 +19,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useState } from "react";
-import DeleteBlockedTimeModal from "../BusinessDashboard/Modals/DeleteBlockedTimeModal";
 
 const LunchInputField = () => {
   const [openDate, setOpenDate] = useState(false);
@@ -245,7 +244,6 @@ const LunchInputField = () => {
       </div>
       {/* Delete Modal */}
       <div className="flex items-center gap-[15px] border px-[35px] py-[42px] mt-3 mb-14">
-        <DeleteBlockedTimeModal />
         <button className="px-[18px] py-4 bg-[#008A90] text-white rounded-[10px] font-bold w-full font-manrope text-base leading-6">
           Save
         </button>

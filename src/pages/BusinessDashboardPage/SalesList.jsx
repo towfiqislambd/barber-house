@@ -2,7 +2,6 @@ import BreadCrumb from "@/components/BusinessHelpCenter/BreadCrumb/BreadCrumb";
 import { AppointmentCalendarSvg, AppointmentCsvSvg, AppointmentExcelSvg, AppointmentPdfSvg, DropdownSvg, ExportSvg, LeftSideArrowSvg } from "@/components/svgContainer/SvgContainer";
 import { Link } from "react-router-dom";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import SalesSummaryModal from "@/components/BusinessDashboard/Modals/SalesSummaryModal";
 import { useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
@@ -129,8 +128,6 @@ const SalesList = () => {
                             <Calendar mode="single" selected={date} onSelect={setDate} />
                         </PopoverContent>
                     </Popover>
-                    {/* Filter */}
-                    <SalesSummaryModal />
                 </div>
                 <div className="flex gap-10 items-center">
                     <Popover>

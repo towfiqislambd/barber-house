@@ -1,30 +1,5 @@
-import { useState } from "react";
-import { Drawer } from "antd";
-import {
-  AddNowSvg,
-  AppointmentCalendarSvg,
-  AppointmentCsvSvg,
-  AppointmentExcelSvg,
-  AppointmentPdfSvg,
-  AppointmentScheduleSvg,
-  AppointmentsSearchSvg,
-  DropdownSvg,
-  ExportSvg,
-} from "@/components/svgContainer/SvgContainer";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { AppointmentsSearchSvg } from "@/components/svgContainer/SvgContainer";
 import SalesFilterModal from "../Modals/SalesFilterModal";
-import SalesDrawer from "./SalesDrawer";
 
 const tableData = [
   {
@@ -93,16 +68,6 @@ const tableData = [
 ];
 
 const Sales = () => {
-  const [location, setLocation] = useState("");
-  const [openLocation, setOpenLocation] = useState(false);
-  const [open, setOpen] = useState(false);
-  const showLargeDrawer = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
-
   return (
     <>
       <div>
@@ -126,111 +91,9 @@ const Sales = () => {
                 <AppointmentsSearchSvg />
               </button>
             </div>
-            {/* Date */}
-            <div>
-              <Select>
-                <SelectTrigger className="flex gap-2 focus:border-none border-gray-100 bg-white items-center py-3 lg:py-6 focus:outline-none px-3 lg:px-4 rounded-full border shadow">
-                  <AppointmentCalendarSvg />
-                  <SelectValue
-                    className="font-medium text-[#2C2C2C]"
-                    placeholder="Today"
-                  />
-                </SelectTrigger>
-                <SelectContent className="w-[300px] p-3">
-                  <SelectItem value="Today">Today</SelectItem>
-                  <SelectItem value="Yesterday">Yesterday</SelectItem>
-                  <SelectItem value="Last 7 days">Last 7 days</SelectItem>
-                  <SelectItem value="Last 30 days">Last 30 days</SelectItem>
-                  <SelectItem value="Last 90 days">Last 90 days</SelectItem>
-                  <SelectItem value="Last month">Last month</SelectItem>
-                  <SelectItem value="Last year">Last year</SelectItem>
-                  <SelectItem value="Week to date">Week to date</SelectItem>
-                  <SelectItem value="Month to date">Month to date</SelectItem>
-                  <SelectItem value="Quarter to date">
-                    Quarter to date
-                  </SelectItem>
-                  <SelectItem value="Tomorrow">Tomorrow</SelectItem>
-                  <SelectItem value="Next 7 days">Next 7 days</SelectItem>
-                  <SelectItem value="Next month">Next month</SelectItem>
-                  <SelectItem value="Next 30 days">Next 30 days</SelectItem>
-                  <SelectItem value="All time">All time</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
 
             {/* Filter */}
             <SalesFilterModal />
-
-            {/* Short by */}
-            <Popover open={openLocation} onOpenChange={setOpenLocation}>
-              <PopoverTrigger className="border-r flex-1 flex gap-2 bg-white border-gray-100 items-center py-2 px-3 lg:py-3 lg:px-4 rounded-full border shadow">
-                <AppointmentScheduleSvg />
-                <p className="font-medium text-[#2C2C2C]">
-                  {location ? location : "Short By"}
-                </p>
-              </PopoverTrigger>
-              <PopoverContent className="w-80 p-5">
-                <ul className="font-medium text-[#2C2C2C] text-base 2xl:text-lg space-y-4 2xl:space-y-6">
-                  {[
-                    "Sale # (Z-A)",
-                    "Sale # (A-Z)",
-                    "Client (Z-A)",
-                    "Client (A-Z)",
-                    "Sale date (newest first)",
-                    "Sale date (oldest first)",
-                    "Tips (highest first)",
-                    "LTips (lowest first)",
-                    "Gross total(highest first)",
-                  ].map((city) => (
-                    <li
-                      key={city}
-                      onClick={() => {
-                        setLocation(city);
-                        setOpenLocation(false);
-                      }}
-                      className="cursor-pointer duration-300 transition-all hover:text-primary"
-                    >
-                      {city}
-                    </li>
-                  ))}
-                </ul>
-              </PopoverContent>
-            </Popover>
-          </div>
-          <div className="flex gap-3 items-center">
-            {/* Export */}
-            <Popover>
-              <PopoverTrigger>
-                <button className="px-3 lg:px-4 py-2 lg:py-[10px] flex gap-2 items-center outline-none rounded-lg border border-primary">
-                  <ExportSvg />
-                  <p>Options</p>
-                  <DropdownSvg />
-                </button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[150px] p-4">
-                <div className="space-y-4">
-                  <button className="flex gap-2 items-center">
-                    <AppointmentPdfSvg />
-                    <p className="text-[#545454] font-medium">PDF</p>
-                  </button>
-                  <button className="flex gap-2 items-center">
-                    <AppointmentCsvSvg />
-                    <p className="text-[#545454] font-medium">CSV</p>
-                  </button>
-                  <button className="flex gap-2 items-center">
-                    <AppointmentExcelSvg />
-                    <p className="text-[#545454] font-medium">Excel</p>
-                  </button>
-                </div>
-              </PopoverContent>
-            </Popover>
-            <button
-              onClick={showLargeDrawer}
-              className="px-3 lg:px-4 py-2 bg-primary flex gap-2 items-center outline-none rounded-lg text-white"
-            >
-              <AddNowSvg />
-              <p>Add new</p>
-            </button>
           </div>
         </div>
         <div className="border-t border-primary mt-10 pb-5"></div>
@@ -246,7 +109,7 @@ const Sales = () => {
               <th className="lg:px-4 py-2 lg:py-6">Gross total</th>
             </tr>
             <tbody>
-              {tableData.map((data) => (
+              {tableData.map(data => (
                 <tr
                   key={data.id}
                   className="hover:bg-gray-200 border-t 
@@ -283,20 +146,6 @@ const Sales = () => {
             </tbody>
           </table>
         </div>
-      </div>
-      <div>
-        <Drawer
-          title={null}
-          closable={false}
-          styles={{ body: { paddingTop: 40 } }}
-          width={1300}
-          onClose={onClose}
-          open={open}
-        >
-          <div>
-            <SalesDrawer />
-          </div>
-        </Drawer>
       </div>
     </>
   );

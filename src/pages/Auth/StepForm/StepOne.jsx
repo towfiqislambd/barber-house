@@ -1,10 +1,6 @@
-import { LeftSideArrowSvg } from "@/components/svgContainer/SvgContainer";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 const StepOne = ({ step, setStep, setFormData }) => {
-  const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -18,17 +14,12 @@ const StepOne = ({ step, setStep, setFormData }) => {
     }
   };
 
-  const handlePrevStep = e => {
-    e.preventDefault();
-    navigate("/business/registration");
-  };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* Next, Prev btns */}
       <div className="flex justify-between items-center mb-5">
-        <button onClick={handlePrevStep} className="cursor-pointer">
-          <LeftSideArrowSvg />
+        <button className="cursor-pointer">
+          
         </button>
         <button className="py-[8px] xl:py-4 px-6 font-manrope text-lg bg-primary text-white font-semibold rounded-lg mt-5">
           Continue
@@ -48,34 +39,34 @@ const StepOne = ({ step, setStep, setFormData }) => {
         {/* Business name */}
         <div className="self-end text-left mb-5">
           <label
-            htmlFor="businessName"
+            htmlFor="business_name"
             className="text-[16px] xl:text-xl font-medium"
           >
             Business name
           </label>
           <input
-            id="businessName"
+            id="business_name"
             type="text"
-            {...register("businessName", { required: true })}
+            {...register("business_name", { required: true })}
             placeholder="Input your first name"
             className="block mt-3 w-full px-4 mb-2 py-3 border rounded-lg border-[#797979]"
           />
-          {errors.businessName && (
+          {errors.business_name && (
             <span className="text-red-400">This field is required</span>
           )}
         </div>
         {/* Business website */}
         <div className="self-end text-left">
           <label
-            htmlFor="Website"
+            htmlFor="website_url"
             className="text-[16px] xl:text-xl font-medium"
           >
             Website (Optional)
           </label>
           <input
-            id="Website"
-            type="text"
-            {...register("Website")}
+            id="website_url"
+            type="url"
+            {...register("website_url")}
             placeholder="Enter your website name"
             className="block mt-3 w-full px-4 mb-2 py-3 border rounded-lg border-[#797979]"
           />
