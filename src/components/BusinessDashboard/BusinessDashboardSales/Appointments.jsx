@@ -67,7 +67,7 @@ const Appointments = ({ data }) => {
               ))
             ) : (
               <p className="font-medium pt-5 text-red-500 text-xl">
-                No activity found!
+                No appointments found!
               </p>
             )}
           </tbody>

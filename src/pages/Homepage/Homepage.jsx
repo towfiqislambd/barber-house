@@ -1,4 +1,3 @@
-import { recentlyViewedData } from "@/data/data";
 import HomepageSliderContainer from "./sections/HomepageSliderContainer";
 import HomepageReview from "./sections/HomepageReview";
 import HomepageStat from "./sections/HomepageStat";

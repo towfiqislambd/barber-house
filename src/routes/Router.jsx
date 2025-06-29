@@ -17,7 +17,6 @@ import BusinessDashboardCatalogue from "@/pages/BusinessDashboardPage/BusinessDa
 import BusinessDashboardHome from "@/pages/BusinessDashboardPage/BusinessDashboardHome";
 import BusinessDashboardMarketing from "@/pages/BusinessDashboardPage/BusinessDashboardMarketing";
 import BusinessDashboardMemberList from "@/pages/BusinessDashboardPage/BusinessDashboardMemberList";
-import BusinessDashboardMessage from "@/pages/BusinessDashboardPage/BusinessDashboardMessage";
 import BusinessDashboardOnlineProfile from "@/pages/BusinessDashboardPage/BusinessDashboardOnlineProfile";
 import BusinessDashboardSales from "@/pages/BusinessDashboardPage/BusinessDashboardSales";
 import EditService from "@/pages/BusinessDashboardPage/EditService";
@@ -27,49 +26,34 @@ import BusinessHomePage from "@/pages/BusinessHomePage/BusinessHomePage";
 import BusinessPricingPage from "@/pages/BusinessPricingPage/BusinessPricingPage";
 import ContactUs from "@/pages/ContactUs/ContactUs";
 import BookingConfirmationPage from "@/pages/Home/BookingConfirmationPage/BookingConfirmationPage";
-import BookingDone from "@/pages/Home/BookingDone/BookingDone";
 import BookNow from "@/pages/Home/BookNow/BookNow";
-import ChooseProfessionalTimePage from "@/pages/Home/ChooseProfessionalTimePage/ChooseProfessionalTimePage";
 import ChooseTimePage from "@/pages/Home/ChooseTimePage/ChooseTimePage";
-import ConfirmationWithPay from "@/pages/Home/ConfirmationWithPay/ConfirmationWithPay";
 import SalonCardDetailsPage from "@/pages/Home/SalonCardDetailsPage/SalonCardDetailsPage";
 import SearchResultPage from "@/pages/Home/SearchResultPage/SearchResultPage";
 import SelectServicesPage from "@/pages/Home/SelectServicesPage/SelectServicesPage";
 import Homepage from "@/pages/Homepage/Homepage";
-import Message from "@/pages/Message/Message";
 import Checkout from "@/pages/Product/Checkout";
 import ConfirmOrder from "@/pages/Product/ConfirmOrder";
-import ProductDetails from "@/pages/Product/ProductDetails";
-import ProductHome from "@/pages/Product/ProductHome";
-import Review from "@/pages/Review/Review";
 import UserAppointments from "@/pages/UserDashboardPage/UserAppointments";
 import UserFavourites from "@/pages/UserDashboardPage/UserFavourites";
 import UserProductOrder from "@/pages/UserDashboardPage/UserProductOrder";
 import UserProfile from "@/pages/UserDashboardPage/UserProfile";
 import { createBrowserRouter } from "react-router-dom";
-import OptimizeOnlineBook from "@/components/SchedulingComponents/OptimizeOnlineBook";
-import Notification from "@/components/SchedulingComponents/Notification";
-import AddPaymentMethod from "@/components/SchedulingComponents/AddPaymentMethod";
-import PaymentMethod from "@/components/SchedulingComponents/PaymentMethod";
-import ReceiptNotification from "@/components/SchedulingComponents/ReceiptNotification";
-import SalesList from "@/pages/BusinessDashboardPage/SalesList";
-import AppointmentList from "@/pages/BusinessDashboardPage/AppointmentList";
 import AddTeamMember from "@/pages/BusinessDashboardPage/AddTeamMember";
 import ProfessionalTimePage from "@/pages/Home/ProfessionalTimePage/ProfessionalTimePage";
 import UserLogin from "@/pages/Auth/UserLogin/UserLogin";
 import VerifyAccount from "@/pages/Auth/VerifyAccount/VerifyAccount";
 import VerifyOtp from "@/pages/Auth/VerifyOtp/VerifyOtp";
 import CreatePass from "@/pages/Auth/CreatePass/CreatePass";
-import Allsalons from "@/pages/Allsalons/Allsalons";
-import ProfessionalAndTimePage from "@/pages/ProfessionalAndTimePage/ProfessionalAndTimePage";
 import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
 import BS from "@/pages/Auth/BS/BS";
 import PrivateRoute from "./PrivateRoute";
 import ChatLayout from "@/layout/ChatLayout";
 import ChatWindow from "@/pages/chat/ChatWindow";
-import BusinessPrivateRoute from "./BusinessPrivateRoute";
+import ArticleDetails from "@/pages/BusinessHelpCenter/ArticleDetails";
 
 export const router = createBrowserRouter([
+  // Main Layout
   {
     path: "/",
     element: <MainLayout />,
@@ -79,20 +63,12 @@ export const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "/reviews",
-        element: <Review />,
-      },
-      {
         path: "/searchresultpage",
         element: <SearchResultPage />,
       },
       {
         path: "/booknow",
         element: <BookNow />,
-      },
-      {
-        path: "/chooseprofessionalpage",
-        element: <ChooseProfessionalTimePage />,
       },
       {
         path: "/shop-info/:id",
@@ -111,30 +87,12 @@ export const router = createBrowserRouter([
         element: <BookingConfirmationPage />,
       },
       {
-        path: "/confirmation-with-pay",
-        element: <ConfirmationWithPay />,
-      },
-      {
         path: "/appointment-completed",
         element: <AppointmentCompleted />,
       },
       {
-        path: "/booking-done",
-        element: <BookingDone />,
-      },
-      {
         path: "/professional-time-page",
         element: <ProfessionalTimePage />,
-      },
-
-      // Product Pages Flow
-      {
-        path: "/productHome",
-        element: <ProductHome />,
-      },
-      {
-        path: "/productDetails",
-        element: <ProductDetails />,
       },
       {
         path: "/checkout",
@@ -144,7 +102,8 @@ export const router = createBrowserRouter([
         path: "/confirmOrder",
         element: <ConfirmOrder />,
       },
-      // Auth Flow Start
+
+      // Auth Flow
       {
         path: "/bs",
         element: <BS />,
@@ -173,19 +132,10 @@ export const router = createBrowserRouter([
         path: "stepContainer",
         element: <StepContainer />,
       },
-      // Auth Flow End
-
-      {
-        path: "/all-salon",
-        element: <Allsalons />,
-      },
-      {
-        path: "/professional-and-time-page",
-        element: <ProfessionalAndTimePage />,
-      },
     ],
   },
-  // This is the Business Route Section
+
+  // Business Website Layout
   {
     path: "/business",
     element: <BusinessLayout />,
@@ -205,6 +155,10 @@ export const router = createBrowserRouter([
       {
         path: "businessdetails/:id",
         element: <BusinessHelpCenterDetails />,
+      },
+      {
+        path: "article-details/:id",
+        element: <ArticleDetails />,
       },
       {
         path: "blog",
@@ -236,7 +190,8 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  // user profile layout
+
+  // User Dashboard Layout
   {
     path: "/userdashboard/",
     element: (
@@ -264,6 +219,7 @@ export const router = createBrowserRouter([
     ],
   },
 
+  // Business Dashboard Layout
   {
     path: "/businessDashboard",
     element: (
@@ -293,10 +249,6 @@ export const router = createBrowserRouter([
         element: <BusinessDashboardMarketing />,
       },
       {
-        path: "message",
-        element: <BusinessDashboardMessage />,
-      },
-      {
         path: "members-list",
         element: <BusinessDashboardMemberList />,
       },
@@ -321,40 +273,13 @@ export const router = createBrowserRouter([
         element: <AddNewProduct />,
       },
       {
-        path: "optimizeonlinebooking",
-        element: <OptimizeOnlineBook />,
-      },
-      {
-        path: "notification",
-        element: <Notification />,
-      },
-      {
-        path: "paymentmethod",
-        element: <PaymentMethod />,
-      },
-      {
-        path: "addpaymentmethod",
-        element: <AddPaymentMethod />,
-      },
-      {
-        path: "receiptNotification",
-        element: <ReceiptNotification />,
-      },
-      {
-        path: "sales-list",
-        element: <SalesList />,
-      },
-      {
-        path: "appointment-list",
-        element: <AppointmentList />,
-      },
-      {
         path: "add-team-member",
         element: <AddTeamMember />,
       },
     ],
   },
 
+  // Chat Layout
   {
     path: "/",
     element: (

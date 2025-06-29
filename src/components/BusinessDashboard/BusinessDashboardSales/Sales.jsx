@@ -1,6 +1,4 @@
 import { AppointmentsSearchSvg } from "@/components/svgContainer/SvgContainer";
-import SalesFilterModal from "../Modals/SalesFilterModal";
-
 const tableData = [
   {
     id: 1,
@@ -91,9 +89,6 @@ const Sales = () => {
                 <AppointmentsSearchSvg />
               </button>
             </div>
-
-            {/* Filter */}
-            <SalesFilterModal />
           </div>
         </div>
         <div className="border-t border-primary mt-10 pb-5"></div>
