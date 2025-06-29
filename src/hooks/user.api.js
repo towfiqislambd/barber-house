@@ -114,3 +114,13 @@ export const Checkout = async (payload) => {
   const { data } = await axiosSecure.post("/api/product/purchase", payload);
   return data;
 };
+
+export const UserTrendingStores = async () => {
+  const { data } = await axiosPublic("/api/online-store/trending");
+  return data?.data;
+};
+
+export const UserRecentlyStores = async () => {
+  const { data } = await axiosSecure("/api/online-store/recently-viewed");
+  return data?.data;
+};

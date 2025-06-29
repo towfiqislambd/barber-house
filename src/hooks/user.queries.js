@@ -6,7 +6,9 @@ import {
   StoreDetails,
   stores,
   UserDataGet,
+  UserRecentlyStores,
   UserSearchStores,
+  UserTrendingStores,
 } from "./user.api";
 import useAuth from "./useAuth";
 
@@ -53,5 +55,19 @@ export const useUserAppointmentLists = () => {
   return useQuery({
     queryKey: ["appointment-lists"],
     queryFn: () => AppointmentList(),
+  });
+};
+
+export const useUserTrendingStores = () => {
+  return useQuery({
+    queryKey: ["trending-store"],
+    queryFn: () => UserTrendingStores(),
+  });
+};
+
+export const useUserRecentlyViewStores = () => {
+  return useQuery({
+    queryKey: ["recently-view"],
+    queryFn: () => UserRecentlyStores(),
   });
 };
