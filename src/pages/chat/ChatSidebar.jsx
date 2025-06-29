@@ -1,4 +1,7 @@
-import { useChatConversion } from "@/hooks/chat.queries";
+import {
+  useChatConversion,
+  useSingleChatConversion,
+} from "@/hooks/chat.queries";
 import echo from "@/hooks/echo";
 import useAuth from "@/hooks/useAuth";
 import { useQueryClient } from "@tanstack/react-query";
@@ -14,8 +17,9 @@ export default function ChatSidebar() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [unread, setUnread] = useState(null);
+  const { singleConversion } = useSingleChatConversion(id);
 
-  console.log(unread);
+  console.log(singleConversion);
 
   useEffect(() => {
     if (!echo || !user?.id) return;
@@ -44,6 +48,29 @@ export default function ChatSidebar() {
         placeholder="Search in dashboard..."
       />
       <div className="overflow-y-auto flex-1">
+        {singleConversion?.data?.messages?.length <= 0 && (
+          <div
+            onClick={() =>
+              navigate(`/chat/${singleConversion?.data?.user?.id}`)
+            }
+            className={`flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 ${
+              +id === +singleConversion?.data?.user?.id ? "bg-gray-100" : ""
+            }`}
+          >
+            <img
+              src={`${import.meta.env.VITE_SITE_URL}/${
+                singleConversion?.data?.user?.avatar
+              }`}
+              className="w-10 h-10 rounded-full mr-3"
+              alt="avatar"
+            />
+            <div className="flex-1">
+              <div className="font-medium text-sm">
+                {singleConversion?.data?.user?.first_name}
+              </div>
+            </div>
+          </div>
+        )}
         {chats?.data?.map((chat) => {
           return chat?.participants?.map((conversation) => (
             <div
@@ -71,7 +98,7 @@ export default function ChatSidebar() {
               )}
               <div className="flex-1">
                 <div className="font-medium text-sm">
-                  {conversation?.user?.first_name}{" "}
+                  {conversation?.user?.first_name}
                   {conversation?.user?.last_name}
                 </div>
                 <div className="text-xs text-gray-500 truncate">
