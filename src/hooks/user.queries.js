@@ -3,6 +3,7 @@ import {
   AppointmentList,
   BookmarkGet,
   BookMarkRemove,
+  ShowProducts,
   StoreDetails,
   stores,
   UserDataGet,
@@ -27,7 +28,7 @@ export const useUserSearchStore = (queryParams = {}) => {
   });
 };
 
-export const useStoreDetails = (id) => {
+export const useStoreDetails = id => {
   return useQuery({
     queryKey: ["store-details", id],
     queryFn: () => StoreDetails(id),
@@ -69,5 +70,11 @@ export const useUserRecentlyViewStores = () => {
   return useQuery({
     queryKey: ["recently-view"],
     queryFn: () => UserRecentlyStores(),
+     });
+}
+export const useShowProducts = () => {
+  return useQuery({
+    queryKey: ["show-products"],
+    queryFn: () => ShowProducts(),
   });
 };

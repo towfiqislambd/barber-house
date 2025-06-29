@@ -77,7 +77,6 @@ export const BookMarkRemove = async (payload) => {
 
 export const stores = async () => {
   const { data } = await axiosPublic.get("/api/online-store/show-all");
-
   return data?.data;
 };
 
@@ -122,5 +121,10 @@ export const UserTrendingStores = async () => {
 
 export const UserRecentlyStores = async () => {
   const { data } = await axiosSecure("/api/online-store/recently-viewed");
+  return data?.data;
+};
+
+export const ShowProducts = async () => {
+  const { data } = await axiosSecure.get("/api/customer-dashboard/my-products");
   return data?.data;
 };
