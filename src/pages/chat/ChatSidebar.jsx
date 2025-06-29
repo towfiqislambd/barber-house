@@ -30,8 +30,8 @@ export default function ChatSidebar() {
         console.log("side", e);
         if (+e.receiverId === +user?.id) {
           queryClient.invalidateQueries(["chat-lists"]);
+
           setUnread(e.unreadMessageCount);
-          console.log("side inside", e);
         }
       });
   }, [echo, user?.id]);
@@ -117,3 +117,14 @@ export default function ChatSidebar() {
     </div>
   );
 }
+
+// echo
+//   .private(`latest-message-channel.${user?.id}`)
+//   .listen("LatestMassageEvent", (e) => {
+//     console.log("side", e);
+//     if (+e.receiverId === +user?.id) {
+//       queryClient.invalidateQueries(["chat-lists"]);
+//       refetch();
+//       console.log("side inside", e);
+//     }
+//   });

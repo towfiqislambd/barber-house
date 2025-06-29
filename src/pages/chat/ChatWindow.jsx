@@ -28,25 +28,15 @@ export default function ChatWindow() {
     if (!echo || !user?.id) return;
 
     echo.private(`chat-channel.${user?.id}`).listen("MessageSentEvent", (e) => {
-      console.log("chat:", e);
       if (e.data.conversation_id === +id) {
         queryClient.invalidateQueries(["chat-lists"]);
         refetch();
       }
     });
-    // echo
-    //   .private(`latest-message-channel.${user?.id}`)
-    //   .listen("LatestMassageEvent", (e) => {
-    //     console.log("side", e);
-    //     if (+e.receiverId === +user?.id) {
-    //       queryClient.invalidateQueries(["chat-lists"]);
-    //       refetch();
-    //       console.log("side inside", e);
-    //     }
-    //   });
   }, [echo, user?.id]);
 
-  const handleSend = () => {
+  const handleSend = (e) => {
+    e.preventDefault();
     if (!message.trim()) return;
     sendMessage({ id, formData: { message } });
     setMessage("");
@@ -58,7 +48,7 @@ export default function ChatWindow() {
       <div className="border-b px-6 py-3 bg-white flex items-center justify-between">
         <div className="font-semibold text-sm">
           {singleConversion?.data?.user?.first_name}
-          <span className="text-xs text-red-500 ml-2">• Offline</span>
+          {/* <span className="text-xs text-red-500 ml-2">• Offline</span> */}
         </div>
       </div>
 
@@ -123,7 +113,10 @@ export default function ChatWindow() {
       </div>
 
       {/* Message Input */}
-      <div className="px-6 py-4 bg-white border-t flex items-center">
+      <form
+        onSubmit={handleSend}
+        className="px-6 py-4 bg-white border-t flex items-center"
+      >
         <input
           type="text"
           placeholder="Type your message"
@@ -132,12 +125,12 @@ export default function ChatWindow() {
           onChange={(e) => setMessage(e.target.value)}
         />
         <button
-          onClick={handleSend}
+          type="submit"
           className="ml-3 bg-blue-600 text-white px-5 py-2 rounded-full"
         >
           Send
         </button>
-      </div>
+      </form>
     </div>
   );
 }

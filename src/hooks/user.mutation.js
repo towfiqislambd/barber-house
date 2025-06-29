@@ -178,9 +178,11 @@ export const useCheckout = (setLoading) => {
     onSuccess: (data) => {
       toast.success(data?.message);
       queryClient.invalidateQueries(["product-order"]);
+      queryClient.invalidateQueries(["daily-sales"]);
+      queryClient.invalidateQueries(["all-sales"]);
     },
     onError: (err) => {
-      setLoading?.(true);
+      setLoading?.(false);
       toast.error(err?.response?.data?.message);
     },
   });
