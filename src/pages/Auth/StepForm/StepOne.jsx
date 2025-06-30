@@ -18,9 +18,7 @@ const StepOne = ({ step, setStep, setFormData }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* Next, Prev btns */}
       <div className="flex justify-between items-center mb-5">
-        <button className="cursor-pointer">
-          
-        </button>
+        <button className="cursor-pointer"></button>
         <button className="py-[8px] xl:py-4 px-6 font-manrope text-lg bg-primary text-white font-semibold rounded-lg mt-5">
           Continue
         </button>
@@ -66,10 +64,13 @@ const StepOne = ({ step, setStep, setFormData }) => {
           <input
             id="website_url"
             type="url"
-            {...register("website_url")}
+            {...register("website_url", { required: true })}
             placeholder="Enter your website name"
             className="block mt-3 w-full px-4 mb-2 py-3 border rounded-lg border-[#797979]"
           />
+          {errors.website_url && (
+            <span className="text-red-400">This field is required</span>
+          )}
         </div>
       </div>
     </form>

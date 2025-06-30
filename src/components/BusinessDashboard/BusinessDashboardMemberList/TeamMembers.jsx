@@ -24,7 +24,6 @@ const TeamMembers = () => {
       console.error("Failed to delete member:", error);
     }
   };
-  console.log(allTeamMembers);
 
   return (
     <div>

@@ -1,40 +1,5 @@
-import galibsPic1 from "../../../../assets/images/team-of-galib/galibsPic.png";
-import galibsPic2 from "../../../../assets/images/team-of-galib/galibsPic1.png";
-import galibsPic3 from "../../../../assets/images/team-of-galib/galibsPic2.png";
-import galibsPic4 from "../../../../assets/images/team-of-galib/galibsPic3.png";
-import galibsPic5 from "../../../../assets/images/team-of-galib/galibsPic4.png";
 import users from "../../../../assets/images/icon/user_icon.jpg";
 const TeamofGhalib = ({ data }) => {
-  console.log(data?.data?.store_teams);
-
-  const people = [
-    {
-      name: "Mohammed Amin",
-      job: "Barber",
-      pic: galibsPic1,
-    },
-    {
-      name: "John Doe",
-      job: "Web Developer",
-      pic: galibsPic2,
-    },
-    {
-      name: "Jane Smith",
-      job: "Designer",
-      pic: galibsPic3,
-    },
-    {
-      name: "Jane Smith",
-      job: "Designer",
-      pic: galibsPic4,
-    },
-    {
-      name: "Jane Smith",
-      job: "Designer",
-      pic: galibsPic5,
-    },
-  ];
-
   return (
     <section className="container pb-10 2xl:py-20 lg:px-5 xl:px-7 2xl:px-10 3xl:px-12 4xl:px-0">
       <h1 className="text-[#2C2C2C] font-outfit text-2xl xl:text-3xl 2xl:text-[32px] font-medium">

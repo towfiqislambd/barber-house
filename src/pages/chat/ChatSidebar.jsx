@@ -6,8 +6,8 @@ import { useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
 import { FiMenu } from "react-icons/fi";
 import defaultUser from "../../assets/images/chat/default-user-avatar.jpg";
-import { IoHome } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { IoArrowBackOutline } from "react-icons/io5";
 
 export default function ChatSidebar({
   onSelectChat,
@@ -19,12 +19,17 @@ export default function ChatSidebar({
   const queryClient = useQueryClient();
   const [unread, setUnread] = useState(null);
   const [showSidebar, setShowSidebar] = useState(false);
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   useEffect(() => {
     if (!echo || !user?.id) return;
     echo
       .private(`latest-message-channel.${user?.id}`)
-      .listen("LatestMassageEvent", (e) => {
+      .listen("LatestMassageEvent", e => {
         if (+e.receiverId === +user?.id) {
           queryClient.invalidateQueries(["chat-lists"]);
           setUnread(e.unreadMessageCount);
@@ -56,9 +61,15 @@ export default function ChatSidebar({
                 {unread || 0}
               </span>
             </div>
-            <Link to={"/"} className="text-2xl cursor-pointer">
-              <IoHome />
-            </Link>
+
+            {/* Back btn */}
+            <button
+              onClick={handleBack}
+              className="flex group gap-[2px] items-center text-sm cursor-pointer font-semibold border rounded-full px-3 py-1 text-primary bg-gray-100"
+            >
+              <IoArrowBackOutline className="group-hover:-translate-x-[3px] duration-300 transition-transform" />
+              <span>Go back</span>
+            </button>
           </div>
 
           <input
@@ -67,15 +78,12 @@ export default function ChatSidebar({
           />
 
           <div className="overflow-y-auto flex-1">
-            {chats?.data?.map((chat) => {
+            {chats?.data?.map(chat => {
               const participant = chat?.participants?.find(
-                (p) => p?.user?.id !== user?.id
+                p => p?.user?.id !== user?.id
               );
               const userInfo = participant?.user;
-
               if (!userInfo) return null;
-
-              console.log(chat.participants[0].user_id);
 
               return (
                 <div

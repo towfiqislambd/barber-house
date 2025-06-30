@@ -4,7 +4,6 @@ import BusinessDashboardLayout from "@/layout/BusinessDashboardLayout";
 import BusinessLayout from "@/layout/BusinessLayout";
 import MainLayout from "@/layout/MainLayout";
 import UserDashboardLayout from "@/layout/UserDashboardLayout";
-import Login from "@/pages/Auth/Login/Login";
 import Registration from "@/pages/Auth/Registration/Registration";
 import SelectAccount from "@/pages/Auth/SelectAccount/SelectAccount";
 import SignOrLogin from "@/pages/Auth/BS/BS";
@@ -171,10 +170,6 @@ export const router = createBrowserRouter([
       {
         path: "blogdetails/:slug",
         element: <BlogDetails />,
-      },
-      {
-        path: "login",
-        element: <Login />,
       },
       {
         path: "registration/:type",

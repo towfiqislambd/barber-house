@@ -11,11 +11,11 @@ import {
   useDeleteAddress,
   useUpdateAddress,
   useUpdateProfileData,
-  // useDeleteAddress,
 } from "@/hooks/user.mutation";
 import { Loader } from "@/components/Loader/Loader";
 
 export default function UserProfile() {
+  const [addressError, setAddressError] = useState("");
   const [openDropdown, setOpenDropdown] = useState(null);
   const [open, setOpen] = useState(false);
   const [editProfile, setEditProfile] = useState(false);
@@ -25,12 +25,15 @@ export default function UserProfile() {
   const [editAddressValue, setEditAddressValue] = useState("");
 
   const { data: userData, isLoading, refetch } = useUserDataGet();
-  const { mutateAsync: addAddress } = useAddAddress();
-  const { mutateAsync: updateAddress } = useUpdateAddress();
-  const { mutateAsync: deleteAddress } = useDeleteAddress();
-  const { mutateAsync: updateUserProfile } = useUpdateProfileData();
-  const toggleDropdown = (index) => {
-    setOpenDropdown((prev) => (prev === index ? null : index));
+  const { mutateAsync: addAddress, isPending } = useAddAddress();
+  const { mutateAsync: updateAddress, isPending: updatePending } =
+    useUpdateAddress();
+  const { mutateAsync: deleteAddress, isPending: deletePending } =
+    useDeleteAddress();
+  const { mutateAsync: updateUserProfile, isPending: editPending } =
+    useUpdateProfileData();
+  const toggleDropdown = index => {
+    setOpenDropdown(prev => (prev === index ? null : index));
   };
 
   const [editFormData, setEditFormData] = useState({
@@ -75,10 +78,16 @@ export default function UserProfile() {
   };
 
   const handleSaveAddress = async () => {
+    if (!addressFormData.address.trim()) {
+      setAddressError("Local address is required.");
+      return;
+    }
+
     try {
       await addAddress(addressFormData);
       setOpen(false);
       setAddressFormData({ address: "" });
+      setAddressError("");
       refetch();
     } catch (error) {
       console.error("Add address failed:", error);
@@ -189,7 +198,9 @@ export default function UserProfile() {
                 My Addresses
               </h3>
               {userData?.addresses?.length === 0 && (
-                <p className="text-center mb-3">No Address Added</p>
+                <p className="text-red-500 font-medium text-lg mb-5">
+                  No address found yet!
+                </p>
               )}
               {userData?.addresses?.map((address, index) => (
                 <div
@@ -274,7 +285,7 @@ export default function UserProfile() {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) =>
+                onChange={e =>
                   setEditFormData({
                     ...editFormData,
                     avatar: e.target.files[0],
@@ -295,7 +306,7 @@ export default function UserProfile() {
               <input
                 type="text"
                 value={editFormData.first_name}
-                onChange={(e) =>
+                onChange={e =>
                   setEditFormData({
                     ...editFormData,
                     first_name: e.target.value,
@@ -307,7 +318,7 @@ export default function UserProfile() {
               <input
                 type="text"
                 value={editFormData.last_name}
-                onChange={(e) =>
+                onChange={e =>
                   setEditFormData({
                     ...editFormData,
                     last_name: e.target.value,
@@ -321,7 +332,7 @@ export default function UserProfile() {
             <PhoneInput
               country={"bd"}
               value={editFormData.number}
-              onChange={(phone) =>
+              onChange={phone =>
                 setEditFormData({ ...editFormData, number: phone })
               }
             />
@@ -329,7 +340,7 @@ export default function UserProfile() {
             <input
               type="email"
               value={editFormData.email}
-              onChange={(e) =>
+              onChange={e =>
                 setEditFormData({ ...editFormData, email: e.target.value })
               }
               placeholder="Email address"
@@ -339,7 +350,7 @@ export default function UserProfile() {
             <input
               type="text"
               value={editFormData.country}
-              onChange={(e) =>
+              onChange={e =>
                 setEditFormData({ ...editFormData, country: e.target.value })
               }
               placeholder="Country"
@@ -359,7 +370,7 @@ export default function UserProfile() {
                 className="w-full bg-primary text-white p-2 rounded-md"
                 onClick={handleEditProfileSave}
               >
-                Save
+                {editPending ? "Saving..." : "Save"}
               </button>
             </div>
           </form>
@@ -373,21 +384,25 @@ export default function UserProfile() {
           <input
             type="text"
             value={addressFormData.address}
-            onChange={(e) =>
+            onChange={e => {
               setAddressFormData({
                 ...addressFormData,
                 address: e.target.value,
-              })
-            }
+              });
+              if (e.target.value.trim()) setAddressError(""); // Clear error on typing
+            }}
             placeholder="Write your local address"
             className="w-full border p-3 rounded-md"
           />
+          {addressError && (
+            <p className="text-red-500 text-sm mt-2">{addressError}</p>
+          )}
           <button
             type="button"
             className="mt-[20px] w-full bg-primary text-white py-[10px] rounded-md"
             onClick={handleSaveAddress}
           >
-            Save Address
+            {isPending ? "Saving...." : "Save Address"}
           </button>
         </form>
       </Modal>
@@ -404,7 +419,7 @@ export default function UserProfile() {
           <input
             type="text"
             value={editAddressValue}
-            onChange={(e) => setEditAddressValue(e.target.value)}
+            onChange={e => setEditAddressValue(e.target.value)}
             placeholder="Edit your address"
             className="w-full border p-3 rounded-md"
           />
@@ -413,12 +428,12 @@ export default function UserProfile() {
             className="mt-[20px] w-full bg-primary text-white py-[10px] rounded-md"
             onClick={handleEditAddressSave}
           >
-            Save Changes
+            {updatePending ? "Updating...." : "Update Address"}
           </button>
         </form>
       </Modal>
 
-      {/* Delete Address Confirmation Modal */}
+      {/* Delete Address Modal */}
       <Modal
         open={openDelete}
         onCancel={handleCancel}
@@ -439,7 +454,7 @@ export default function UserProfile() {
               onClick={handleDeleteAddress}
               className="w-full bg-red-600 text-white py-2 rounded-md"
             >
-              Delete
+              {deletePending ? "Deleting...." : "Delete Address"}
             </button>
           </div>
         </div>

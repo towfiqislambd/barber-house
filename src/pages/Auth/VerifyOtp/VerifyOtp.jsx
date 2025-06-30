@@ -8,7 +8,6 @@ import { CgSpinnerTwoAlt } from "react-icons/cg";
 const VerifyOtp = () => {
   const location = useLocation();
   const email = location.state?.email;
-  console.log(email);
   const { mutateAsync: verifyOtpMutation, isPending } = useVerifyOtp();
 
   const {

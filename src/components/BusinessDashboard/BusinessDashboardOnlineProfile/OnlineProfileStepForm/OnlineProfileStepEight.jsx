@@ -63,7 +63,7 @@ const OnlineProfileStepEight = ({ step, setStep, setFormData, details }) => {
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
     },
-    fileList: [], // disable antd's own preview
+    fileList: [],
   };
 
   // Continue to next step

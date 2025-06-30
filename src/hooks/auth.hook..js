@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import useAuth from "./useAuth";
 
 // get user data:
-export const useGetUserData = (token) => {
+export const useGetUserData = token => {
   return useQuery({
     queryKey: ["user", token],
     queryFn: GetUserDataFunc,
@@ -30,11 +30,11 @@ export const useRegister = () => {
 
   return useMutation({
     mutationKey: ["register"],
-    mutationFn: (payload) => RegisterFunc(payload),
+    mutationFn: payload => RegisterFunc(payload),
     onMutate: () => {
       setLoading(true);
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       if (data?.token) {
         if (data?.role === "customer") {
           toast.success("Registration Successful");
@@ -45,7 +45,7 @@ export const useRegister = () => {
         }
       }
     },
-    onError: (err) => {
+    onError: err => {
       setLoading(false);
       toast.error(err?.response?.data?.message);
     },
@@ -60,11 +60,11 @@ export const useLogin = () => {
 
   return useMutation({
     mutationKey: ["login"],
-    mutationFn: (payload) => LoginFunc(payload),
+    mutationFn: payload => LoginFunc(payload),
     onMutate: () => {
       setLoading(true);
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       setLoading(false);
       if (data?.token) {
         setToken(data?.token);
@@ -82,7 +82,7 @@ export const useLogin = () => {
         }
       }
     },
-    onError: (err) => {
+    onError: err => {
       setLoading(false);
       toast.error(err?.response?.data?.message);
     },
@@ -90,22 +90,23 @@ export const useLogin = () => {
 };
 
 // social login:
-export const useSocialLogin = (setSslLoading) => {
+export const useSocialLogin = setSslLoading => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
   return useMutation({
     mutationKey: ["social-login"],
-    mutationFn: (payload) => GoogleLoginFunc(payload),
+    mutationFn: payload => GoogleLoginFunc(payload),
     onMutate: () => {
       // setSslLoading(true);
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
+      console.log(data);
       // setSslLoading(false);
       setToken(data?.token);
       navigate((location?.state && location.state) || "/");
       toast.success("Login Successful");
     },
-    onError: (err) => {
+    onError: err => {
       // setSslLoading(false);
       toast.error(err?.response?.data?.message);
     },
@@ -119,18 +120,18 @@ export const useVerifyEmail = () => {
 
   return useMutation({
     mutationKey: ["verify-email"],
-    mutationFn: (payload) => VerifyEmailFunc(payload),
+    mutationFn: payload => VerifyEmailFunc(payload),
     onMutate: () => {
       setLoading(true);
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       if (data?.email) {
         navigate("/verify-otp", { state: { email: data.email } });
         setLoading(false);
         toast.success("Otp sent to your email address");
       }
     },
-    onError: (err) => {
+    onError: err => {
       console.log(err);
       setLoading(false);
       toast.error(err?.response?.data?.data?.email?.[0]);
@@ -145,11 +146,11 @@ export const useVerifyOtp = () => {
 
   return useMutation({
     mutationKey: ["verify-otp"],
-    mutationFn: (payload) => OtpVerifyFunc(payload),
+    mutationFn: payload => OtpVerifyFunc(payload),
     onMutate: () => {
       setLoading(true);
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       if (data) {
         setLoading(false);
         toast.success("Otp verified successfully");
@@ -158,7 +159,7 @@ export const useVerifyOtp = () => {
         });
       }
     },
-    onError: (err) => {
+    onError: err => {
       setLoading(false);
       toast.error(err?.response?.data?.message);
     },
@@ -172,18 +173,18 @@ export const useResetPassword = () => {
 
   return useMutation({
     mutationKey: ["reset-password"],
-    mutationFn: (payload) => ResetPasswordFunc(payload),
+    mutationFn: payload => ResetPasswordFunc(payload),
     onMutate: () => {
       setLoading(true);
     },
-    onSuccess: (data) => {
+    onSuccess: data => {
       if (data) {
         setLoading(false);
         toast.success("Password reset successfully");
         navigate("/login");
       }
     },
-    onError: (err) => {
+    onError: err => {
       setLoading(false);
       toast.error(err?.response?.data?.message);
     },
@@ -207,7 +208,7 @@ export const useLogOut = () => {
       setLoading(false);
       toast.success("User Logged out Successfully");
     },
-    onError: (err) => {
+    onError: err => {
       toast.error(err?.response?.data?.message);
     },
   });

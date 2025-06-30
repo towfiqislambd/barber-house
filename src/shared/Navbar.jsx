@@ -37,7 +37,7 @@ const Navbar = () => {
   const { mutate: logOutMutate } = useLogOut();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector(state => state.cart.cartItems);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -59,7 +59,6 @@ const Navbar = () => {
     logOutMutate();
   };
 
-  console.log(user?.role);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const handleCheckout = () => {
     setIsCartOpen(false);
@@ -162,10 +161,11 @@ const Navbar = () => {
                   </Link>
                 )
               ) : (
-                <Link to="/login">
-                  <button className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium text-white">
-                    <span>Sign In</span>
-                  </button>
+                <Link
+                  to="/login"
+                  className="px-5 py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-xl font-medium text-white"
+                >
+                  <span>Sign In</span>
                 </Link>
               )}
             </div>
@@ -181,6 +181,7 @@ const Navbar = () => {
             </span>
           </div> */}
         </div>
+        
         {/* Hamburger btn */}
         <button
           onClick={() => setOpen(!isOpen)}
@@ -214,7 +215,7 @@ const Navbar = () => {
         <div className="flex flex-col mt-5 items-center gap-6">
           {/* tabs */}
           <div className="flex flex-col items-center gap-3">
-            {["Male", "Female"].map((option) => (
+            {["Male", "Female"].map(option => (
               <button
                 key={option}
                 onClick={() => setGender(option)}

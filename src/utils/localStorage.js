@@ -1,6 +1,4 @@
 export function setItem(key, value) {
-  console.log(value);
-
   try {
     window.localStorage.setItem(key, value);
   } catch (err) {

@@ -7,10 +7,7 @@ export default function ChatApp() {
   const location = useLocation();
   const [selectedChatId, setSelectedChatId] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-
   const userId = location.state?.userId ?? null;
-
-  console.log(userId);
 
   useEffect(() => {
     // Set initial selected chat from location state

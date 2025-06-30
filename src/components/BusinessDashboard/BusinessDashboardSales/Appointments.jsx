@@ -7,6 +7,7 @@ const Appointments = () => {
   const online_store_id = user?.business_profile?.online_store?.id;
   const { data: appointmentsData, isLoading } =
     useAppointmentLists(online_store_id);
+  console.log(appointmentsData);
 
   return (
     <div className=" relative">
@@ -37,7 +38,7 @@ const Appointments = () => {
               </tr>
             </thead>
             <tbody>
-              {appointmentsData.length > 0 ? (
+              {appointmentsData && appointmentsData.length > 0 ? (
                 appointmentsData?.map((data, idx) => (
                   <tr
                     key={data.id}

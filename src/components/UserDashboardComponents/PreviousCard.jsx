@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { IoTimeOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import AddReviewModal from "../BusinessDashboard/Modals/AddReviewModal";
+import { currencyFormatter } from "@/lib/currencyFormatter";
 
 export default function PreviousCard({ previousData, onSelect, selected }) {
   const { id, store_services, date, time } = previousData;
@@ -45,8 +46,7 @@ export default function PreviousCard({ previousData, onSelect, selected }) {
             {store_services?.map(store => (
               <>
                 <h4 className="text-[#2C2C2C] font-manrope text-lg font-medium leading-[30px] ]">
-                  {store?.catalog_service?.name} -{" "}
-                  {currencyFormatter(+store?.catalog_service?.price)}
+                  {store?.catalog_service?.name}
                 </h4>
               </>
             ))}

@@ -11,7 +11,6 @@ import { useState } from "react";
 import ReviewCard from "@/components/cards/ReviewCard";
 
 const HomepageReview = ({ data }) => {
-  console.log(data);
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (

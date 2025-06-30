@@ -4,11 +4,20 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import UpcommingCard from "@/components/UserDashboardComponents/UpcommingCard";
 import PreviousCard from "@/components/UserDashboardComponents/PreviousCard";
 import { useUserAppointmentLists } from "@/hooks/user.queries";
+import { Loader } from "@/components/Loader/Loader";
 
 export default function UserAppointments() {
   const [activeTab, setActiveTab] = useState("tab1");
-  const { data } = useUserAppointmentLists();
+  const { data, isLoading } = useUserAppointmentLists();
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -63,6 +72,11 @@ export default function UserAppointments() {
                       }
                     />
                   ))}
+                  {data?.upcoming_appointments?.length === 0 && (
+                    <p className="text-red-500 font-medium text-lg">
+                      No upcoming appointment found
+                    </p>
+                  )}
                 </div>
               )}
               {activeTab === "tab2" && (
@@ -84,7 +98,9 @@ export default function UserAppointments() {
                     />
                   ))}
                   {data?.previous_appointments?.length === 0 && (
-                    <p className="text-black">No Previous Appointment Found</p>
+                    <p className="text-red-500 font-medium text-lg">
+                      No previous appointment found
+                    </p>
                   )}
                 </div>
               )}
