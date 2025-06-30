@@ -10,8 +10,6 @@ export default function UserProfileNavbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const { user } = useAuth();
-  console.log(user);
-
   return (
     <>
       <header className="py-[12px] 3xl:px-[100px] px-5">
