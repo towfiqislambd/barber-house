@@ -30,7 +30,7 @@ const BusinessDashboardMarketing = () => {
         <div className="w-full">
           {/* This is the right section */}
           <div className="space-y-4">
-            {reviewsData?.length !== 0 ? (
+            {reviewsData && reviewsData.length > 0 ? (
               reviewsData?.map(review => (
                 <div
                   key={review.id}

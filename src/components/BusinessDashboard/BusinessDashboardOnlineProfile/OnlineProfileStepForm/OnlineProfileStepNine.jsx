@@ -22,7 +22,6 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
   const [services, setServices] = useState([]);
   const [error, setError] = useState({ team: false, service: false });
 
-  // ✅ Populate defaults from details
   useEffect(() => {
     if (details?.store_teams?.length > 0) {
       const defaultTeamIds = details.store_teams.map(item => item.team_id);
@@ -37,7 +36,6 @@ const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
     }
   }, [details]);
 
-  // Update error when teams/services change
   useEffect(() => {
     setError({
       team: teams.length === 0,
