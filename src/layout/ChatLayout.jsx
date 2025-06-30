@@ -1,10 +1,23 @@
 import ChatSidebar from "@/pages/chat/ChatSidebar";
 import ChatWindow from "@/pages/chat/ChatWindow";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function ChatApp() {
+  const location = useLocation();
   const [selectedChatId, setSelectedChatId] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  const userId = location.state?.userId ?? null;
+
+  console.log(userId);
+
+  useEffect(() => {
+    // Set initial selected chat from location state
+    if (+userId) {
+      setSelectedChatId(+userId);
+    }
+  }, [userId]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,7 +37,7 @@ export default function ChatApp() {
         />
       ) : null}
 
-      {/* Show chat or fallback message */}
+      {/* Chat window or fallback message */}
       <div className="flex flex-col flex-1 w-full h-full">
         {!selectedChatId && !isMobile && (
           <div className="h-full flex items-center justify-center text-gray-400 text-sm">
