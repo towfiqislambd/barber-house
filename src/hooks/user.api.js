@@ -6,7 +6,7 @@ export const UserDataGet = async () => {
   return data?.data;
 };
 
-export const updateProfile = async (payload) => {
+export const updateProfile = async payload => {
   const { data } = await axiosSecure.post(
     `/api/customer-dashboard/update-profile`,
     payload
@@ -15,7 +15,7 @@ export const updateProfile = async (payload) => {
   return data;
 };
 
-export const addAddress = async (payload) => {
+export const addAddress = async payload => {
   const { data } = await axiosSecure.post(
     `/api/customer-dashboard/add-address`,
     payload
@@ -23,7 +23,7 @@ export const addAddress = async (payload) => {
   return data;
 };
 
-export const updateAddress = async (payload) => {
+export const updateAddress = async payload => {
   const { data } = await axiosSecure.post(
     `/api/customer-dashboard/edit-address`,
     payload
@@ -32,7 +32,7 @@ export const updateAddress = async (payload) => {
   return data;
 };
 
-export const deleteAddress = async (payload) => {
+export const deleteAddress = async payload => {
   const { data } = await axiosSecure.post(
     "/api/customer-dashboard/delete-address",
     payload
@@ -47,11 +47,11 @@ export const UserSearchStores = async (queryParams = {}) => {
   return data?.data;
 };
 
-export const StoreDetails = async (id) => {
+export const StoreDetails = async id => {
   const { data } = await axiosPublic(`/api/online-store/show-details/${id}`);
   return data;
 };
-export const BookMarkAdd = async (payload) => {
+export const BookMarkAdd = async payload => {
   const { data } = await axiosSecure.post(
     "/api/online-store/bookmark/add",
     payload
@@ -67,7 +67,7 @@ export const BookmarkGet = async () => {
   return data?.data;
 };
 
-export const BookMarkRemove = async (payload) => {
+export const BookMarkRemove = async payload => {
   const { data } = await axiosSecure.post(
     `/api/online-store/bookmark/remove`,
     payload
@@ -80,7 +80,7 @@ export const stores = async () => {
   return data?.data;
 };
 
-export const AppointmentAdd = async (payload) => {
+export const AppointmentAdd = async payload => {
   const { data } = await axiosSecure.post(
     `/api/online-store/appointment/book`,
     payload
@@ -101,7 +101,7 @@ export const AppointmentReschedule = async (id, payload) => {
   return data;
 };
 
-export const AppointmentCancel = async (id) => {
+export const AppointmentCancel = async id => {
   const { data } = await axiosSecure.post(
     `/api/online-store/appointment/cancel/${id}`
   );
@@ -109,7 +109,7 @@ export const AppointmentCancel = async (id) => {
   return data;
 };
 
-export const Checkout = async (payload) => {
+export const Checkout = async payload => {
   const { data } = await axiosSecure.post("/api/product/purchase", payload);
   return data;
 };
@@ -127,4 +127,17 @@ export const UserRecentlyStores = async () => {
 export const ShowProducts = async () => {
   const { data } = await axiosSecure.get("/api/customer-dashboard/my-products");
   return data?.data;
+};
+
+export const AppointmentCount = async () => {
+  const { data } = await axiosPublic.get("/api/appointments/this-week-total");
+  return data?.data;
+};
+
+export const AddReview = async payload => {
+  const { data } = await axiosSecure.post(
+    "/api/appointment/review/submit",
+    payload
+  );
+  return data;
 };

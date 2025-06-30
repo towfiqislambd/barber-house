@@ -6,7 +6,7 @@ import { LuMapPin } from "react-icons/lu";
 import { useServicesType } from "@/hooks/cms.queries";
 import toast from "react-hot-toast";
 
-const HomepageBanner = () => {
+const HomepageBanner = ({ appointmentCount }) => {
   const navigate = useNavigate();
   const [location, setLocation] = useState("");
   const [coords, setCoords] = useState({ lat: null, lng: null });
@@ -28,7 +28,7 @@ const HomepageBanner = () => {
       toast.error("Please select a location from the suggestions");
       return;
     }
-    const selectedService = serviceData?.find((s) => s.id === +serviceId);
+    const selectedService = serviceData?.find(s => s.id === +serviceId);
 
     const params = new URLSearchParams();
 
@@ -46,7 +46,7 @@ const HomepageBanner = () => {
     });
   };
 
-  const handleLocationChange = (value) => {
+  const handleLocationChange = value => {
     setLocation(value);
     setCoords({ lat: null, lng: null });
     setSuggestions([]);
@@ -80,7 +80,7 @@ const HomepageBanner = () => {
     }, 500);
   };
 
-  const handleSuggestionClick = (suggestion) => {
+  const handleSuggestionClick = suggestion => {
     setLocation(suggestion.formatted_address);
     setCoords({
       lat: suggestion.geometry.location.lat,
@@ -97,7 +97,7 @@ const HomepageBanner = () => {
 
     setLoading(true);
     navigator.geolocation.getCurrentPosition(
-      async (position) => {
+      async position => {
         const { latitude, longitude } = position.coords;
         setCoords({ lat: latitude, lng: longitude });
 
@@ -122,7 +122,7 @@ const HomepageBanner = () => {
           setLoading(false);
         }
       },
-      (error) => {
+      error => {
         console.error("Error getting current location", error);
         alert("Failed to get current location.");
         setLoading(false);
@@ -152,10 +152,10 @@ const HomepageBanner = () => {
               <select
                 className="w-full focus:outline-none"
                 value={serviceId}
-                onChange={(e) => setServiceId(e.target.value)}
+                onChange={e => setServiceId(e.target.value)}
               >
                 <option value="">All treatments & places</option>
-                {serviceData?.map((data) => (
+                {serviceData?.map(data => (
                   <option key={data?.id} value={data?.id}>
                     {data?.service_name}
                   </option>
@@ -171,7 +171,7 @@ const HomepageBanner = () => {
                 type="text"
                 placeholder="Enter location"
                 value={location}
-                onChange={(e) => handleLocationChange(e.target.value)}
+                onChange={e => handleLocationChange(e.target.value)}
               />
               {loading && (
                 <div className="absolute right-3">
@@ -213,8 +213,10 @@ const HomepageBanner = () => {
         {/* Booking Stats */}
         <div>
           <h4 className="text-xl lg:text-2xl text-white font-outfit">
-            <span className="text-3xl font-semibold">250,000</span> appointments
-            booked this week!
+            <span className="text-2xl font-semibold">
+              {appointmentCount?.total_appointment_this_week}
+            </span>{" "}
+             appointments booked this week!
           </h4>
         </div>
       </div>
