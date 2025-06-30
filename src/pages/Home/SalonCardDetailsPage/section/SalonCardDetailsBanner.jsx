@@ -155,7 +155,8 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
             </h1>
             <div className="flex gap-3">
               <Link
-                to={`/chat/${data?.data?.business_profile?.user_id}`}
+                to="/chat"
+                state={{ userId: data?.data?.business_profile?.user_id }}
                 className="bg-[#B3BAC5] cursor-pointer hover:bg-primary ease-in-out duration-300 border border-[#B3BAC5] w-9 h-9 lg:w-12 lg:h-12 rounded-full flex items-center justify-center"
               >
                 <MessageSvg />

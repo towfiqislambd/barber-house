@@ -7,6 +7,7 @@ import moment from "moment";
 import echo from "@/hooks/echo";
 import defaultUser from "../../assets/images/chat/default-user-avatar.jpg";
 import { Loader } from "@/components/Loader/Loader";
+import { PiCameraBold } from "react-icons/pi";
 
 export default function ChatWindow({ chatId, onBack, isMobile }) {
   const { singleConversion, refetch } = useSingleChatConversion(chatId);
@@ -105,6 +106,7 @@ export default function ChatWindow({ chatId, onBack, isMobile }) {
       }
     );
   };
+  console.log(singleConversion?.data?.user?.first_name);
 
   return (
     <div className="flex flex-col h-full w-full">
@@ -225,7 +227,7 @@ export default function ChatWindow({ chatId, onBack, isMobile }) {
             htmlFor="image"
             className="cursor-pointer px-3 py-2 bg-gray-200 rounded-full text-sm sm:text-base"
           >
-            📷
+            <PiCameraBold />
           </label>
           <input
             id="image"
