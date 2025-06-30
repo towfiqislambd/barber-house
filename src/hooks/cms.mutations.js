@@ -24,7 +24,9 @@ export const useOnboard = () => {
   return useMutation({
     mutationKey: ["onboard"],
     mutationFn: payload => OnBoarding(payload),
-    onSuccess: () => {},
+    onSuccess: () => {
+      toast.success("Redirecting to stripe....");
+    },
     onError: err => {
       toast.error(err?.response?.data?.message);
     },

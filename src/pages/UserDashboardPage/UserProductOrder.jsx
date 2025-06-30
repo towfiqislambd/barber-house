@@ -3,7 +3,7 @@ import { useShowProducts } from "@/hooks/user.queries";
 
 export default function UserProductOrder() {
   const { data: showProducts, isLoading } = useShowProducts();
-  
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-[80vh]">
@@ -59,6 +59,11 @@ export default function UserProductOrder() {
                   </td>
                 </tr>
               ))
+            )}
+            {showProducts?.orders?.length === 0 && (
+              <p className="text-red-500 mt-5 font-medium text-lg">
+                No product found yet!
+              </p>
             )}
           </tbody>
         </table>
