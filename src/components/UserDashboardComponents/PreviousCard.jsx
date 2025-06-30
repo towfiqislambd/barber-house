@@ -1,11 +1,8 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { IoTimeOutline } from "react-icons/io5";
-import Currency from "../../assets/images/currency.png";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { MdOutlineWatchLater } from "react-icons/md";
-import { IoLocationOutline } from "react-icons/io5";
-import { FiHome } from "react-icons/fi";
 import { MdOutlineCancel } from "react-icons/md";
 
 export default function PreviousCard({ previousData, onSelect, selected }) {
@@ -19,7 +16,7 @@ export default function PreviousCard({ previousData, onSelect, selected }) {
     setOpen(!open);
   };
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = event => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpen(false);
       }
@@ -53,7 +50,7 @@ export default function PreviousCard({ previousData, onSelect, selected }) {
             </p>
           </div>
           <div className="flex flex-col ">
-            {store_services?.map((store) => (
+            {store_services?.map(store => (
               <>
                 <h4 className="text-[#2C2C2C] font-manrope text-lg font-medium leading-[30px] ]">
                   {store?.catalog_service?.name} -{" "}
