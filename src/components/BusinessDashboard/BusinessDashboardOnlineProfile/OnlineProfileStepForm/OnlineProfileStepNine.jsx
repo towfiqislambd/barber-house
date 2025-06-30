@@ -15,7 +15,6 @@ import { Command, CommandItem, CommandList } from "@/components/ui/command";
 import { CheckIcon } from "lucide-react";
 
 const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
-  console.log(details);
   const { data: allTeamMembers } = useAllTeamMembers();
   const { data: allServices } = useAllServices();
 

@@ -3,8 +3,7 @@ import { useShowProducts } from "@/hooks/user.queries";
 
 export default function UserProductOrder() {
   const { data: showProducts, isLoading } = useShowProducts();
-  console.log(showProducts);
-
+  
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-[80vh]">

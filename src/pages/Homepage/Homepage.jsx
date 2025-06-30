@@ -25,8 +25,6 @@ const Homepage = () => {
   const { data: recentlyView } = useUserRecentlyViewStores();
   // const { user } = useAuth();
 
-  console.log(recentlyView);
-
   const isLoading =
     allStoreLoading ||
     trendingStoreLoading ||

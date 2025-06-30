@@ -7,7 +7,6 @@ const BusinessDashboardMarketing = () => {
   const { user } = useAuth();
   const online_store_id = user?.business_profile?.online_store?.id;
   const { data: reviewsData, isLoading } = useGetReviews(online_store_id);
-  console.log(reviewsData);
 
   if (isLoading) {
     return (

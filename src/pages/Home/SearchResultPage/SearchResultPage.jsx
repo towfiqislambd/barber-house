@@ -5,32 +5,22 @@ import { useUserSearchStore } from "@/hooks/user.queries";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 import { useLocation } from "react-router-dom";
 import { Loader } from "@/components/Loader/Loader";
-const mapContainerStyle = {
-  width: "100%",
-  height: "100%",
-};
 
 const SearchResultPage = () => {
   const locationState = useLocation();
   const serviceInfo = locationState?.state?.serviceInfo;
-
   const [searchParams] = useSearchParams();
   const searchLocation = searchParams.get("location");
   const serviceId = searchParams.get("serviceId");
   const latitude = parseFloat(searchParams.get("lat"));
   const longitude = parseFloat(searchParams.get("lng"));
-
   const [isOpen, setIsOpen] = useState(false);
-
   const queryParams = {
     service_id: serviceId,
     latitude,
     longitude,
   };
-
   const { data: stores, isLoading } = useUserSearchStore(queryParams);
-
-  console.log(stores);
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAP_API,
@@ -40,9 +30,7 @@ const SearchResultPage = () => {
     lat: latitude,
     lng: longitude,
   };
-
-  const toggleDropdown = () => setIsOpen(!isOpen);
-
+  
   return (
     <section className="pb-14 pt-24 2xl:py-20 3xl:py-32 container">
       {/* Header */}

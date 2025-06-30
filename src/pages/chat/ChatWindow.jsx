@@ -106,7 +106,6 @@ export default function ChatWindow({ chatId, onBack, isMobile }) {
       }
     );
   };
-  console.log(singleConversion?.data?.user?.first_name);
 
   return (
     <div className="flex flex-col h-full w-full">

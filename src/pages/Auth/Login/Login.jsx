@@ -61,7 +61,6 @@ const Login = () => {
           avatar: data?.picture,
           // avatar: null,
         };
-        console.log(updatedData);
         await socialLoginMutation(updatedData);
       } catch (error) {
         console.error("Error fetching user info:", error);

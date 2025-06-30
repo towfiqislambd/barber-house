@@ -11,7 +11,6 @@ const VenuesNearbyCard = ({ venue }) => {
   const { data: bookmark } = useBookmarkGet();
   const addBookmark = useBookmarkAdd();
   const removeBookmark = useBookmarkRemove();
-
   const isBookmarked = bookmark?.some((item) => item.id === venue?.id);
 
   const handleBookmark = async (e) => {

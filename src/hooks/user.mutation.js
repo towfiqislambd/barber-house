@@ -47,8 +47,6 @@ export const useUpdateAddress = () => {
     mutationKey: ["update-address"],
     mutationFn: payload => updateAddress(payload),
     onSuccess: data => {
-      console.log(data);
-
       toast.success(data?.message);
     },
     onError: err => {

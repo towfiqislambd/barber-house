@@ -12,15 +12,11 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addtoCart(state, action) {
-      //if the item already in the cart
       const existedItemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      console.log(existedItemIndex);
 
-      //if exist
       if (existedItemIndex >= 0) {
-        //increase quantity
         state.cartItems[existedItemIndex].cartQuantity += 1;
         toast.info("Quantity Increased", {
           position: "bottom-left",

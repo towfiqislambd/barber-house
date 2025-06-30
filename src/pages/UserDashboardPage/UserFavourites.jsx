@@ -4,9 +4,6 @@ import React from "react";
 
 const UserFavourites = () => {
   const { data: bookmark } = useBookmarkGet();
-
-  console.log(bookmark);
-
   return (
     <div className="px-[15px]">
       <h3 className="text-[#2C2C2C] font-outfit text-[24px] xl:text-[36px] font-medium mb-[40px] pl-[50px] xl:pl-[0px]">

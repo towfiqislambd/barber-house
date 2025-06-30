@@ -72,10 +72,7 @@ export default function ChatSidebar({
                 (p) => p?.user?.id !== user?.id
               );
               const userInfo = participant?.user;
-
               if (!userInfo) return null;
-
-              console.log(chat.participants[0].user_id);
 
               return (
                 <div
