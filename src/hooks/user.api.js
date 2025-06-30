@@ -121,7 +121,7 @@ export const UserTrendingStores = async () => {
 
 export const UserRecentlyStores = async () => {
   const { data } = await axiosSecure("/api/online-store/recently-viewed");
-  return data?.data;
+  return data;
 };
 
 export const ShowProducts = async () => {

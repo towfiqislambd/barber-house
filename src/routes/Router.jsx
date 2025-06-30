@@ -48,9 +48,9 @@ import CreatePass from "@/pages/Auth/CreatePass/CreatePass";
 import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
 import BS from "@/pages/Auth/BS/BS";
 import PrivateRoute from "./PrivateRoute";
-import ChatLayout from "@/layout/ChatLayout";
-import ChatWindow from "@/pages/chat/ChatWindow";
+
 import ArticleDetails from "@/pages/BusinessHelpCenter/ArticleDetails";
+import ChatApp from "@/layout/ChatLayout";
 
 export const router = createBrowserRouter([
   // Main Layout
@@ -279,28 +279,12 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // Chat Layout
   {
-    path: "/",
+    path: "/chat",
     element: (
       <PrivateRoute>
-        <ChatLayout />
+        <ChatApp />
       </PrivateRoute>
     ),
-    children: [
-      {
-        path: "chat",
-        children: [
-          {
-            index: true,
-            element: <ChatWindow />,
-          },
-          {
-            path: ":id",
-            element: <ChatWindow />,
-          },
-        ],
-      },
-    ],
   },
 ]);
