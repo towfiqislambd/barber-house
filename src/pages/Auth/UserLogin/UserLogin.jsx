@@ -1,5 +1,4 @@
 import {
-  GoogleIcon,
   GoogleSvg,
   LeftSideArrowSvg,
 } from "@/components/svgContainer/SvgContainer";
@@ -9,7 +8,6 @@ import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { useLogin, useSocialLogin } from "@/hooks/auth.hook.";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
