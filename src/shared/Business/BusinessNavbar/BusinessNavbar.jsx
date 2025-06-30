@@ -112,48 +112,6 @@ const BusinessNavbar = () => {
               >
                 Blog
               </NavLink>
-              {user?.role === "business" && (
-                <Link
-                  className="text-black font-medium hover:text-primary "
-                  to={"/businessDashboard"}
-                >
-                  Business Dashboard
-                </Link>
-              )}
-
-              {/* <NavLink
-                onClick={() => saleMobileMenuActive(false)}
-                className={({ isActive }) =>
-                  isActive
-                    ? "businessNavClass text-primary hover:text-primary"
-                    : "businessNavClass hover:text-primary "
-                }
-                to={"/business/signorlogin"}
-              >
-                Signup
-              </NavLink>
-              <NavLink
-                onClick={() => saleMobileMenuActive(false)}
-                className={({ isActive }) =>
-                  isActive
-                    ? "businessNavClass text-primary hover:text-primary"
-                    : "businessNavClass hover:text-primary"
-                }
-                to={"/business/login"}
-              >
-                Login
-              </NavLink> */}
-              {/* <NavLink
-                onClick={() => saleMobileMenuActive(false)}
-                className={({ isActive }) =>
-                  isActive
-                    ? "businessNavClass text-primary hover:text-primary"
-                    : "businessNavClass hover:text-primary"
-                }
-                to={"/business/contactus"}
-              >
-                Contact Us
-              </NavLink> */}
               <div className="group flex gap-1 cursor-pointer items-center hover:text-primary">
                 <NavLink
                   onClick={() => saleMobileMenuActive(false)}

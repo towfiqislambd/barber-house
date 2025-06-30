@@ -5,6 +5,7 @@ import { useAddTeamMembers } from "@/hooks/cms.mutations";
 const TeamMembers = ({ allTeamMembers, serviceId }) => {
   const { mutateAsync: addTeamMembers, isPending } = useAddTeamMembers();
   const [selectedMembers, setSelectedMembers] = useState([]);
+  const [error, setError] = useState("");
 
   const allSelected = selectedMembers.length === allTeamMembers.length;
 
@@ -14,20 +15,33 @@ const TeamMembers = ({ allTeamMembers, serviceId }) => {
     } else {
       setSelectedMembers(allTeamMembers.map(member => member.id));
     }
+    setError("");
   };
 
   const toggleMember = id => {
-    setSelectedMembers(prev =>
-      prev.includes(id) ? prev.filter(mid => mid !== id) : [...prev, id]
-    );
+    setSelectedMembers(prev => {
+      const updated = prev.includes(id)
+        ? prev.filter(mid => mid !== id)
+        : [...prev, id];
+      if (updated.length > 0) setError("");
+      return updated;
+    });
   };
 
-  const handleSubmit = () => {
-    if (selectedMembers.length > 0) {
-      addTeamMembers({
+  const handleSubmit = async () => {
+    if (selectedMembers.length === 0) {
+      setError("Please select at least one team member.");
+      return;
+    }
+
+    try {
+      await addTeamMembers({
         id: serviceId,
         payload: { team_ids: selectedMembers },
       });
+      setError("");
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -94,12 +108,15 @@ const TeamMembers = ({ allTeamMembers, serviceId }) => {
           </div>
         ))}
       </div>
+
+      {error && <p className="text-red-600 font-medium mt-3">{error}</p>}
+
       <button
         onClick={handleSubmit}
         type="submit"
         className="mt-5 bg-black text-white px-6 py-2 rounded-lg"
       >
-        {isPending ? "Submitting...." : "Submit"}
+        {isPending ? "Submitting..." : "Submit"}
       </button>
     </div>
   );

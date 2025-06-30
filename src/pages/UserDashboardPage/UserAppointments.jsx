@@ -1,19 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import BookingImg from "../../assets/images/appoirment-img.png";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import Currency from "../../assets/images/currency.png";
-import { FaAngleRight } from "react-icons/fa6";
 import UpcommingCard from "@/components/UserDashboardComponents/UpcommingCard";
 import PreviousCard from "@/components/UserDashboardComponents/PreviousCard";
-import { Link } from "react-router-dom";
-import { useAppointmentLists } from "@/hooks/cms.queries";
 import { useUserAppointmentLists } from "@/hooks/user.queries";
+import { Loader } from "@/components/Loader/Loader";
 
 export default function UserAppointments() {
   const [activeTab, setActiveTab] = useState("tab1");
-  const { data } = useUserAppointmentLists();
-  console.log(data);
+  const { data, isLoading } = useUserAppointmentLists();
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -51,20 +55,28 @@ export default function UserAppointments() {
                 <div>
                   <div className="mb-[28px]">
                     <h3 className="text-[#2C2C2C] font-outfit text-[28px] font-medium leading-[33px] flex gap-[15px]">
-                      Upcomming{" "}
+                      Upcoming{" "}
                       <span className="w-[30px] h-[30px] bg-primary rounded-[100%] text-center flex items-center justify-center text-[#FFF] text-[20px]">
                         {data?.upcoming_appointments?.length}
                       </span>
                     </h3>
                   </div>
-                  {data?.upcoming_appointments?.map((upcomingData) => (
+                  {data?.upcoming_appointments?.map(upcomingData => (
                     <UpcommingCard
                       upcomingData={upcomingData}
                       key={upcomingData.id}
                       onSelect={setSelectedAppointment}
-                      selected={selectedAppointment?.store_services.id === upcomingData.id}
+                      selected={
+                        selectedAppointment?.store_services.id ===
+                        upcomingData.id
+                      }
                     />
                   ))}
+                  {data?.upcoming_appointments?.length === 0 && (
+                    <p className="text-red-500 font-medium text-lg">
+                      No upcoming appointment found
+                    </p>
+                  )}
                 </div>
               )}
               {activeTab === "tab2" && (
@@ -77,7 +89,7 @@ export default function UserAppointments() {
                       </span>
                     </h3>
                   </div>
-                  {data?.previous_appointments?.map((previousData) => (
+                  {data?.previous_appointments?.map(previousData => (
                     <PreviousCard
                       previousData={previousData}
                       key={previousData.id}
@@ -86,7 +98,9 @@ export default function UserAppointments() {
                     />
                   ))}
                   {data?.previous_appointments?.length === 0 && (
-                    <p className="text-black">No Previous Appointment Found</p>
+                    <p className="text-red-500 font-medium text-lg">
+                      No previous appointment found
+                    </p>
                   )}
                 </div>
               )}
@@ -129,42 +143,6 @@ export default function UserAppointments() {
                     "Address not available"}
                 </p>
               </div>
-
-              {/* <div>
-                <h3 className="text-[#2C2C2C] mb-[15px] text-[20px] font-medium font-outfit">
-                  Overview
-                </h3>
-                <div className="flex justify-between mb-[32px]">
-                  <div>
-                    <p className="mb-[5px] text-[#2C2C2C] font-manrope text-[18px] font-medium">
-                      {selectedAppointment.title}
-                    </p>
-                    <p className="text-[#2C2C2C] font-manrope text-[16px] font-medium">
-                      30 mins
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-[4px]">
-                    <img className="h-[20px]" src={Currency} alt="" />
-                    <span className="text-[#4A4A4A] font-manrope text-[20px] font-semibold">
-                      {selectedAppointment.price}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex justify-between">
-                  <p className="mb-[5px] text-[#2C2C2C] font-manrope text-[18px] font-medium">
-                    Total with tax
-                  </p>
-                  <div className="flex items-center gap-[4px]">
-                    <img className="h-[20px]" src={Currency} alt="" />
-                    <span className="text-[#4A4A4A] font-manrope text-[20px] font-semibold">
-                      {selectedAppointment.price}
-                    </span>
-                  </div>
-                </div>
-              </div> */}
-
-              {/* Keep the Forms and Cancellation Policy sections as-is */}
             </div>
           </div>
         )}

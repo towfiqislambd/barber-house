@@ -1,12 +1,16 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  AppointmentCount,
   AppointmentList,
   BookmarkGet,
   BookMarkRemove,
+  ShowProducts,
   StoreDetails,
   stores,
   UserDataGet,
+  UserRecentlyStores,
   UserSearchStores,
+  UserTrendingStores,
 } from "./user.api";
 import useAuth from "./useAuth";
 
@@ -25,7 +29,7 @@ export const useUserSearchStore = (queryParams = {}) => {
   });
 };
 
-export const useStoreDetails = (id) => {
+export const useStoreDetails = id => {
   return useQuery({
     queryKey: ["store-details", id],
     queryFn: () => StoreDetails(id),
@@ -53,5 +57,33 @@ export const useUserAppointmentLists = () => {
   return useQuery({
     queryKey: ["appointment-lists"],
     queryFn: () => AppointmentList(),
+  });
+};
+
+export const useUserTrendingStores = () => {
+  return useQuery({
+    queryKey: ["trending-store"],
+    queryFn: () => UserTrendingStores(),
+  });
+};
+
+export const useUserRecentlyViewStores = () => {
+  return useQuery({
+    queryKey: ["recently-view"],
+    queryFn: () => UserRecentlyStores(),
+     });
+}
+
+export const useShowProducts = () => {
+  return useQuery({
+    queryKey: ["show-products"],
+    queryFn: () => ShowProducts(),
+  });
+};
+
+export const useAppointmentCount = () => {
+  return useQuery({
+    queryKey: ["appointment-count"],
+    queryFn: () => AppointmentCount(),
   });
 };

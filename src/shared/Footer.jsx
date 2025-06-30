@@ -3,7 +3,6 @@ import {
   FooterSocialFour,
   FooterSocialOne,
   FooterSocialThree,
-  FooterSocialTwo,
   InstagramSvg,
 } from "@/components/svgContainer/SvgContainer";
 import { useSocialLinks } from "@/hooks/cms.queries";
@@ -60,6 +59,7 @@ const Footer = () => {
             <div className="flex gap-1 2xl:gap-3 items-center">
               {socialLinks?.map((item, idx) => (
                 <a
+                  key={idx}
                   target="_blank"
                   href={item?.profile_link}
                   className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient "

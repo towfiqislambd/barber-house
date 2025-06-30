@@ -17,9 +17,8 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const dropdownRef = useRef(null);
 
-  // dropdown open/close
   useEffect(() => {
-    const onClick = (e) => {
+    const onClick = e => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setOpen(false);
       }
@@ -57,7 +56,7 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
           <p className="text-primary flex items-center mb-3">
             <IoTimeOutline className="mr-2" /> {time}
           </p>
-          {store_services.map((s) => (
+          {store_services.map(s => (
             <h4 key={s.catalog_service?.id} className="font-medium">
               {s.catalog_service?.name} —{" "}
               {currencyFormatter(+s.catalog_service?.price)}
@@ -68,7 +67,7 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
         {/* 3‑dots menu */}
         {status === "confirmed" && (
           <div className="absolute top-3 right-3" ref={dropdownRef}>
-            <button onClick={() => setOpen((o) => !o)}>
+            <button onClick={() => setOpen(o => !o)}>
               <BsThreeDotsVertical />
             </button>
             {open && (
@@ -162,7 +161,7 @@ function RescheduleModal({ appointment, onClose }) {
         <input
           type="time"
           value={selectedTime}
-          onChange={(e) => setSelectedTime(e.target.value)}
+          onChange={e => setSelectedTime(e.target.value)}
           className="border p-2 w-full rounded mb-6"
         />
         <button

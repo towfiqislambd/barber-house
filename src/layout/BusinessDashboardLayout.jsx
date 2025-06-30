@@ -14,6 +14,8 @@ import {
 import { FaBars } from "react-icons/fa6";
 import { Tooltip } from "antd";
 import useAuth from "@/hooks/useAuth";
+import { IoLogOutOutline } from "react-icons/io5";
+import { useLogOut } from "@/hooks/auth.hook.";
 
 const excludedPaths = [
   "/businessDashboard/editgifcardsale",
@@ -90,10 +92,15 @@ const BusinessDashboardLayout = () => {
   const [isOpen, setOpen] = useState(false);
   const [active, setActive] = useState("one");
   const location = useLocation();
+  const { mutateAsync: logOutMutate } = useLogOut();
   const isExcluded = excludedPaths.includes(location.pathname);
   const handleActive = id => {
     setActive(id);
     setOpen(false);
+  };
+
+  const handleLogout = () => {
+    logOutMutate();
   };
 
   return (
@@ -132,7 +139,7 @@ const BusinessDashboardLayout = () => {
             id="sidebar"
             className="w-[100px] hidden xl:block overflow-y-auto p-6 bg-white border-r h-full"
           >
-            <ul className="space-y-20">
+            <ul className="space-y-[70px]">
               {routingList.map(({ id, to, Icon, label }) => (
                 <li key={id}>
                   <Tooltip placement="right" title={label}>
@@ -146,6 +153,13 @@ const BusinessDashboardLayout = () => {
                   </Tooltip>
                 </li>
               ))}
+              <li>
+                <Tooltip placement="right" title="Logout">
+                  <button onClick={handleLogout} className="pl-3">
+                    <IoLogOutOutline className="text-3xl text-red-500" />
+                  </button>
+                </Tooltip>
+              </li>
             </ul>
           </aside>
         )}
@@ -178,7 +192,7 @@ const BusinessDashboardLayout = () => {
       >
         {!isExcluded && (
           <aside id="sidebar" className=" bg-white">
-            <ul className="space-y-9">
+            <ul className="space-y-[70px]">
               {routingList.map(({ id, to, Icon }) => (
                 <li key={id}>
                   <NavLink
@@ -191,6 +205,13 @@ const BusinessDashboardLayout = () => {
                 </li>
               ))}
             </ul>
+            <li>
+              <Tooltip placement="right" title="Logout">
+                <button onClick={handleLogout} className="pl-3">
+                  <IoLogOutOutline className="text-3xl text-red-500" />
+                </button>
+              </Tooltip>
+            </li>
           </aside>
         )}
       </div>

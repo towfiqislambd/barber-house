@@ -12,15 +12,11 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addtoCart(state, action) {
-      //if the item already in the cart
       const existedItemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      console.log(existedItemIndex);
 
-      //if exist
       if (existedItemIndex >= 0) {
-        //increase quantity
         state.cartItems[existedItemIndex].cartQuantity += 1;
         toast.info("Quantity Increased", {
           position: "bottom-left",
@@ -144,7 +140,8 @@ const cartSlice = createSlice({
       );
 
       if (item) {
-        item.cartQuantity += action.payload.cartQuantity;
+        // Increase quantity
+        item.cartQuantity += action.payload.cartQuantity || 1;
       } else {
         toast.success("Product added", {
           position: "bottom-left",
@@ -156,9 +153,13 @@ const cartSlice = createSlice({
           progress: undefined,
           theme: "light",
         });
-        state.cartItems.push(action.payload);
+        // Add new product with default cartQuantity 1 if not provided
+        state.cartItems.push({
+          ...action.payload,
+          cartQuantity: action.payload.cartQuantity || 1,
+        });
       }
-      //updated local storage
+      // Update local storage
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
   },

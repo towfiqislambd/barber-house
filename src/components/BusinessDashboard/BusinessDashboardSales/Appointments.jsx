@@ -1,4 +1,14 @@
-const Appointments = ({ data }) => {
+import { Loader } from "@/components/Loader/Loader";
+import { useAppointmentLists } from "@/hooks/cms.queries";
+import useAuth from "@/hooks/useAuth";
+
+const Appointments = () => {
+  const { user } = useAuth();
+  const online_store_id = user?.business_profile?.online_store?.id;
+  const { data: appointmentsData, isLoading } =
+    useAppointmentLists(online_store_id);
+  console.log(appointmentsData);
+
   return (
     <div className=" relative">
       <h3 className="text-[#2C2C2C] font-outfit text-xl lg:text-2xl font-medium mb-2">
@@ -8,71 +18,78 @@ const Appointments = ({ data }) => {
         Track, analyze & grow your salon business daily
       </p>
       <div className="border-t border-primary mt-10 pb-5"></div>
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse min-w-[800px]">
-          <thead>
-            <tr className="lg:text-lg text-gray-700 bg-gray-100 text-nowrap">
-              <th className="py-4 px-2">ID</th>
-              <th className="py-4 px-2">Client Name</th>
-              <th className="py-4 px-2 !text-left">Service</th>
-              <th className="py-4 px-2 !text-left">Price</th>
-              <th className="py-4 px-2 !text-left">Duration</th>
-              <th className="py-4 px-2 ">Appointment Date</th>
-              <th className="py-4 px-2">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.length > 0 ? (
-              data?.map((data, idx) => (
-                <tr
-                  key={data.id}
-                  className="hover:bg-gray-200 border-t first:border-none border-dashed text-[#545454] text-nowrap"
-                >
-                  <td className="px-3 text-sm md:px-4 py-3 md:py-5 md:text-base text-center">
-                    {idx + 1}
-                  </td>
-                  <td className="px-3 text-sm md:px-4 py-3 md:py-5 md:text-base text-center">
-                    {data?.customer_name}
-                  </td>
-                  <td className="px-3 text-sm md:px-4 py-3 md:py-5 ">
-                    {data?.services?.map(service => (
-                      <p key={service?.price}>{service?.service_name}</p>
-                    ))}
-                  </td>
-                  <td className="px-3 text-sm md:px-4 py-3 md:py-5 ">
-                    {data?.services?.map(service => (
-                      <p key={service?.price}>SAR: {service?.price}</p>
-                    ))}
-                  </td>
-                  <td className="px-3 text-sm md:px-4 py-3 md:py-5 ">
-                    {data?.services?.map(service => (
-                      <p key={service?.price}>{service?.duration} min</p>
-                    ))}
-                  </td>
-                  <td className="px-3 text-sm md:px-4 py-3 md:py-5 md:text-base text-center">
-                    {data?.appointment_date}
-                  </td>
-                  <td className="px-3 text-sm md:px-4 py-3 md:py-5 md:text-base text-center">
-                    <span
-                      className={`capitalize ${
-                        data?.status === "confirmed"
-                          ? "text-green-700 bg-green-200"
-                          : "text-red-700 bg-red-200"
-                      } px-3 py-1 rounded-full`}
-                    >
-                      {data?.status}
-                    </span>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <p className="font-medium pt-5 text-red-500 text-xl">
-                No activity found!
-              </p>
-            )}
-          </tbody>
-        </table>
-      </div>
+
+      {isLoading ? (
+        <div className="flex justify-center items-center py-12">
+          <Loader />
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse min-w-[800px]">
+            <thead>
+              <tr className="lg:text-lg text-gray-700 bg-gray-100 text-nowrap">
+                <th className="py-4 px-2">ID</th>
+                <th className="py-4 px-2">Client Name</th>
+                <th className="py-4 px-2 !text-left">Service</th>
+                <th className="py-4 px-2 !text-left">Price</th>
+                <th className="py-4 px-2 !text-left">Duration</th>
+                <th className="py-4 px-2 ">Appointment Date</th>
+                <th className="py-4 px-2">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {appointmentsData && appointmentsData.length > 0 ? (
+                appointmentsData?.map((data, idx) => (
+                  <tr
+                    key={data.id}
+                    className="hover:bg-gray-200 border-t first:border-none border-dashed text-[#545454] text-nowrap"
+                  >
+                    <td className="px-3 text-sm md:px-4 py-3 md:py-5 md:text-base text-center">
+                      {idx + 1}
+                    </td>
+                    <td className="px-3 text-sm md:px-4 py-3 md:py-5 md:text-base text-center">
+                      {data?.customer_name}
+                    </td>
+                    <td className="px-3 text-sm md:px-4 py-3 md:py-5 ">
+                      {data?.services?.map(service => (
+                        <p key={service?.price}>{service?.service_name}</p>
+                      ))}
+                    </td>
+                    <td className="px-3 text-sm md:px-4 py-3 md:py-5 ">
+                      {data?.services?.map(service => (
+                        <p key={service?.price}>SAR: {service?.price}</p>
+                      ))}
+                    </td>
+                    <td className="px-3 text-sm md:px-4 py-3 md:py-5 ">
+                      {data?.services?.map(service => (
+                        <p key={service?.price}>{service?.duration} min</p>
+                      ))}
+                    </td>
+                    <td className="px-3 text-sm md:px-4 py-3 md:py-5 md:text-base text-center">
+                      {data?.appointment_date}
+                    </td>
+                    <td className="px-3 text-sm md:px-4 py-3 md:py-5 md:text-base text-center">
+                      <span
+                        className={`capitalize ${
+                          data?.status === "confirmed"
+                            ? "text-green-700 bg-green-200"
+                            : "text-red-700 bg-red-200"
+                        } px-3 py-1 rounded-full`}
+                      >
+                        {data?.status}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <p className="font-medium pt-5 text-red-500 text-xl">
+                  No appointments found!
+                </p>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

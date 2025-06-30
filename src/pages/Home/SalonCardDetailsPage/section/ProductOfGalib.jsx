@@ -6,8 +6,7 @@ import "swiper/css/pagination";
 import { NextSliderSvg } from "@/components/svgContainer/SvgContainer";
 import { useState } from "react";
 import ProductOfGalibCard from "@/components/ProductOfGalibCard/ProductOfGalibCard";
-import productImg1 from "../../../../assets/images/productOfGalib/productOfGalibImg1.png";
-import productImg2 from "../../../../assets/images/productOfGalib/productOfGalibImg2.png";
+
 import currencyImg from "../../../../assets/images/searchResultPage/currentcy.png";
 
 const ProductOfGalib = ({ data }) => {
@@ -47,6 +46,7 @@ const ProductOfGalib = ({ data }) => {
                 <ProductOfGalibCard
                   currencyImgSrc={currencyImg}
                   product={product}
+                  data={data}
                 />
               </SwiperSlide>
             ))}

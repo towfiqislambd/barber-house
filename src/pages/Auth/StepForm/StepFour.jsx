@@ -34,7 +34,7 @@ const StepFour = ({ step, setStep, setFormData }) => {
       }
 
       try {
-        const API_KEY = "AIzaSyDl7ias7CMBPanjqPisVXwhXXVth21Cl5Y"; // Replace with your actual key
+        const API_KEY = import.meta.env.VITE_GOOGLE_MAP_API;
         const response = await axios.get(
           `https://maps.googleapis.com/maps/api/geocode/json`,
           {
