@@ -1,30 +1,22 @@
 import { useEffect, useState, useRef } from "react";
 import { IoTimeOutline } from "react-icons/io5";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { MdOutlineWatchLater } from "react-icons/md";
-import { MdOutlineCancel } from "react-icons/md";
+import { FaStar } from "react-icons/fa";
+import AddReviewModal from "../BusinessDashboard/Modals/AddReviewModal";
 
 export default function PreviousCard({ previousData, onSelect, selected }) {
-  console.log(previousData);
-  const { store_services, date, time } = previousData;
-
+  const { id, store_services, date, time } = previousData;
   const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const openFunc = () => {
-    setOpen(!open);
-  };
   useEffect(() => {
-    const handleClickOutside = event => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+    const onClick = e => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
   return (
@@ -36,7 +28,7 @@ export default function PreviousCard({ previousData, onSelect, selected }) {
         onClick={() => onSelect(previousData)}
       >
         <div className="flex flex-col gap-[8px] w-[20%] border-r border-[#DFE1E6] pr-[30px] flex-shrink-0">
-          <h3 className="text-[#008A90] font-outfit text-[28px] font-medium text-center">
+          <h3 className="text-[#008A90] font-outfit text-xl font-medium text-center">
             {date}
           </h3>
         </div>
@@ -60,34 +52,21 @@ export default function PreviousCard({ previousData, onSelect, selected }) {
             ))}
           </div>
         </div>
-        <div className="w-[10%] text-right relative" ref={dropdownRef}>
-          <button className="px-[10px] py-[10px]" onClick={openFunc}>
-            <BsThreeDotsVertical />
+        <div className="w-[30%] relative" ref={dropdownRef}>
+          <button
+            onClick={() => {
+              setIsOpen(true);
+            }}
+            className="flex items-center gap-2 border rounded-full px-2 py-1"
+          >
+            <FaStar className="text-yellow-400" />
+            Add Review
           </button>
-          {open && (
-            <div className="absolute w-[250px] shadow-md bg-white p-[32px] z-10">
-              <ul className="text-start flex flex-col gap-[32px]">
-                <li>
-                  <Link className="text-[#2C2C2C] font-manrope text-[16px] font-medium flex items-center gap-[5px]">
-                    <span className="text-[#008A90]text-[20px]">
-                      <MdOutlineWatchLater />
-                    </span>{" "}
-                    Reschedule Booking
-                  </Link>
-                </li>
-                <li>
-                  <Link className="text-[#2C2C2C] font-manrope text-[16px] font-medium flex items-center gap-[5px]">
-                    <span className="text-[#008A90] text-[20px]">
-                      <MdOutlineCancel />
-                    </span>{" "}
-                    Cancel Booking
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          )}
         </div>
       </div>
+
+      {/* Review Modal */}
+      <AddReviewModal id={id} isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }

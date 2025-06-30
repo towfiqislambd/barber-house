@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { IoTimeOutline } from "react-icons/io5";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { FaStar } from "react-icons/fa";
 import { MdOutlineWatchLater, MdOutlineCancel } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -96,18 +95,6 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
                     >
                       <MdOutlineCancel className="text-red-500" /> Cancel
                       Booking
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => {
-                        setShowCancelModal(true);
-                        setOpen(false);
-                      }}
-                      className="flex items-center gap-2"
-                    >
-                      <FaStar className="text-yellow-400" />
-                      Add Review
                     </button>
                   </li>
                 </ul>

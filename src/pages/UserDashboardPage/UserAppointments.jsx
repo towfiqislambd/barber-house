@@ -75,14 +75,14 @@ export default function UserAppointments() {
                       </span>
                     </h3>
                   </div>
-                  {data?.previous_appointments?.map(previousData => {
+                  {data?.previous_appointments?.map(previousData => (
                     <PreviousCard
                       previousData={previousData}
                       key={previousData.id}
                       onSelect={setSelectedAppointment}
                       selected={selectedAppointment?.id === previousData.id}
-                    />;
-                  })}
+                    />
+                  ))}
                   {data?.previous_appointments?.length === 0 && (
                     <p className="text-black">No Previous Appointment Found</p>
                   )}
