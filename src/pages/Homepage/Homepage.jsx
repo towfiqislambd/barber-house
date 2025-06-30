@@ -5,28 +5,33 @@ import ExploreMore from "@/components/HomePageComponents/ExploreMore";
 import HomepageBanner from "./sections/HomepageBanner";
 import { useHomePageData } from "@/hooks/cms.queries";
 import {
+  useAppointmentCount,
   useStores,
   useUserRecentlyViewStores,
   useUserTrendingStores,
 } from "@/hooks/user.queries";
-import useAuth from "@/hooks/useAuth"; // Make sure this exists
+// import useAuth from "@/hooks/useAuth";
 import { Loader } from "@/components/Loader/Loader";
 import { useEffect } from "react";
 
 const Homepage = () => {
-  const { data: homePageData } = useHomePageData();
-
-  console.log(homePageData);
-
+  const { data: appointmentCount, isLoading: appointmentCountLoading } =
+    useAppointmentCount();
+  const { data: homePageData, isLoading: homepageDataLoading } =
+    useHomePageData();
   const { data: stores, isLoading: allStoreLoading } = useStores();
   const { data: trendingStore, isLoading: trendingStoreLoading } =
     useUserTrendingStores();
   const { data: recentlyView } = useUserRecentlyViewStores();
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   console.log(recentlyView);
 
-  const isLoading = allStoreLoading || trendingStoreLoading;
+  const isLoading =
+    allStoreLoading ||
+    trendingStoreLoading ||
+    appointmentCountLoading ||
+    homepageDataLoading;
 
   useEffect(() => {
     if (isLoading) {
@@ -49,13 +54,13 @@ const Homepage = () => {
 
   const containerItems = [];
 
-  if (user) {
-    containerItems.push({
-      id: 2,
-      title: "Recently Viewed",
-      data: recentlyView,
-    });
-  }
+  // if (user) {
+  //   containerItems.push({
+  //     id: 2,
+  //     title: "Recently Viewed",
+  //     data: recentlyView,
+  //   });
+  // }
 
   containerItems.push(
     {
@@ -72,7 +77,7 @@ const Homepage = () => {
 
   return (
     <>
-      <HomepageBanner />
+      <HomepageBanner appointmentCount={appointmentCount} />
       <div className="bg-[#FCFCFC] 2xl:py-32 lg:py-16 py-8">
         {containerItems.map((data, index) => (
           <HomepageSliderContainer

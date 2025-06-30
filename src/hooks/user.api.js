@@ -128,3 +128,8 @@ export const ShowProducts = async () => {
   const { data } = await axiosSecure.get("/api/customer-dashboard/my-products");
   return data?.data;
 };
+
+export const AppointmentCount = async () => {
+  const { data } = await axiosPublic.get("/api/appointments/this-week-total");
+  return data?.data;
+};

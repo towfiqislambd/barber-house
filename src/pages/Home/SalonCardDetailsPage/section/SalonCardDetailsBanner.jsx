@@ -21,8 +21,6 @@ import toast from "react-hot-toast";
 import { useBookmarkAdd } from "@/hooks/user.mutation";
 import { useBookmarkGet } from "@/hooks/user.queries";
 import { useBookmarkRemove } from "@/hooks/user.mutation";
-import { useDispatch } from "react-redux";
-import { clearServices } from "@/redux/features/serviceSlice";
 
 const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
   const { user } = useAuth();
@@ -50,11 +48,11 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
 
   const currentDay = moment().format("dddd").toLowerCase();
   const todayHours = openingHours.find(
-    (entry) => entry.day_name.toLowerCase() === currentDay
+    entry => entry.day_name.toLowerCase() === currentDay
   );
 
   const storeId = data?.data?.id;
-  const isBookmarked = bookmark?.some((item) => item.id === storeId);
+  const isBookmarked = bookmark?.some(item => item.id === storeId);
   const handleBookmark = async () => {
     if (!user) {
       toast.error("Please Login First");
@@ -213,7 +211,7 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
                     <p className="text-[#1E1E1E] font-outfit text-xl font-semibold mb-2">
                       Opening Times
                     </p>
-                    {openingHours.map((day) => {
+                    {openingHours.map(day => {
                       const isToday = day.day_name.toLowerCase() === currentDay;
                       const isClosed =
                         !day.morning_start_time && !day.evening_start_time;

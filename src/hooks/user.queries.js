@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  AppointmentCount,
   AppointmentList,
   BookmarkGet,
   BookMarkRemove,
@@ -72,9 +73,17 @@ export const useUserRecentlyViewStores = () => {
     queryFn: () => UserRecentlyStores(),
      });
 }
+
 export const useShowProducts = () => {
   return useQuery({
     queryKey: ["show-products"],
     queryFn: () => ShowProducts(),
+  });
+};
+
+export const useAppointmentCount = () => {
+  return useQuery({
+    queryKey: ["appointment-count"],
+    queryFn: () => AppointmentCount(),
   });
 };

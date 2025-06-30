@@ -1,20 +1,15 @@
 import loginImg from "../../../assets/images/loginImage.png";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import {
-  GoogleSvg,
-  LeftSideArrowSvg,
-} from "@/components/svgContainer/SvgContainer";
+import { LeftSideArrowSvg } from "@/components/svgContainer/SvgContainer";
 import { useState } from "react";
 import icon from "../../../assets/images/icon.png";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm, Controller } from "react-hook-form";
 import { FaUser } from "react-icons/fa";
-import { useRegister, useSocialLogin } from "@/hooks/auth.hook.";
+import { useRegister } from "@/hooks/auth.hook.";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -23,7 +18,6 @@ const Registration = () => {
 
   const [avatarError, setAvatarError] = useState("");
   const { mutateAsync: registerMutation, isPending } = useRegister();
-  const { mutateAsync: socialLoginMutation } = useSocialLogin();
   const { type } = useParams();
   const handlePrev = () => {
     navigate(-1);
@@ -48,7 +42,7 @@ const Registration = () => {
     },
   });
 
-  const handleImageChange = (event) => {
+  const handleImageChange = event => {
     const file = event.target.files[0];
 
     if (file) {
@@ -56,11 +50,11 @@ const Registration = () => {
       setUserAvatar(imageUrl);
       setValue("avatar", file);
       setUserFile(file);
-      setAvatarError(""); // Clear error
+      setAvatarError("");
     }
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async data => {
     if (!data.avatar) {
       setAvatarError("Avatar is required");
       return;
@@ -83,38 +77,6 @@ const Registration = () => {
 
     await registerMutation(formData);
   };
-
-  // login with google:
-  const handleLoginWithGoogle = useGoogleLogin({
-    onSuccess: async (tokenResponse) => {
-      const token = tokenResponse.access_token;
-      try {
-        const { data } = await axios(
-          `${import.meta.env.VITE_GOOGLE_URL}/oauth2/v2/userinfo`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const updatedData = {
-          token,
-          provider: "google",
-          username: data?.name,
-          email: data?.email,
-          avatar: data?.picture,
-          // avatar: null,
-        };
-        await socialLoginMutation(updatedData);
-      } catch (error) {
-        console.error("Error fetching user info:", error);
-      }
-    },
-    onError: (error) => {
-      console.error("Google Login Failed:", error);
-    },
-  });
 
   return (
     <section className="container flex flex-col xl:flex-row gap-[20px] xl:gap-[132px] mb-[50px] items-start h-[100vh] overflow-hidden">
@@ -139,10 +101,6 @@ const Registration = () => {
         <h1 className="text-textSecondary font-outfit text-[32px] xl:text-[40px] font-semibold leading-[52.8px] text-center">
           Sign up
         </h1>
-        <p className="text-[#8993A4] font-outfit text-lg leading-[29.52px] text-center max-w-[578px] mt-2">
-          We imported your data from Google but any changes you make here will
-          be limited to your Fresha profile.
-        </p>
 
         {/* Avatar */}
         <div className="w-full flex justify-center items-center mt-6">
@@ -272,14 +230,14 @@ const Registration = () => {
               control={control}
               name="agree_to_terms"
               rules={{
-                validate: (value) =>
+                validate: value =>
                   value === true || "You must agree to the terms",
               }}
               render={({ field }) => (
                 <Checkbox
                   id="terms"
                   checked={field.value}
-                  onCheckedChange={(value) => field.onChange(value)}
+                  onCheckedChange={value => field.onChange(value)}
                 />
               )}
             />
@@ -314,21 +272,11 @@ const Registration = () => {
             "Sign Up"
           )}
         </Button>
-
-        <button
-          onClick={() => handleLoginWithGoogle()}
-          className="flex gap-3 mt-5 w-full justify-center border border-[#1E1E1E] py-[14px] px-[16px] rounded-[10px] items-center"
-        >
-          <GoogleSvg />
-          <h1 className="text-textSecondary font-outfit text-lg font-medium leading-[29.52px]">
-            Continue with Google
-          </h1>
-        </button>
         <p className="flex flex-col items-center md:flex-row mt-5 justify-center  gap-x-1 ">
           Already have an account?
           <Link to="/login" className="underline font-bold cursor-pointer ">
             Log In
-          </Link>{" "}
+          </Link>
         </p>
       </form>
     </section>
