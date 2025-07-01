@@ -10,7 +10,8 @@ import { Loader } from "@/components/Loader/Loader";
 import { PiCameraBold } from "react-icons/pi";
 
 export default function ChatWindow({ chatId, onBack, isMobile }) {
-  const { singleConversion, refetch } = useSingleChatConversion(chatId);
+  const { singleConversion, refetch, isLoading } =
+    useSingleChatConversion(chatId);
   const { mutate: sendMessage } = usePostMessage();
   const [message, setMessage] = useState("");
   const [imageFile, setImageFile] = useState(null);
@@ -126,77 +127,85 @@ export default function ChatWindow({ chatId, onBack, isMobile }) {
         className="flex-1 overflow-y-auto p-3 sm:p-6 bg-[#FAFAFC]"
         ref={containerRef}
       >
-        <div className="space-y-4">
-          {messages.map((msg, i) => {
-            return (
-              <div
-                key={msg.id || i}
-                className={`flex ${
-                  isCurrentUser(msg.sender_id) ? "justify-end" : "justify-start"
-                }`}
-              >
-                {!isCurrentUser(msg.sender_id) && (
-                  <img
-                    src={
-                      msg.sender?.avatar
-                        ? `${import.meta.env.VITE_SITE_URL}/${
-                            msg.sender.avatar
-                          }`
-                        : defaultUser
-                    }
-                    className="w-8 h-8 rounded-full mr-2 self-end"
-                    alt="avatar"
-                  />
-                )}
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <Loader />
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {messages.map((msg, i) => {
+              return (
                 <div
-                  className={`rounded-xl px-4 py-2 text-sm max-w-[85%] sm:max-w-[70%] break-words ${
+                  key={msg.id || i}
+                  className={`flex ${
                     isCurrentUser(msg.sender_id)
-                      ? "bg-[#1C1F4A] text-white"
-                      : "bg-gray-200 text-black"
-                  } ${
-                    msg.status === "sending"
-                      ? "opacity-60 italic"
-                      : msg.status === "failed"
-                      ? "border border-red-500"
-                      : ""
+                      ? "justify-end"
+                      : "justify-start"
                   }`}
                 >
-                  {msg.type === "text" && <p>{msg.message}</p>}
-                  {msg.type === "file" &&
-                    (msg.status === "sending" ? (
-                      <Loader />
-                    ) : (
-                      <img
-                        src={`${import.meta.env.VITE_SITE_URL}/storage/${
-                          msg.file_path
-                        }`}
-                        alt="sent"
-                        className="mt-2 max-w-[200px] sm:max-w-[220px] rounded-lg"
-                      />
-                    ))}
-                  <span className="text-[10px] block mt-1 opacity-60 text-right">
-                    {moment(msg.created_at).format("LT")}
-                    {msg.status === "sending" && " ⏳"}
-                    {msg.status === "failed" && " ❌"}
-                  </span>
+                  {!isCurrentUser(msg.sender_id) && (
+                    <img
+                      src={
+                        msg.sender?.avatar
+                          ? `${import.meta.env.VITE_SITE_URL}/${
+                              msg.sender.avatar
+                            }`
+                          : defaultUser
+                      }
+                      className="w-8 h-8 rounded-full mr-2 self-end"
+                      alt="avatar"
+                    />
+                  )}
+                  <div
+                    className={`rounded-xl px-4 py-2 text-sm max-w-[85%] sm:max-w-[70%] break-words ${
+                      isCurrentUser(msg.sender_id)
+                        ? "bg-[#1C1F4A] text-white"
+                        : "bg-gray-200 text-black"
+                    } ${
+                      msg.status === "sending"
+                        ? "opacity-60 italic"
+                        : msg.status === "failed"
+                        ? "border border-red-500"
+                        : ""
+                    }`}
+                  >
+                    {msg.type === "text" && <p>{msg.message}</p>}
+                    {msg.type === "file" &&
+                      (msg.status === "sending" ? (
+                        <Loader />
+                      ) : (
+                        <img
+                          src={`${import.meta.env.VITE_SITE_URL}/storage/${
+                            msg.file_path
+                          }`}
+                          alt="sent"
+                          className="mt-2 max-w-[200px] sm:max-w-[220px] rounded-lg"
+                        />
+                      ))}
+                    <span className="text-[10px] block mt-1 opacity-60 text-right">
+                      {moment(msg.created_at).format("LT")}
+                      {msg.status === "sending" && " ⏳"}
+                      {msg.status === "failed" && " ❌"}
+                    </span>
+                  </div>
+                  {isCurrentUser(msg.sender_id) && (
+                    <img
+                      src={
+                        msg.sender?.avatar
+                          ? `${import.meta.env.VITE_SITE_URL}/${
+                              msg.sender.avatar
+                            }`
+                          : defaultUser
+                      }
+                      className="w-8 h-8 rounded-full ml-2 self-end"
+                      alt="avatar"
+                    />
+                  )}
                 </div>
-                {isCurrentUser(msg.sender_id) && (
-                  <img
-                    src={
-                      msg.sender?.avatar
-                        ? `${import.meta.env.VITE_SITE_URL}/${
-                            msg.sender.avatar
-                          }`
-                        : defaultUser
-                    }
-                    className="w-8 h-8 rounded-full ml-2 self-end"
-                    alt="avatar"
-                  />
-                )}
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Input */}
