@@ -29,7 +29,7 @@ export default function ChatSidebar({
     if (!echo || !user?.id) return;
     echo
       .private(`latest-message-channel.${user?.id}`)
-      .listen("LatestMassageEvent", e => {
+      .listen("LatestMassageEvent", (e) => {
         if (+e.receiverId === +user?.id) {
           queryClient.invalidateQueries(["chat-lists"]);
           setUnread(e.unreadMessageCount);
@@ -78,9 +78,9 @@ export default function ChatSidebar({
           />
 
           <div className="overflow-y-auto flex-1">
-            {chats?.data?.map(chat => {
+            {chats?.data?.map((chat) => {
               const participant = chat?.participants?.find(
-                p => p?.user?.id !== user?.id
+                (p) => p?.user?.id !== user?.id
               );
               const userInfo = participant?.user;
               if (!userInfo) return null;
@@ -89,11 +89,11 @@ export default function ChatSidebar({
                 <div
                   key={chat.id}
                   onClick={() => {
-                    onSelectChat(chat.id);
+                    onSelectChat(+chat?.participants[0].user_id);
                     if (isMobile) setShowSidebar(false);
                   }}
                   className={`flex items-center px-4 py-3 cursor-pointer hover:bg-gray-100 ${
-                    +selectedChatId === +chat.participants[0].user_id
+                    +selectedChatId === +chat?.participants[0]?.user_id
                       ? "bg-gray-100"
                       : ""
                   }`}
