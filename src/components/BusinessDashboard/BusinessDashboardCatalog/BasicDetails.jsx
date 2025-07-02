@@ -7,18 +7,16 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useAddService } from "@/hooks/cms.mutations";
-import { useCatalogue, useServicesType } from "@/hooks/cms.queries";
+import { useCatalogue } from "@/hooks/cms.queries";
 import useAuth from "@/hooks/useAuth";
 import Input from "antd/es/input/Input";
 import { useForm, Controller } from "react-hook-form";
 
 const BasicDetails = ({ onNext }) => {
-  const { data: categoryData } = useCatalogue();
   const { user } = useAuth();
+  const { data: categoryData } = useCatalogue();
   const business_profile_id = user?.business_profile?.id;
   const { mutateAsync: addService, isPending } = useAddService();
-  const { data: servicesTypes } = useServicesType();
-
   const {
     handleSubmit,
     control,
@@ -108,13 +106,13 @@ const BasicDetails = ({ onNext }) => {
                   <SelectValue placeholder="Select a service type" />
                 </SelectTrigger>
                 <SelectContent className="!text-black">
-                  {servicesTypes?.map(item => (
+                  {user?.business_profile?.business_services?.map(item => (
                     <SelectItem
-                      key={item.id}
-                      value={item.id.toString()} // Convert to string if necessary
+                      key={item.service_id}
+                      value={item.service_id.toString()} // Convert to string if necessary
                       className="!text-black"
                     >
-                      {item.service_name}
+                      {item?.service?.service_name}
                     </SelectItem>
                   ))}
                 </SelectContent>
