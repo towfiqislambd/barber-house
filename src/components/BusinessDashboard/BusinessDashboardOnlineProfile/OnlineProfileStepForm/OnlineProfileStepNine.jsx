@@ -17,6 +17,7 @@ import { CheckIcon } from "lucide-react";
 const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
   const { data: allTeamMembers } = useAllTeamMembers();
   const { data: allServices } = useAllServices();
+  console.log(allServices);
 
   const [teams, setTeams] = useState([]);
   const [services, setServices] = useState([]);
