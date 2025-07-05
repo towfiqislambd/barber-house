@@ -42,7 +42,7 @@ export default function UserProfileNavbar() {
               </button>
             </div>
             <div className="mt-2">
-              <UserProfileSidebar />
+              <UserProfileSidebar setIsSidebarOpen={setIsSidebarOpen} />
             </div>
           </div>
           {isSidebarOpen && (

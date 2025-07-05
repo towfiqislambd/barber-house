@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function PopularArticals({ data, data2 }) {
   return (
-    <section className="py-[40px] xl:py-[68px] px-[15px]">
+    <section className="lg:py-[40px] xl:py-[68px] px-[15px]">
       <div className="container">
         <div className="mb-[67px] text-center">
           <CommonTitle title={data?.title} text={data?.sub_title} />

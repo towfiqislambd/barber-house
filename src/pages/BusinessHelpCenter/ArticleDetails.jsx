@@ -28,7 +28,7 @@ export default function ArticleDetails() {
   }
 
   return (
-    <section className="py-20">
+    <section className="pb-10 lg:py-20">
       <div className="container">
         {/* Single item */}
         <div className="flex h-[100%] flex-col gap-[18px] w-full rounded-[16px] shadow-[0px_2px_16px_0px_rgba(0,0,0,0.08)] border border-[#dfe1e6] py-[18px] px-[24px]">

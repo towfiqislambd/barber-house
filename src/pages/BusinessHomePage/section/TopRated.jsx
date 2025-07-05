@@ -10,7 +10,7 @@ const TopRated = ({ data }) => {
   return (
     <section>
       <div
-        className="lg:h-[362px] xl:h-[370px]"
+        className=""
         style={{
           backgroundImage: ` url(${topRatedBannerImg}) `,
           backgroundSize: "cover",
@@ -32,7 +32,7 @@ const TopRated = ({ data }) => {
           <div className="grid grid-cols-2 gap-12">
             {clientData.map(client => (
               <div key={client.id}>
-                <h2 className="text-[#1E1E1E] font-outfit text-[24px] xl:text-4xl font-semibold xl:leading-[43.2px]">
+                <h2 className="text-[#1E1E1E] font-outfit text-[24px] xl:text-2xl 2xl:text-4xl font-semibold 2xl:leading-[43.2px]">
                   {typeof client.count === "number"
                     ? client.count.toLocaleString() + "+"
                     : client.count}
