@@ -27,14 +27,11 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
   const mutateAync = useBookmarkAdd();
   const { data: bookmark } = useBookmarkGet();
   const removeBookmark = useBookmarkRemove();
-
   const [swiperRef, setSwiperRef] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-
   const baseURL = import.meta.env.VITE_SITE_URL;
   const salonImages = data?.data?.store_images || [];
-
   const [selectedBanner, setSelectedBanner] = useState("");
 
   useEffect(() => {
@@ -45,7 +42,6 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
   }, [salonImages]);
 
   const openingHours = data?.data?.opening_hours || [];
-
   const currentDay = moment().format("dddd").toLowerCase();
   const todayHours = openingHours.find(
     entry => entry.day_name.toLowerCase() === currentDay
@@ -100,7 +96,7 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
             alt="Salon Preview"
           />
 
-          <div className="relative w-11/12 mx-auto xl:max-w-[500px] 2xl:max-w-[650px] 3xl:max-w-[745px]">
+          <div className="relative w-10/12 lg:w-11/12 mx-auto xl:max-w-[500px] 2xl:max-w-[650px] 3xl:max-w-[745px]">
             {/* Prev Button */}
             <div
               onClick={() => swiperRef?.slidePrev()}
