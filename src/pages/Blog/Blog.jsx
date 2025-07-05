@@ -28,8 +28,8 @@ export default function Blog() {
     <section className="sm:pt-[60px] lg:pt-[100px] px-[15px] md:px-[30px] 3xl:px-[100px] ">
       <div className="container">
         <div>
-          <div className="flex items-center flex-col mb-[64px]">
-            <div className="mb-[40px]">
+          <div className="flex items-center flex-col mb-8 lg:mb-[64px]">
+            <div className="lg:mb-[40px]">
               <h4 className="font-outfit lg:text-[48px] text-center text-[28px] font-semibold leading-[57px] text-[#000]">
                 {allBlog?.blog_banner?.title}
               </h4>
