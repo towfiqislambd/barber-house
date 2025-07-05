@@ -16,13 +16,13 @@ const SelectServicesPage = () => {
           </h1>
 
           {/* This is the content section */}
-          <div className="container">
-            <div className="flex flex-col gap-y-[33px] 3xl:ml-[105px] mt-10 3xl:mt-[88px]">
-              <div className="flex flex-col xl:flex-row w-full gap-10 gap-x-[50px] relative">
-                <SelectServiceComponent
-                  bookingType={bookingType}
-                  storeData={storeData}
-                />
+          <div className="flex flex-col gap-y-[33px] 3xl:ml-[105px] mt-10 3xl:mt-[88px]">
+            <div className="flex flex-col xl:flex-row w-full gap-10 gap-x-[50px] relative">
+              <SelectServiceComponent
+                bookingType={bookingType}
+                storeData={storeData}
+              />
+              <div className="flex-shrink-0">
                 <Featured bookingType={bookingType} storeData={storeData} />
               </div>
             </div>

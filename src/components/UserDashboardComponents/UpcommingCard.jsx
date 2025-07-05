@@ -30,7 +30,7 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
   return (
     <div className="mb-5">
       <div
-        className={`p-5 flex items-center rounded-lg bg-white border ${
+        className={`p-2 lg:p-5 flex flex-col lg:flex-row lg:items-center rounded-lg bg-white border ${
           selected ? "border-primary shadow-md" : "border-gray-300"
         } relative cursor-pointer hover:shadow`}
         onClick={() => onSelect(upcomingData)}
@@ -47,13 +47,13 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
         </span>
 
         {/* Date */}
-        <div className="w-1/5 border-r pr-4">
-          <h3 className="text-primary text-2xl text-center">{date}</h3>
+        <div className="lg:w-1/5 border-r pr-4 flex-shrink-0">
+          <h3 className="text-primary text-lg lg:text-2xl lg:text-center">{date}</h3>
         </div>
 
         {/* Time & services */}
-        <div className="w-4/5 pl-6 flex flex-col">
-          <p className="text-primary flex items-center mb-3">
+        <div className="lg:w-4/5 lg:pl-6 flex flex-col">
+          <p className="text-primary flex items-center mb-1 lg:mb-3">
             <IoTimeOutline className="mr-2" /> {time}
           </p>
           {store_services.map(s => (

@@ -1,9 +1,7 @@
 import UserProfileNavbar from "@/shared/UserProfile/UserProfileNavbar";
 import UserProfileSidebar from "@/shared/UserProfile/UserProfileSidebar";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { LiaTimesCircle } from "react-icons/lia";
-import { HiMiniBars3BottomRight } from "react-icons/hi2";
 
 export default function UserDashboardLayout() {
   const [salesetting, setSalesetting] = useState(false);
@@ -32,7 +30,7 @@ export default function UserDashboardLayout() {
             </div>
           </div>
 
-          <div className="2xl:ml-[300px] pt-[60px]  xl:pl-[60px] pb-[100px]">
+          <div className="2xl:ml-[300px] pt-5 lg:pt-[60px] pr-5 pl-[30px] 4xl:pl-[60px] pb-[100px]">
             <Outlet />
           </div>
         </div>

@@ -20,12 +20,12 @@ export default function UserAppointments() {
   }
 
   return (
-    <div>
+    <section className="">
       <h3 className="text-[#2C2C2C] font-outfit text-[36px] font-medium mb-[40px]">
         Appointments
       </h3>
-      <div className="flex gap-[30px]">
-        <div className="flex-shrink-0 w-[814px]">
+      <div className="flex flex-col-reverse 4xl:flex-row gap-[30px]">
+        <div className="flex-shrink-0 w-full lg:w-[700px]">
           <div className="">
             <div className="flex bg-primary w-max rounded-[36px] p-[4px] mb-[28px]">
               <button
@@ -110,7 +110,7 @@ export default function UserAppointments() {
 
         {/*Start:: Right card  */}
         {selectedAppointment && (
-          <div className="flex-shrink-0 w-[400px] h-[450px] border border-borderColorLight rounded-[16px] p-[30px]">
+          <div className="flex-shrink-0 w-full lg:w-[400px] h-[450px] border border-borderColorLight rounded-[16px] p-3 lg:p-[30px]">
             <div className="overflow-hidden rounded-tl-[8px] rounded-tr-[8px] h-[200px]">
               <img
                 src={BookingImg}
@@ -147,6 +147,6 @@ export default function UserAppointments() {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 }
