@@ -43,10 +43,8 @@ const HomepageReview = ({ data }) => {
                 480: { slidesPerView: 2 },
                 576: { slidesPerView: 2 },
                 768: { slidesPerView: 2 },
-                1024: { slidesPerView: 4 },
+                1024: { slidesPerView: 3 },
                 1200: { slidesPerView: 4 },
-                1460: { slidesPerView: 4 },
-                1650: { slidesPerView: 4 },
               }}
             >
               {data?.map((item, index) => (

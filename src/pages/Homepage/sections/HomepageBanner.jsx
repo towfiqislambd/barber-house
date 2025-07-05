@@ -213,7 +213,7 @@ const HomepageBanner = ({ appointmentCount }) => {
         {/* Booking Stats */}
         <div>
           <h4 className="text-xl lg:text-2xl text-white font-outfit">
-            <span className="text-2xl font-semibold">
+            <span className="text-lg lg:text-2xl font-semibold">
               {appointmentCount?.total_appointment_this_week}
             </span>{" "}
              appointments booked this week!
