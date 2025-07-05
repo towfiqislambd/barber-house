@@ -52,7 +52,6 @@ const HomepageSliderContainer = ({ data, isLastItem }) => {
             375: { slidesPerView: 1 },
             480: { slidesPerView: 1 },
             576: { slidesPerView: 2 },
-            768: { slidesPerView: 3, spaceBetween: 20 },
             1024: { slidesPerView: 3 },
             1200: { slidesPerView: 4 },
           }}

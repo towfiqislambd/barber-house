@@ -62,7 +62,7 @@ const Footer = () => {
                   key={idx}
                   target="_blank"
                   href={item?.profile_link}
-                  className="w-10 h-10 rounded-full grid place-items-center bg-primary-gradient "
+                  className="w-10 h-10 rounded-full grid place-items-center flex-shrink-0 bg-primary-gradient "
                 >
                   {item?.social_media === "facebook" && <FooterSocialOne />}
                   {item?.social_media === "twitter" && <FooterSocialThree />}

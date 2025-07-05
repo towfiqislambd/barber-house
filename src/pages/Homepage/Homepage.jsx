@@ -76,7 +76,7 @@ const Homepage = () => {
   return (
     <>
       <HomepageBanner appointmentCount={appointmentCount} />
-      <div className="bg-[#FCFCFC] 2xl:py-32 lg:py-16 py-8">
+      <div className="bg-[#FCFCFC] 4xl:py-32 lg:py-16 py-8">
         {containerItems.map((data, index) => (
           <HomepageSliderContainer
             isLastItem={index + 1 === containerItems.length}

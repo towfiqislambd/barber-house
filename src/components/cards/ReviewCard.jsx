@@ -2,16 +2,14 @@ import { QuotationSvg, StarSvg } from "../svgContainer/SvgContainer";
 
 const ReviewCard = ({ item }) => {
   return (
-    <div className="bg-[#F6F6F6] 4xl:h-[300px] 4xl:px-6 px-3 4xl:py-8 py-4 rounded-lg transition-all w-full hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer">
+    <div className="bg-[#F6F6F6] min-h-[300px] 4xl:px-6 px-3 4xl:py-8 py-4 rounded-lg transition-all w-full hover:bg-[#E0E0E0] ease-out duration-300 cursor-pointer">
       {/* description */}
       <div>
-        <p className="text-textColor 4xl:text-xl">
-         {item?.review}
-        </p>
+        <p className="text-textColor 4xl:text-lg">{item?.review}</p>
       </div>
       {/* review */}
       <div className="mt-2">
-        <p className="flex items-center gap-2 text-xl font-medium">
+        <p className="flex items-center gap-2 text-lg font-medium">
           {item?.rating}
           <span>
             <StarSvg />

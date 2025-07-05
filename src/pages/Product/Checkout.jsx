@@ -19,15 +19,13 @@ import { useCheckout } from "@/hooks/user.mutation";
 
 const Checkout = () => {
   const { user } = useAuth();
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector(state => state.cart.cartItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
-
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
   const { mutate: checkout } = useCheckout(setLoading);
-
   const data = location.state?.data;
 
   const {
@@ -77,7 +75,7 @@ const Checkout = () => {
     }
   };
 
-  const handleRemoveItem = (item) => {
+  const handleRemoveItem = item => {
     dispatch(removeFromCart(item));
   };
 
@@ -90,7 +88,7 @@ const Checkout = () => {
   const inputStyle =
     "w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition";
 
-  const onSubmit = (formData) => {
+  const onSubmit = formData => {
     const payload = {
       store_id: data?.id,
       first_name: formData.first_name,
@@ -98,7 +96,7 @@ const Checkout = () => {
       email: formData.email,
       phone: formData.number,
       address_id: user?.addresses?.[selectedAddressIndex]?.id,
-      products: cartItems.map((item) => ({
+      products: cartItems.map(item => ({
         product_id: item.id,
         quantity: item.cartQuantity,
       })),
@@ -107,7 +105,7 @@ const Checkout = () => {
     };
 
     checkout(payload, {
-      onSuccess: (res) => {
+      onSuccess: res => {
         if (res?.data) {
           dispatch(removeAllFromCart());
           window.location.href = res.data;
@@ -123,38 +121,46 @@ const Checkout = () => {
   }, [location]);
 
   return (
-    <div className="xl:pb-20 pb-10 xl:pt-40 md:pt-32 pt-24 container">
-      <div className="min-h-screen bg-gray-100 py-10 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="2xl:pb-20 pb-10 xl:pt-40 md:pt-32 pt-24">
+      <div className="bg-gray-100 py-10 px-4 md:px-8 container">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 xl:grid-cols-3 gap-8">
           {/* Left Side */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-6 order-2 xl:order-1">
             {/* Shipping Info */}
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="bg-white rounded-2xl shadow-lg p-6">
                 <h2 className="text-2xl font-semibold text-gray-800 mb-4">
                   Shipping Information
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    {...register("first_name", { required: true })}
-                    className={inputStyle}
-                    placeholder="First Name"
-                  />
-                  <input
-                    {...register("last_name", { required: true })}
-                    className={inputStyle}
-                    placeholder="Last Name"
-                  />
-                  <input
-                    {...register("email", { required: true })}
-                    className={inputStyle}
-                    placeholder="Email Address"
-                  />
-                  <input
-                    {...register("number", { required: true })}
-                    className={inputStyle}
-                    placeholder="Phone Number"
-                  />
+                <div className="grid lg:grid-cols-2 gap-4">
+                  <div className="col-span-2 lg:col-span-1">
+                    <input
+                      {...register("first_name", { required: true })}
+                      className={inputStyle}
+                      placeholder="First Name"
+                    />
+                  </div>
+                  <div className="col-span-2 lg:col-span-1">
+                    <input
+                      {...register("last_name", { required: true })}
+                      className={inputStyle}
+                      placeholder="Last Name"
+                    />
+                  </div>
+                  <div className="col-span-2 lg:col-span-1">
+                    <input
+                      {...register("email", { required: true })}
+                      className={inputStyle}
+                      placeholder="Email Address"
+                    />
+                  </div>
+                  <div className="col-span-2 lg:col-span-1">
+                    <input
+                      {...register("number", { required: true })}
+                      className={inputStyle}
+                      placeholder="Phone Number"
+                    />
+                  </div>
 
                   {/* Address Selection */}
                   <div className="col-span-2 space-y-3">
@@ -239,10 +245,10 @@ const Checkout = () => {
           </div>
 
           {/* Right Side */}
-          <div className="bg-white rounded-2xl shadow-lg p-6 h-fit space-y-6">
+          <div className="bg-white rounded-2xl shadow-lg p-6 h-fit space-y-6 -order-1 xl:order-2">
             <h2 className="text-2xl font-semibold text-gray-800">Your Order</h2>
             <div className="space-y-4 max-h-[300px] overflow-y-auto pr-1">
-              {cartItems.map((item) => (
+              {cartItems.map(item => (
                 <div
                   key={item.id}
                   className="flex items-center justify-between gap-4"

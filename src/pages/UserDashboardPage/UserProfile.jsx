@@ -141,7 +141,7 @@ export default function UserProfile() {
         </div>
       ) : (
         <div className="px-[15px]">
-          <h3 className="text-[#2C2C2C] font-outfit text-[24px] xl:text-[36px] font-medium mb-[40px]">
+          <h3 className="text-[#2C2C2C] font-outfit text-[24px] xl:text-[36px] font-medium mb-5 lg:mb-[40px]">
             Profile
           </h3>
           <div className="flex flex-col xl:flex-row gap-[20px]">
@@ -275,7 +275,7 @@ export default function UserProfile() {
         open={editProfile}
         onCancel={handleCancel}
       >
-        <div className="p-[15px]">
+        <div className="lg:p-[15px]">
           <h3 className="text-[24px] font-medium mb-[20px]">Edit Profile</h3>
           <form className="flex flex-col gap-[20px]">
             <div>

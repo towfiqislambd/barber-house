@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-export default function UserProfileSidebar() {
+export default function UserProfileSidebar({ setIsSidebarOpen }) {
   const baseClass =
     "py-[16px] px-[32px] rounded-[8px] font-manrope font-medium leading-[27px] text-[18px] block";
   const activeClass = "bg-primary text-white";

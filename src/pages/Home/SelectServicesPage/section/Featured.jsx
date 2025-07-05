@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import currencyImg from "../../../../assets/images/searchResultPage/currentcy.png";
 import { useSelector } from "react-redux";
 import { currencyFormatter } from "@/lib/currencyFormatter";
 
@@ -14,7 +13,7 @@ const Featured = ({ storeData, bookingType }) => {
   );
 
   return (
-    <div className="w-[438px] max-h-[871px] border-[0.4px] border-solid p-5 border-borderColorLight 2xl:px-7 2xl:py-7 3xl:py-8 3xl:px-7 rounded-2xl">
+    <div className="max-w-[438px] max-h-[871px] border-[0.4px] border-solid p-5 border-borderColorLight 2xl:px-7 2xl:py-7 3xl:py-8 3xl:px-7 rounded-2xl">
       <img
         className="w-full h-[180px] 2xl:h-[237px] object-cover"
         src={`${import.meta.env.VITE_SITE_URL}/${
