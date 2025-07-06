@@ -7,7 +7,13 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useForm, Controller } from "react-hook-form";
 
-const OnlineProfileStepThree = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepThree = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   const {
     handleSubmit,
     control,
@@ -15,8 +21,8 @@ const OnlineProfileStepThree = ({ step, setStep, setFormData, details }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      phone: details?.phone || "",
-      email: details?.email || "",
+      phone: details?.phone || formData?.phone || "",
+      email: details?.email || formData?.email || "",
     },
   });
 
@@ -49,7 +55,7 @@ const OnlineProfileStepThree = ({ step, setStep, setFormData, details }) => {
         </div>
 
         <div className="xl:max-w-[608px] md:w-[500px] w-full mx-auto xl:mt-[84px] mt-12 font-semibold leading-[43.2px] container px-5 xl:px-0 pb-10 sm:pb-0">
-          <h1 className="text-textColor font-outfit text-4xl">
+          <h1 className="text-textColor font-outfit text-2xl lg:text-4xl">
             How can clients get in touch?
           </h1>
 

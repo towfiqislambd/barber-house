@@ -9,7 +9,7 @@ export default function UserProfileSidebar({ setIsSidebarOpen }) {
   return (
     <div className="relative">
       <ul className="flex flex-col">
-        <li>
+        <li onClick={() => setIsSidebarOpen(false)}>
           <NavLink
             to="/userdashboard"
             end
@@ -20,7 +20,7 @@ export default function UserProfileSidebar({ setIsSidebarOpen }) {
             Profile
           </NavLink>
         </li>
-        <li>
+        <li onClick={() => setIsSidebarOpen(false)}>
           <NavLink
             to="/userdashboard/appointments"
             className={({ isActive }) =>
@@ -30,7 +30,7 @@ export default function UserProfileSidebar({ setIsSidebarOpen }) {
             Appointments
           </NavLink>
         </li>
-        <li>
+        <li onClick={() => setIsSidebarOpen(false)}>
           <NavLink
             to="/userdashboard/favourites"
             className={({ isActive }) =>
@@ -40,7 +40,7 @@ export default function UserProfileSidebar({ setIsSidebarOpen }) {
             Favourites
           </NavLink>
         </li>
-        <li>
+        <li onClick={() => setIsSidebarOpen(false)}>
           <NavLink
             to="/userdashboard/productorder"
             className={({ isActive }) =>

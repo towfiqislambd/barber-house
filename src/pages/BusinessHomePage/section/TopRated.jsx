@@ -29,7 +29,7 @@ const TopRated = ({ data }) => {
             </p>
           </div>
           {/* Right side Div */}
-          <div className="grid grid-cols-2 gap-12">
+          <div className="grid grid-cols-2 gap-12 flex-shrink-0">
             {clientData.map(client => (
               <div key={client.id}>
                 <h2 className="text-[#1E1E1E] font-outfit text-[24px] xl:text-2xl 2xl:text-4xl font-semibold 2xl:leading-[43.2px]">

@@ -19,7 +19,7 @@ const ServiceCard = ({ service, bookingType, detailsPage }) => {
   return (
     <div
       onClick={() => dispatch(toggleService({ service }))}
-      className={`border-borderColorLight bg-white border-[0.4px] ease-in-out duration-500 w-full  h-auto max-h-[146px] p-5 lg:py-6 lg:px-7 rounded-2xl flex cursor-pointer items-center justify-between ${
+      className={`border-borderColorLight bg-white border-[0.4px] ease-in-out duration-500 w-full  h-auto max-h-[146px] p-5 rounded-2xl flex cursor-pointer items-center justify-between ${
         isActive ? "border-primary" : ""
       }`}
     >

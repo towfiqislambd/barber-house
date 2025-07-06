@@ -22,7 +22,7 @@ const SelectServicesPage = () => {
                 bookingType={bookingType}
                 storeData={storeData}
               />
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 w-full lg:w-[300px] 2xl:w-[350px]">
                 <Featured bookingType={bookingType} storeData={storeData} />
               </div>
             </div>

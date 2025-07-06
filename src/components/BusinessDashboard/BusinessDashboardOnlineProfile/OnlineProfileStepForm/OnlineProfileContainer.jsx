@@ -94,7 +94,7 @@ const OnlineProfileContainer = () => {
         />
       );
     }
-    
+
     if (step === 8) {
       return (
         <OnlineProfileStepNine

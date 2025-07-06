@@ -47,7 +47,6 @@ import CreatePass from "@/pages/Auth/CreatePass/CreatePass";
 import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
 import BS from "@/pages/Auth/BS/BS";
 import PrivateRoute from "./PrivateRoute";
-
 import ArticleDetails from "@/pages/BusinessHelpCenter/ArticleDetails";
 import ChatApp from "@/layout/ChatLayout";
 

@@ -14,13 +14,18 @@ import { Button } from "@/components/ui/button";
 import { Command, CommandItem, CommandList } from "@/components/ui/command";
 import { CheckIcon } from "lucide-react";
 
-const OnlineProfileStepNine = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepNine = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   const { data: allTeamMembers } = useAllTeamMembers();
   const { data: allServices } = useAllServices();
-  console.log(allServices);
 
-  const [teams, setTeams] = useState([]);
-  const [services, setServices] = useState([]);
+  const [teams, setTeams] = useState(formData?.teams || []);
+  const [services, setServices] = useState(formData?.services || []);
   const [error, setError] = useState({ team: false, service: false });
 
   useEffect(() => {

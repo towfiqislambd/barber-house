@@ -7,15 +7,21 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Loader } from "@/components/Loader/Loader";
 
-const OnlineProfileStepTen = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepTen = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   const { data: allAmenities, isLoading: amenitiesLoading } = useAmenities();
   const { data: allHighlights, isLoading: highlightsLoading } = useHighlights();
   const { data: allValues, isLoading: valuesLoading } = useValues();
   const isLoading = amenitiesLoading || highlightsLoading || valuesLoading;
 
-  const [amenities, setAmenities] = useState([]);
-  const [highlights, setHighlights] = useState([]);
-  const [values, setValues] = useState([]);
+  const [amenities, setAmenities] = useState(formData?.amenities || []);
+  const [highlights, setHighlights] = useState(formData?.highlights || []);
+  const [values, setValues] = useState(formData?.values || []);
   const [validationError, setValidationError] = useState("");
 
   // ✅ Set default selected items from details
@@ -106,7 +112,7 @@ const OnlineProfileStepTen = ({ step, setStep, setFormData, details }) => {
 
       <div className="max-w-[708px] mx-auto lg:mt-[40px] mt-5 font-semibold leading-[43.2px]">
         <div className="lg:mt-12">
-          <h1 className="text-textColor font-outfit text-[28px] font-semibold leading-[33.6px]">
+          <h1 className="text-textColor font-outfit text-2xl lg:text-[28px] font-semibold leading-[33.6px]">
             Make your profile stand out
           </h1>
           <p className="text-textLight font-manrope text-sm md:text-base font-medium leading-6 max-w-[608px] mt-3">
