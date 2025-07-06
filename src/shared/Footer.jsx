@@ -42,7 +42,8 @@ const Footer = () => {
               <Link to={"/business/pricingPage"}>Pricing</Link>
             </ul>
           </div>
-          <div className="">
+          <div></div>
+          {/* <div className="">
             <h3 className="xl:mb-2 2xl:mb-5 text-[#1E1E1E] text-xl 2xl:text-2xl font-semibold font-manrope">
               Legal
             </h3>
@@ -51,7 +52,7 @@ const Footer = () => {
               <li>Privacy Policy</li>
               <li>Terms of Use</li>
             </ul>
-          </div>
+          </div> */}
           <div className="">
             <h3 className="mb-2 2xl:mb-5 text-[#1E1E1E] text-xl 2xl:text-2xl font-semibold font-manrope">
               Contact Us

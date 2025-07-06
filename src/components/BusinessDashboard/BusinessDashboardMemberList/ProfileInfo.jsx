@@ -147,7 +147,7 @@ const ProfileInfo = () => {
             Phone number *
           </label>
           <input
-            type="text"
+            type="number"
             {...register("phone", { required: "Phone number is required" })}
             className="px-3 py-3 rounded-lg bg-transparent w-full block shadow outline-none border"
             placeholder="Input your phone number"

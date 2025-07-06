@@ -8,8 +8,14 @@ import {
 
 const { Dragger } = Upload;
 
-const OnlineProfileStepEight = ({ step, setStep, setFormData, details }) => {
-  const [images, setImages] = useState([]);
+const OnlineProfileStepEight = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
+  const [images, setImages] = useState(formData?.images || []);
   const [error, setError] = useState("");
 
   // Populate default images on mount
@@ -95,7 +101,7 @@ const OnlineProfileStepEight = ({ step, setStep, setFormData, details }) => {
       </div>
 
       <div className="max-w-[640px] mx-auto mt-5 lg:mt-0">
-        <h1 className="text-textColor font-outfit text-3xl xl:text-4xl font-semibold leading-[43.2px]">
+        <h1 className="text-textColor font-outfit text-2xl lg:text-4xl font-semibold leading-[43.2px]">
           Update venue images
         </h1>
         <p className="text-textColor font-manrope text-sm lg:text-base xl:text-lg font-medium leading-[27px] lg:mt-[13px] mt-2">

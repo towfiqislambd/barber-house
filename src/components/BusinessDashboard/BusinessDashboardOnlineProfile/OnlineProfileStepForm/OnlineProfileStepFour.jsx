@@ -24,7 +24,13 @@ const days = [
   "Friday",
 ];
 
-const OnlineProfileStepFour = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepFour = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   // Extract selected days
   const selectedDays = details?.opening_hours?.map(item => item.day_name) || [];
 
@@ -53,11 +59,19 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData, details }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      day_name: selectedDays,
-      morning_start_time: convertTo24Hour(defaultTimeData.morning_start_time),
-      morning_end_time: convertTo24Hour(defaultTimeData.morning_end_time),
-      evening_start_time: convertTo24Hour(defaultTimeData.evening_start_time),
-      evening_end_time: convertTo24Hour(defaultTimeData.evening_end_time),
+      day_name: formData?.day_name || selectedDays,
+      morning_start_time: convertTo24Hour(
+        formData?.morning_start_time || defaultTimeData.morning_start_time
+      ),
+      morning_end_time: convertTo24Hour(
+        formData?.morning_end_time || defaultTimeData.morning_end_time
+      ),
+      evening_start_time: convertTo24Hour(
+        formData?.evening_start_time || defaultTimeData.evening_start_time
+      ),
+      evening_end_time: convertTo24Hour(
+        formData?.evening_end_time || defaultTimeData.evening_end_time
+      ),
     },
   });
 
@@ -102,7 +116,7 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData, details }) => {
         </div>
 
         <div className="max-w-[608px] mx-auto mt-6 lg:mt-0 px-5 md:px-0 pb-10 sm:pb-0">
-          <h1 className="text-textColor font-outfit lg:text-4xl text-3xl font-semibold leading-[43.2px]">
+          <h1 className="text-textColor font-outfit lg:text-4xl text-2xl font-semibold leading-[43.2px]">
             Add your opening hours
           </h1>
           <p className="text-textLight mt-3 font-manrope text-base font-medium leading-6 mb-8">

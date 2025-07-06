@@ -40,7 +40,7 @@ const OnlineProfileStepSix = ({ step, setStep }) => {
           <h1 className="text-textColor font-manrope text-base font-medium leading-6">
             Step 2
           </h1>
-          <p className="mt-[6px] text-textColor font-outfit text-3xl sm:text-[36px] font-semibold sm:leading-[43.2px]">
+          <p className="mt-[6px] text-textColor font-outfit text-2xl lg:text-3xl sm:text-[36px] font-semibold sm:leading-[43.2px]">
             Showcase the beauty of your venue
           </p>
           <p className="max-w-[608px] sm:mt-6 mt-2 text-textLight font-manrope text-sm sm:text-base font-medium leading-6">

@@ -17,7 +17,7 @@ const BusinessDashboardMarketing = () => {
   }
 
   return (
-    <section>
+    <section className="p-5 md:p-0">
       <div>
         <h1 className="text-[#000] font-outfit text-[28px] font-semibold leading-[33.6px]">
           Reviews

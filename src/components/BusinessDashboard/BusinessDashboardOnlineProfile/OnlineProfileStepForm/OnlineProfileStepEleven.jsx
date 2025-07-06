@@ -106,7 +106,7 @@ const OnlineProfileStepEleven = ({ step, setStep, formData, setFormData }) => {
           <h1 className="text-textColor font-manrope text-base font-medium leading-6">
             Step 3
           </h1>
-          <p className="mt-[6px] text-textColor font-outfit text-3xl sm:text-[36px] font-semibold sm:leading-[43.2px]">
+          <p className="mt-[6px] text-textColor font-outfit text-2xl lg:text-[36px] font-semibold sm:leading-[43.2px]">
             Accept online bookings
           </p>
           <p className="max-w-[608px] sm:mt-6 mt-2 text-textLight font-manrope text-sm sm:text-base font-medium leading-6">

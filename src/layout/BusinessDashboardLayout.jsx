@@ -18,18 +18,8 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { useLogOut } from "@/hooks/auth.hook.";
 
 const excludedPaths = [
-  "/businessDashboard/editgifcardsale",
-  "/businessDashboard/edittipping",
-  "/businessDashboard/editreceipt",
-  "/businessDashboard/grouptax",
-  "/businessDashboard/newtax",
-  "/businessDashboard/notification",
   "/businessDashboard/addpaymentmethod",
-  "/businessDashboard/optimizeonlinebooking",
-  "/businessDashboard/onlineavailability",
-  "/businessDashboard/blockedtimeedit",
   "/businessDashboard/edittimeandcalander",
-  "/businessDashboard/freshaMarketplace",
   "/businessDashboard/appointmentremainder",
   "/businessDashboard/smartpricingstepcontainer",
   "/businessDashboard/businessdashboardeditpage",
@@ -37,9 +27,7 @@ const excludedPaths = [
   "/businessDashboard/editService",
   "/businessDashboard/addService",
   "/businessDashboard/add-membership",
-  "/businessDashboard/addclientsources",
   "/businessDashboard/addnew-product",
-  "/businessDashboard/addblocktime",
 ];
 
 const routingList = [
@@ -65,7 +53,7 @@ const routingList = [
     id: "six",
     to: "/businessDashboard/online-profile",
     Icon: BusinessDashboardSix,
-    label: "Online Booking",
+    label: "Online Store",
   },
   {
     id: "seven",
@@ -112,9 +100,9 @@ const BusinessDashboardLayout = () => {
             <img className="w-[50px] h-[50px] " src={logo} alt="Logo" />
           </Link>
           <div className="flex gap-3 md:gap-5 items-center">
-            <button>
+            {/* <button>
               <BusinessNotificationSvg />
-            </button>
+            </button> */}
             <img
               src={`${import.meta.env.VITE_SITE_URL}/${user?.avatar}`}
               className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-primary"
@@ -166,9 +154,9 @@ const BusinessDashboardLayout = () => {
 
         {/* Scrollable Content */}
         <main
-          className={`flex-1 bg-[#F9F9F9] ${
-            location.pathname !== "/businessDashboard/calendar" && "md:p-5"
-          }  overflow-y-auto ${isExcluded ? "h-screen" : "h-full"}`}
+          className={`flex-1 bg-[#F9F9F9] md:p-5 overflow-y-auto ${
+            isExcluded ? "h-screen" : "h-full"
+          }`}
         >
           <Outlet />
         </main>
@@ -204,14 +192,14 @@ const BusinessDashboardLayout = () => {
                   </NavLink>
                 </li>
               ))}
+              <li>
+                <Tooltip placement="right" title="Logout">
+                  <button onClick={handleLogout} className="pl-3">
+                    <IoLogOutOutline className="text-3xl text-red-500" />
+                  </button>
+                </Tooltip>
+              </li>
             </ul>
-            <li>
-              <Tooltip placement="right" title="Logout">
-                <button onClick={handleLogout} className="pl-3">
-                  <IoLogOutOutline className="text-3xl text-red-500" />
-                </button>
-              </Tooltip>
-            </li>
           </aside>
         )}
       </div>

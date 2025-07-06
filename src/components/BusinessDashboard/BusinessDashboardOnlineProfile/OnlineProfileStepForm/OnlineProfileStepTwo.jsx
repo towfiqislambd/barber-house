@@ -5,14 +5,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-const OnlineProfileStepTwo = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepTwo = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (formData?.name) setValue("name", formData.name);
+    if (formData?.about) setValue("about", formData.about);
+  }, [formData, setValue]);
 
   const onSubmit = data => {
     setFormData(prevData => ({ ...prevData, ...data }));
@@ -38,7 +51,7 @@ const OnlineProfileStepTwo = ({ step, setStep, setFormData, details }) => {
         </div>
 
         <div className="max-w-[608px] mx-auto xl:mt-[84px] mt-10 font-semibold leading-[43.2px] px-5 md:px-0 mb-5 md:mb-0">
-          <h1 className="text-textColor font-outfit text-3xl lg:text-4xl">
+          <h1 className="text-textColor font-outfit text-2xl lg:text-4xl">
             Tell us a bit about this venue
           </h1>
           <p className="text-[#545454] text-sm lg:text-base font-medium leading-6 mt-3">
