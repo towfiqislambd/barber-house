@@ -106,7 +106,7 @@ const OnlineProfileStepTen = ({ step, setStep, setFormData, details }) => {
 
       <div className="max-w-[708px] mx-auto lg:mt-[40px] mt-5 font-semibold leading-[43.2px]">
         <div className="lg:mt-12">
-          <h1 className="text-textColor font-outfit text-[28px] font-semibold leading-[33.6px]">
+          <h1 className="text-textColor font-outfit text-2xl lg:text-[28px] font-semibold leading-[33.6px]">
             Make your profile stand out
           </h1>
           <p className="text-textLight font-manrope text-sm md:text-base font-medium leading-6 max-w-[608px] mt-3">

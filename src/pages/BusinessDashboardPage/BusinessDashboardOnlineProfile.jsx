@@ -6,7 +6,6 @@ import chartImg from "../../../src/assets/images/online-profile/chart.png";
 import clientImg from "../../../src/assets/images/online-profile/client.png";
 import { Loader } from "@/components/Loader/Loader";
 
-
 const BusinessDashboardOnlineProfile = () => {
   const { user } = useAuth();
 
@@ -54,7 +53,7 @@ const BusinessDashboardOnlineProfile = () => {
       {onlineStore ? (
         <Link
           to="/businessDashboard/tellusaboutyourbusiness"
-          className="max-w-[900px] mx-auto xl:mt-10 block px-5 md:px-0 mt-6 md:mt-0"
+          className="max-w-[800px] 2xl:max-w-[900px] mx-auto xl:mt-10 block px-5 md:px-0 mt-6 md:mt-0"
         >
           <div className="flex items-center gap-[9px] justify-between">
             <div className="max-w-[771px]">
@@ -67,10 +66,10 @@ const BusinessDashboardOnlineProfile = () => {
             </div>
           </div>
 
-          <div className="mt-8 flex flex-col lg:flex-row justify-between items-center lg:border border-[#DFE1E6] rounded-2xl">
+          <div className="mt-8 flex flex-col lg:flex-row justify-between items-center lg:border border-[#DFE1E6] rounded-2xl gap-5">
             {storeImageUrl ? (
               <img
-                className="xl:w-[340px] lg:w-[300px] w-full xl:h-[207px] h-[200px] object-cover lg:rounded-l-2xl rounded-2xl"
+                className="2xl:w-[340px] lg:w-[300px] w-full xl:h-[207px] h-[200px] object-cover lg:rounded-l-2xl rounded-2xl"
                 src={storeImageUrl}
                 alt="Store"
               />

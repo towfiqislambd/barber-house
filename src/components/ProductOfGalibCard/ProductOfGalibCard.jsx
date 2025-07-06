@@ -32,7 +32,7 @@ const ProductOfGalibCard = ({ product, data }) => {
       </div>
 
       {/* Stock Badge */}
-      <div className="w-fit absolute top-[42px] right-[52px]">
+      <div className="w-fit absolute top-[16px] right-[16px]">
         <p className="text-secondary font-manrope text-base font-semibold leading-6 bg-primary py-[6px] px-3 flex justify-center rounded-full">
           {product.stock_quantity > 0 ? "In Stock" : "Stock Out"}
         </p>

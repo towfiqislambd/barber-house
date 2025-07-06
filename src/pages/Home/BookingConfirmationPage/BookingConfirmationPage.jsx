@@ -23,14 +23,13 @@ const BookingConfirmationPage = () => {
 
   const handleConfirm = async () => {
     const formData = new FormData();
-
     formData.append("online_store_id", storeData?.data?.id);
     formData.append("appointment_type", bookingType);
     formData.append("is_professional_selected", true);
     formData.append("date", formattedDate);
     formData.append("time", selectedAppointment || "12:30");
     formData.append("booking_notes", notes);
-    selectedServices?.forEach((s) => {
+    selectedServices?.forEach(s => {
       formData.append("store_service_ids[]", s.catalog_service.id);
     });
     formData.append(
@@ -75,7 +74,7 @@ const BookingConfirmationPage = () => {
               className="border border-[#8993A4] w-full 2xl:w-[678px] h-40 lg:h-[203px] rounded-xl mt-4 px-3 lg:px-5 py-3 lg:py-6 text-[#8993A4]"
               placeholder="Write anything about your booking..."
               value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              onChange={e => setNotes(e.target.value)}
             ></textarea>
             <h1 className="mt-5 xl:mt-10 3xl:mt-16 text-textColor font-manrope xl:text-lg font-normal leading-[30px]">
               <span className="text-textColor font-manrope text-xl font-semibold leading-[30px]">
@@ -89,7 +88,7 @@ const BookingConfirmationPage = () => {
         </div>
 
         {/* Second Div */}
-        <div className="lg:max-w-[493px] max-h-[871px] border-[0.4px] border-solid p-5 border-borderColorLight 2xl:px-7 2xl:py-7 3xl:py-8 3xl:px-7 rounded-2xl">
+        <div className="flex-shrink-0 w-full lg:w-[300px] 2xl:w-[350px] border-[0.4px] border-solid p-5 border-borderColorLight 2xl:px-7 2xl:py-7 3xl:py-8 3xl:px-7 rounded-2xl">
           <img
             className="w-full h-[180px] 2xl:h-[237px] object-cover"
             src={`${import.meta.env.VITE_SITE_URL}/${

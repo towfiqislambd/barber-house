@@ -102,7 +102,7 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData, details }) => {
         </div>
 
         <div className="max-w-[608px] mx-auto mt-6 lg:mt-0 px-5 md:px-0 pb-10 sm:pb-0">
-          <h1 className="text-textColor font-outfit lg:text-4xl text-3xl font-semibold leading-[43.2px]">
+          <h1 className="text-textColor font-outfit lg:text-4xl text-2xl font-semibold leading-[43.2px]">
             Add your opening hours
           </h1>
           <p className="text-textLight mt-3 font-manrope text-base font-medium leading-6 mb-8">

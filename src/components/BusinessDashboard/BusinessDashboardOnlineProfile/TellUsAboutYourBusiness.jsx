@@ -42,10 +42,10 @@ const TellUsAboutYourBusiness = () => {
         </Link>
       </div>
       {/* This is the content section */}
-      <div className="3xl:mt-[90px] 2xl:mt-8 lg:mt-11 mt-5 flex flex-col lg:flex-row items-center 2xl:gap-12 xl:gap-5 lg:gap-10 justify-center">
+      <div className="3xl:mt-[90px] 2xl:mt-8 lg:mt-11 mt-5 flex flex-col xl:flex-row items-center 2xl:gap-12 xl:gap-5 lg:gap-10 justify-center">
         {/* This is left side div */}
-        <div className="xl:max-w-[486px] lg:max-w-[300px] max-w-[500px]">
-          <h1 className="text-[#000] font-outfit text-2xl md:text-3xl lg:text-5xl xl:text-5xl font-semibold xl:leading-[57.6px] lg:leading-[50px]">
+        <div className="2xl:max-w-[486px] xl:max-w-[350px] w-full">
+          <h1 className="text-[#000] font-outfit text-2xl md:text-2xl xl:text-4xl 3xl:text-5xl font-semibold xl:leading-[57.6px] lg:leading-[50px]">
             Let’s get you published on the world’s{" "}
             <span className="bg-primary-gradient bg-clip-text text-transparent">
               most popular marketplace
@@ -54,7 +54,7 @@ const TellUsAboutYourBusiness = () => {
           </h1>
         </div>
         {/* This is right side div */}
-        <div className="md:mt-8 mt-4 lg:mt-0">
+        <div className="md:mt-8 mt-4 lg:mt-0 flex-shrink-0">
           {steps.map(step => (
             <div key={step.id} className="flex gap-6 2xl:py-8 py-4 lg:px-2">
               <div>

@@ -107,7 +107,7 @@ const OnlineProfileStepFive = ({ step, setStep, setFormData, details }) => {
 
         <div className="px-5 md:px-0 mb-5 md:mb-0">
           <div className="max-w-[608px] mx-auto mt-5 2xl:mt-0">
-            <h1 className="text-textColor font-outfit text-2xl sm:text-3xl lg:text-4xl font-semibold sm:leading-[43.2px] lg:mt-10 mt-5 xl:mt-0">
+            <h1 className="text-textColor font-outfit text-2xl lg:text-4xl font-semibold sm:leading-[43.2px] lg:mt-10 mt-5 xl:mt-0">
               Where is your business located
             </h1>
             <p className="text-textLight font-manrope mt-3 text-base font-medium leading-6">

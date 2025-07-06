@@ -18,18 +18,8 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { useLogOut } from "@/hooks/auth.hook.";
 
 const excludedPaths = [
-  "/businessDashboard/editgifcardsale",
-  "/businessDashboard/edittipping",
-  "/businessDashboard/editreceipt",
-  "/businessDashboard/grouptax",
-  "/businessDashboard/newtax",
-  "/businessDashboard/notification",
   "/businessDashboard/addpaymentmethod",
-  "/businessDashboard/optimizeonlinebooking",
-  "/businessDashboard/onlineavailability",
-  "/businessDashboard/blockedtimeedit",
   "/businessDashboard/edittimeandcalander",
-  "/businessDashboard/freshaMarketplace",
   "/businessDashboard/appointmentremainder",
   "/businessDashboard/smartpricingstepcontainer",
   "/businessDashboard/businessdashboardeditpage",
@@ -37,9 +27,7 @@ const excludedPaths = [
   "/businessDashboard/editService",
   "/businessDashboard/addService",
   "/businessDashboard/add-membership",
-  "/businessDashboard/addclientsources",
   "/businessDashboard/addnew-product",
-  "/businessDashboard/addblocktime",
 ];
 
 const routingList = [
@@ -166,9 +154,9 @@ const BusinessDashboardLayout = () => {
 
         {/* Scrollable Content */}
         <main
-          className={`flex-1 bg-[#F9F9F9] ${
-            location.pathname !== "/businessDashboard/calendar" && "md:p-5"
-          }  overflow-y-auto ${isExcluded ? "h-screen" : "h-full"}`}
+          className={`flex-1 bg-[#F9F9F9] md:p-5 overflow-y-auto ${
+            isExcluded ? "h-screen" : "h-full"
+          }`}
         >
           <Outlet />
         </main>
@@ -204,14 +192,14 @@ const BusinessDashboardLayout = () => {
                   </NavLink>
                 </li>
               ))}
+              <li>
+                <Tooltip placement="right" title="Logout">
+                  <button onClick={handleLogout} className="pl-3">
+                    <IoLogOutOutline className="text-3xl text-red-500" />
+                  </button>
+                </Tooltip>
+              </li>
             </ul>
-            <li>
-              <Tooltip placement="right" title="Logout">
-                <button onClick={handleLogout} className="pl-3">
-                  <IoLogOutOutline className="text-3xl text-red-500" />
-                </button>
-              </Tooltip>
-            </li>
           </aside>
         )}
       </div>

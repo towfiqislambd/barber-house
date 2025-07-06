@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
-
 import userDashboardLogo from "../../assets/images/logo.jpg";
 import UserProfileSidebar from "./UserProfileSidebar";
 import useAuth from "@/hooks/useAuth";

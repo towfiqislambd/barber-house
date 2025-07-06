@@ -57,7 +57,7 @@ const Featured = ({ storeData, bookingType }) => {
               Total
             </h1>
             <div className="flex items-center gap-1">
-              <h1 className="text-[#3E3E3E] font-manrope text-2xl font-medium leading-[27px]">
+              <h1 className="text-[#3E3E3E] font-manrope text-xl font-medium leading-[27px]">
                 {currencyFormatter(totalPrice)}
               </h1>
             </div>
