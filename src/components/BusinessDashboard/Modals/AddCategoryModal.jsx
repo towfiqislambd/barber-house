@@ -68,7 +68,6 @@ const AddCategoryModal = ({ refetch }) => {
                     <h3 className="mb-2 text-base font-semibold text-[#2C2C2C]">
                       Description
                     </h3>
-                    <p>0/320</p>
                   </div>
                   <Textarea
                     rows={6}

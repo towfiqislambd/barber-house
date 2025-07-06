@@ -53,7 +53,7 @@ const routingList = [
     id: "six",
     to: "/businessDashboard/online-profile",
     Icon: BusinessDashboardSix,
-    label: "Online Booking",
+    label: "Online Store",
   },
   {
     id: "seven",
@@ -100,9 +100,9 @@ const BusinessDashboardLayout = () => {
             <img className="w-[50px] h-[50px] " src={logo} alt="Logo" />
           </Link>
           <div className="flex gap-3 md:gap-5 items-center">
-            <button>
+            {/* <button>
               <BusinessNotificationSvg />
-            </button>
+            </button> */}
             <img
               src={`${import.meta.env.VITE_SITE_URL}/${user?.avatar}`}
               className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover border-2 border-primary"
