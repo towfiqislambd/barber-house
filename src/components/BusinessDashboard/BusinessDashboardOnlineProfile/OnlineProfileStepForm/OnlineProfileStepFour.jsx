@@ -24,7 +24,13 @@ const days = [
   "Friday",
 ];
 
-const OnlineProfileStepFour = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepFour = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   // Extract selected days
   const selectedDays = details?.opening_hours?.map(item => item.day_name) || [];
 
@@ -53,11 +59,19 @@ const OnlineProfileStepFour = ({ step, setStep, setFormData, details }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      day_name: selectedDays,
-      morning_start_time: convertTo24Hour(defaultTimeData.morning_start_time),
-      morning_end_time: convertTo24Hour(defaultTimeData.morning_end_time),
-      evening_start_time: convertTo24Hour(defaultTimeData.evening_start_time),
-      evening_end_time: convertTo24Hour(defaultTimeData.evening_end_time),
+      day_name: formData?.day_name || selectedDays,
+      morning_start_time: convertTo24Hour(
+        formData?.morning_start_time || defaultTimeData.morning_start_time
+      ),
+      morning_end_time: convertTo24Hour(
+        formData?.morning_end_time || defaultTimeData.morning_end_time
+      ),
+      evening_start_time: convertTo24Hour(
+        formData?.evening_start_time || defaultTimeData.evening_start_time
+      ),
+      evening_end_time: convertTo24Hour(
+        formData?.evening_end_time || defaultTimeData.evening_end_time
+      ),
     },
   });
 

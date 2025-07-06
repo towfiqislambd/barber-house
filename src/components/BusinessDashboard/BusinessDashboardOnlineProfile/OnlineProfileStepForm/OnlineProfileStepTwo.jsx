@@ -5,14 +5,27 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-const OnlineProfileStepTwo = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepTwo = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (formData?.name) setValue("name", formData.name);
+    if (formData?.about) setValue("about", formData.about);
+  }, [formData, setValue]);
 
   const onSubmit = data => {
     setFormData(prevData => ({ ...prevData, ...data }));

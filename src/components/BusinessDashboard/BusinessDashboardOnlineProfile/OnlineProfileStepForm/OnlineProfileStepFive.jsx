@@ -8,7 +8,13 @@ import {
 } from "@/components/svgContainer/SvgContainer";
 import { Input } from "@/components/ui/input";
 
-const OnlineProfileStepFive = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepFive = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   const {
     register,
     handleSubmit,
@@ -16,7 +22,7 @@ const OnlineProfileStepFive = ({ step, setStep, setFormData, details }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      address: details?.address || "",
+      address: formData?.address || details?.address || "",
     },
   });
 
@@ -79,8 +85,8 @@ const OnlineProfileStepFive = ({ step, setStep, setFormData, details }) => {
 
     const submissionData = {
       ...data,
-      latitude: coordinates.lat.toString(),
-      longitude: coordinates.lng.toString(),
+      latitude: formData?.latitude || coordinates.lat.toString(),
+      longitude: formData?.longitude || coordinates.lng.toString(),
     };
 
     setFormData(prevData => ({ ...prevData, ...submissionData }));

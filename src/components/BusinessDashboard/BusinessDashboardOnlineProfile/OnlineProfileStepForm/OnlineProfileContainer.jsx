@@ -15,6 +15,7 @@ const OnlineProfileContainer = () => {
   const { user } = useAuth();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(null);
+  console.log(formData);
 
   // For step form
   const renderStep = () => {

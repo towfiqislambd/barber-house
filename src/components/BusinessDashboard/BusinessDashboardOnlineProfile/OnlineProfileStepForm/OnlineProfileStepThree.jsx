@@ -7,7 +7,13 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useForm, Controller } from "react-hook-form";
 
-const OnlineProfileStepThree = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepThree = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   const {
     handleSubmit,
     control,
@@ -15,8 +21,8 @@ const OnlineProfileStepThree = ({ step, setStep, setFormData, details }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      phone: details?.phone || "",
-      email: details?.email || "",
+      phone: details?.phone || formData?.phone || "",
+      email: details?.email || formData?.email || "",
     },
   });
 

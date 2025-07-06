@@ -8,8 +8,14 @@ import {
 
 const { Dragger } = Upload;
 
-const OnlineProfileStepEight = ({ step, setStep, setFormData, details }) => {
-  const [images, setImages] = useState([]);
+const OnlineProfileStepEight = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
+  const [images, setImages] = useState(formData?.images || []);
   const [error, setError] = useState("");
 
   // Populate default images on mount

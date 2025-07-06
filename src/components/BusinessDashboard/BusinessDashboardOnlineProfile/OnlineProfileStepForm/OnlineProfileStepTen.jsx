@@ -7,15 +7,21 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { Loader } from "@/components/Loader/Loader";
 
-const OnlineProfileStepTen = ({ step, setStep, setFormData, details }) => {
+const OnlineProfileStepTen = ({
+  step,
+  setStep,
+  formData,
+  setFormData,
+  details,
+}) => {
   const { data: allAmenities, isLoading: amenitiesLoading } = useAmenities();
   const { data: allHighlights, isLoading: highlightsLoading } = useHighlights();
   const { data: allValues, isLoading: valuesLoading } = useValues();
   const isLoading = amenitiesLoading || highlightsLoading || valuesLoading;
 
-  const [amenities, setAmenities] = useState([]);
-  const [highlights, setHighlights] = useState([]);
-  const [values, setValues] = useState([]);
+  const [amenities, setAmenities] = useState(formData?.amenities || []);
+  const [highlights, setHighlights] = useState(formData?.highlights || []);
+  const [values, setValues] = useState(formData?.values || []);
   const [validationError, setValidationError] = useState("");
 
   // ✅ Set default selected items from details
