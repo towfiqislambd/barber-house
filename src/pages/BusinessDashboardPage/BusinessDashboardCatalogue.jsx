@@ -80,6 +80,8 @@ const BusinessDashboardCatalogue = () => {
           <AllServicesList allProductsList={allProductsList} />
         )}
       </div>
+
+      {/* Modals */}
       <AddProductCategoryModal open={open} setOpen={setOpen} />
       <AddProductBrandModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </section>

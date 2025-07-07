@@ -51,6 +51,8 @@ export const useSocialLinks = () => {
 // Catalogue
 export const useCatalogue = (category_id, search, selectedTeamMember) => {
   return useQuery({
+    retry: false,
+    keepPreviousData: true,
     queryKey: ["get-catalogue", category_id, search, selectedTeamMember],
     queryFn: () => Catalogue(category_id, search, selectedTeamMember),
   });
@@ -59,6 +61,7 @@ export const useCatalogue = (category_id, search, selectedTeamMember) => {
 // All Team Members
 export const useAllTeamMembers = search => {
   return useQuery({
+    retry: false,
     queryKey: ["team-members", search],
     queryFn: () => AllTeamMembers(search),
   });
@@ -272,6 +275,7 @@ export const useAllProductsList = id => {
 // Daily Sales
 export const useDailySales = id => {
   return useQuery({
+    retry: false,
     queryKey: ["daily-sales", id],
     queryFn: () => DailySales(id),
     enabled: !!id,

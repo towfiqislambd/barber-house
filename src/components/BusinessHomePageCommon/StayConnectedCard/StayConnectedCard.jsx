@@ -1,6 +1,3 @@
-import { ArrowSignSvg } from "@/components/svgContainer/SvgContainer";
-import parse from "html-react-parser";
-
 const StayConnectedCard = ({
   image,
   title,
@@ -24,9 +21,10 @@ const StayConnectedCard = ({
         </h2>
         {/*  */}
         <div className="mt-8">
-          <p className="text-[#545454] font-manrope text-base leading-6 max-w-[852px]">
-            {typeof description === "string" ? parse(description) : description}
-          </p>
+          <div
+            dangerouslySetInnerHTML={{ __html: description }}
+            className="text-[#545454] font-manrope text-base leading-6 max-w-[852px] [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:pl-5 [&_ol]:list-decimal"
+          ></div>
         </div>
       </div>
       {/* This is right side */}

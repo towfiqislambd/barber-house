@@ -39,10 +39,7 @@ const BusinessHomePage = () => {
       <TopRated data={businessHome?.stats} />
       <GrowBusiness data={businessHome?.grow_business} />
       <StayConnected data={businessHome?.stay_connected?.items} />
-      <GetStarted
-        data={businessHome?.get_started}
-        data2={servicesTypes}
-      />
+      <GetStarted data={businessHome?.get_started} data2={servicesTypes} />
       <CallToAction
         title={businessHome?.interested?.title}
         subtitle={businessHome?.interested?.sub_title}
