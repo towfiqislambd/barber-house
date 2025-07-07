@@ -11,9 +11,12 @@ const FreeAll = ({ data, data2 }) => {
           <p className="text-[#545454] font-manrope  xl:text-xl font-medium leading-[30px] mt-3">
             {data?.sub_title}
           </p>
-          <div className="grid grid-col-1 xl:grid-cols-2 gap-y-8 mt-[67px]">
-            {data2?.map(feature => (
-              <div key={feature.id} className="flex gap-2">
+          <div className="grid grid-col-1 xl:grid-cols-2 gap-x-24 gap-y-8 mt-[67px] mx-auto">
+            {data2?.map((feature, idx) => (
+              <div
+                key={feature.id}
+                className={`flex gap-2 ${idx % 2 === 0 && "xl:justify-self-end"}`}
+              >
                 <FreeToAllSvg />
                 <div className="text-left">
                   <h1 className="text-[#2C2C2C] font-outfit text-[20px] xl:text-[22px] font-medium leading-normal">

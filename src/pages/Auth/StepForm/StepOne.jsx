@@ -59,7 +59,7 @@ const StepOne = ({ step, setStep, setFormData }) => {
             htmlFor="website_url"
             className="text-[16px] xl:text-xl font-medium"
           >
-            Website (Optional)
+            Website
           </label>
           <input
             id="website_url"

@@ -107,7 +107,7 @@ const OnlineProfileStepThree = ({
               <Input
                 className="md:w-[465px] sm:w-[420px] w-full h-[51px] text-[#0D1619] border rounded-[8px]"
                 type="email"
-                placeholder="mamunur.servey@gmail.com"
+                placeholder="demo@gmail.com"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {

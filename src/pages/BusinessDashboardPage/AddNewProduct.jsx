@@ -58,18 +58,6 @@ const AddNewProduct = () => {
   return (
     <section className="4xl:max-w-[1095px] mx-auto py-5 px-3 sm:px-6 lg:px-6 4xl:px-0">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex justify-between items-center mb-5">
-          <Link to="/businessDashboard/catalogue">
-            <MembershipCrossSvg />
-          </Link>
-          <button
-            type="submit"
-            className="bg-[#008A90] text-white px-5 md:py-[10px] py-2 font-medium rounded-lg"
-          >
-            {isPending ? "Saving..." : "Save Product"}
-          </button>
-        </div>
-
         <div className="border rounded-t-xl border-[#00C2CB] px-6 py-4">
           <h3 className="font-outfit text-xl md:text-2xl font-medium text-[#1E1E1E]">
             Add new product
@@ -346,6 +334,21 @@ const AddNewProduct = () => {
                   {errors.price.message}
                 </p>
               )}
+            </div>
+
+            <div className="flex justify-end gap-5 items-center mb-5">
+              <Link
+                className="bg-[#008A90] text-white px-5 md:py-[10px] py-2 font-medium rounded-lg"
+                to="/businessDashboard/catalogue"
+              >
+                Back
+              </Link>
+              <button
+                type="submit"
+                className="bg-[#008A90] text-white px-5 md:py-[10px] py-2 font-medium rounded-lg"
+              >
+                {isPending ? "Saving..." : "Save Product"}
+              </button>
             </div>
           </div>
         </div>
