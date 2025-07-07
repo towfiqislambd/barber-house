@@ -31,7 +31,7 @@ const TeamofGhalib = ({ data }) => {
                 <h1 className="text-[#2C2C2C] font-manrope text-lg font-semibold">
                   {person?.team?.first_name}
                 </h1>
-                <p className="text-[#2C2C2C] font-manrope text-lg font-semibold mt-1">
+                <p className="text-[#2C2C2C] font-manrope text-lg font-semibold mt-1 truncate text-nowrap">
                   {person?.team?.job_title}
                 </p>
               </div>

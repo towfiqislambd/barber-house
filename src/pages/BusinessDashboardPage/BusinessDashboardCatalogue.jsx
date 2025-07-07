@@ -25,7 +25,7 @@ const BusinessDashboardCatalogue = () => {
   return (
     <section className="xl:grid xl:grid-cols-12 gap-10">
       <div className="xl:col-span-4 2xl:col-span-3 3xl:col-span-2 4xl:col-span-2 mb-5 xl:mb-0 bg-white rounded-xl 4xl:p-6 p-3 self-start">
-        <h3 className="mb-3 text-2xl font-semibold">Catalog</h3>
+        <h3 className="mb-3 text-2xl font-semibold">Catalogue</h3>
         <div className="border-t pb-5"></div>
         <ul className="xl:space-y-5 xl:text-lg font-medium text-nowrap flex xl:block gap-3 flex-wrap md:gap-5">
           <button
