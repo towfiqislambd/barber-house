@@ -11,6 +11,7 @@ import { useMemo } from "react";
 import dayjs from "dayjs";
 
 const UpcomingAppointmentsChart = ({ data }) => {
+  console.log(data)
   const transformedData = useMemo(() => {
     const grouped = {};
 
@@ -28,23 +29,31 @@ const UpcomingAppointmentsChart = ({ data }) => {
       }
     });
 
-    // Convert grouped object into array
     return Object.values(grouped);
   }, [data]);
 
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <BarChart
-        data={transformedData}
-        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-      >
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="Confirmed" stackId="a" fill="#01CC92" />
-        <Bar dataKey="Cancelled" stackId="a" fill="#00328580" />
-      </BarChart>
+      {transformedData.length > 0 ? (
+        <BarChart
+          data={transformedData}
+          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+        >
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="Confirmed" stackId="a" fill="#01CC92" />
+          <Bar dataKey="Cancelled" stackId="a" fill="#00328580" />
+        </BarChart>
+      ) : (
+        <div
+          className="font-medium text-red-500 text-xl"
+          style={{ textAlign: "center", paddingTop: "150px" }}
+        >
+          No upcoming appointment data
+        </div>
+      )}
     </ResponsiveContainer>
   );
 };
