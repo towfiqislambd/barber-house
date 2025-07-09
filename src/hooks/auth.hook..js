@@ -69,13 +69,11 @@ export const useLogin = () => {
       if (data?.token) {
         setToken(data?.token);
         if (data?.role === "customer") {
-          navigate((location?.state && location?.state) || "/userDashboard");
+          navigate("/userDashboard");
           toast.success("Login Successful");
         } else {
           if (data?.flag) {
-            navigate(
-              (location?.state && location?.state) || "/businessDashboard"
-            );
+            navigate("/businessDashboard");
           } else {
             navigate("/stepContainer");
           }
@@ -103,7 +101,7 @@ export const useSocialLogin = setSslLoading => {
       console.log(data);
       // setSslLoading(false);
       setToken(data?.token);
-      navigate((location?.state && location.state) || "/");
+      navigate("/");
       toast.success("Login Successful");
     },
     onError: err => {

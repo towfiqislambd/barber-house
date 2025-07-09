@@ -82,6 +82,8 @@ const BusinessDashboardLayout = () => {
   const location = useLocation();
   const { mutateAsync: logOutMutate } = useLogOut();
   const isExcluded = excludedPaths.includes(location.pathname);
+  console.log(user?.role);
+
   const handleActive = id => {
     setActive(id);
     setOpen(false);

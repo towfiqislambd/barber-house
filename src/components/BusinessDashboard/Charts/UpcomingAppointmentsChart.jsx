@@ -11,7 +11,6 @@ import { useMemo } from "react";
 import dayjs from "dayjs";
 
 const UpcomingAppointmentsChart = ({ data }) => {
-  console.log(data)
   const transformedData = useMemo(() => {
     const grouped = {};
 

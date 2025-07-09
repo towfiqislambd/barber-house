@@ -2,7 +2,7 @@ import { Loader } from "@/components/Loader/Loader";
 import useAuth from "@/hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
 
-const PrivateRoute = ({ children }) => {
+const ChatPrivateRoute = ({ children }) => {
   const location = useLocation();
   const { user, token, loading } = useAuth();
 
@@ -13,9 +13,10 @@ const PrivateRoute = ({ children }) => {
       </div>
     );
   }
+
   if (token || user) return children;
 
   return <Navigate to="/login" state={location?.pathname} replace />;
 };
 
-export default PrivateRoute;
+export default ChatPrivateRoute;
