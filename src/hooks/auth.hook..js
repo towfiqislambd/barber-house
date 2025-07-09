@@ -67,7 +67,6 @@ export const useLogin = () => {
       setLoading(true);
     },
     onSuccess: data => {
-      console.log(data);
       setLoading(false);
       if (data?.token) {
         setToken(data?.token);
@@ -102,6 +101,8 @@ export const useLogin = () => {
 export const useSocialLogin = setSslLoading => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
+  const { mutateAsync: stripeMutation } = useStripe();
+
   return useMutation({
     mutationKey: ["social-login"],
     mutationFn: payload => GoogleLoginFunc(payload),
@@ -109,11 +110,27 @@ export const useSocialLogin = setSslLoading => {
       // setSslLoading(true);
     },
     onSuccess: data => {
-      console.log(data);
-      // setSslLoading(false);
-      setToken(data?.token);
-      navigate("/");
-      toast.success("Login Successful");
+      if (data?.token) {
+        setToken(data?.token);
+        if (data?.role === "customer") {
+          navigate("/userDashboard");
+          toast.success("Login Successful");
+        } else {
+          if (!data?.flag) {
+            navigate("/stepContainer");
+          } else {
+            if (!data?.bank_connected) {
+              stripeMutation({
+                success_redirect_url: `${window.location.origin}/businessDashboard`,
+                cancel_redirect_url: `${window.location.origin}`,
+              });
+            } else {
+              navigate("/businessDashboard");
+              toast.success("Login Successful");
+            }
+          }
+        }
+      }
     },
     onError: err => {
       // setSslLoading(false);
