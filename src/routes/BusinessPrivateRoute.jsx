@@ -16,7 +16,7 @@ const BusinessPrivateRoute = ({ children }) => {
     );
   }
 
-  if (token && data && data?.data?.role === "business") {
+  if (token && data && data?.data?.role === "business" && data?.data?.flag) {
     return children;
   }
 
