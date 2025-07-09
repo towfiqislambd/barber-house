@@ -16,7 +16,13 @@ const BusinessPrivateRoute = ({ children }) => {
     );
   }
 
-  if (token && data && data?.data?.role === "business" && data?.data?.flag) {
+  if (
+    token &&
+    data &&
+    data?.data?.role === "business" &&
+    data?.data?.flag &&
+    data?.data?.bank_connected
+  ) {
     return children;
   }
 

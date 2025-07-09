@@ -12,6 +12,7 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAuth from "./useAuth";
+import { useOnboard, useStripe } from "./cms.mutations";
 
 // get user data:
 export const useGetUserData = token => {
@@ -57,6 +58,7 @@ export const useLogin = () => {
   const { setLoading, setToken } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { mutateAsync: stripeMutation } = useStripe();
 
   return useMutation({
     mutationKey: ["login"],
@@ -65,6 +67,7 @@ export const useLogin = () => {
       setLoading(true);
     },
     onSuccess: data => {
+      console.log(data);
       setLoading(false);
       if (data?.token) {
         setToken(data?.token);
@@ -72,10 +75,18 @@ export const useLogin = () => {
           navigate("/userDashboard");
           toast.success("Login Successful");
         } else {
-          if (data?.flag) {
-            navigate("/businessDashboard");
-          } else {
+          if (!data?.flag) {
             navigate("/stepContainer");
+          } else {
+            if (!data?.bank_connected) {
+              stripeMutation({
+                success_redirect_url: `${window.location.origin}/businessDashboard`,
+                cancel_redirect_url: `${window.location.origin}`,
+              });
+            } else {
+              navigate("/businessDashboard");
+              toast.success("Login Successful");
+            }
           }
         }
       }

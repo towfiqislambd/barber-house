@@ -161,7 +161,7 @@ const Navbar = () => {
                       </PopoverContent>
                     </Popover>
                   )}
-                  {user?.role === "business" && user?.flag && (
+                  {user?.role === "business" && (
                     <Link
                       className="px-3 lg:px-5 py-2 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-sm lg:text-xl font-medium text-white"
                       to={"/businessDashboard"}
