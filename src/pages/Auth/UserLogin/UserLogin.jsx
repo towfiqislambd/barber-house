@@ -12,9 +12,12 @@ import { useLogin, useSocialLogin } from "@/hooks/auth.hook.";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
+import RoleModal from "@/components/BusinessDashboard/Modals/RoleModal";
 
 const UserLogin = () => {
   const navigate = useNavigate();
+  const [role, setRole] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [isShowPass, setisShowPass] = useState(false);
   const { mutateAsync: loginMutation, isPending } = useLogin();
   const { mutateAsync: socialLoginMutation } = useSocialLogin();
@@ -55,6 +58,7 @@ const UserLogin = () => {
           email: data?.email,
           avatar: data?.picture,
           // avatar: null,
+          role: role,
         };
         await socialLoginMutation(updatedData);
       } catch (error) {
@@ -177,7 +181,8 @@ const UserLogin = () => {
                   Or
                 </span>
                 <div
-                  onClick={() => handleLoginWithGoogle()}
+                  // onClick={() => handleLoginWithGoogle()}
+                  onClick={() => setIsOpen(true)}
                   className="flex gap-3 cursor-pointer justify-center border w-full border-[#1E1E1E] py-[14px] px-[16px] rounded-[10px] items-center"
                 >
                   <GoogleSvg />
@@ -196,6 +201,14 @@ const UserLogin = () => {
           </div>
         </div>
       </div>
+
+      {/* Modals */}
+      <RoleModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        setRole={setRole}
+        handleLoginWithGoogle={handleLoginWithGoogle}
+      />
     </section>
   );
 };

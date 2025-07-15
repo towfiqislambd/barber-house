@@ -79,7 +79,6 @@
   }
 
   body[data-scroll-locked] .topbar {
-    /* margin-right: var(--removed-body-scroll-bar-size) !important; */
     padding-right: var(--removed-body-scroll-bar-size) !important;
   }
 }
@@ -100,7 +99,6 @@
   border-radius: 16px;
 }
 .ant-tabs-nav-list {
-  /* border: 1px solid #b3bac5 !important; */
   border-radius: 12px !important;
   height: 300px !important;
 }
@@ -250,9 +248,7 @@
 
 .ant-switch-checked {
   background-color: #6950f3 !important;
-  /* Your desired active color */
 }
-/* otp:start */
 
 #otp_container div {
   @apply flex items-center justify-center sm:gap-5 gap-2;

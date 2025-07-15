@@ -3,7 +3,7 @@ import { useGetUserData } from "@/hooks/auth.hook.";
 import useAuth from "@/hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
 
-const BusinessPrivateRoute = ({ children }) => {
+const UserPrivateRoute = ({ children }) => {
   const location = useLocation();
   const { token, loading } = useAuth();
   const { data, isLoading: dataLoading } = useGetUserData(token);
@@ -16,17 +16,11 @@ const BusinessPrivateRoute = ({ children }) => {
     );
   }
 
-  if (
-    token &&
-    data &&
-    data?.data?.role === "business" &&
-    data?.data?.flag &&
-    data?.data?.bank_connected
-  ) {
+  if (token && data && data?.data?.role === "customer") {
     return children;
   }
 
   return <Navigate to="/login" state={location?.pathname} replace />;
 };
 
-export default BusinessPrivateRoute;
+export default UserPrivateRoute;

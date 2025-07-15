@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { IoTimeOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import AddReviewModal from "../BusinessDashboard/Modals/AddReviewModal";
-import { currencyFormatter } from "@/lib/currencyFormatter";
 
 export default function PreviousCard({ previousData, onSelect, selected }) {
   const { id, store_services, date, time } = previousData;
@@ -21,43 +20,50 @@ export default function PreviousCard({ previousData, onSelect, selected }) {
   }, []);
 
   return (
-    <div className="mb-[20px]">
+    <div className="mb-5">
       <div
-        className={`p-[20px] flex gap-[10px] mb-[20px] items-center rounded-[16px] bg-[#FFF] border ${
-          selected ? "border-[#008A90] shadow-md" : "border-[#DFE1E6]"
-        } w-[100%] cursor-pointer hover:shadow transition`}
         onClick={() => onSelect(previousData)}
+        className={`group flex flex-col sm:flex-row gap-4 p-5 rounded-2xl border ${
+          selected ? "border-[#008A90] shadow-md" : "border-[#DFE1E6]"
+        } bg-white hover:shadow transition cursor-pointer`}
       >
-        <div className="flex flex-col gap-[8px] w-[20%] border-r border-[#DFE1E6] pr-[30px] flex-shrink-0">
-          <h3 className="text-[#008A90] font-outfit text-xl font-medium text-center">
+        {/* DATE BLOCK */}
+        <div className="sm:flex-shrink-0 sm:w-1/4 md:w-1/5 flex justify-center items-center border-b sm:border-b-0 sm:border-r border-[#DFE1E6] pb-2 sm:pb-0 sm:pr-7">
+          <h3 className="font-outfit text-lg font-medium text-[#008A90]">
             {date}
           </h3>
         </div>
-        <div className="w-[70%] flex justify-between items-center pl-[30px]">
-          <div>
-            <p className="text-[#008A90] font-manrope text-[18px] font-medium mb-[15px] flex items-center gap-[5px]">
-              <span>
-                <IoTimeOutline />
-              </span>
-              {time}
-            </p>
-          </div>
-          <div className="flex flex-col ">
+
+        {/* TIME & SERVICES */}
+        <div className="flex flex-col flex-1 sm:px-7 gap-2">
+          <p className="flex items-center gap-2 text-[#008A90] font-manrope text-[17px]">
+            <IoTimeOutline />
+            {time}
+          </p>
+
+          <div className="space-y-1">
             {store_services?.map(store => (
-              <>
-                <h4 className="text-[#2C2C2C] font-manrope text-lg font-medium leading-[30px] ]">
-                  {store?.catalog_service?.name}
-                </h4>
-              </>
+              <h4
+                key={store.id ?? store.catalog_service?.id}
+                className="text-[#2C2C2C] font-manrope text-[17px] leading-6"
+              >
+                {store?.catalog_service?.name}
+              </h4>
             ))}
           </div>
         </div>
-        <div className="w-[30%] relative" ref={dropdownRef}>
+
+        {/* REVIEW BUTTON */}
+        <div
+          ref={dropdownRef}
+          className="sm:flex-shrink-0 flex justify-start sm:justify-end items-start sm:items-center"
+        >
           <button
-            onClick={() => {
+            onClick={e => {
+              e.stopPropagation(); // prevent card selection
               setIsOpen(true);
             }}
-            className="flex items-center gap-2 border rounded-full px-2 py-1"
+            className="inline-flex items-center gap-2 border rounded-full px-3 py-1 text-sm font-medium hover:bg-gray-50"
           >
             <FaStar className="text-yellow-400" />
             Add Review

@@ -82,6 +82,7 @@ const BusinessDashboardLayout = () => {
   const location = useLocation();
   const { mutateAsync: logOutMutate } = useLogOut();
   const isExcluded = excludedPaths.includes(location.pathname);
+
   const handleActive = id => {
     setActive(id);
     setOpen(false);
@@ -190,7 +191,12 @@ const BusinessDashboardLayout = () => {
                 <li key={id}>
                   <NavLink
                     to={to}
-                    className="flex justify-center"
+                    end
+                    className={({ isActive }) =>
+                      `flex justify-center ${
+                        isActive ? "text-[#EE6C9C]" : "text-[#2C2C2C]"
+                      }`
+                    }
                     onClick={() => handleActive(id)}
                   >
                     <Icon color={active === id ? "#EE6C9C" : "#2C2C2C"} />

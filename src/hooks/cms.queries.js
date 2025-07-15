@@ -18,6 +18,8 @@ import {
   CategoryDetails,
   ClientList,
   DailySales,
+  DynamicPageDetails,
+  DynamicPages,
   GetReviews,
   GetStore,
   Highlights,
@@ -26,6 +28,7 @@ import {
   ProductsCategory,
   ServicesDetails,
   ServicesType,
+  SiteSettings,
   SocialLinks,
   StoreDetails,
   TeamMemberDetails,
@@ -51,6 +54,8 @@ export const useSocialLinks = () => {
 // Catalogue
 export const useCatalogue = (category_id, search, selectedTeamMember) => {
   return useQuery({
+    retry: false,
+    keepPreviousData: true,
     queryKey: ["get-catalogue", category_id, search, selectedTeamMember],
     queryFn: () => Catalogue(category_id, search, selectedTeamMember),
   });
@@ -59,6 +64,7 @@ export const useCatalogue = (category_id, search, selectedTeamMember) => {
 // All Team Members
 export const useAllTeamMembers = search => {
   return useQuery({
+    retry: false,
     queryKey: ["team-members", search],
     queryFn: () => AllTeamMembers(search),
   });
@@ -272,6 +278,7 @@ export const useAllProductsList = id => {
 // Daily Sales
 export const useDailySales = id => {
   return useQuery({
+    retry: false,
     queryKey: ["daily-sales", id],
     queryFn: () => DailySales(id),
     enabled: !!id,
@@ -284,5 +291,30 @@ export const useAllSales = (id, filter) => {
     queryKey: ["all-sales", id, filter],
     queryFn: () => AllSales(id, filter),
     enabled: !!id,
+  });
+};
+
+// Site Settings
+export const useSiteSettings = () => {
+  return useQuery({
+    queryKey: ["site-settings"],
+    queryFn: SiteSettings,
+  });
+};
+
+// Dynamic Pages
+export const useDynamicPages = () => {
+  return useQuery({
+    queryKey: ["dynamic-pages"],
+    queryFn: DynamicPages,
+  });
+};
+
+// Dynamic Page Details
+export const useDynamicPageDetails = slug => {
+  return useQuery({
+    queryKey: ["dynamic-page-details", slug],
+    queryFn: () => DynamicPageDetails(slug),
+    enabled: !!slug,
   });
 };
