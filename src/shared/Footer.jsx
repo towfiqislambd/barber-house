@@ -21,7 +21,7 @@ const Footer = () => {
   return (
     <footer>
       {/* upper part */}
-      <div className="bg-[#EFF0F4] py-7 sm:py-14 px-5 xl:px-3 2xl:px-5">
+      <div className="bg-[#EFF0F4] py-7 sm:py-14 xl:px-3 2xl:px-5">
         <div className="container grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6 sm:gap-8 md:gap-[35px] lg:gap-6 xl:gap-2 2xl:gap-5">
           <div className="col-span-1 xl:col-span-2">
             <h3 className="text-[48px] font-normal font-Marcellus text-[#1E1E1E] ">
