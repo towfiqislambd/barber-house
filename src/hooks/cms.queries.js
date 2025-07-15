@@ -18,6 +18,8 @@ import {
   CategoryDetails,
   ClientList,
   DailySales,
+  DynamicPageDetails,
+  DynamicPages,
   GetReviews,
   GetStore,
   Highlights,
@@ -26,6 +28,7 @@ import {
   ProductsCategory,
   ServicesDetails,
   ServicesType,
+  SiteSettings,
   SocialLinks,
   StoreDetails,
   TeamMemberDetails,
@@ -288,5 +291,30 @@ export const useAllSales = (id, filter) => {
     queryKey: ["all-sales", id, filter],
     queryFn: () => AllSales(id, filter),
     enabled: !!id,
+  });
+};
+
+// Site Settings
+export const useSiteSettings = () => {
+  return useQuery({
+    queryKey: ["site-settings"],
+    queryFn: SiteSettings,
+  });
+};
+
+// Dynamic Pages
+export const useDynamicPages = () => {
+  return useQuery({
+    queryKey: ["dynamic-pages"],
+    queryFn: DynamicPages,
+  });
+};
+
+// Dynamic Page Details
+export const useDynamicPageDetails = slug => {
+  return useQuery({
+    queryKey: ["dynamic-page-details", slug],
+    queryFn: () => DynamicPageDetails(slug),
+    enabled: !!slug,
   });
 };

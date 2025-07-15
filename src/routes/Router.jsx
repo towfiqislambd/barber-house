@@ -51,6 +51,7 @@ import ChatApp from "@/layout/ChatLayout";
 import BusinessPrivateRoute from "./BusinessPrivateRoute";
 import UserPrivateRoute from "./UserPrivateRoute";
 import ChatPrivateRoute from "./ChatPrivateRoute";
+import DynamicPage from "@/pages/DynamicPages/DynamicPage";
 
 export const router = createBrowserRouter([
   // Main Layout
@@ -99,8 +100,8 @@ export const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
-        path: "/confirmOrder",
-        element: <ConfirmOrder />,
+        path: "/dynamic-page/:slug",
+        element: <DynamicPage />,
       },
 
       // Auth Flow

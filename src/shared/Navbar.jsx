@@ -26,8 +26,10 @@ import {
 } from "@/redux/features/cartSlice";
 import toast from "react-hot-toast";
 import { currencyFormatter } from "@/lib/currencyFormatter";
+import { useSiteSettings } from "@/hooks/cms.queries";
 
 const Navbar = () => {
+  const { data: siteSettings, isLoading } = useSiteSettings();
   const dispatch = useDispatch();
   const [isOpen, setOpen] = useState(false);
   const [gender, setGender] = useState("Male");
@@ -68,6 +70,14 @@ const Navbar = () => {
       toast.error("You need to login first");
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <header
       className={`fixed w-full z-[999] top-0 left-0 transition-all duration-300 ${
@@ -82,7 +92,7 @@ const Navbar = () => {
         >
           <img
             className="w-full h-full object-cover rounded"
-            src={logo}
+            src={`${import.meta.env.VITE_SITE_URL}/${siteSettings?.logo}`}
             alt="Logo"
           />
         </Link>
