@@ -8,11 +8,11 @@ import {
 const BusinessAccordion = ({ data }) => {
   return (
     <Accordion type="single" collapsible className="w-full space-y-4">
-      {data?.map(item => (
+      {data?.map((item, index) => (
         <AccordionItem
           className="rounded-lg py-[0px] xl:py-6 px-[15px] xl:px-8 border-[#050505]"
-          key={item.id}
-          value={`item-${item.id}`}
+          key={item.id || index}
+          value={`item-${item.id || index}`}
         >
           <AccordionTrigger className="text-textSecondary font-outfit text-[18px] xl:text-2xl font-semibold leading-[28.8px]">
             {item?.question}

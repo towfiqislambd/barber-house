@@ -4,7 +4,7 @@ const ExploreMore = ({ data }) => {
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 3xl:gap-10 lg:gap-20 gap-10">
           <div className="3xl:space-y-7 space-y-3">
-            <h2 className="text-3xl xl:text-4xl 3xl:text-6xl font-bold text-[#1E1E1E] font-outfit">
+            <h2 className="text-2xl xl:text-3xl 2xl:text-4xl 3xl:text-6xl font-bold text-[#1E1E1E] font-outfit">
               {data?.title}
             </h2>
             <p className="text-[#2C2C2C] font-medium text-sm xl:text-lg 3xl:text-xl leading-7 xl:leading-[35px]">

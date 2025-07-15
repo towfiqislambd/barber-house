@@ -334,3 +334,21 @@ export const AllSales = async (id, filter) => {
   );
   return data?.data;
 };
+
+// Site Settings
+export const SiteSettings = async () => {
+  const { data } = await axiosPublic("/api/site-settings");
+  return data?.data;
+};
+
+// Dynamic Pages
+export const DynamicPages = async () => {
+  const { data } = await axiosPublic("/api/dynamic-pages");
+  return data?.data;
+};
+
+// Dynamic Page Details
+export const DynamicPageDetails = async slug => {
+  const { data } = await axiosPublic(`/api/dynamic-pages/single/${slug}`);
+  return data?.data;
+};

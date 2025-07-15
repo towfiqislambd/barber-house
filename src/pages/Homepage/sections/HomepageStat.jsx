@@ -4,7 +4,7 @@ const HomepageStat = ({ data }) => {
       <div className="max-w-[1024px] mx-auto">
         {/* title */}
         <div className="container text-center space-y-2 md:space-y-4">
-          <h2 className="font-outfit text-[30px] md:text-4xl font-semibold">
+          <h2 className="font-outfit text-2xl xl:text-[30px] md:text-4xl font-semibold">
             {data?.title}
           </h2>
           <p className="text-base md:text-lg font-semibold text-textColor">

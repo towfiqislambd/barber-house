@@ -26,8 +26,10 @@ import {
 } from "@/redux/features/cartSlice";
 import toast from "react-hot-toast";
 import { currencyFormatter } from "@/lib/currencyFormatter";
+import { useSiteSettings } from "@/hooks/cms.queries";
 
 const Navbar = () => {
+  const { data: siteSettings, isLoading } = useSiteSettings();
   const dispatch = useDispatch();
   const [isOpen, setOpen] = useState(false);
   const [gender, setGender] = useState("Male");
@@ -35,7 +37,7 @@ const Navbar = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isSmallPopoverOpen, setIsSmallPopoverOpen] = useState(false);
   const { mutate: logOutMutate } = useLogOut();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const [loading, setLoading] = useState(false);
   const cartItems = useSelector(state => state.cart.cartItems);
 
@@ -68,6 +70,14 @@ const Navbar = () => {
       toast.error("You need to login first");
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <header
       className={`fixed w-full z-[999] top-0 left-0 transition-all duration-300 ${
@@ -82,7 +92,7 @@ const Navbar = () => {
         >
           <img
             className="w-full h-full object-cover rounded"
-            src={logo}
+            src={`${import.meta.env.VITE_SITE_URL}/${siteSettings?.logo}`}
             alt="Logo"
           />
         </Link>
@@ -99,71 +109,77 @@ const Navbar = () => {
                 For Business
               </Link>
               {user ? (
-                user?.role === "customer" ? (
-                  <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                    <PopoverTrigger>
-                      <button className="px-3 lg:px-5 py-2 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-sm lg:text-xl font-medium flex items-center gap-2 text-white">
-                        <span>Get Started</span>
-                        <DownArrowSvg />
-                      </button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-60 lg:w-72 mt-5">
-                      <div className="!bg-white rounded-lg px-2 lg:px-7 py-3 lg:py-10">
-                        <ul className="font-medium text-[#2C2C2C] lg:text-lg space-y-1 lg:space-y-4">
-                          {[
-                            {
-                              icon: <HeaderSVGOne />,
-                              label: "Profile",
-                              path: "/userdashboard",
-                            },
-                            {
-                              icon: <HeaderSVGTwo />,
-                              label: "Appointments",
-                              path: "/userdashboard/appointments",
-                            },
-                            {
-                              icon: <HeaderSVGFour />,
-                              label: "Favourites",
-                              path: "/userdashboard/favourites",
-                            },
-                            {
-                              icon: <HeaderSVGSix />,
-                              label: "Product orders",
-                              path: "/userdashboard/productorder",
-                            },
-                          ].map(({ icon, label, path }) => (
-                            <Link
-                              to={path}
-                              key={label}
+                <>
+                  {user?.role === "customer" && (
+                    <Popover
+                      open={isPopoverOpen}
+                      onOpenChange={setIsPopoverOpen}
+                    >
+                      <PopoverTrigger>
+                        <button className="px-3 lg:px-5 py-2 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-sm lg:text-xl font-medium flex items-center gap-2 text-white">
+                          <span>Get Started</span>
+                          <DownArrowSvg />
+                        </button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-60 lg:w-72 mt-5">
+                        <div className="!bg-white rounded-lg px-2 lg:px-7 py-3 lg:py-10">
+                          <ul className="font-medium text-[#2C2C2C] lg:text-lg space-y-1 lg:space-y-4">
+                            {[
+                              {
+                                icon: <HeaderSVGOne />,
+                                label: "Profile",
+                                path: "/userdashboard",
+                              },
+                              {
+                                icon: <HeaderSVGTwo />,
+                                label: "Appointments",
+                                path: "/userdashboard/appointments",
+                              },
+                              {
+                                icon: <HeaderSVGFour />,
+                                label: "Favourites",
+                                path: "/userdashboard/favourites",
+                              },
+                              {
+                                icon: <HeaderSVGSix />,
+                                label: "Product orders",
+                                path: "/userdashboard/productorder",
+                              },
+                            ].map(({ icon, label, path }) => (
+                              <Link
+                                to={path}
+                                key={label}
+                                className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
+                                onClick={() => setIsPopoverOpen(false)}
+                              >
+                                {icon}
+                                <p className="font-manrope lg:text-lg font-medium">
+                                  {label}
+                                </p>
+                              </Link>
+                            ))}
+                            <li
                               className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
-                              onClick={() => setIsPopoverOpen(false)}
+                              onClick={handleLogOut}
                             >
-                              {icon}
                               <p className="font-manrope lg:text-lg font-medium">
-                                {label}
+                                Log Out
                               </p>
-                            </Link>
-                          ))}
-                          <li
-                            className="cursor-pointer flex gap-2 items-center hover:bg-primary-gradient hover:text-white group text-[#2C2C2C] duration-300 transition-all rounded px-3 py-2"
-                            onClick={handleLogOut}
-                          >
-                            <p className="font-manrope lg:text-lg font-medium">
-                              Log Out
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </PopoverContent>
-                  </Popover>
-                ) : (
-                  <Link
-                    className="px-3 lg:px-5 py-2 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-sm lg:text-xl font-medium text-white"
-                    to={"/businessDashboard"}
-                  >
-                    Go to Dashboard
-                  </Link>
-                )
+                            </li>
+                          </ul>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  )}
+                  {user?.role === "business" && (
+                    <Link
+                      className="px-3 lg:px-5 py-2 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-sm lg:text-xl font-medium text-white"
+                      to={"/businessDashboard"}
+                    >
+                      Go to Dashboard
+                    </Link>
+                  )}
+                </>
               ) : (
                 <Link
                   to="/login"
