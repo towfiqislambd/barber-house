@@ -5,9 +5,11 @@ import { MdOutlineWatchLater, MdOutlineCancel } from "react-icons/md";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { currencyFormatter } from "@/lib/currencyFormatter";
+import { MdOutlineFileDownload } from "react-icons/md";
 import {
   useRescheduleAppointment,
   useCancleAppointment,
+  useDownloadInvoice,
 } from "@/hooks/user.mutation";
 
 export default function UpcommingCard({ upcomingData, onSelect, selected }) {
@@ -16,6 +18,7 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
   const [showRescheduleModal, setShowRescheduleModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const dropdownRef = useRef(null);
+  const { mutate: downloadInvoiceMutation, isPending } = useDownloadInvoice();
 
   useEffect(() => {
     const onClick = e => {
@@ -48,7 +51,9 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
 
         {/* Date */}
         <div className="lg:w-1/5 border-r pr-4 flex-shrink-0">
-          <h3 className="text-primary text-lg lg:text-2xl lg:text-center">{date}</h3>
+          <h3 className="text-primary text-lg lg:text-2xl lg:text-center">
+            {date}
+          </h3>
         </div>
 
         {/* Time & services */}
@@ -95,6 +100,15 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
                     >
                       <MdOutlineCancel className="text-red-500" /> Cancel
                       Booking
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => downloadInvoiceMutation(id)}
+                      className="flex items-center gap-2"
+                    >
+                      <MdOutlineFileDownload className="text-red-500" />
+                      {isPending ? "Downloading..." : "Download Invoice"}
                     </button>
                   </li>
                 </ul>

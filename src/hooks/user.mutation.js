@@ -10,6 +10,7 @@ import {
   BookMarkRemove,
   Checkout,
   deleteAddress,
+  DownloadInvoice,
   updateAddress,
   updateProfile,
 } from "./user.api";
@@ -209,6 +210,20 @@ export const useAddComplain = () => {
     mutationKey: ["add-complain"],
     mutationFn: payload => AddComplain(payload),
     onSuccess: data => {
+      toast.success(data?.message);
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+export const useDownloadInvoice = () => {
+  return useMutation({
+    mutationKey: ["download-invoice"],
+    mutationFn: id => DownloadInvoice(id),
+    onSuccess: data => {
+      console.log(data);
       toast.success(data?.message);
     },
     onError: err => {
