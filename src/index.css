@@ -89,6 +89,10 @@
   }
 }
 
+body {
+  @apply !top-0;
+}
+
 /* This is the ant design css */
 .ant-tabs-nav-wrap {
   border: 1px solid #dfe1e6 !important;
@@ -343,6 +347,28 @@
   overflow: hidden !important;
   white-space: nowrap !important;
   text-overflow: ellipsis !important;
+}
+
+/* For Language */
+.goog-te-banner-frame,
+.goog-te-menu-value,
+.skiptranslate iframe,
+#google_translate_element,
+.VIpgJd-ZVi9od-aZ2wEe-OiiCO,
+#goog-gt-vt {
+  display: none !important;
+}
+
+.goog-te-menu-frame {
+  max-width: 100% !important;
+}
+
+.goog-te-menu-value span {
+  color: inherit !important;
+}
+
+.skiptranslate iframe {
+  visibility: hidden !important;
 }
 
 @media (max-width: 1024px) {

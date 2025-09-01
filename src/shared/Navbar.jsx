@@ -27,8 +27,13 @@ import {
 import toast from "react-hot-toast";
 import { currencyFormatter } from "@/lib/currencyFormatter";
 import { useSiteSettings } from "@/hooks/cms.queries";
+import { useTranslation } from "@/provider/TranslationContext";
+import ReactFlagsSelect from "react-flags-select";
 
 const Navbar = () => {
+  const [selectedCountry, setSelectedCountry] = useState("US");
+  const { changeLanguage } = useTranslation();
+
   const { data: siteSettings, isLoading } = useSiteSettings();
   const dispatch = useDispatch();
   const [isOpen, setOpen] = useState(false);
@@ -88,7 +93,7 @@ const Navbar = () => {
         {/* logo */}
         <Link
           to="/"
-          className="size-[60px] md:size-[65px] lg:size-[80px] 3xl:size-[100px] rounded"
+          className="size-[50px] md:size-[65px] lg:size-[80px] 3xl:size-[100px] rounded"
         >
           <img
             className="w-full h-full object-cover rounded"
@@ -101,10 +106,10 @@ const Navbar = () => {
         <div className="flex items-center">
           <div className="flex items-center gap-8">
             {/* cta */}
-            <div className="flex items-center gap-3 lg:gap-5">
+            <div className="flex items-center gap-1.5 lg:gap-5">
               <Link
                 to={"/business"}
-                className="text-white px-3 text-sm lg:px-5 py-2 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] lg:text-xl font-medium"
+                className="text-white px-2.5 text-[13px] lg:px-5 py-1.5 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] lg:text-xl font-medium"
               >
                 For Business
               </Link>
@@ -173,7 +178,7 @@ const Navbar = () => {
                   )}
                   {user?.role === "business" && (
                     <Link
-                      className="px-3 lg:px-5 py-2 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-sm lg:text-xl font-medium text-white"
+                      className="px-2.5 lg:px-5 py-1.5 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-[13px] lg:text-xl font-medium text-white"
                       to={"/businessDashboard"}
                     >
                       Go to Dashboard
@@ -183,11 +188,92 @@ const Navbar = () => {
               ) : (
                 <Link
                   to="/login"
-                  className="px-3 lg:px-5 py-2 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-sm lg:text-xl font-medium text-white"
+                  className="px-2.5 lg:px-5 py-1.5 lg:py-[10px] 3xl:py-3.5 border border-textColor rounded-[32px] text-[13px] lg:text-xl font-medium text-white"
                 >
                   <span>Sign In</span>
                 </Link>
               )}
+
+              <div className="hidden lg:block">
+                <ReactFlagsSelect
+                  selected={selectedCountry}
+                  onSelect={countryCode => {
+                    const languageMap = {
+                      US: "en",
+                      GB: "en",
+                      FR: "fr",
+                      DE: "de",
+                      IT: "it",
+                      BD: "bn",
+                      IN: "hi",
+                    };
+
+                    const langCode = languageMap[countryCode] || "en";
+                    changeLanguage(langCode);
+                    setSelectedCountry(countryCode);
+                  }}
+                  countries={["US", "GB", "FR", "DE", "IT", "BD", "IN"]}
+                  customLabels={{
+                    US: "English",
+                    GB: "English (UK)",
+                    FR: "Français",
+                    DE: "Deutsch",
+                    IT: "Italiano",
+                    BD: "বাংলা",
+                    IN: "हिन्दी",
+                  }}
+                  placeholder="Select Language"
+                  searchable={false}
+                  selectedSize={16}
+                  optionsSize={14}
+                  className="inline-block"
+                  selectButtonClassName="p-2 border bg-[#0F1E3A] text-white !border-gray-700 rounded"
+                />
+              </div>
+
+              {/* Mobile Version (icon-based dropdown) */}
+              <div className="lg:hidden relative">
+                <button
+                  onClick={() => setIsSmallPopoverOpen(prev => !prev)}
+                  className="px-1 py-0.5 border border-gray-500 bg-[#0F1E3A] text-white rounded"
+                >
+                  🌐
+                </button>
+                {isSmallPopoverOpen && (
+                  <div className="absolute top-12 right-0 bg-white shadow-lg rounded-md p-2 z-50 w-40">
+                    {[
+                      { code: "US", label: "English" },
+                      { code: "GB", label: "English (UK)" },
+                      { code: "FR", label: "Français" },
+                      { code: "DE", label: "Deutsch" },
+                      { code: "IT", label: "Italiano" },
+                      { code: "BD", label: "বাংলা" },
+                      { code: "IN", label: "हिन्दी" },
+                    ].map(({ code, label }) => (
+                      <div
+                        key={code}
+                        className="cursor-pointer px-3 py-2 text-sm hover:bg-gray-100 rounded"
+                        onClick={() => {
+                          const languageMap = {
+                            US: "en",
+                            GB: "en",
+                            FR: "fr",
+                            DE: "de",
+                            IT: "it",
+                            BD: "bn",
+                            IN: "hi",
+                          };
+                          changeLanguage(languageMap[code] || "en");
+                          setSelectedCountry(code);
+                          setIsSmallPopoverOpen(false);
+                        }}
+                      >
+                        {label}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
