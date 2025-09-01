@@ -1,3 +1,4 @@
+import { useMutation } from "@tanstack/react-query";
 import { axiosPublic } from "./useAxiosPublic";
 import { axiosSecure } from "./useAxiosSecure";
 
@@ -119,6 +120,11 @@ export const UserTrendingStores = async () => {
   return data?.data;
 };
 
+export const SubscribedStores = async () => {
+  const { data } = await axiosPublic("/api/online-store/subcribed");
+  return data?.data;
+};
+
 export const UserRecentlyStores = async () => {
   const { data } = await axiosSecure("/api/online-store/recently-viewed");
   return data;
@@ -147,9 +153,13 @@ export const AddComplain = async payload => {
   return data;
 };
 
-export const DownloadInvoice = async appointment_id => {
-  const { data } = await axiosSecure.get(
-    `api/online-store/appointments/${appointment_id}/invoice`
-  );
-  return data;
+export const useDownloadInvoice = () => {
+  return useMutation({
+    mutationFn: appointment_id =>
+      axiosSecure
+        .get(`api/online-store/appointments/${appointment_id}/invoice`, {
+          responseType: "blob",
+        })
+        .then(res => res.data),
+  });
 };

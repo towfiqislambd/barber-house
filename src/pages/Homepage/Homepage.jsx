@@ -7,6 +7,7 @@ import { useHomePageData } from "@/hooks/cms.queries";
 import {
   useAppointmentCount,
   useStores,
+  useSubscribedStores,
   useUserRecentlyViewStores,
   useUserTrendingStores,
 } from "@/hooks/user.queries";
@@ -19,17 +20,19 @@ const Homepage = () => {
     useAppointmentCount();
   const { data: homePageData, isLoading: homepageDataLoading } =
     useHomePageData();
+
   const { data: stores, isLoading: allStoreLoading } = useStores();
   const { data: trendingStore, isLoading: trendingStoreLoading } =
     useUserTrendingStores();
-  const { data: recentlyView } = useUserRecentlyViewStores();
-  // const { user } = useAuth();
+  const { data: subscribedStores, isLoading: subscribeLoading } =
+    useSubscribedStores();
 
   const isLoading =
     allStoreLoading ||
     trendingStoreLoading ||
     appointmentCountLoading ||
-    homepageDataLoading;
+    homepageDataLoading ||
+    subscribeLoading;
 
   useEffect(() => {
     if (isLoading) {
@@ -61,6 +64,11 @@ const Homepage = () => {
   // }
 
   containerItems.push(
+    {
+      id: 3,
+      title: "Subscribed Stores",
+      data: subscribedStores,
+    },
     {
       id: 4,
       title: "New to Cleanse",

@@ -16,6 +16,7 @@ const BusinessDashboardCatalogue = () => {
   const [activeTab, setActiveTab] = useState("service_menu");
   const { user } = useAuth();
   const online_store_id = user?.business_profile?.online_store?.id;
+  console.log(online_store_id);
   const { data: allCategoryData } = useCatalogue();
   const { data: allProductsList } = useAllProductsList(online_store_id);
 

@@ -1,13 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   AppointmentCount,
   AppointmentList,
   BookmarkGet,
-  BookMarkRemove,
-  DownloadInvoice,
   ShowProducts,
   StoreDetails,
   stores,
+  SubscribedStores,
   UserDataGet,
   UserRecentlyStores,
   UserSearchStores,
@@ -68,6 +67,13 @@ export const useUserTrendingStores = () => {
   });
 };
 
+export const useSubscribedStores = () => {
+  return useQuery({
+    queryKey: ["subscribed-store"],
+    queryFn: () => SubscribedStores(),
+  });
+};
+
 export const useUserRecentlyViewStores = () => {
   return useQuery({
     queryKey: ["recently-view"],
@@ -89,8 +95,8 @@ export const useAppointmentCount = () => {
   });
 };
 
-export const useDownloadInvoice = () => {
-  return useMutation({
-    mutationFn: DownloadInvoice,
-  });
-};
+// export const useDownloadInvoice = () => {
+//   return useMutation({
+//     mutationFn: DownloadInvoice,
+//   });
+// };

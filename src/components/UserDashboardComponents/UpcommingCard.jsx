@@ -10,25 +10,34 @@ import {
   useRescheduleAppointment,
   useCancleAppointment,
 } from "@/hooks/user.mutation";
-import { useDownloadInvoice } from "@/hooks/user.queries";
+import { useDownloadInvoice } from "@/hooks/user.api";
 
 export default function UpcommingCard({ upcomingData, onSelect, selected }) {
+  const { mutate: downloadInvoice, isPending } = useDownloadInvoice();
   const { id, store_services, date, time, status } = upcomingData;
   const [open, setOpen] = useState(false);
   const [showRescheduleModal, setShowRescheduleModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const dropdownRef = useRef(null);
-  const { mutateAsync: downloadInvoice } = useDownloadInvoice();
 
-  const handleDownload = async () => {
-    try {
-      const data = await downloadInvoice(id);
-      console.log(data);
-      // Same download logic here
-    } catch (error) {
-      console.error(error);
-    }
+  const handleDownload = () => {
+    downloadInvoice(id, {
+      onSuccess: blob => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", `invoice-${id}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      },
+      onError: error => {
+        console.error("Failed to download invoice:", error);
+      },
+    });
   };
+
   useEffect(() => {
     const onClick = e => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -112,13 +121,27 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
                     </button>
                   </li>
                   <li>
-                    <button
-                      onClick={handleDownload}
-                      className="flex items-center gap-2"
-                    >
-                      <MdOutlineFileDownload className="text-red-500" />
-                      Download
-                    </button>
+                    <li>
+                      <button
+                        onClick={handleDownload}
+                        disabled={isPending}
+                        className={`flex items-center gap-2 ${
+                          isPending ? "opacity-50 cursor-not-allowed" : ""
+                        }`}
+                      >
+                        {isPending ? (
+                          <>
+                            <span className="animate-spin">⏳</span>{" "}
+                            Downloading…
+                          </>
+                        ) : (
+                          <>
+                            <MdOutlineFileDownload className="text-red-500" />
+                            Download
+                          </>
+                        )}
+                      </button>
+                    </li>
                   </li>
                 </ul>
               </div>
