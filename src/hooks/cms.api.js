@@ -359,5 +359,5 @@ export const AddDiscountCode = async (store_id, payload) => {
     `/api/stores/${store_id}/discount-codes`,
     payload
   );
-  return data?.data;
+  return data;
 };

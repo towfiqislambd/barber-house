@@ -243,3 +243,18 @@ export const useDeleteCategory = () => {
     },
   });
 };
+
+// Discount Code
+export const useAddDiscountCode = id => {
+  return useMutation({
+    mutationKey: ["add-discount-code"],
+    mutationFn: payload => AddDiscountCode(id, payload),
+    onSuccess: data => {
+      console.log(data)
+      toast.success(data?.message);
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
