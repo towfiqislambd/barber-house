@@ -20,13 +20,15 @@ export default function UserAppointments() {
   }
 
   return (
-    <section className="">
+    <section>
       <h3 className="text-[#2C2C2C] font-outfit text-[36px] font-medium mb-[40px]">
         Appointments
       </h3>
+
       <div className="flex flex-col-reverse 4xl:flex-row gap-[30px]">
         <div className="flex-shrink-0 w-full lg:w-[700px]">
-          <div className="">
+          <div>
+            {/* Tabs */}
             <div className="flex bg-primary w-max rounded-[36px] p-[4px] mb-[28px]">
               <button
                 className={`py-2 px-4 rounded-[32px] font-manrope font-semibold text-[18px] ${
@@ -50,12 +52,13 @@ export default function UserAppointments() {
               </button>
             </div>
 
+            {/* Content */}
             <div className="mt-4">
               {activeTab === "tab1" && (
                 <div>
                   <div className="mb-[28px]">
                     <h3 className="text-[#2C2C2C] font-outfit text-[28px] font-medium leading-[33px] flex gap-[15px]">
-                      Upcoming{" "}
+                      Upcoming
                       <span className="w-[30px] h-[30px] bg-primary rounded-[100%] text-center flex items-center justify-center text-[#FFF] text-[20px]">
                         {data?.upcoming_appointments?.length}
                       </span>

@@ -141,3 +141,8 @@ export const AddReview = async payload => {
   );
   return data;
 };
+
+export const AddComplain = async payload => {
+  const { data } = await axiosSecure.post("/api/complain", payload);
+  return data;
+};

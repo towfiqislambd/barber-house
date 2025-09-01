@@ -2,11 +2,14 @@ import { useEffect, useState, useRef } from "react";
 import { IoTimeOutline } from "react-icons/io5";
 import { FaStar } from "react-icons/fa";
 import AddReviewModal from "../BusinessDashboard/Modals/AddReviewModal";
+import AddComplainModal from "../BusinessDashboard/Modals/AddComplainModal";
+import { MdOutlineFeedback } from "react-icons/md";
 
 export default function PreviousCard({ previousData, onSelect, selected }) {
-  const { id, store_services, date, time } = previousData;
+  const { id, store_services, date, time, online_store_id } = previousData;
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [openComplain, setOpenComplain] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -54,10 +57,7 @@ export default function PreviousCard({ previousData, onSelect, selected }) {
         </div>
 
         {/* REVIEW BUTTON */}
-        <div
-          ref={dropdownRef}
-          className="sm:flex-shrink-0 flex justify-start sm:justify-end items-start sm:items-center"
-        >
+        <div ref={dropdownRef} className="flex flex-col gap-2 ">
           <button
             onClick={e => {
               e.stopPropagation(); // prevent card selection
@@ -68,11 +68,28 @@ export default function PreviousCard({ previousData, onSelect, selected }) {
             <FaStar className="text-yellow-400" />
             Add Review
           </button>
+
+          {/* Add complain btn */}
+          <button
+            onClick={e => {
+              e.stopPropagation();
+              setOpenComplain(true);
+            }}
+            className="inline-flex items-center gap-2 border rounded-full px-3 py-1 text-sm font-medium hover:bg-gray-50"
+          >
+            <MdOutlineFeedback className="text-primary" />
+            Add Complain
+          </button>
         </div>
       </div>
 
       {/* Review Modal */}
       <AddReviewModal id={id} isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddComplainModal
+        id={online_store_id}
+        isOpen={openComplain}
+        setIsOpen={setOpenComplain}
+      />
     </div>
   );
 }

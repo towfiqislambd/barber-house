@@ -11,6 +11,7 @@ import { currencyFormatter } from "@/lib/currencyFormatter";
 const BookingConfirmationPage = () => {
   const location = useLocation();
   const [notes, setNotes] = useState("");
+  const [discountCode, setDiscountCode] = useState("");
 
   const storeData = location.state?.storeData;
   const selectedServices = location.state?.selectedServices;
@@ -29,6 +30,7 @@ const BookingConfirmationPage = () => {
     formData.append("date", formattedDate);
     formData.append("time", selectedAppointment || "12:30");
     formData.append("booking_notes", notes);
+    formData.append("discount_code", discountCode);
     selectedServices?.forEach(s => {
       formData.append("store_service_ids[]", s.catalog_service.id);
     });
@@ -67,23 +69,25 @@ const BookingConfirmationPage = () => {
         {/* First Div */}
         <div className="w-full lg:w-[70%] border-[0.4px] border-borderColorLight rounded-2xl bg-[#FFF]">
           <div className="py-5 xl:py-12 px-5 xl:px-10 3xl:px-[165px]">
-            <h1 className="text-textColor font-manrope text-xl font-bold">
+            <h2 className="text-textColor font-manrope text-xl font-bold">
               Booking Notes
-            </h1>
+            </h2>
             <textarea
-              className="border border-[#8993A4] w-full 2xl:w-[678px] h-40 lg:h-[203px] rounded-xl mt-4 px-3 lg:px-5 py-3 lg:py-6 text-[#8993A4]"
+              className="border border-[#8993A4] w-full 2xl:w-[678px] h-40 lg:h-[203px] rounded-lg mt-4 px-3 lg:px-5 py-3 lg:py-6 text-[#8993A4]"
               placeholder="Write anything about your booking..."
               value={notes}
               onChange={e => setNotes(e.target.value)}
             ></textarea>
-            <h1 className="mt-5 xl:mt-10 3xl:mt-16 text-textColor font-manrope xl:text-lg font-normal leading-[30px]">
-              <span className="text-textColor font-manrope text-xl font-semibold leading-[30px]">
-                Contact Note:
-              </span>{" "}
-              If there is any inquiry regarding booking, rescheduling,
-              cancelling appointment or any other queries please Call us/Text
-              us/Contact on whatsapp/viber in the following number.
-            </h1>
+
+            <h2 className="text-textColor font-manrope text-xl font-bold mt-7">
+              Discount Code (If have)
+            </h2>
+            <input
+              type="text"
+              className="border border-[#8993A4] w-full 2xl:w-[678px] h-7 rounded-lg mt-4 px-3 lg:px-5 py-3 lg:py-6 text-[#8993A4]"
+              placeholder="Enter discount code..."
+              onChange={e => setDiscountCode(e.target.value)}
+            />
           </div>
         </div>
 

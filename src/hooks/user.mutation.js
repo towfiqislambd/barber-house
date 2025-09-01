@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   addAddress,
+  AddComplain,
   AddReview,
   AppointmentAdd,
   AppointmentCancel,
@@ -199,6 +200,19 @@ export const useAddReview = () => {
     },
     onError: err => {
       toast.error(err?.response?.data?.message || "Failed to add review");
+    },
+  });
+};
+
+export const useAddComplain = () => {
+  return useMutation({
+    mutationKey: ["add-complain"],
+    mutationFn: payload => AddComplain(payload),
+    onSuccess: data => {
+      toast.success(data?.message);
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
     },
   });
 };
