@@ -148,7 +148,7 @@ export const AddComplain = async payload => {
 };
 
 export const DownloadInvoice = async appointment_id => {
-  const { data } = await axiosSecure.post(
+  const { data } = await axiosSecure.get(
     `api/online-store/appointments/${appointment_id}/invoice`
   );
   return data;

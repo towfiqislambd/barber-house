@@ -6,16 +6,19 @@ import AddProductCategoryModal from "@/components/BusinessDashboard/Modals/AddPr
 import AddProductBrandModal from "@/components/BusinessDashboard/Modals/AddProductBrandModal";
 import AllServicesList from "./AllServicesList";
 import useAuth from "@/hooks/useAuth";
+import AddDiscountModal from "@/components/BusinessDashboard/Modals/AddDiscountModal";
 
 const BusinessDashboardCatalogue = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [openDiscount, setOpenDiscount] = useState(false);
   const [activeTab, setActiveTab] = useState("service_menu");
   const { user } = useAuth();
   const online_store_id = user?.business_profile?.online_store?.id;
   const { data: allCategoryData } = useCatalogue();
   const { data: allProductsList } = useAllProductsList(online_store_id);
+
   useEffect(() => {
     if (location.state?.tab) {
       setActiveTab(location.state.tab);
@@ -60,6 +63,12 @@ const BusinessDashboardCatalogue = () => {
           >
             Add Product Brand
           </button>
+          <button
+            onClick={() => setOpenDiscount(true)}
+            className="xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg"
+          >
+            Add Discount Coupon
+          </button>
           <Link
             to={"/businessDashboard/addnew-product"}
             className={`xl:ps-5 px-[10px] md:px-3 xl:pe-24 py-[5px] md:py-2 xl:w-full xl:block text-left duration-300 transition-all hover:bg-primary hover:text-white rounded-lg ${
@@ -84,6 +93,7 @@ const BusinessDashboardCatalogue = () => {
       {/* Modals */}
       <AddProductCategoryModal open={open} setOpen={setOpen} />
       <AddProductBrandModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <AddDiscountModal isOpen={openDiscount} setIsOpen={setOpenDiscount} />
     </section>
   );
 };

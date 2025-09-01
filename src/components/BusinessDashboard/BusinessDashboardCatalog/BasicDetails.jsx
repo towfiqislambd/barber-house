@@ -17,6 +17,7 @@ const BasicDetails = ({ onNext }) => {
   const { data: categoryData } = useCatalogue();
   const business_profile_id = user?.business_profile?.id;
   const { mutateAsync: addService, isPending } = useAddService();
+
   const {
     handleSubmit,
     control,

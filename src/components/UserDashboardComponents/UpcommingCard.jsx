@@ -9,8 +9,8 @@ import { MdOutlineFileDownload } from "react-icons/md";
 import {
   useRescheduleAppointment,
   useCancleAppointment,
-  useDownloadInvoice,
 } from "@/hooks/user.mutation";
+import { useDownloadInvoice } from "@/hooks/user.queries";
 
 export default function UpcommingCard({ upcomingData, onSelect, selected }) {
   const { id, store_services, date, time, status } = upcomingData;
@@ -18,8 +18,17 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
   const [showRescheduleModal, setShowRescheduleModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const dropdownRef = useRef(null);
-  const { mutate: downloadInvoiceMutation, isPending } = useDownloadInvoice();
+  const { mutateAsync: downloadInvoice } = useDownloadInvoice();
 
+  const handleDownload = async () => {
+    try {
+      const data = await downloadInvoice(id);
+      console.log(data);
+      // Same download logic here
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
     const onClick = e => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -104,11 +113,11 @@ export default function UpcommingCard({ upcomingData, onSelect, selected }) {
                   </li>
                   <li>
                     <button
-                      onClick={() => downloadInvoiceMutation(id)}
+                      onClick={handleDownload}
                       className="flex items-center gap-2"
                     >
                       <MdOutlineFileDownload className="text-red-500" />
-                      {isPending ? "Downloading..." : "Download Invoice"}
+                      Download
                     </button>
                   </li>
                 </ul>

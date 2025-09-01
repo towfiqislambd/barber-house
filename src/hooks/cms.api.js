@@ -352,3 +352,12 @@ export const DynamicPageDetails = async slug => {
   const { data } = await axiosPublic(`/api/dynamic-pages/single/${slug}`);
   return data?.data;
 };
+
+// Add Discount Code
+export const AddDiscountCode = async (store_id, payload) => {
+  const { data } = await axiosSecure.post(
+    `/api/stores/${store_id}/discount-codes`,
+    payload
+  );
+  return data?.data;
+};
