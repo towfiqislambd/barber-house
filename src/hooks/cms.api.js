@@ -361,3 +361,12 @@ export const AddDiscountCode = async (store_id, payload) => {
   );
   return data;
 };
+
+// Purchase Subscription
+export const PurchaseSubscription = async () => {
+  const { data } = await axiosSecure.post(
+    "/api/online-store/subscription/purchase",
+    payload
+  );
+  return data;
+};

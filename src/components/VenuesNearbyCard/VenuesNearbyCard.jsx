@@ -1,9 +1,9 @@
 import useAuth from "@/hooks/useAuth";
-import { StarSvg, WishButtonSvg } from "../svgContainer/SvgContainer";
+import toast from "react-hot-toast";
+import { WishButtonSvg } from "../svgContainer/SvgContainer";
 import { Link, useNavigate } from "react-router-dom";
 import { useBookmarkGet } from "@/hooks/user.queries";
 import { useBookmarkAdd, useBookmarkRemove } from "@/hooks/user.mutation";
-import toast from "react-hot-toast";
 
 const VenuesNearbyCard = ({ venue }) => {
   const { user } = useAuth();
@@ -11,9 +11,9 @@ const VenuesNearbyCard = ({ venue }) => {
   const { data: bookmark } = useBookmarkGet();
   const addBookmark = useBookmarkAdd();
   const removeBookmark = useBookmarkRemove();
-  const isBookmarked = bookmark?.some((item) => item.id === venue?.id);
+  const isBookmarked = bookmark?.some(item => item.id === venue?.id);
 
-  const handleBookmark = async (e) => {
+  const handleBookmark = async e => {
     e.stopPropagation();
     e.preventDefault();
 
@@ -103,7 +103,7 @@ const VenuesNearbyCard = ({ venue }) => {
 
         {/* wishlist button */}
         <div
-          onClick={(e) => handleBookmark(e)}
+          onClick={e => handleBookmark(e)}
           className={`size-8 cursor-pointer flex items-center justify-center rounded-full absolute top-3 right-3 transition-colors duration-300 ${
             isBookmarked ? "bg-primary" : "bg-white/50 hover:bg-primary"
           }`}

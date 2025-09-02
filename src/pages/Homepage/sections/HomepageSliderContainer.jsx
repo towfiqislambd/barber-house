@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import ProductCard from "@/components/cards/ProductCard";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper/modules"; // ✅ Fixed Import
+import { Pagination, Navigation } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
@@ -16,6 +16,7 @@ import { useState } from "react";
 import VenuesNearbyCard from "@/components/VenuesNearbyCard/VenuesNearbyCard";
 
 const HomepageSliderContainer = ({ data, isLastItem }) => {
+  console.log(data);
   const [swiperRef, setSwiperRef] = useState(null);
 
   return (
@@ -30,48 +31,53 @@ const HomepageSliderContainer = ({ data, isLastItem }) => {
           {data?.title}
         </h3>
       </div>
+      {data?.data?.data?.length > 0 ? (
+        <div className="relative">
+          {/* prev-button */}
+          <div
+            onClick={() => swiperRef?.slidePrev()}
+            className="absolute top-1/2 -left-8 z-10 group cursor-pointer"
+          >
+            <PrevSliderSvg />
+          </div>
 
-      {/* cards */}
-      <div className="relative">
-        {/* prev-button */}
-        <div
-          onClick={() => swiperRef?.slidePrev()}
-          className="absolute top-1/2 -left-8 z-10 group cursor-pointer"
-        >
-          <PrevSliderSvg />
+          <Swiper
+            onSwiper={setSwiperRef}
+            spaceBetween={30}
+            slidesPerView={1}
+            loop={true}
+            modules={[Pagination, Navigation]}
+            className="mySwiper mt-8"
+            breakpoints={{
+              375: { slidesPerView: 1 },
+              480: { slidesPerView: 1 },
+              576: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+              1200: { slidesPerView: 4 },
+            }}
+          >
+            {data?.data?.data?.map((venue, index) => (
+              <SwiperSlide key={venue.id || index}>
+                <VenuesNearbyCard
+                  homepage={true}
+                  key={venue.id}
+                  venue={venue}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* next-button */}
+          <div
+            onClick={() => swiperRef?.slideNext()}
+            className="absolute top-1/2 -right-8 z-10 group cursor-pointer"
+          >
+            <NextSliderSvg />
+          </div>
         </div>
-
-        <Swiper
-          onSwiper={setSwiperRef}
-          spaceBetween={30}
-          slidesPerView={1}
-          loop={true}
-          modules={[Pagination, Navigation]}
-          className="mySwiper mt-8"
-          breakpoints={{
-            375: { slidesPerView: 1 },
-            480: { slidesPerView: 1 },
-            576: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1200: { slidesPerView: 4 },
-          }}
-        >
-          {data?.data?.data?.map((venue, index) => (
-            <SwiperSlide key={venue.id || index}>
-              {" "}
-              <VenuesNearbyCard homepage={true} key={venue.id} venue={venue} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        {/* next-button */}
-        <div
-          onClick={() => swiperRef?.slideNext()}
-          className="absolute top-1/2 -right-8 z-10 group cursor-pointer"
-        >
-          <NextSliderSvg />
-        </div>
-      </div>
+      ) : (
+        <p className="text-lg font-semibold mt-5">No Data Found Yet!!</p>
+      )}
     </section>
   );
 };

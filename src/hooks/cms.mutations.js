@@ -16,6 +16,7 @@ import {
   EditService,
   OnBoarding,
   OnStripe,
+  PurchaseSubscription,
 } from "./cms.api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -250,8 +251,23 @@ export const useAddDiscountCode = id => {
     mutationKey: ["add-discount-code"],
     mutationFn: payload => AddDiscountCode(id, payload),
     onSuccess: data => {
-      console.log(data)
+      console.log(data);
       toast.success(data?.message);
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Discount Code
+export const usePurchaseSubscription = () => {
+  return useMutation({
+    mutationKey: ["purchase-subscription"],
+    mutationFn: payload => PurchaseSubscription(payload),
+    onSuccess: data => {
+      console.log(data);
+      // toast.success(data?.message);
     },
     onError: err => {
       toast.error(err?.response?.data?.message);

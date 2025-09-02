@@ -4,9 +4,11 @@ import FAQ from "./section/FAQ";
 import FreeAll from "./section/FreeAll";
 import { useEffect } from "react";
 import { Loader } from "@/components/Loader/Loader";
+import Pricing from "./section/Pricing";
 
 const BusinessPricingPage = () => {
   const { data: businessPricing, isLoading } = useBusinessPricing();
+
   useEffect(() => {
     if (isLoading) {
       document.body.style.overflow = "hidden";
@@ -29,6 +31,7 @@ const BusinessPricingPage = () => {
   return (
     <>
       <BusinessPricingBanner data={businessPricing?.banner} />
+      <Pricing />
       <FreeAll
         data={businessPricing?.section_description}
         data2={businessPricing?.description_items}
