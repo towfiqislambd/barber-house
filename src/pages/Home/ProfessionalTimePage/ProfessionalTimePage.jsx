@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import BreadCrumb from "@/components/BusinessHelpCenter/BreadCrumb/BreadCrumb";
 import {
   AppointmentCalendarSvg,
   LeftSideArrowSvg,
@@ -53,16 +52,14 @@ const appointmentTime = [
 ];
 
 const ProfessionalTimePage = () => {
-  const defaultDate = new Date(2025, 5, 30); // June 30, 2025
+  const defaultDate = new Date(); // current date as Date object
   const [selectedDate, setSelectedDate] = useState(defaultDate);
   const [date, setDate] = useState(defaultDate);
+
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [visibleRange, setVisibleRange] = useState([0, 10]);
-
   const location = useLocation();
-
   const formattedDate = format(selectedDate, "yyyy-MM-dd");
-
   const storeData = location.state?.storeData;
   const selectedServices = location.state?.selectedServices;
   const bookingType = location.state?.bookingType;
@@ -80,7 +77,7 @@ const ProfessionalTimePage = () => {
     }
   };
 
-  const getDaysInMonth = (date) => {
+  const getDaysInMonth = date => {
     const year = date.getFullYear();
     const month = date.getMonth();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -137,13 +134,13 @@ const ProfessionalTimePage = () => {
                 <Calendar
                   mode="single"
                   selected={date}
-                  onSelect={(selected) => {
+                  onSelect={selected => {
                     if (selected >= today) {
                       setDate(selected);
                       setSelectedDate(selected);
                     }
                   }}
-                  disabled={(date) => date < today}
+                  disabled={date => date < today}
                 />
               </PopoverContent>
             </Popover>
@@ -176,7 +173,7 @@ const ProfessionalTimePage = () => {
             <div className="flex flex-wrap gap-y-2 gap-x-1 md:justify-between items-center">
               {getDaysInMonth(selectedDate)
                 .slice(visibleRange[0], visibleRange[1])
-                .map((item) => {
+                .map(item => {
                   const itemDate = new Date(
                     selectedDate.getFullYear(),
                     selectedDate.getMonth(),

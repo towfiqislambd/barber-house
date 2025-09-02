@@ -7,6 +7,7 @@ import { useAppointmentBooking } from "@/hooks/user.mutation";
 import { useState } from "react";
 import { clearServices } from "@/redux/features/serviceSlice";
 import { currencyFormatter } from "@/lib/currencyFormatter";
+import toast from "react-hot-toast";
 
 const BookingConfirmationPage = () => {
   const location = useLocation();
@@ -23,6 +24,11 @@ const BookingConfirmationPage = () => {
   const { mutateAsync } = useAppointmentBooking(setLoading);
 
   const handleConfirm = async () => {
+    if (!notes.trim()) {
+      toast.error("Booking Notes are required");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("online_store_id", storeData?.data?.id);
     formData.append("appointment_type", bookingType);

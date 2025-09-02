@@ -1,5 +1,4 @@
 import BreadCrumb from "@/components/BusinessHelpCenter/BreadCrumb/BreadCrumb";
-import salonBannerImg from "../../../../assets/images/saloncarddetails/salonBanner.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -66,6 +65,18 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
       console.error(error);
     }
   };
+
+  const handleBook = () => {
+    if (!user) {
+      toast.error("Please Login First");
+      navigate("/login");
+      return;
+    }
+
+    // <Navigate to="/booknow" state={{ storeData: data }} />;
+    navigate("/booknow", { state: { storeData: data } });
+  };
+
   return (
     <div className="container mb-10 lg:mb-20 4xl:mb-[120px] lg:px-5 xl:px-7 2xl:px-10 3xl:px-12 4xl:px-0">
       {/* Back and Breadcrumb */}
@@ -270,11 +281,13 @@ const SalonCardDetailsBanner = ({ setActiveCart, data }) => {
           </div>
 
           {/* Book Now Button */}
-          <Link to="/booknow" state={{ storeData: data }}>
-            <button className="text-white font-manrope text-lg 2xl:text-xl font-semibold bg-primary-gradient justify-center py-2 lg:py-3 2xl:py-4 mt-8 3xl:mt-[72px] rounded-[40px] w-full block">
-              Book Now
-            </button>
-          </Link>
+
+          <button
+            onClick={handleBook}
+            className="text-white font-manrope text-lg 2xl:text-xl font-semibold bg-primary-gradient justify-center py-2 lg:py-3 2xl:py-4 mt-8 3xl:mt-[72px] rounded-[40px] w-full block"
+          >
+            Book Now
+          </button>
         </div>
       </div>
     </div>
