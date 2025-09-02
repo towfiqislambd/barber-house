@@ -353,6 +353,12 @@ export const DynamicPageDetails = async slug => {
   return data?.data;
 };
 
+// Get Subscription
+export const GetSubscription = async () => {
+  const { data } = await axiosPublic("/api/online-store/subscription");
+  return data?.data;
+};
+
 // Add Discount Code
 export const AddDiscountCode = async (store_id, payload) => {
   const { data } = await axiosSecure.post(
@@ -363,9 +369,18 @@ export const AddDiscountCode = async (store_id, payload) => {
 };
 
 // Purchase Subscription
-export const PurchaseSubscription = async () => {
+export const PurchaseSubscription = async payload => {
   const { data } = await axiosSecure.post(
     "/api/online-store/subscription/purchase",
+    payload
+  );
+  return data;
+};
+
+// Renew Subscription
+export const RenewSubscription = async payload => {
+  const { data } = await axiosSecure.post(
+    "/api/online-store/subscription/renew",
     payload
   );
   return data;

@@ -1,11 +1,14 @@
+import { usePurchaseSubscription } from "@/hooks/cms.mutations";
 import useAuth from "@/hooks/useAuth";
 import React from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
-const Pricing = () => {
+const Pricing = ({ data }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { mutate: purchaseSubscriptionMutation, isPending } =
+    usePurchaseSubscription();
   const online_store_id = user?.business_profile?.online_store?.id;
 
   const handleClicked = () => {
@@ -14,6 +17,20 @@ const Pricing = () => {
       toast.error("Please login first");
       return;
     }
+
+    const payload = {
+      online_store_id,
+      success_redirect_url: `${window.location.origin}`,
+      cancel_redirect_url: `${window.location.origin}/business/pricingPage`,
+    };
+
+    purchaseSubscriptionMutation(payload, {
+      onSuccess: data => {
+        if (data?.success) {
+          window.location.href = data?.data?.redirect_url;
+        }
+      },
+    });
   };
 
   return (
@@ -27,21 +44,21 @@ const Pricing = () => {
       </p>
 
       <div className="border p-5 rounded-lg max-w-[300px] mx-auto">
-        <h3 className="text-2xl font-extrabold mb-3">Basic</h3>
-        <p className="text-3xl xl font-black">50$</p>
+        <h3 className="text-xl font-black mb-3 capitalize">{data[0]?.name}</h3>
+        <p className="text-3xl xl font-black">{data[0]?.price}$</p>
         <p className="text-gray-700 mt-2 font-medium">For one month only</p>
         <h4 className="text-lg font-bold text-black mt-4 mb-2">
           Key Feathers:
         </h4>
         <p className="text-gray-700 text-base mb-7">
-          Your shop will show at the subscribed shops list
+          Showcase Your Shop in the Subscribed List
         </p>
 
         <button
           onClick={handleClicked}
           className="py-3 font-semibold bg-black text-white duration-300 transition-all block w-full border-2 border-black rounded-lg cursor-pointer hover:bg-transparent hover:text-black"
         >
-          Get Started
+          {isPending ? "Starting....." : "Get Started"}
         </button>
       </div>
     </div>

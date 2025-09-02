@@ -17,6 +17,7 @@ import {
   OnBoarding,
   OnStripe,
   PurchaseSubscription,
+  RenewSubscription,
 } from "./cms.api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -260,14 +261,27 @@ export const useAddDiscountCode = id => {
   });
 };
 
-// Discount Code
+// Purchase Subscription
 export const usePurchaseSubscription = () => {
   return useMutation({
     mutationKey: ["purchase-subscription"],
     mutationFn: payload => PurchaseSubscription(payload),
     onSuccess: data => {
-      console.log(data);
-      // toast.success(data?.message);
+      toast.success(data?.message);
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+// Renew Subscription
+export const useRenewSubscription = () => {
+  return useMutation({
+    mutationKey: ["renew-subscription"],
+    mutationFn: payload => RenewSubscription(payload),
+    onSuccess: data => {
+      toast.success(data?.message);
     },
     onError: err => {
       toast.error(err?.response?.data?.message);

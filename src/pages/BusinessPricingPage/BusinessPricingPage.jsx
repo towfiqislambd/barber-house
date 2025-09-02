@@ -1,4 +1,4 @@
-import { useBusinessPricing } from "@/hooks/cms.queries";
+import { useBusinessPricing, useGetSubscription } from "@/hooks/cms.queries";
 import BusinessPricingBanner from "./section/BusinessPricingBanner";
 import FAQ from "./section/FAQ";
 import FreeAll from "./section/FreeAll";
@@ -7,7 +7,12 @@ import { Loader } from "@/components/Loader/Loader";
 import Pricing from "./section/Pricing";
 
 const BusinessPricingPage = () => {
-  const { data: businessPricing, isLoading } = useBusinessPricing();
+  const { data: businessPricing, isLoading: businessLoading } =
+    useBusinessPricing();
+  const { data: subscriptionData, isLoading: subscriptionLoading } =
+    useGetSubscription();
+
+  const isLoading = businessLoading || subscriptionLoading;
 
   useEffect(() => {
     if (isLoading) {
@@ -31,7 +36,7 @@ const BusinessPricingPage = () => {
   return (
     <>
       <BusinessPricingBanner data={businessPricing?.banner} />
-      <Pricing />
+      <Pricing data={subscriptionData} />
       <FreeAll
         data={businessPricing?.section_description}
         data2={businessPricing?.description_items}

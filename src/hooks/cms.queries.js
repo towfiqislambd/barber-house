@@ -22,6 +22,7 @@ import {
   DynamicPages,
   GetReviews,
   GetStore,
+  GetSubscription,
   Highlights,
   HomePageData,
   ProductsBrand,
@@ -316,5 +317,13 @@ export const useDynamicPageDetails = slug => {
     queryKey: ["dynamic-page-details", slug],
     queryFn: () => DynamicPageDetails(slug),
     enabled: !!slug,
+  });
+};
+
+// Get Subscription
+export const useGetSubscription = () => {
+  return useQuery({
+    queryKey: ["get-subscription"],
+    queryFn: GetSubscription,
   });
 };
