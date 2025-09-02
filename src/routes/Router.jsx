@@ -43,7 +43,6 @@ import UserLogin from "@/pages/Auth/UserLogin/UserLogin";
 import VerifyAccount from "@/pages/Auth/VerifyAccount/VerifyAccount";
 import VerifyOtp from "@/pages/Auth/VerifyOtp/VerifyOtp";
 import CreatePass from "@/pages/Auth/CreatePass/CreatePass";
-import AppointmentCompleted from "@/pages/Home/AppointmentCompleted";
 import BS from "@/pages/Auth/BS/BS";
 import ArticleDetails from "@/pages/BusinessHelpCenter/ArticleDetails";
 import ChatApp from "@/layout/ChatLayout";
@@ -85,10 +84,6 @@ export const router = createBrowserRouter([
       {
         path: "/booking-confirmation",
         element: <BookingConfirmationPage />,
-      },
-      {
-        path: "/appointment-completed",
-        element: <AppointmentCompleted />,
       },
       {
         path: "/professional-time-page",

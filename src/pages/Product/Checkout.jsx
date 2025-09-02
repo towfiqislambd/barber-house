@@ -100,7 +100,7 @@ const Checkout = () => {
         product_id: item.id,
         quantity: item.cartQuantity,
       })),
-      success_redirect_url: `${window.location.origin}`,
+      success_redirect_url: `${window.location.origin}/userdashboard/productorder`,
       cancel_redirect_url: `${window.location.origin}`,
     };
 

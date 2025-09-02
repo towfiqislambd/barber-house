@@ -42,7 +42,7 @@ const BookingConfirmationPage = () => {
     });
     formData.append(
       "success_redirect_url",
-      `${window.location.origin}/appointment-completed`
+      `${window.location.origin}/userdashboard/appointments`
     );
     formData.append("cancel_redirect_url", `${window.location.origin}`);
 
