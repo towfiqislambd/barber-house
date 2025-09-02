@@ -24,7 +24,7 @@ export const TranslationProvider = ({ children }) => {
       new window.google.translate.TranslateElement(
         {
           pageLanguage: "en",
-          includedLanguages: "en,es,fr,de,ja,bn,hi",
+          includedLanguages: "en,es,fr,de,ja,ar",
           layout:
             window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
         },

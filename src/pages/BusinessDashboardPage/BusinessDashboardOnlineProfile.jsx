@@ -5,9 +5,29 @@ import userImg from "../../../src/assets/images/online-profile/user.png";
 import chartImg from "../../../src/assets/images/online-profile/chart.png";
 import clientImg from "../../../src/assets/images/online-profile/client.png";
 import { Loader } from "@/components/Loader/Loader";
+import { useRenewSubscription } from "@/hooks/cms.mutations";
 
 const BusinessDashboardOnlineProfile = () => {
   const { user } = useAuth();
+  const { mutate: renewSubscriptionMutation, isPending } =
+    useRenewSubscription();
+  const online_store_id = user?.business_profile?.online_store?.id;
+
+  const handleClicked = () => {
+    const payload = {
+      online_store_id,
+      success_redirect_url: `${window.location.origin}/businessDashboard`,
+      cancel_redirect_url: `${window.location.origin}/businessDashboard`,
+    };
+
+    renewSubscriptionMutation(payload, {
+      onSuccess: data => {
+        if (data?.success) {
+          window.location.href = data?.data?.redirect_url;
+        }
+      },
+    });
+  };
 
   const steps = [
     {
@@ -51,10 +71,7 @@ const BusinessDashboardOnlineProfile = () => {
   return (
     <>
       {onlineStore ? (
-        <Link
-          to="/businessDashboard/tellusaboutyourbusiness"
-          className="max-w-[800px] 2xl:max-w-[900px] mx-auto xl:mt-10 block px-5 md:px-0 mt-6 md:mt-0"
-        >
+        <div className="max-w-[800px] 2xl:max-w-[900px] mx-auto xl:mt-10 block px-5 md:px-0 mt-6 md:mt-0">
           <div className="flex items-center gap-[9px] justify-between">
             <div className="max-w-[771px]">
               <h1 className="text-textSecondary font-outfit text-[28px] font-semibold leading-[33.6px]">
@@ -64,9 +81,20 @@ const BusinessDashboardOnlineProfile = () => {
                 View and manage your online profile.
               </p>
             </div>
+
+            {/* Renew subscription btn */}
+            <button
+              onClick={handleClicked}
+              className="text-sm font-medium bg-primary text-gray-50 cursor-pointer px-5 py-3 rounded-lg"
+            >
+              {isPending ? "Please wait..." : "Renew Subscription"}
+            </button>
           </div>
 
-          <div className="mt-8 flex flex-col lg:flex-row justify-between items-center lg:border border-[#DFE1E6] rounded-2xl gap-5">
+          <Link
+            to="/businessDashboard/tellusaboutyourbusiness"
+            className="mt-8 flex flex-col lg:flex-row justify-between items-center lg:border border-[#DFE1E6] rounded-2xl gap-5"
+          >
             {storeImageUrl ? (
               <img
                 className="2xl:w-[340px] lg:w-[300px] w-full xl:h-[207px] h-[200px] object-cover lg:rounded-l-2xl rounded-2xl"
@@ -90,8 +118,8 @@ const BusinessDashboardOnlineProfile = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
       ) : (
         <section className="max-w-[1320px] mx-auto px-5 lg:px-0 mt-5 md:mt-0">
           <div className="flex justify-end gap-4">

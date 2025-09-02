@@ -194,6 +194,7 @@ const Navbar = () => {
                 </Link>
               )}
 
+              {/* For desktop */}
               <div className="hidden lg:block">
                 <ReactFlagsSelect
                   selected={selectedCountry}
@@ -204,23 +205,23 @@ const Navbar = () => {
                       FR: "fr",
                       DE: "de",
                       IT: "it",
-                      BD: "bn",
-                      IN: "hi",
+                      SA: "ar",
+                      AE: "ar",
                     };
 
                     const langCode = languageMap[countryCode] || "en";
                     changeLanguage(langCode);
                     setSelectedCountry(countryCode);
                   }}
-                  countries={["US", "GB", "FR", "DE", "IT", "BD", "IN"]}
+                  countries={["US", "GB", "FR", "DE", "IT", "SA", "AE"]}
                   customLabels={{
                     US: "English",
                     GB: "English (UK)",
                     FR: "Français",
                     DE: "Deutsch",
                     IT: "Italiano",
-                    BD: "বাংলা",
-                    IN: "हिन्दी",
+                    SA: "العربية",
+                    AE: "العربية",
                   }}
                   placeholder="Select Language"
                   searchable={false}
@@ -247,8 +248,8 @@ const Navbar = () => {
                       { code: "FR", label: "Français" },
                       { code: "DE", label: "Deutsch" },
                       { code: "IT", label: "Italiano" },
-                      { code: "BD", label: "বাংলা" },
-                      { code: "IN", label: "हिन्दी" },
+                      { code: "SA", label: "العربية" },
+                      { code: "AE", label: "العربية" },
                     ].map(({ code, label }) => (
                       <div
                         key={code}
@@ -260,8 +261,8 @@ const Navbar = () => {
                             FR: "fr",
                             DE: "de",
                             IT: "it",
-                            BD: "bn",
-                            IN: "hi",
+                            SA: "العربية",
+                            AE: "العربية",
                           };
                           changeLanguage(languageMap[code] || "en");
                           setSelectedCountry(code);

@@ -50,6 +50,7 @@ const Pricing = ({ data }) => {
         <h4 className="text-lg font-bold text-black mt-4 mb-2">
           Key Feathers:
         </h4>
+
         <p className="text-gray-700 text-base mb-7">
           Showcase Your Shop in the Subscribed List
         </p>
