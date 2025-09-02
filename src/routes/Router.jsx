@@ -32,7 +32,6 @@ import SearchResultPage from "@/pages/Home/SearchResultPage/SearchResultPage";
 import SelectServicesPage from "@/pages/Home/SelectServicesPage/SelectServicesPage";
 import Homepage from "@/pages/Homepage/Homepage";
 import Checkout from "@/pages/Product/Checkout";
-import ConfirmOrder from "@/pages/Product/ConfirmOrder";
 import UserAppointments from "@/pages/UserDashboardPage/UserAppointments";
 import UserFavourites from "@/pages/UserDashboardPage/UserFavourites";
 import UserProductOrder from "@/pages/UserDashboardPage/UserProductOrder";
