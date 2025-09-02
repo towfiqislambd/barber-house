@@ -10,12 +10,21 @@ import {
 import { Loader } from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { currencyFormatter } from "@/lib/currencyFormatter";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 const ProductOfGalibCard = ({ product, data }) => {
+  const { user } = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleOrder = () => {
+    if (!user) {
+      toast.error("Please Login First");
+      navigate("/login");
+      return;
+    } 
+
     dispatch(addToSingleCart(product));
     navigate("/checkout", { state: data });
   };
