@@ -93,7 +93,7 @@ const Navbar = () => {
         {/* logo */}
         <Link
           to="/"
-          className="size-[50px] md:size-[65px] lg:size-[80px] 3xl:size-[100px] rounded"
+          className="size-[45px] md:size-[65px] lg:size-[80px] 3xl:size-[100px] rounded"
         >
           <img
             className="w-full h-full object-cover rounded"
@@ -261,8 +261,8 @@ const Navbar = () => {
                             FR: "fr",
                             DE: "de",
                             IT: "it",
-                            SA: "العربية",
-                            AE: "العربية",
+                            SA: "ar",
+                            AE: "ar",
                           };
                           changeLanguage(languageMap[code] || "en");
                           setSelectedCountry(code);

@@ -153,6 +153,11 @@ export const AddComplain = async payload => {
   return data;
 };
 
+export const AddSupport = async payload => {
+  const { data } = await axiosPublic.post("/api/contact-admin", payload);
+  return data;
+};
+
 export const useDownloadInvoice = () => {
   return useMutation({
     mutationFn: appointment_id =>

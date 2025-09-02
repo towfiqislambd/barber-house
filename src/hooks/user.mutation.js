@@ -3,6 +3,7 @@ import {
   addAddress,
   AddComplain,
   AddReview,
+  AddSupport,
   AppointmentAdd,
   AppointmentCancel,
   AppointmentReschedule,
@@ -209,6 +210,20 @@ export const useAddComplain = () => {
     mutationKey: ["add-complain"],
     mutationFn: payload => AddComplain(payload),
     onSuccess: data => {
+      toast.success(data?.message);
+    },
+    onError: err => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+};
+
+export const useAddSupport = () => {
+  return useMutation({
+    mutationKey: ["add-support"],
+    mutationFn: payload => AddSupport(payload),
+    onSuccess: data => {
+      console.log(data);
       toast.success(data?.message);
     },
     onError: err => {

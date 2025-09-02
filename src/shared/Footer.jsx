@@ -12,8 +12,11 @@ import {
   useSocialLinks,
 } from "@/hooks/cms.queries";
 import { Link } from "react-router-dom";
+import SupportModal from "@/components/BusinessDashboard/Modals/SupportModal";
+import { useState } from "react";
 
 const Footer = () => {
+  const [open, setOpen] = useState(false);
   const { data: socialLinks } = useSocialLinks();
   const { data: siteSettings } = useSiteSettings();
   const { data: dynamicPages } = useDynamicPages();
@@ -39,7 +42,11 @@ const Footer = () => {
               About Us
             </h3>
             <ul className="text-[#2C2C2C] space-y-1 xl:space-y-3 flex flex-col">
-              <Link to={"/business/businesshelpcenter"}>Customer Support</Link>
+              {/* <Link to={"/business/businesshelpcenter"}>Customer Support</Link> */}
+
+              <button onClick={() => setOpen(true)} className="text-left">
+                Support
+              </button>
               <Link to={"/business/blog"}>Blog</Link>
             </ul>
           </div>
@@ -97,6 +104,8 @@ const Footer = () => {
           {siteSettings?.copyright_text}
         </span>
       </div>
+
+      <SupportModal isOpen={open} setIsOpen={setOpen} />
     </footer>
   );
 };
