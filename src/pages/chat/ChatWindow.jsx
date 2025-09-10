@@ -169,6 +169,7 @@ export default function ChatWindow({ chatId, onBack, isMobile }) {
                         : ""
                     }`}
                   >
+                    
                     {msg.type === "text" && <p>{msg.message}</p>}
                     {msg.type === "file" &&
                       (msg.status === "sending" ? (
